@@ -1,0 +1,179 @@
+version: 2.1
+executors:
+  rails:
+    docker:
+      - image: circleci/ruby:3.0.0
+        environment:
+          RAILS_ENV: test
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          BUNDLER_VERSION: 2.2.3
+      - image: circleci/mysql:5.7-ram
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    working_directory: ~/calendar
+  
+  # node:
+  #   docker:
+  #     - image: circleci/node:12
+  #   working_directory: ~/calendar/front
+
+commands:
+  install_bundler:
+    description: Bundler install
+    steps:
+      - run: gem install bundler -v 2.2.3
+
+jobs:
+  fetch_source_code_back:
+    executor:
+      name: rails
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/calendar
+  bundle_dependencies:
+    executor:
+      name: rails
+    steps:
+      - restore_cache:
+          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+      - install_bundler
+      - run:
+          name: Bundle Install Dependencies
+          command: |
+            bundle install
+      - save_cache:
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+  rspec:
+    executor:
+      name: rails
+    steps:
+      - restore_cache:
+          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Waitting stand up database
+          command: |
+            dockerize -wait \
+            tcp://127.0.0.1:3306 -timeout 120s
+      # Database setup
+      - run: mv ./config/database.yml.ci ./config/database.yml
+      - install_bundler
+      - run:
+          name: Testing DB migration and seed
+          command: |
+            bundle exec rails db:create db:migrate db:seed db:drop
+      - run:
+          name: Run rspec
+          command: |
+            mkdir /tmp/test-results
+            mkdir -p ~/rspec
+            bundle exec rails db:create db:migrate
+            TEST_FILES="$(circleci tests glob \"spec/**/*_spec.rb\" | circleci tests split --split-by=timings)"
+            bundle exec rspec --require rails_helper \
+                              --color \
+                              --format progress \
+                              --format RspecJunitFormatter \
+                              --out ~/rspec/rspec.xml
+      # collect reports
+      - store_test_results:
+          path: ~/rspec
+      - store_artifacts:
+          path: ~/tmp/test-results
+          destination: test-results
+  rubocop:
+    executor:
+      name: rails
+    steps:
+      - restore_cache: # ソースコードの復元
+          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache: # vendor/bundleを復元
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+      - install_bundler
+      - run:
+          name: Execute rubocop
+          command: |
+            bundle exec rubocop
+  # fetch_source_code_front:
+  #   executor:
+  #     name: node
+  #   steps:
+  #   - checkout
+  #   - save_cache:
+  #       key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
+  #       paths:
+  #           - ~/calendar/front
+
+  # npm_dependencies:
+  #   executor: node
+  #   steps:
+  #     - restore_cache: # ソースコードの復元
+  #         key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
+  #     - restore_cache: # node_modulesを復元
+  #         key: v4-dependencies-{{ checksum "package-lock.json" }}
+  #     - run:
+  #         name: npm install dependencies
+  #         command: npm install
+  #     - save_cache:
+  #         key: v4-dependencies-{{ checksum "package-lock.json" }}
+  #         paths:
+  #           - ~/calendar/front/.node_modules
+
+  # jest:
+  #   executor: node
+  #   steps:
+  #     - restore_cache: # ソースコードの復元
+  #         key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
+  #     - restore_cache: # node_modulesを復元
+  #         key: v4-dependencies-{{ checksum "front/package-lock.json" }}            
+  #     - run:
+  #         name: execute test
+  #         working_directory: ~/calendar/front
+  #         command: npm test
+
+  # eslint:
+  #   executor: node
+  #   steps:
+  #     - restore_cache: # ソースコードの復元
+  #         key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
+  #     - restore_cache: # node_modulesを復元
+  #         key: v4-dependencies-{{ checksum "front/package-lock.json" }}
+  #     - run:
+  #         name: execute eslint
+  #         working_directory: ~/calendar/front
+  #         command: npm test
+
+workflows:
+  build_backend:
+    jobs:
+      - fetch_source_code_back
+      - bundle_dependencies:
+          requires:
+            - fetch_source_code_back
+      - rspec:
+          requires:
+            - bundle_dependencies
+      - rubocop:
+          requires:
+            - bundle_dependencies
+  # build_frontend:
+  #   jobs:
+  #     - fetch_source_code_front
+  #     - npm_dependencies:
+  #         requires:
+  #           - fetch_source_code_front
+  #     - jest:
+  #         requires:
+  #           - npm_dependencies
+  #     - eslint:
+  #         requires:
+  #           - npm_dependencies
