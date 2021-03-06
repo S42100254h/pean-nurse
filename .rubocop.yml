@@ -8,4 +8,4 @@ inherit_from:
   - config/rubocop/rspec.yml
 
 AllCops:
-  TargetRubyVersion: 2.6 
+    NewCops: enable
