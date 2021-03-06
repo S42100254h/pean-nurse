@@ -126,14 +126,6 @@ Metrics/BlockLength:
 Metrics/CyclomaticComplexity:
   Max: 10
 
-# * 警告 120文字
-# * 禁止 160文字
-# のイメージ
-Metrics/LineLength:
-  Max: 160
-  Exclude:
-    - "db/migrate/*.rb"
-
 # 20 行超えるのは migration ファイル以外滅多に無い
 Metrics/MethodLength:
   Max: 20
@@ -201,10 +193,6 @@ Style/BlockDelimiters:
   AutoCorrect: false
   Exclude:
     - "spec/**/*_spec.rb"
-
-# option 等、明示的にハッシュにした方が分かりやすい場合もある
-Style/BracesAroundHashParameters:
-  Enabled: false
 
 # scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
 # namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
