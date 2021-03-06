@@ -47,5 +47,7 @@ module NurseStep
                         controller_specs: false,
                         request_spec: true
     end
+
+    config.api_only = true
   end
 end
