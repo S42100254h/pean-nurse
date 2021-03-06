@@ -52,11 +52,11 @@ module NurseStep
       g.stylesheets false
       g.helper false
       g.test_framework :rspec,
-                        view_specs: false,
-                        routing_specs: false,
-                        helper_specs: false,
-                        controller_specs: false,
-                        request_spec: true
+                       view_specs: false,
+                       routing_specs: false,
+                       helper_specs: false,
+                       controller_specs: false,
+                       request_spec: true
     end
 
     config.api_only = true
