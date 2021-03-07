@@ -59,7 +59,10 @@ jobs:
       - restore_cache:
           key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v2-dependencies-{{ checksum "Gemfile.lock" }}
+            - v2-dependencies-
+
       - run:
           name: Waitting stand up database
           command: |
@@ -97,7 +100,9 @@ jobs:
       - restore_cache: # ソースコードの復元
           key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # vendor/bundleを復元
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v2-dependencies-{{ checksum "Gemfile.lock" }}
+            - v2-dependencies-
       - install_bundler
       - run:
           name: Execute rubocop
