@@ -13,10 +13,10 @@
 ActiveRecord::Schema.define(version: 2021_03_07_025822) do
 
   create_table "answers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "answer_1"
-    t.string "answer_2"
-    t.string "answer_3"
-    t.string "answer_4"
+    t.string "answer1"
+    t.string "answer2"
+    t.string "answer3"
+    t.string "answer4"
     t.integer "correct_answer_no"
     t.string "commentary"
     t.bigint "quiz_id", null: false
