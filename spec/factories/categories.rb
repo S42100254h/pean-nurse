@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { "MyString" }
-    quiz { nil }
+    name { Faker::Lorem::word }
+    quiz
   end
 end

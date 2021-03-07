@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :answer do
-    answer_1 { "MyString" }
-    answer_2 { "MyString" }
-    answer_3 { "MyString" }
-    answer_4 { "MyString" }
-    correct_answer_no { 1 }
-    commentary { "MyString" }
-    quiz { nil }
+    answer1 { Faker::Lorem.word }
+    answer2 { Faker::Lorem.word }
+    answer3 { Faker::Lorem.word }
+    answer4 { Faker::Lorem.word }
+    correct_answer_no { Faker::Lorem.characters(number: Random.new.rand(1..4)) }
+    commentary { Faker::Lorem.sentences }
+    quiz
   end
 end

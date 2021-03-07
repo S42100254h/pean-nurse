@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :quiz do
-    title { "MyString" }
+    title { Faker::Lorem.question }
   end
 end
