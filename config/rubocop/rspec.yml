@@ -62,4 +62,8 @@ RSpec/NestedGroups:
 # ブロックは初見だと返り値を書いていると気づけないので and_return にしたいが、
 # ブロックの方が見た目がスッキリして見やすいので、どちらでもお好きにどうぞ。
 RSpec/ReturnFromStub:
-  Enabled: false 
+  Enabled: false
+
+# テストの中でlet!を使えるようにする
+RSpec/LetSetup:
+  Enabled: false
