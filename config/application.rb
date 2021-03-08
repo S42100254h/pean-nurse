@@ -59,6 +59,7 @@ module NurseStep
                        request_spec: true
     end
 
+    config.middleware.use ActionDispatch::Flash
     config.api_only = true
   end
 end
