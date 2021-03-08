@@ -6,5 +6,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :name, presence: true, length: { maximum: 50 }
+  # devise_token_authにより、emailの形式とpasswordの長さは下記のように設定されている。
+  # email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  # password_length = 6..128
   include DeviseTokenAuth::Concerns::User
 end
