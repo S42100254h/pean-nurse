@@ -67,3 +67,11 @@ RSpec/ReturnFromStub:
 # テストの中でlet!を使えるようにする
 RSpec/LetSetup:
   Enabled: false
+
+# テストの中でhttp statusを記述できるようにする
+RSpec/Rails/HttpStatus:
+  Enabled: false
+
+# 複数のexpectationを実行できるようにする
+RSpec/MultipleExpectations:
+  Enabled: false
