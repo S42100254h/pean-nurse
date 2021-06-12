@@ -12,12 +12,12 @@ executors:
       - image: circleci/mysql:5.7-ram
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-    working_directory: ~/calendar
+    working_directory: ~/nurse-step
   
-  # node:
-  #   docker:
-  #     - image: circleci/node:12
-  #   working_directory: ~/calendar/front
+  node:
+    docker:
+      - image: circleci/node:12
+    working_directory: ~/nurse-step/front
 
 commands:
   install_bundler:
@@ -32,24 +32,26 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/calendar
+            - ~/nurse-step
   bundle_dependencies:
     executor:
       name: rails
     steps:
       - restore_cache:
-          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v3-dependencies-{{ checksum "Gemfile.lock" }}
+            - v3-dependencies-
       - install_bundler
       - run:
           name: Bundle Install Dependencies
           command: |
             bundle install
       - save_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v3-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
   rspec:
@@ -57,11 +59,11 @@ jobs:
       name: rails
     steps:
       - restore_cache:
-          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Gemfile.lock" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "Gemfile.lock" }}
+            - v3-dependencies-
 
       - run:
           name: Waitting stand up database
@@ -98,64 +100,64 @@ jobs:
       name: rails
     steps:
       - restore_cache: # ソースコードの復元
-          key: v1-calendar-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # vendor/bundleを復元
           keys:
-            - v2-dependencies-{{ checksum "Gemfile.lock" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "Gemfile.lock" }}
+            - v3-dependencies-
       - install_bundler
       - run:
           name: Execute rubocop
           command: |
             bundle exec rubocop
-  # fetch_source_code_front:
-  #   executor:
-  #     name: node
-  #   steps:
-  #   - checkout
-  #   - save_cache:
-  #       key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
-  #       paths:
-  #           - ~/calendar/front
+  fetch_source_code_front:
+    executor:
+      name: node
+    steps:
+    - checkout
+    - save_cache:
+        key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+        paths:
+            - ~/nurse-step/front
 
-  # npm_dependencies:
-  #   executor: node
-  #   steps:
-  #     - restore_cache: # ソースコードの復元
-  #         key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
-  #     - restore_cache: # node_modulesを復元
-  #         key: v4-dependencies-{{ checksum "package-lock.json" }}
-  #     - run:
-  #         name: npm install dependencies
-  #         command: npm install
-  #     - save_cache:
-  #         key: v4-dependencies-{{ checksum "package-lock.json" }}
-  #         paths:
-  #           - ~/calendar/front/.node_modules
+  npm_dependencies:
+    executor: node
+    steps:
+      - restore_cache: # ソースコードの復元
+          key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+      - restore_cache: # node_modulesを復元
+          key: v4-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: npm install dependencies
+          command: npm install
+      - save_cache:
+          key: v4-dependencies-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/nurse-step/front/.node_modules
 
-  # jest:
-  #   executor: node
-  #   steps:
-  #     - restore_cache: # ソースコードの復元
-  #         key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
-  #     - restore_cache: # node_modulesを復元
-  #         key: v4-dependencies-{{ checksum "front/package-lock.json" }}            
-  #     - run:
-  #         name: execute test
-  #         working_directory: ~/calendar/front
-  #         command: npm test
+  jest:
+    executor: node
+    steps:
+      - restore_cache: # ソースコードの復元
+          key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+      - restore_cache: # node_modulesを復元
+          key: v4-dependencies-{{ checksum "front/package-lock.json" }}            
+      - run:
+          name: execute test
+          working_directory: ~/nurse-step/front
+          command: npm test
 
-  # eslint:
-  #   executor: node
-  #   steps:
-  #     - restore_cache: # ソースコードの復元
-  #         key: v3-calendar-{{ .Environment.CIRCLE_SHA2 }}
-  #     - restore_cache: # node_modulesを復元
-  #         key: v4-dependencies-{{ checksum "front/package-lock.json" }}
-  #     - run:
-  #         name: execute eslint
-  #         working_directory: ~/calendar/front
-  #         command: npm test
+  eslint:
+    executor: node
+    steps:
+      - restore_cache: # ソースコードの復元
+          key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+      - restore_cache: # node_modulesを復元
+          key: v4-dependencies-{{ checksum "front/package-lock.json" }}
+      - run:
+          name: execute eslint
+          working_directory: ~/nurse-step/front
+          command: npm test
 
 workflows:
   build_backend:
@@ -170,15 +172,15 @@ workflows:
       - rubocop:
           requires:
             - bundle_dependencies
-  # build_frontend:
-  #   jobs:
-  #     - fetch_source_code_front
-  #     - npm_dependencies:
-  #         requires:
-  #           - fetch_source_code_front
-  #     - jest:
-  #         requires:
-  #           - npm_dependencies
-  #     - eslint:
-  #         requires:
-  #           - npm_dependencies
+  build_frontend:
+    jobs:
+      - fetch_source_code_front
+      - npm_dependencies:
+          requires:
+            - fetch_source_code_front
+      - jest:
+          requires:
+            - npm_dependencies
+      - eslint:
+          requires:
+            - npm_dependencies
