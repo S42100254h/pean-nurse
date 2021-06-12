@@ -21,4 +21,4 @@ module.exports = {
     "space-before-blocks": ["warn", { "functions": "always" }],
     "no-unused-vars": "off"
   }
-}
+};
