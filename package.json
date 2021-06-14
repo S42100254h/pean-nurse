@@ -10,7 +10,11 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "babel-jest": "^27.0.2",
     "eslint": "^7.28.0",
+    "jest": "^27.0.4",
     "webpack-dev-server": "^3.11.2"
   }
 }
