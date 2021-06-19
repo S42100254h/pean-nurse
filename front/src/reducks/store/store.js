@@ -5,7 +5,7 @@ import {
 
 import { UsersReducer } from "../users/reducers";
 
-export default createStore = () => {
+export const createStore = () => {
   return reduxCreateStore(
     combineReducers({
       users: UsersReducer
