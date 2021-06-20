@@ -1,8 +1,11 @@
 import React from "react";
+import Router from "./Router";
 
 const App = () => {
   return (
-    <p>nurse step</p>
+    <main>
+      <Router />
+    </main>
   );
 };
 
