@@ -1,5 +1,5 @@
 export const isValidEmailFormat = (email) => {
-  const regex = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i;
+  const regex = /([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})/i;
   return regex.test(email);
 };
 
