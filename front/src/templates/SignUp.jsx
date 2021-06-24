@@ -25,8 +25,9 @@ const SignUp = () => {
   }, [setConfirmPassword]);
 
   return (
-    <div>
-      <h2>アカウント登録</h2>
+    <div className="c-section-container">
+      <h2 className="u-text__headline u-text-center">アカウント登録</h2>
+      <div className="module-spacer--medium" />
       <TextField
         fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={username} type={"text"} onChange={inputUsername}
       />
