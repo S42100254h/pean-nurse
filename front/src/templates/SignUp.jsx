@@ -7,14 +7,14 @@ import { signUp } from "../reducks/users/operations";
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const [ username, setUsername ] = useState(""),
+  const [ name, setName ] = useState(""),
     [ email, setEmail] = useState(""),
     [ password, setPassword ] = useState(""),
     [ confirmPassword, setConfirmPassword ] = useState("");
 
-  const inputUsername = useCallback((event) => {
-    setUsername(event.target.value);
-  }, [setUsername]);
+  const inputName = useCallback((event) => {
+    setName(event.target.value);
+  }, [setName]);
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
@@ -33,7 +33,7 @@ const SignUp = () => {
       <h2 className="u-text__headline u-text-center">アカウント登録</h2>
       <div className="module-spacer--medium" />
       <TextInput
-        fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={username} type={"text"} onChange={inputUsername}
+        fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={name} type={"text"} onChange={inputName}
       />
       <TextInput
         fullWidth={true} label={"メールアドレス"} multiline={false} required={true} row={1} value={email} type={"email"} onChange={inputEmail}
@@ -47,7 +47,7 @@ const SignUp = () => {
       <div className="module-spacer--medium" />
       <PrimaryButton
         label={"アカウントを登録する"}
-        onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
+        onClick={() => dispatch(signUp(name, email, password, confirmPassword))}
       />
       <p onClick={() => dispatch(push("/signin"))}>アカウントをお持ちの方はこちら</p>
     </div>
