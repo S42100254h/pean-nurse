@@ -1,7 +1,11 @@
 import React, { useCallback, useState} from "react";
-import { TextField } from "@material-ui/core";
+import { TextInput, PrimaryButton } from "../components/UIkit";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
+import { signUp } from "../reducks/users/operations";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
 
   const [ username, setUsername ] = useState(""),
     [ email, setEmail] = useState(""),
@@ -28,18 +32,24 @@ const SignUp = () => {
     <div className="c-section-container">
       <h2 className="u-text__headline u-text-center">アカウント登録</h2>
       <div className="module-spacer--medium" />
-      <TextField
+      <TextInput
         fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={username} type={"text"} onChange={inputUsername}
       />
-      <TextField
+      <TextInput
         fullWidth={true} label={"メールアドレス"} multiline={false} required={true} row={1} value={email} type={"email"} onChange={inputEmail}
       />
-      <TextField
+      <TextInput
         fullWidth={true} label={"パスワード"} multiline={false} required={true} row={1} value={password} type={"password"} onChange={inputPassword}
       />
-      <TextField
+      <TextInput
         fullWidth={true} label={"パスワード（確認用）"} multiline={false} required={true} row={1} value={confirmPassword} type={"confirmPassword"} onChange={inputConfirmPassword}
       />
+      <div className="module-spacer--medium" />
+      <PrimaryButton
+        label={"アカウントを登録する"}
+        onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
+      />
+      <p onClick={() => dispatch(push("/signin"))}>アカウントをお持ちの方はこちら</p>
     </div>
   );
 };

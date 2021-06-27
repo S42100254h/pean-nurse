@@ -1,12 +1,11 @@
 import React from "react";
-import TextField from "@material-ui/core";
-import { getThemeProps } from "@material-ui/styles";
+import TextField from "@material-ui/core/TextField";
 
-const TextInput = () => {
+const TextInput = (props) => {
   return (
     <TextField
-      fullWidth={getThemeProps.fullWidth}
-      label={getThemeProps.label}
+      fullWidth={props.fullWidth}
+      label={props.label}
       margin="dense"
       multiline={props.multiline}
       required={props.required}
@@ -18,4 +17,4 @@ const TextInput = () => {
   );
 };
 
-export default TextField;
+export default TextInput;
