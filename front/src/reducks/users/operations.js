@@ -1,4 +1,4 @@
-import { signInAction, signOutAction } from "./actions";
+import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 
 export const signUp = (username, email, password, confirmPassword) => {
