@@ -1,5 +1,6 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
+import axios from "axios";
 
 export const signUp = (name, email, password, confirmPassword) => {
   return async (dispach) => {
@@ -19,19 +20,16 @@ export const signUp = (name, email, password, confirmPassword) => {
     }
 
     const body = { name, email: email, password: password, confirmPassword: confirmPassword };
-    const header = { headers: { "Content-Type": "application/json" } };
-    const options = { ...header, method: "POST", body: JSON.stringify(body) };
-    const resp = await fetch("http://localhost:4000/api/v1/auth", options );
+    axios.post("http://localhost:4000/api/v1/auth", body )
+      .then((resp) => {
+        localStorage.setItem("access-token", resp.headers["access-token"]);
+        localStorage.setItem("client", resp.headers["client"]);
+        localStorage.setItem("uid", resp.headers["uid"]);
 
-    localStorage.setItem("access-token", resp.headers.get("access-token"));
-    localStorage.setItem("client", resp.headers.get("client"));
-    localStorage.setItem("uid", resp.headers.get("uid"));
-
-    const result = await resp.json();
+        dispach(signUpAction(resp.data));
+      });
 
     console.log(localStorage);
-
-    dispach(signUpAction(result));
   };
 };
 
@@ -53,18 +51,15 @@ export const signIn = (email, password) => {
     }
 
     const body = { email: email, password: password };
-    const header = { headers: { "Content-Type": "application/json" } };
-    const options = { ...header, method: "POST", body: JSON.stringify(body)};
-    const resp = await fetch("http://localhost:4000/api/v1/auth/sign_in", options);
+    axios.post("http://localhost:4000/api/v1/auth/sign_in", body)
+      .then((resp) => {
+        localStorage.setItem("access-token", resp.headers["access-token"]);
+        localStorage.setItem("client", resp.headers["client"]);
+        localStorage.setItem("uid", resp.headers["uid"]);
 
-    localStorage.setItem("access-token", resp.headers.get("access-token"));
-    localStorage.setItem("client", resp.headers.get("client"));
-    localStorage.setItem("uid", resp.headers.get("uid"));
-
-    const result = await resp.json();
+        dispatch(signInAction(resp.data));
+      });
 
     console.log(localStorage);
-
-    dispatch(signInAction(result));
   };
 };
