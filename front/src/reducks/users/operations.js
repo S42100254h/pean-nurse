@@ -19,7 +19,7 @@ export const signUp = (name, email, password, confirmPassword) => {
       return false;
     }
 
-    const body = { name, email: email, password: password, confirmPassword: confirmPassword };
+    const body = { name: name, email: email, password: password, confirmPassword: confirmPassword };
     axios.post("http://localhost:4000/api/v1/auth", body )
       .then((resp) => {
         localStorage.setItem("access-token", resp.headers["access-token"]);
