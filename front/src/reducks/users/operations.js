@@ -26,7 +26,7 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("client", resp.headers["client"]);
         localStorage.setItem("uid", resp.headers["uid"]);
 
-        dispach(signUpAction(resp.data));
+        dispatch(signUpAction(resp.data.data));
       });
 
     console.log(localStorage);
