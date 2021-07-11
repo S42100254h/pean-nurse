@@ -14,7 +14,7 @@ export const signUp = (name, email, password, confirmPassword) => {
       return false;
     }
 
-    if (password.lengtjh < 6) {
+    if (password.length < 6) {
       alert("パスワードは６文字以上で入力してください");
       return false;
     }
