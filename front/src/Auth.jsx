@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { children } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "./reducks/users/selectors";
 import { push } from "connected-react-router";
 
-const Auth = ({ childlen }) => {
+const Auth = ({ children }) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 

@@ -56,10 +56,10 @@ export const signIn = (email, password) => {
         localStorage.setItem("access-token", resp.headers["access-token"]);
         localStorage.setItem("client", resp.headers["client"]);
         localStorage.setItem("uid", resp.headers["uid"]);
-
-        dispatch(signInAction(resp.data));
+        
+        dispatch(signInAction(resp.data.data));
       });
-
+    
     console.log(localStorage);
   };
 };
