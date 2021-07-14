@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "./reducks/users/selectors";
-import { push } from "connected-react-router";
+import { listenAuthState } from "./reducks/users/operations";
 
 const Auth = ({ children }) => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Auth = ({ children }) => {
   
   useEffect(() => {
     if (!isSignedIn) {
-      dispatch(push("/signin"));
+      dispatch(listenAuthState());
     }
   }), [];
 

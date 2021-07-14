@@ -33,7 +33,6 @@ const SignIn = () => {
         label={"サインイン"}
         onClick={() => {
           dispatch(signIn(email, password));
-          dispatch(push("/"));
         }}
       />
     </div>
