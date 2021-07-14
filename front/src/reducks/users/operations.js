@@ -1,9 +1,10 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import axios from "axios";
+import { push } from "connected-react-router";
 
 export const signUp = (name, email, password, confirmPassword) => {
-  return async (dispach) => {
+  return async (dispatch) => {
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
@@ -28,8 +29,6 @@ export const signUp = (name, email, password, confirmPassword) => {
 
         dispatch(signUpAction(resp.data.data));
       });
-
-    console.log(localStorage);
   };
 };
 
@@ -58,8 +57,41 @@ export const signIn = (email, password) => {
         localStorage.setItem("uid", resp.headers["uid"]);
         
         dispatch(signInAction(resp.data.data));
+        dispatch(push("/"));
       });
-    
-    console.log(localStorage);
+  };
+};
+export const listenAuthState = () => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/users/currentuser";
+
+      axios
+        .get(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((response) => {
+          const userData = response.data;
+
+          dispatch(signInAction({
+            isSignedIn: true,
+            uid: userData.uid,
+            name: userData.name,
+          }));
+        })
+        .catch((error) => {
+          alert("ログインに失敗しました。");
+          console.log(error);
+        });
+    } else {
+      dispatch(push("/signin"));
+    }
   };
 };
