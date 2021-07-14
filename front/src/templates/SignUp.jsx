@@ -49,7 +49,6 @@ const SignUp = () => {
         label={"アカウントを登録する"}
         onClick={() => {
           dispatch(signUp(name, email, password, confirmPassword));
-          dispatch(push("/"));
         }}
       />
       <p onClick={() => dispatch(push("/signin"))}>アカウントをお持ちの方はこちら</p>
