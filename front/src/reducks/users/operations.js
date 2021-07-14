@@ -28,6 +28,7 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("uid", resp.headers["uid"]);
 
         dispatch(signUpAction(resp.data.data));
+        dispatch(push("/"));
       });
   };
 };
