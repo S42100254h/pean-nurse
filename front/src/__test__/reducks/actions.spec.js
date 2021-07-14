@@ -42,3 +42,20 @@ describe("actions.jsのテスト", () => {
     )
   });
 });
+
+describe("actions.jsのテスト", () => {
+  it("signOutActionのテスト", () => {
+    const action = signOutAction();
+
+    expect(action).toStrictEqual(
+      {
+        type: SIGN_OUT,
+        payload: {
+          isSignedIn: false,
+          uid: "",
+          name: ""
+        }
+      }
+    )
+  });
+});
