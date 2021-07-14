@@ -1,0 +1,26 @@
+import {
+  SIGN_UP,
+  SIGN_IN,
+  SIGN_OUT,
+  signUpAction,
+  signInAction,
+  signOutAction,
+} from "../../reducks/users/actions";
+
+describe("actions.jsのテスト", () => {
+  it("signUpActionのテスト", () => {
+    const dummy = { uid: "neko@gmail.com", name: "neko" };
+    const action = signUpAction(dummy);
+
+    expect(action).toStrictEqual(
+      {
+        type: SIGN_UP,
+        payload: {
+          isSignedIn: true,
+          uid: "neko@gmail.com",
+          name: "neko"
+        }
+      }
+    )
+  });
+});
