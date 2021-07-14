@@ -24,3 +24,21 @@ describe("actions.jsのテスト", () => {
     )
   });
 });
+
+describe("actions.jsのテスト", () => {
+  it("signInActionのテスト", () => {
+    const dummy = { uid: "neko@gmail.com", name: "neko" };
+    const action = signInAction(dummy);
+
+    expect(action).toStrictEqual(
+      {
+        type: SIGN_IN,
+        payload: {
+          isSignedIn: true,
+          uid: "neko@gmail.com",
+          name: "neko"
+        }
+      }
+    )
+  });
+});
