@@ -5,7 +5,7 @@ import {
   signUpAction,
   signInAction,
   signOutAction,
-} from "../../reducks/users/actions";
+} from "../../../reducks/users/actions";
 
 describe("actions.jsのテスト", () => {
   it("signUpActionのテスト", () => {
