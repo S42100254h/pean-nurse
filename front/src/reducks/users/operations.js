@@ -30,6 +30,9 @@ export const signUp = (name, email, password, confirmPassword) => {
 
         dispatch(signUpAction(resp.data.data));
         dispatch(push("/"));
+      })
+      .catch(() => {
+        alert("アカウント登録に失敗しました。通信環境を確認してください。");
       });
   };
 };
@@ -61,6 +64,9 @@ export const signIn = (email, password) => {
         
         dispatch(signInAction(resp.data.data));
         dispatch(push("/"));
+      })
+      .catch(() => {
+        alert("サインインに失敗しました。通信環境を確認してください。");
       });
   };
 };
@@ -86,8 +92,7 @@ export const signOut = () => {
           dispatch(signOutAction());
         })
         .catch((error) => {
-          alert("サインアウトに失敗しました。");
-          console.log(error);
+          alert("サインアウトに失敗しました。通信環境を確認してください。");
         });
     } else {
       dispatch(push("/signin"));
@@ -122,7 +127,6 @@ export const listenAuthState = () => {
         })
         .catch((error) => {
           alert("サインインに失敗しました。");
-          console.log(error);
         });
     } else {
       dispatch(push("/signin"));
