@@ -15,11 +15,7 @@ describe("actions.jsのテスト", () => {
     expect(action).toStrictEqual(
       {
         type: SIGN_UP,
-        payload: {
-          isSignedIn: true,
-          uid: "neko@gmail.com",
-          name: "neko"
-        }
+        payload: dummy
       }
     )
   });
@@ -33,11 +29,7 @@ describe("actions.jsのテスト", () => {
     expect(action).toStrictEqual(
       {
         type: SIGN_IN,
-        payload: {
-          isSignedIn: true,
-          uid: "neko@gmail.com",
-          name: "neko"
-        }
+        payload: dummy
       }
     )
   });
@@ -49,12 +41,7 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: SIGN_OUT,
-        payload: {
-          isSignedIn: false,
-          uid: "",
-          name: ""
-        }
+        type: SIGN_OUT
       }
     )
   });
