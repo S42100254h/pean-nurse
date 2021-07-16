@@ -6,17 +6,20 @@ export const UsersReducer = (state = initialState.users, action) => {
   case Actions.SIGN_IN:
     return {
       ...state,
-      ...action.payload
+      isSignedIn: true,
+      uid: action.payload.uid,
+      name: action.payload.name
     };
   case Actions.SIGN_UP:
     return {
       ...state,
-      ...action.payload
+      isSignedIn: true,
+      uid: action.payload.uid,
+      name: action.payload.name
     };
   case Actions.SIGN_OUT:
     return {
-      ...state,
-      ...action.payload
+      ...initialState.users
     };
   default:
     return state;
