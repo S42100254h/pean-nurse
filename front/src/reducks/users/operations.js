@@ -1,5 +1,6 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
+import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
 
@@ -39,6 +40,7 @@ export const signUp = (name, email, password, confirmPassword) => {
 
 export const signIn = (email, password) => {
   return async (dispatch) => {
+    dispatch(showLoadingAction("Sign in..."));
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
