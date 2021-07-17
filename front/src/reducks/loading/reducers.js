@@ -6,12 +6,14 @@ export const LoadingReducer = (state = initialState.loading, action) => {
   case Actions.HIDE_LOADING:
     return {
       ...state,
-      ...action.payload,
+      state: false,
+      text: "",
     };
   case Actions.SHOW_LOADING:
     return {
       ...state,
-      ...action.payload,
+      state: true,
+      text: action.payload,
     };
   default:
     return state;
