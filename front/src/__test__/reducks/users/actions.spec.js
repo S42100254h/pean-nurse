@@ -17,7 +17,7 @@ describe("actions.jsのテスト", () => {
         type: SIGN_UP,
         payload: dummy
       }
-    )
+    );
   });
 });
 
@@ -31,7 +31,7 @@ describe("actions.jsのテスト", () => {
         type: SIGN_IN,
         payload: dummy
       }
-    )
+    );
   });
 });
 
@@ -43,6 +43,6 @@ describe("actions.jsのテスト", () => {
       {
         type: SIGN_OUT
       }
-    )
+    );
   });
 });
