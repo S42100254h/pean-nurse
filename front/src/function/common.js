@@ -12,3 +12,5 @@ export const isValidRequiredInput = (...args) => {
   }
   return validator;
 };
+
+export const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
