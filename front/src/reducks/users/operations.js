@@ -40,7 +40,6 @@ export const signUp = (name, email, password, confirmPassword) => {
 
 export const signIn = (email, password) => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("Sign in..."));
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
@@ -65,6 +64,7 @@ export const signIn = (email, password) => {
         localStorage.setItem("uid", resp.headers["uid"]);
         
         dispatch(signInAction(resp.data.data));
+        dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/"));
       })
       .catch(() => {
