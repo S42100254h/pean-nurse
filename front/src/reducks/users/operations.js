@@ -1,6 +1,7 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { _sleep } from "../../function/common";
 import axios from "axios";
 import { push } from "connected-react-router";
 
@@ -30,17 +31,19 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("uid", resp.headers["uid"]);
 
         dispatch(signUpAction(resp.data.data));
+        dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/"));
       })
       .catch(() => {
         alert("アカウント登録に失敗しました。通信環境を確認してください。");
       });
+    await _sleep(1300);
+    dispatch(hideLoadingAction());
   };
 };
 
 export const signIn = (email, password) => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("Sign in..."));
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
@@ -65,11 +68,15 @@ export const signIn = (email, password) => {
         localStorage.setItem("uid", resp.headers["uid"]);
         
         dispatch(signInAction(resp.data.data));
+        dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/"));
+
       })
       .catch(() => {
         alert("サインインに失敗しました。通信環境を確認してください。");
       });
+    await _sleep(1300);
+    dispatch(hideLoadingAction());
   };
 };
 
@@ -92,10 +99,13 @@ export const signOut = () => {
         .then(() => {
           localStorage.clear();
           dispatch(signOutAction());
+          dispatch(showLoadingAction("Sign out..."));
         })
         .catch((error) => {
           alert("サインアウトに失敗しました。通信環境を確認してください。");
         });
+      await _sleep(1300);
+      dispatch(hideLoadingAction());
     } else {
       dispatch(push("/signin"));
     }
