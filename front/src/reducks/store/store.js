@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import { LoadingReducer } from "../loading/reducers";
+import { NotificationReducer } from "../notification/reducers";
 import { UsersReducer } from "../users/reducers";
 
 export const createStore = (history) => {
@@ -15,6 +16,7 @@ export const createStore = (history) => {
     combineReducers({
       router: connectRouter(history),
       loading: LoadingReducer,
+      notification: NotificationReducer,
       users: UsersReducer
     }),
     composeWithDevTools(
