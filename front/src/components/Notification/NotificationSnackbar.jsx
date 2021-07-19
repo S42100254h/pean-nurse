@@ -10,7 +10,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import ErrorIcon from "@material-ui/icons/Error";
 import InfoIcon from "@material-ui/icons/Info";
 import WarningIcon from "@material-ui/icons/Warning";
-import { makeStyles, ThemeProvider } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 
 const variantIcon = {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing(1),
+    marginRight: 1,
   },
   message: {
     display: "flex",

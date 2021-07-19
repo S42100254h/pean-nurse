@@ -1,9 +1,12 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { setNotificationAction } from "../notification/actions";
 import { _sleep } from "../../function/common";
 import axios from "axios";
 import { push } from "connected-react-router";
+
+let notificationContent = {};
 
 export const signUp = (name, email, password, confirmPassword) => {
   return async (dispatch) => {
@@ -70,13 +73,21 @@ export const signIn = (email, password) => {
         dispatch(signInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/"));
-
+        notificationContent = {
+          variant: "success",
+          message: "サインインしました。"
+        };
       })
       .catch(() => {
-        alert("サインインに失敗しました。通信環境を確認してください。");
+        notificationContent = {
+          variant: "error",
+          message: "サインインに失敗しました。"
+        };
       });
     await _sleep(1300);
     dispatch(hideLoadingAction());
+    await _sleep(300);
+    dispatch(setNotificationAction(...Object.values(notificationContent)));
   };
 };
 
