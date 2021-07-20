@@ -1,8 +1,7 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
-import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { hideLoadingAction, showLoadingAction, _sleep } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
-import { _sleep } from "../../function/common";
 import axios from "axios";
 import { push } from "connected-react-router";
 
@@ -38,10 +37,15 @@ export const signUp = (name, email, password, confirmPassword) => {
         dispatch(push("/"));
       })
       .catch(() => {
-        alert("アカウント登録に失敗しました。通信環境を確認してください。");
+        notificationContent = {
+          variant: "error",
+          message: "ユーザー登録に失敗しました。"
+        };
       });
-    await _sleep(1300);
+    await _sleep(1000);
     dispatch(hideLoadingAction());
+    await _sleep(300);
+    dispatch(setNotificationAction(...Object.values(notificationContent)));
   };
 };
 
@@ -84,7 +88,7 @@ export const signIn = (email, password) => {
           message: "サインインに失敗しました。"
         };
       });
-    await _sleep(1300);
+    await _sleep(1000);
     dispatch(hideLoadingAction());
     await _sleep(300);
     dispatch(setNotificationAction(...Object.values(notificationContent)));
@@ -113,10 +117,15 @@ export const signOut = () => {
           dispatch(showLoadingAction("Sign out..."));
         })
         .catch((error) => {
-          alert("サインアウトに失敗しました。通信環境を確認してください。");
+          notificationContent = {
+            variant: "error",
+            message: "サインアウトに失敗しました。"
+          };
         });
-      await _sleep(1300);
+      await _sleep(1000);
       dispatch(hideLoadingAction());
+      await _sleep(300);
+      dispatch(setNotificationAction(...Object.values(notificationContent)));
     } else {
       dispatch(push("/signin"));
     }
