@@ -1,6 +1,6 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
-import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
-import { hideLoadingAction, showLoadingAction, _sleep } from "../loading/actions";
+import { isValidEmailFormat, isValidRequiredInput, _sleep } from "../../function/common";
+import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
