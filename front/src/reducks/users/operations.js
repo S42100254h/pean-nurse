@@ -45,7 +45,7 @@ export const signUp = (name, email, password, confirmPassword) => {
     await _sleep(1000);
     dispatch(hideLoadingAction());
     await _sleep(300);
-    dispatch(setNotificationAction(...Object.values(notificationContent)));
+    dispatch(setNotificationAction(notificationContent));
   };
 };
 
@@ -91,7 +91,7 @@ export const signIn = (email, password) => {
     await _sleep(1000);
     dispatch(hideLoadingAction());
     await _sleep(300);
-    dispatch(setNotificationAction(...Object.values(notificationContent)));
+    dispatch(setNotificationAction(notificationContent));
   };
 };
 
