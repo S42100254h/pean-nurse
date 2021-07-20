@@ -3,6 +3,11 @@ const initialState = {
     state: false,
     text: "",
   },
+  notification: {
+    isOpen: false,
+    variant: "success",
+    message: "",
+  },
   users: {
     isSignedIn: false,
     uid: "",

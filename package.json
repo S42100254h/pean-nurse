@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
     "redux-devtools-extension": "^2.13.9"
   }
 }
