@@ -125,7 +125,7 @@ export const signOut = () => {
       await _sleep(1000);
       dispatch(hideLoadingAction());
       await _sleep(300);
-      dispatch(setNotificationAction(...Object.values(notificationContent)));
+      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
