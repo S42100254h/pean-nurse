@@ -1,6 +1,6 @@
 import { signUpAction, signInAction, signOutAction } from "./actions";
-import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
-import { hideLoadingAction, showLoadingAction, _sleep } from "../loading/actions";
+import { isValidEmailFormat, isValidRequiredInput, _sleep } from "../../function/common";
+import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
@@ -45,7 +45,7 @@ export const signUp = (name, email, password, confirmPassword) => {
     await _sleep(1000);
     dispatch(hideLoadingAction());
     await _sleep(300);
-    dispatch(setNotificationAction(...Object.values(notificationContent)));
+    dispatch(setNotificationAction(notificationContent));
   };
 };
 
@@ -91,7 +91,7 @@ export const signIn = (email, password) => {
     await _sleep(1000);
     dispatch(hideLoadingAction());
     await _sleep(300);
-    dispatch(setNotificationAction(...Object.values(notificationContent)));
+    dispatch(setNotificationAction(notificationContent));
   };
 };
 
@@ -125,7 +125,7 @@ export const signOut = () => {
       await _sleep(1000);
       dispatch(hideLoadingAction());
       await _sleep(300);
-      dispatch(setNotificationAction(...Object.values(notificationContent)));
+      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }

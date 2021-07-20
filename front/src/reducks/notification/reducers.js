@@ -6,12 +6,16 @@ export const NotificationReducer = (state = initialState.notification, action) =
   case Actions.CLOSE_NOTIFICATION:
     return {
       ...state,
-      ...action.payload,
+      isOpen: false,
+      variant: "success",
+      message: "",
     };
   case Actions.SET_NOTIFICATION:
     return {
       ...state,
-      ...action.payload,
+      isOpen: true,
+      variant: action.payload.variant,
+      message: action.payload.message,
     };
   default:
     return state;
