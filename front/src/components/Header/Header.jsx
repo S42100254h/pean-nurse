@@ -1,6 +1,6 @@
 import React, { useCallback, useState} from "react";
 import { useDispatch } from "react-redux";
-import { AppBar, Box, IconButton, MenuIcon, rgbToHex, Toolbar } from "@material-ui/core";
+import { AppBar, Box, MenuIcon, rgbToHex, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
 import logo from "../../assets/img/icons/logo.png";
@@ -22,11 +22,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolBar: {
-    margin: "0 auto",
-    width: "100%",
+    width: "330px",
   },
-  IconButtons: {
-    margin: "0 0 0 auto",
+  headerItem: {
+    color: "#696969",
+    cursor: "pointer",
+    fontSize: "14px",
+    margin: "0 auto",
+    lineHeight: "60px",
+    height: "90%",
+    textAlign: "center",
+    "&:hover": {
+      borderBottom: "5px solid #F6ADC6",
+      transition: "0.05s",
+    },
   },
 }));
 
@@ -39,6 +48,8 @@ const Header = () => {
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
           <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
+          <p className={classes.headerItem}>コース一覧</p>
+          <p className={classes.headerItem}>問い合わせ</p>
         </Toolbar>
       </AppBar>
     </Box>
