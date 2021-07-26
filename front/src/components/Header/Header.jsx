@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { AppBar, Box, IconButton, MenuIcon, rgbToHex, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
+import logo from "../../assets/img/icons/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +13,13 @@ const useStyles = makeStyles((theme) => ({
   menuBar: {
     backgroundColor: "#ffffff",
     height: "60px",
+  },
+  headerLogo: {
+    maxHeight: "50px",
+    cursor: "pointer",
+    "&:hover": {
+      opacity: 0.7,
+    },
   },
   toolBar: {
     margin: "0 auto",
@@ -30,6 +38,7 @@ const Header = () => {
     <Box className={classes.root}>
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
+          <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
         </Toolbar>
       </AppBar>
     </Box>
