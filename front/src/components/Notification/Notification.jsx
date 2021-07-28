@@ -9,6 +9,7 @@ import { NotificationSnackbar } from "./index";
 const useStyles = makeStyles({
   Snackbar: {
     height: 80,
+    paddingTop: 70,
   },
 });
 
