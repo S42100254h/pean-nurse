@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "../../reducks/users/selectors";
-import { signIn, signOut } from "../../reducks/users/operations";
+import { signOut } from "../../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -38,7 +38,7 @@ const ClosableDrawer = (props) => {
   };
   
   const handleSignIn = (event) => {
-    dispatch(signIn());
+    dispatch(push("/signin"));
     props.onClose(event);
   };
 
