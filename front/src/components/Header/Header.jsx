@@ -4,6 +4,7 @@ import { AppBar, Box, MenuIcon, rgbToHex, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
 import logo from "../../assets/img/icons/logo.png";
+import { ClosableDrawer } from "./index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ const Header = () => {
           <p className={classes.headerItem}>問い合わせ</p>
         </Toolbar>
       </AppBar>
+      <ClosableDrawer />
     </Box>
   );
 };
