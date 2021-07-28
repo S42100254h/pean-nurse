@@ -1,7 +1,8 @@
 import React, { useCallback, useState} from "react";
 import { useDispatch } from "react-redux";
-import { AppBar, Box, MenuIcon, rgbToHex, Toolbar } from "@material-ui/core";
+import { AppBar, Box, IconButton, rgbToHex, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
 import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   toolBar: {
     width: "330px",
+  },
+  iconButtons: {
+    margin: "0 0 0 auto",
   },
   headerItem: {
     color: "#696969",
@@ -62,6 +66,12 @@ const Header = () => {
           <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
           <p className={classes.headerItem}>コース一覧</p>
           <p className={classes.headerItem}>問い合わせ</p>
+
+          <Box className={classes.iconButtons}>
+            <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
+              <MenuIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />

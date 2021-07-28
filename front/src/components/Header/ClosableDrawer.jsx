@@ -12,12 +12,9 @@ import { signIn, signOut } from "../../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    [theme.breakpoints.up("sm")]: {
-      flexShrink: 0,
-      width: 256,
-    },
+    flexShrink: 0,
+    width: 256,
   },
-  toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: 256,
   },
