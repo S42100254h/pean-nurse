@@ -115,6 +115,10 @@ export const signOut = () => {
           localStorage.clear();
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
+          notificationContent = {
+            variant: "success",
+            message: "サインアウトしました。"
+          };
         })
         .catch((error) => {
           notificationContent = {
