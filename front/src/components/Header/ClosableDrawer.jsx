@@ -1,21 +1,14 @@
 import React from "react";
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
-import {
-  AppsIcon,
-  Email,
-  ExitToAppIcon,
-  PermIdentityIcon,
-} from "@material-ui/icons/Apps";
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import AppsIcon from "@material-ui/icons/Apps";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import PermIdentityIcon from "@material-ui/icons/PermIdentity";
+import { Email } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "../../reducks/users/selectors";
+import { signIn, signOut } from "../../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -47,6 +40,11 @@ const ClosableDrawer = (props) => {
     props.onClose(event);
   };
   
+  const handleSignIn = (event) => {
+    dispatch(signIn());
+    props.onClose(event);
+  };
+
   const menus = [
     {
       func: selectMenu,

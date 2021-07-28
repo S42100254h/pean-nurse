@@ -44,6 +44,17 @@ const Header = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerToggle = useCallback((event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    setOpen(!open);
+  },
+  [setOpen, open]
+  );
+
   return (
     <Box className={classes.root}>
       <AppBar position="fixed" className={classes.menuBar}>
@@ -53,7 +64,7 @@ const Header = () => {
           <p className={classes.headerItem}>問い合わせ</p>
         </Toolbar>
       </AppBar>
-      <ClosableDrawer />
+      <ClosableDrawer open={open} onClose={handleDrawerToggle} />
     </Box>
   );
 };
