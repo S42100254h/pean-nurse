@@ -1,15 +1,16 @@
 import React from "react";
 import {
-  AppsIcon,
-  BookmarkBorder,
   Drawer,
-  Email,
-  ExitToAppIcon,
   List,
   ListItemIcon,
   ListItemText,
-  PermIdentityIcon
 } from "@material-ui/core";
+import {
+  AppsIcon,
+  Email,
+  ExitToAppIcon,
+  PermIdentityIcon,
+} from "@material-ui/icons/Apps";
 import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
