@@ -64,7 +64,8 @@ const Header = () => {
     <Box className={classes.root}>
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
-          <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
+          <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("dashboard"))} />
+          <p className={classes.headerItem} onClick={() => dispatch(push("dashboard"))}>ダッシュボード</p>
           <p className={classes.headerItem} onClick={() => dispatch(push("courses"))}>コース一覧</p>
           <p className={classes.headerItem} onClick={() => dispatch(push("contact"))}>問い合わせ</p>
 
