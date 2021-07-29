@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolBar: {
-    width: "330px",
+    width: "100%",
   },
   iconButtons: {
     margin: "0 0 0 auto",
@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
     color: "#696969",
     cursor: "pointer",
     fontSize: "14px",
-    margin: "0 auto",
+    margin: "0",
+    paddingLeft: "15px",
     lineHeight: "60px",
     height: "90%",
     textAlign: "center",

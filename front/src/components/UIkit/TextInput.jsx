@@ -13,6 +13,7 @@ const TextInput = (props) => {
       value={props.value}
       type={props.type}
       onChange={props.onChange}
+      onKeyDown={props.onKeyDown}
     />
   );
 };
