@@ -28,21 +28,27 @@ const SignUp = () => {
     setConfirmPassword(event.target.value);
   }, [setConfirmPassword]);
 
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      dispatch(signUp(name, email, password, confirmPassword));
+    }
+  };
+
   return (
     <div className="c-section-container">
       <h2 className="u-text__headline u-text-center">アカウント登録</h2>
       <div className="module-spacer--medium" />
       <TextInput
-        fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={name} type={"text"} onChange={inputName}
+        fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={name} type={"text"} onChange={inputName} onKeyDown={handleOnKeyDown}
       />
       <TextInput
-        fullWidth={true} label={"メールアドレス"} multiline={false} required={true} row={1} value={email} type={"email"} onChange={inputEmail}
+        fullWidth={true} label={"メールアドレス"} multiline={false} required={true} row={1} value={email} type={"email"} onChange={inputEmail} onKeyDown={handleOnKeyDown}
       />
       <TextInput
-        fullWidth={true} label={"パスワード"} multiline={false} required={true} row={1} value={password} type={"password"} onChange={inputPassword}
+        fullWidth={true} label={"パスワード"} multiline={false} required={true} row={1} value={password} type={"password"} onChange={inputPassword} onKeyDown={handleOnKeyDown}
       />
       <TextInput
-        fullWidth={true} label={"パスワード（確認用）"} multiline={false} required={true} row={1} value={confirmPassword} type={"confirmPassword"} onChange={inputConfirmPassword}
+        fullWidth={true} label={"パスワード（確認用）"} multiline={false} required={true} row={1} value={confirmPassword} type={"confirmPassword"} onChange={inputConfirmPassword} onKeyDown={handleOnKeyDown}
       />
       <div className="module-spacer--medium" />
       <PrimaryButton

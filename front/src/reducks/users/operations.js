@@ -35,6 +35,10 @@ export const signUp = (name, email, password, confirmPassword) => {
         dispatch(signUpAction(resp.data.data));
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/"));
+        notificationContent = {
+          variant: "success",
+          message: "ユーザー登録に成功しました。"
+        };
       })
       .catch(() => {
         notificationContent = {
