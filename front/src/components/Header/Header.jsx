@@ -65,8 +65,8 @@ const Header = () => {
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
           <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
-          <p className={classes.headerItem}>コース一覧</p>
-          <p className={classes.headerItem}>問い合わせ</p>
+          <p className={classes.headerItem} onClick={() => dispatch(push("courses"))}>コース一覧</p>
+          <p className={classes.headerItem} onClick={() => dispatch(push("contact"))}>問い合わせ</p>
 
           <Box className={classes.iconButtons}>
             <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
