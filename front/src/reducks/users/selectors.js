@@ -11,3 +11,8 @@ export const getSignedIn = createSelector(
   [usersSelector],
   state => state.isSignedIn
 );
+
+export const getUserImage = createSelector(
+  [usersSelector],
+  state => state.image
+);
