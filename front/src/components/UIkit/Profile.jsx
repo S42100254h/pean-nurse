@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
+import { getUserId, getUserImage } from "../../reducks/users/selectors";
 
 const useStyles = makeStyles((theme) => ({
   "profile": {
@@ -32,12 +34,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = () => {
   const classes = useStyles();
+  const selector = useSelector((state) => state);
+  const userId = getUserId(selector);
+  const userImage = getUserImage(selector);
   
   return (
     <Container className={classes.profile} maxWidth="sm">
       <div className={classes.profileItems}>
-        <Avatar src="/broken-image.jpg" className={classes.avatar} />
-        <h2>ユーザー名</h2>
+        {userImage ? (
+          <Avatar src={userImage} className={classes.avatar} />
+        ) : (
+          <Avatar src="/broken-image.jpg" className={classes.avatar} />
+        )}
+        <h2>{userId}</h2>
         <div className={classes.separator} />
         <div className={classes.separator} />
       </div>
