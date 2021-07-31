@@ -11,7 +11,8 @@ const initialState = {
   users: {
     isSignedIn: false,
     uid: "",
-    name: ""
+    name: "",
+    image: "",
   },
 };
 
