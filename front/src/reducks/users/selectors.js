@@ -16,3 +16,8 @@ export const getUserImage = createSelector(
   [usersSelector],
   state => state.image
 );
+
+export const getUserName = createSelector(
+  [usersSelector],
+  state => state.name
+);
