@@ -33,7 +33,7 @@ const SignIn = () => {
         multiline={false}
         required={true}
         row={1}
-        variant={"email"}
+        value={email}
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
@@ -43,7 +43,7 @@ const SignIn = () => {
         multiline={false}
         required={true}
         row={1}
-        variant={"password"}
+        value={password}
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}
       />

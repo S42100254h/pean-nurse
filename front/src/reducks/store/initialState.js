@@ -12,6 +12,7 @@ const initialState = {
     isSignedIn: false,
     uid: "",
     name: "",
+    email: "",
     image: "",
   },
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import AppsIcon from "@material-ui/icons/Apps";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import SettingsIcon from "@material-ui/icons/Settings";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import { Email } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
@@ -49,6 +50,12 @@ const ClosableDrawer = (props) => {
       icon: <AppsIcon />,
       id: "courses",
       value: "/courses",
+    },
+    {
+      func: selectMenu,
+      label: "設定",
+      icon: <SettingsIcon />,
+      value: "/setting",
     },
     {
       func: selectMenu,
