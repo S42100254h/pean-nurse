@@ -8,14 +8,18 @@ export const UsersReducer = (state = initialState.users, action) => {
       ...state,
       isSignedIn: true,
       uid: action.payload.uid,
-      name: action.payload.name
+      name: action.payload.name,
+      email: action.payload.email,
+      image: action.payload.image,
     };
   case Actions.SIGN_UP:
     return {
       ...state,
       isSignedIn: true,
       uid: action.payload.uid,
-      name: action.payload.name
+      name: action.payload.name,
+      email: action.payload.email,
+      image: action.payload.image,
     };
   case Actions.SIGN_OUT:
     return {
