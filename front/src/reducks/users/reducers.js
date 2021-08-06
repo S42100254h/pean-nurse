@@ -25,6 +25,12 @@ export const UsersReducer = (state = initialState.users, action) => {
     return {
       ...initialState.users
     };
+  case Actions.EDIT_USER_INFO:
+    return {
+      ...state,
+      name: action.payload.name,
+      email: action.payload.email,
+    };
   default:
     return state;
   }
