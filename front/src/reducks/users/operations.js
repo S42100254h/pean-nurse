@@ -1,4 +1,4 @@
-import { signUpAction, signInAction, signOutAction } from "./actions";
+import { editUserInfoAction, signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, _sleep } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
@@ -33,6 +33,7 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("uid", resp.headers["uid"]);
 
         dispatch(signUpAction(resp.data.data));
+        console.log(resp.data.data);
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/"));
         notificationContent = {
@@ -140,6 +141,53 @@ export const signOut = () => {
   }; 
 };
 
+export const editUserInfo = (name, email) => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+
+      const body = { name: name, email: email };
+
+      axios
+        .patch(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          localStorage.setItem("access-token", resp.headers["access-token"]);
+          localStorage.setItem("client", resp.headers["client"]);
+          localStorage.setItem("uid", resp.headers["uid"]);
+
+          dispatch(editUserInfoAction(resp.data.data));
+          dispatch(showLoadingAction("Update ..."));
+          dispatch(push("/"));
+          notificationContent = {
+            variant: "success",
+            message: "ユーザー情報を更新しました。"
+          };
+        })
+        .catch(() => {
+          notificationContent = {
+            variant: "error",
+            message: "ユーザー情報の更新に失敗しました。"
+          };
+        });
+      await _sleep(1000);
+      dispatch(hideLoadingAction());
+      await _sleep(300);
+      dispatch(setNotificationAction(notificationContent));
+    } else {
+      dispatch(push("/signin"));
+    }
+  };
+};
+
 export const listenAuthState = () => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
@@ -163,6 +211,8 @@ export const listenAuthState = () => {
             isSignedIn: true,
             uid: userData.uid,
             name: userData.name,
+            image: userData.image,
+            email: userData.email,
           }));
         })
         .catch((error) => {

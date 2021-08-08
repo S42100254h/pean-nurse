@@ -1,10 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab } from "@material-ui/core";
 import { TabPanel, TextInput, PrimaryButton } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
+import { editUserInfo } from "../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,27 +55,32 @@ const useStyles = makeStyles((theme) => ({
 
 const Setting = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const userImage = getUserImage(selector);
   const userName = getUserName(selector);
   const userEmail = getUserEmail(selector);
 
   const [value, setValue] = useState(0),
-    [name, setName] = useState(userName),
-    [email, setEmail] = useState(userEmail);
-
+    [name, setName] = useState(""),
+    [email, setEmail] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const inputName = useCallback((event) => {
-    setEmail(event.target.value);
+    setName(event.target.value);
   }, [setName]);
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
   }, [setEmail]);
+
+  useEffect(() => {
+    setName(userName);
+    setEmail(userEmail);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -117,7 +124,12 @@ const Setting = () => {
               onChange={inputEmail}
             />
             <div className="module-spacer--medium" />
-            <PrimaryButton label={"更新"} />
+            <PrimaryButton
+              label={"更新"}
+              onClick={() => {
+                dispatch(editUserInfo(name, email));
+              }}
+            />
             <div className="module-spacer--medium" />
             <a href="#">アカウントを削除される場合はこちら</a>
           </TabPanel>

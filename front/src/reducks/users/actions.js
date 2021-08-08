@@ -20,3 +20,11 @@ export const signOutAction = () => {
     type: "SIGN_OUT"
   };
 };
+
+export const EDIT_USER_INFO = "EDIT_USER_INFO";
+export const editUserInfoAction = (payload) => {
+  return {
+    type: "EDIT_USER_INFO",
+    payload,
+  };
+};
