@@ -33,6 +33,7 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("uid", resp.headers["uid"]);
 
         dispatch(signUpAction(resp.data.data));
+        console.log(resp.data.data);
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/"));
         notificationContent = {
@@ -210,6 +211,8 @@ export const listenAuthState = () => {
             isSignedIn: true,
             uid: userData.uid,
             name: userData.name,
+            image: userData.image,
+            email: userData.email,
           }));
         })
         .catch((error) => {

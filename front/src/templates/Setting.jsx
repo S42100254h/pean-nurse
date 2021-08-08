@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab } from "@material-ui/core";
@@ -76,6 +76,11 @@ const Setting = () => {
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
   }, [setEmail]);
+
+  useEffect(() => {
+    setName(userName);
+    setEmail(userEmail);
+  }, []);
 
   return (
     <div className={classes.root}>
