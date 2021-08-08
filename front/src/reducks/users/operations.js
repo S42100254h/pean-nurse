@@ -140,7 +140,7 @@ export const signOut = () => {
   }; 
 };
 
-export const editUserInfo = () => {
+export const editUserInfo = (name, email) => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
@@ -148,8 +148,10 @@ export const editUserInfo = () => {
       const uid = localStorage.getItem("uid");
       const apiEndpoint = "http://localhost:4000/api/v1/auth";
 
+      const body = { name: name, email: email };
+
       axios
-        .patch(apiEndpoint, {
+        .patch(apiEndpoint, body, {
           headers: {
             "access-token": auth_token,
             client: client,
