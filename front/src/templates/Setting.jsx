@@ -6,6 +6,7 @@ import { TabPanel, TextInput, PrimaryButton } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { editUserInfo } from "../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,9 +48,21 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     padding: "45px 100px",
   },
+  imageContainer: {
+    position: "relative",
+    width: "100px",
+    height: "100px",
+    margin: "0 auto",
+  },
   avatar: {
     width: "80px",
     height: "80px",
+  },
+  upload: {
+    position: "absolute",
+    top: "55px",
+    left: "55px",
+    zIndex: "999",
   },
 }));
 
@@ -100,11 +113,15 @@ const Setting = () => {
         </div>
         <div className={classes.tabMenu}>
           <TabPanel value={value} index={0}>
-            {userImage ? (
-              <Avatar src={userImage} className={classes.avatar} />
-            ) : (
-              <Avatar src="/broken-image.jpg" className={classes.avatar} />
-            )}
+            <div className={classes.imageContainer}>
+              {userImage ? (
+                <Avatar src={userImage} className={classes.avatar} />
+              ) : (
+                <Avatar src="/broken-image.jpg" className={classes.avatar} />
+              )}
+              <PhotoCameraIcon className={classes.upload}/>
+            </div>
+            <div className="module-spacer--extra-small" />
             <TextInput
               fullWidth={true}
               label={"ユーザー名"}
