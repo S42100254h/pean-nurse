@@ -50,9 +50,11 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     position: "relative",
-    width: "100px",
-    height: "100px",
+    minwidth: "100%",
+    minheight: "100%",
     margin: "0 auto",
+    background: "none",
+    border: "none",
   },
   avatar: {
     width: "80px",
@@ -113,14 +115,14 @@ const Setting = () => {
         </div>
         <div className={classes.tabMenu}>
           <TabPanel value={value} index={0}>
-            <div className={classes.imageContainer}>
+            <button type="button" className={classes.imageContainer}>
               {userImage ? (
                 <Avatar src={userImage} className={classes.avatar} />
               ) : (
                 <Avatar src="/broken-image.jpg" className={classes.avatar} />
               )}
               <PhotoCameraIcon className={classes.upload}/>
-            </div>
+            </button>
             <div className="module-spacer--extra-small" />
             <TextInput
               fullWidth={true}
