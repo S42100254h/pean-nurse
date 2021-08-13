@@ -8,6 +8,7 @@ import { getUserEmail, getUserImage, getUserName } from "../reducks/users/select
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { editUserInfo } from "../reducks/users/operations";
+import { ClickAway } from "../components/UIkit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "55px",
     left: "55px",
-    zIndex: "999",
+    zIndex: "1",
   },
 }));
 
@@ -78,7 +79,8 @@ const Setting = () => {
 
   const [value, setValue] = useState(0),
     [name, setName] = useState(""),
-    [email, setEmail] = useState("");
+    [email, setEmail] = useState(""),
+    [open, setOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -97,8 +99,18 @@ const Setting = () => {
     setEmail(userEmail);
   }, []);
 
+  const handleModalToggle = useCallback((event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    setOpen(!open);
+  },
+  [setOpen, open]
+  );
+
   return (
     <div className={classes.root}>
+      <div onClose={(e) => handleModalToggle(e)} />
       <div className={classes.container}>
         <div className={classes.tabList}>
           <Tabs
@@ -115,13 +127,16 @@ const Setting = () => {
         </div>
         <div className={classes.tabMenu}>
           <TabPanel value={value} index={0}>
-            <button type="button" className={classes.imageContainer}>
+            <button type="button" className={classes.imageContainer} onClick={(e) => handleModalToggle(e)}>
               {userImage ? (
                 <Avatar src={userImage} className={classes.avatar} />
               ) : (
                 <Avatar src="/broken-image.jpg" className={classes.avatar} />
               )}
               <PhotoCameraIcon className={classes.upload}/>
+              {open && (
+                <ClickAway onClickAway={handleModalToggle} />
+              )}
             </button>
             <div className="module-spacer--extra-small" />
             <TextInput
