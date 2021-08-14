@@ -36,9 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const ClickAway = (props) => {
   const classes = useStyles();
 
-
   return (
-
     <ClickAwayListener onClickAway={props.onClickAway}>
       <div className={classes.modal}>
         <div className={classes.popContainer}>
