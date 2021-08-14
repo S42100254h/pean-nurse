@@ -98,6 +98,10 @@ GEM
       devise (> 3.5.2, < 5)
       rails (>= 4.2.0, < 6.2)
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     excon (0.85.0)
     factory_bot (6.1.0)
@@ -320,6 +324,7 @@ DEPENDENCIES
   byebug
   carrierwave
   devise_token_auth
+  dotenv-rails
   factory_bot_rails
   faker
   fog-aws
