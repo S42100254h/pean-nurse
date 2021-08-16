@@ -28,3 +28,11 @@ export const editUserInfoAction = (payload) => {
     payload,
   };
 };
+
+export const EDIT_USER_IMAGE = "EDIT_USER_IMAGE";
+export const editUserImageAction = (payload) => {
+  return {
+    type: "EDIT_USER_IMAGE",
+    payload,
+  };
+};
