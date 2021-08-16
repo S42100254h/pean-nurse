@@ -31,6 +31,11 @@ export const UsersReducer = (state = initialState.users, action) => {
       name: action.payload.name,
       email: action.payload.email,
     };
+  case Actions.EDIT_USER_IMAGE:
+    return {
+      ...state,
+      image: action.payload.image,
+    };
   default:
     return state;
   }
