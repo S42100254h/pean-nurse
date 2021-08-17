@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :name, presence: true, length: { maximum: 50 }
-  mount_uploader :image, imageUploader
+  mount_uploader :image, ImageUploader
   # devise_token_authにより、emailの形式とpasswordの長さは下記のように設定されている。
   # email_regexp = /\A[^@\s]+@[^@\s]+\z/
   # password_length = 6..128

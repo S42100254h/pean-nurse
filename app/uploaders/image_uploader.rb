@@ -16,6 +16,7 @@ class ImageUploader < CarrierWave::Uploader::Base
       "uploads/test/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     else
       "uploads/production/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
