@@ -129,7 +129,7 @@ const Setting = () => {
           <TabPanel value={value} index={0}>
             <button type="button" className={classes.imageContainer} onClick={(e) => handleModalToggle(e)}>
               {userImage ? (
-                <Avatar src={userImage} className={classes.avatar} />
+                <Avatar src={userImage.url} className={classes.avatar} />
               ) : (
                 <Avatar src="/broken-image.jpg" className={classes.avatar} />
               )}
