@@ -28,7 +28,10 @@ gem "jbuilder", "~> 2.7"
 # Reduces boot times through caching; required in config/boot.rb
 gem "active_model_serializers"
 gem "bootsnap", ">= 1.4.4", require: false
+gem "carrierwave"
 gem "devise_token_auth"
+gem "dotenv-rails"
+gem "fog-aws"
 gem "rack-cors"
 
 group :development, :test do

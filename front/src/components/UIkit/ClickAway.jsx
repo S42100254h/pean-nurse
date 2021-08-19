@@ -40,8 +40,10 @@ const ClickAway = (props) => {
     <ClickAwayListener onClickAway={props.onClickAway}>
       <div className={classes.modal}>
         <div className={classes.popContainer}>
-          <input type="file" accept="image/jpeg, image/png" className={classes.input} />
-          <p className={classes.pop}>画像をアップロード</p>
+          <label className={classes.pop}>
+            画像をアップロード
+            <input type="file" accept="image/jpeg, image/png" className={classes.input} />
+          </label>
         </div>
         <div className={classes.popContainer}>
           <p className={classes.pop}>デフォルト画像に設定</p>
