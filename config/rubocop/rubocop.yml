@@ -105,7 +105,7 @@ Lint/Void:
 # 30 まではギリギリ許せる範囲だったけど
 # リリースごとに 3 ずつぐらい下げていきます。20 まで下げたい。
 Metrics/AbcSize:
-  Max: 24
+  Max: 27
 
 # Gemfile, Guardfile は DSL 的で基本的に複雑にはならないので除外
 # rake, rspec, environments, routes は巨大な block 不可避なので除外
@@ -408,4 +408,8 @@ Style/WordArray:
 # に修正されるのが嫌。
 # 中身を入れ替えて否定外しても良いんだけど、どちらが例外的な処理なのかが分かりづらくなる。
 Style/ZeroLengthPredicate:
+  Enabled: false
+
+# 環境変数の連結を許可する。
+Style/StringConcatenation:
   Enabled: false
