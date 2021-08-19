@@ -28,11 +28,11 @@ gem "jbuilder", "~> 2.7"
 # Reduces boot times through caching; required in config/boot.rb
 gem "active_model_serializers"
 gem "bootsnap", ">= 1.4.4", require: false
-gem "devise_token_auth"
-gem "rack-cors"
 gem "carrierwave"
-gem "fog-aws"
+gem "devise_token_auth"
 gem "dotenv-rails"
+gem "fog-aws"
+gem "rack-cors"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
