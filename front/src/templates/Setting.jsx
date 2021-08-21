@@ -134,9 +134,6 @@ const Setting = () => {
                 <Avatar src="/broken-image.jpg" className={classes.avatar} />
               )}
               <PhotoCameraIcon className={classes.upload}/>
-              {open && (
-                <ClickAway onClickAway={handleModalToggle} />
-              )}
             </button>
             <div className="module-spacer--extra-small" />
             <TextInput
@@ -177,6 +174,9 @@ const Setting = () => {
             Item four
           </TabPanel>
         </div>
+        {open && (
+          <ClickAway onClickAway={handleModalToggle} />
+        )}
       </div>
     </div>
   );
