@@ -1,4 +1,4 @@
-import { editUserInfoAction, signUpAction, signInAction, signOutAction } from "./actions";
+import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, _sleep } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
@@ -184,6 +184,43 @@ export const editUserInfo = (name, email) => {
       dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
+    }
+  };
+};
+
+export const editImage = (image) => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/vi/auth";
+
+      const body = {image: image };
+
+      axios
+        .patch(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(editUserImageAction(resp.data.data));
+          console.log(resp.data.data);
+          notificationContent = {
+            variant: "success",
+            message: "画像を更新しました。"
+          };
+        })
+        .catch(() => {
+          notificationContent = {
+            variant: "error",
+            message: "画像の更新に失敗しました。"
+          };
+        });
+      dispatch(setNotificationAction(notificationContent));
     }
   };
 };
