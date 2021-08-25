@@ -33,7 +33,6 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("uid", resp.headers["uid"]);
 
         dispatch(signUpAction(resp.data.data));
-        console.log(resp.data.data);
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/"));
         notificationContent = {
@@ -194,13 +193,15 @@ export const editImage = (image) => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/vi/auth";
+      const apiEndpoint = "http://localhost:4000/api/v1/auth";
 
-      const body = {image: image };
+      let form = new FormData();
+      form.append("image", image);
 
       axios
-        .patch(apiEndpoint, body, {
+        .patch(apiEndpoint, form, {
           headers: {
+            "content-type": "multipart/form-data",
             "access-token": auth_token,
             client: client,
             uid: uid,
@@ -208,7 +209,6 @@ export const editImage = (image) => {
         })
         .then((resp) => {
           dispatch(editUserImageAction(resp.data.data));
-          console.log(resp.data.data);
           notificationContent = {
             variant: "success",
             message: "画像を更新しました。"
@@ -220,7 +220,10 @@ export const editImage = (image) => {
             message: "画像の更新に失敗しました。"
           };
         });
+      await _sleep(2000);
       dispatch(setNotificationAction(notificationContent));
+    } else {
+      dispatch(push("/signin"));
     }
   };
 };
