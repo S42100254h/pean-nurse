@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-import { editUserInfo } from "../reducks/users/operations";
+import { editImage, editUserInfo } from "../reducks/users/operations";
 import { ClickAway } from "../components/UIkit";
 
 const useStyles = makeStyles((theme) => ({
@@ -108,6 +108,16 @@ const Setting = () => {
   [setOpen, open]
   );
 
+  const handleUpload = (e) => {
+    const image = e.target.files[0];
+    if (image === undefined) {
+      return;
+    } else {
+      dispatch(editImage(image));
+      setOpen(!open);
+    }
+  };
+
   return (
     <div className={classes.root}>
       <div onClose={(e) => handleModalToggle(e)} />
@@ -175,7 +185,7 @@ const Setting = () => {
           </TabPanel>
         </div>
         {open && (
-          <ClickAway onClickAway={handleModalToggle} />
+          <ClickAway onClickAway={handleModalToggle} onChange={(e) => handleUpload(e)} />
         )}
       </div>
     </div>
