@@ -1,4 +1,4 @@
-import { editUserInfoAction, signUpAction, signInAction, signOutAction } from "./actions";
+import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, _sleep } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
@@ -33,7 +33,6 @@ export const signUp = (name, email, password, confirmPassword) => {
         localStorage.setItem("uid", resp.headers["uid"]);
 
         dispatch(signUpAction(resp.data.data));
-        console.log(resp.data.data);
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/"));
         notificationContent = {
@@ -181,6 +180,47 @@ export const editUserInfo = (name, email) => {
       await _sleep(1000);
       dispatch(hideLoadingAction());
       await _sleep(300);
+      dispatch(setNotificationAction(notificationContent));
+    } else {
+      dispatch(push("/signin"));
+    }
+  };
+};
+
+export const editImage = (image) => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+
+      let form = new FormData();
+      form.append("image", image);
+
+      axios
+        .patch(apiEndpoint, form, {
+          headers: {
+            "content-type": "multipart/form-data",
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(editUserImageAction(resp.data.data));
+          notificationContent = {
+            variant: "success",
+            message: "画像を更新しました。"
+          };
+        })
+        .catch(() => {
+          notificationContent = {
+            variant: "error",
+            message: "画像の更新に失敗しました。"
+          };
+        });
+      await _sleep(2000);
       dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));

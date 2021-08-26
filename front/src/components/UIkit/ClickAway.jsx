@@ -5,7 +5,8 @@ import { ClickAwayListener } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   modal: {
     position: "absolute",
-    top: "70px",
+    top: "220px",
+    left: "1020px",
     width: "230px",
     height: "100px",
     border: "2px solid #fff",
@@ -27,9 +28,15 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "inline-block",
     padding: "10px 20px",
+    cursor: "pointer",
   },
   input: {
     display: "none",
+  },
+  clickAwayContainer: {
+    position: "fixed",
+    inset: "0",
+    zIndex: "20000",
   },
 }));
 
@@ -37,19 +44,21 @@ const ClickAway = (props) => {
   const classes = useStyles();
 
   return (
-    <ClickAwayListener onClickAway={props.onClickAway}>
-      <div className={classes.modal}>
-        <div className={classes.popContainer}>
-          <label className={classes.pop}>
-            画像をアップロード
-            <input type="file" accept="image/jpeg, image/png" className={classes.input} />
-          </label>
+    <div className={classes.clickAwayContainer}>
+      <ClickAwayListener onClickAway={props.onClickAway}>
+        <div className={classes.modal}>
+          <div className={classes.popContainer}>
+            <label className={classes.pop}>
+              画像をアップロード
+              <input type="file" accept="image/jpeg, image/png" className={classes.input} onChange={(e) => props.onChange(e)} />
+            </label>
+          </div>
+          <div className={classes.popContainer}>
+            <p className={classes.pop}>デフォルト画像に設定</p>
+          </div>
         </div>
-        <div className={classes.popContainer}>
-          <p className={classes.pop}>デフォルト画像に設定</p>
-        </div>
-      </div>
-    </ClickAwayListener>
+      </ClickAwayListener>
+    </div>
   ); 
 };
 
