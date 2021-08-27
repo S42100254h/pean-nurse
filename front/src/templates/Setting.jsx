@@ -58,13 +58,13 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
   },
   avatar: {
-    width: "80px",
-    height: "80px",
+    width: "100px",
+    height: "100px",
   },
   upload: {
     position: "absolute",
-    top: "55px",
-    left: "55px",
+    top: "75px",
+    left: "75px",
     zIndex: "1",
   },
 }));
