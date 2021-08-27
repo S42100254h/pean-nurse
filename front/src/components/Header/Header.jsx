@@ -1,6 +1,6 @@
 import React, { useCallback, useState} from "react";
 import { useDispatch } from "react-redux";
-import { AppBar, Box, IconButton, rgbToHex, Toolbar } from "@material-ui/core";
+import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
@@ -33,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#696969",
     cursor: "pointer",
     fontSize: "14px",
-    margin: "0",
-    paddingLeft: "15px",
+    margin: "0 0 0 15px",
     lineHeight: "60px",
     height: "90%",
     textAlign: "center",
