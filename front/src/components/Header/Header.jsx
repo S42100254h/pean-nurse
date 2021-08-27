@@ -1,6 +1,6 @@
 import React, { useCallback, useState} from "react";
 import { useDispatch } from "react-redux";
-import { AppBar, Box, IconButton, rgbToHex, Toolbar } from "@material-ui/core";
+import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
