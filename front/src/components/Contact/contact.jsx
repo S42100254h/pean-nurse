@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px 20px",
     backgroundColor: "#F08080",
     borderRadius: "2px",
+    cursor: "pointer",
   },
   icon: {
     float: "left",

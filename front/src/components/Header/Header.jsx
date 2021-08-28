@@ -1,4 +1,4 @@
-import React, { useCallback, useState} from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
@@ -66,7 +66,7 @@ const Header = () => {
           <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("dashboard"))} />
           <p className={classes.headerItem} onClick={() => dispatch(push("dashboard"))}>ダッシュボード</p>
           <p className={classes.headerItem} onClick={() => dispatch(push("courses"))}>コース一覧</p>
-          <p className={classes.headerItem} onClick={() => dispatch(push("contact"))}>ヘルプ</p>
+          <p className={classes.headerItem} onClick={() => dispatch(push("help"))}>ヘルプ</p>
 
           <Box className={classes.iconButtons}>
             <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
