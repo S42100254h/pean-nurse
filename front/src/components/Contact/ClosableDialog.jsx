@@ -5,7 +5,11 @@ import { PrimaryButton } from "../../components/UIkit";
 const ClosableDialog = (props) => {
   return (
     <div>
-      <Dialog>
+      <Dialog
+        open={props.open}
+        onClose={(e) => props.onClose(e)}
+        ModalProps={{ keepMounted: true }}
+      >
         <DialogContent>
           <DialogContentText>
             contact form
