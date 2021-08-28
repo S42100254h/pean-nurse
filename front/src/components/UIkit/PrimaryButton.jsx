@@ -10,7 +10,6 @@ const useStyles = makeStyles({
     height: 48,
     marginButton: 16,
     width: 256,
-    letterSpacing: "1rem",
   },
 });
 
