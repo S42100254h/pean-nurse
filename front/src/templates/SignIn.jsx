@@ -40,6 +40,7 @@ const SignIn = () => {
       <TextInput
         fullWidth={true}
         label={"パスワード"}
+        type="password"
         multiline={false}
         required={true}
         row={1}
