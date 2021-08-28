@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabList: {
     width: "200px",
-    height: "240px",
+    minheight: "100%",
     borderRadius: "4px",
     backgroundColor: "#FEEEED",
     display: "grid",
@@ -58,13 +58,13 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
   },
   avatar: {
-    width: "80px",
-    height: "80px",
+    width: "100px",
+    height: "100px",
   },
   upload: {
     position: "absolute",
-    top: "55px",
-    left: "55px",
+    top: "75px",
+    left: "75px",
     zIndex: "1",
   },
 }));
@@ -122,17 +122,17 @@ const Setting = () => {
     <div className={classes.root}>
       <div onClose={(e) => handleModalToggle(e)} />
       <div className={classes.container}>
-        <div className={classes.tabList}>
+        <div>
           <Tabs
             orientation="vertical"
             value={value}
             onChange={handleChange}
             className={classes.tabList}
           >
-            <Tab label="プロフィール" />
-            <Tab label="パスワード" />
-            <Tab label="お知らせ" />
-            <Tab label="お支払情報" />
+            <Tab className={classes.tabListItem} label="プロフィール" />
+            <Tab className={classes.tabListItem} label="パスワード" />
+            <Tab className={classes.tabListItem} label="お知らせ" />
+            <Tab className={classes.tabListItem} label="お支払情報" />
           </Tabs>
         </div>
         <div className={classes.tabMenu}>
@@ -143,7 +143,7 @@ const Setting = () => {
               ) : (
                 <Avatar src="/broken-image.jpg" className={classes.avatar} />
               )}
-              <PhotoCameraIcon className={classes.upload}/>
+              <PhotoCameraIcon style={{ fontSize: 30 }} className={classes.upload}/>
             </button>
             <div className="module-spacer--extra-small" />
             <TextInput

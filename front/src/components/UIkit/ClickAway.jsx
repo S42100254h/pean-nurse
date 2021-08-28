@@ -4,9 +4,9 @@ import { ClickAwayListener } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    position: "absolute",
-    top: "220px",
-    left: "1020px",
+    position: "fixed",
+    top: "30vh",
+    left: "55vw",
     width: "230px",
     height: "100px",
     border: "2px solid #fff",
