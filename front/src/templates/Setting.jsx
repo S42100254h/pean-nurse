@@ -143,7 +143,7 @@ const Setting = () => {
               ) : (
                 <Avatar src="/broken-image.jpg" className={classes.avatar} />
               )}
-              <PhotoCameraIcon className={classes.upload}/>
+              <PhotoCameraIcon style={{ fontSize: 30 }} className={classes.upload}/>
             </button>
             <div className="module-spacer--extra-small" />
             <TextInput
