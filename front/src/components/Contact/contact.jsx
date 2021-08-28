@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
+import { ClosableDialog } from "./index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,17 +27,33 @@ const useStyles = makeStyles((theme) => ({
 
 const Contact = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+  
+  const handleDialogToggle = useCallback((event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    setOpen(!open);
+  },
+  [setOpen, open]
+  );
 
   return (
-    <Box
-      className={classes.root}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <MailOutline fontSize="small" style={{ color: "white" }} />      
-      <p className={classes.main}>ご意見箱</p>
-    </Box>
+    <>
+      <Box
+        className={classes.root}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        onClick={(event) => handleDialogToggle(event)}
+      >
+        <MailOutline fontSize="small" style={{ color: "white" }} />
+        <p className={classes.main}>ご意見箱</p>
+      </Box>
+      <ClosableDialog open={open} onClose={handleDialogToggle} />
+    </>
   );
 };
 
