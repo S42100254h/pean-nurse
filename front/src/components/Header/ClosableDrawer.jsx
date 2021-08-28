@@ -4,7 +4,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
-import { Email } from "@material-ui/icons";
+import { HelpOutline } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,10 +59,10 @@ const ClosableDrawer = (props) => {
     },
     {
       func: selectMenu,
-      label: "問い合わせ",
-      icon: <Email />,
-      id: "contact",
-      value: "/contact",
+      label: "ヘルプ",
+      icon: <HelpOutline />,
+      id: "help",
+      value: "/help",
     },
   ];
   
