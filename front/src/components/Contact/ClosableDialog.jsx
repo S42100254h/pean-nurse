@@ -1,30 +1,24 @@
 import React from "react";
-import { Dialog, DialogActions, DialogContent, DialogContentText, MenuItem } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import { Dialog, DialogContent, DialogContentText, MenuItem } from "@material-ui/core";
 import { PrimaryButton, SelectBox } from "../../components/UIkit";
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: "0 auto",
+    textAlign: "center",
+  },
+}));
+
 const ClosableDialog = (props) => {
+  const classes = useStyles();
 
   const menus = [
-    {
-      label: "- 選択してください -",
-      value: "none",
-    },
-    {
-      label: "コース内容について",
-      value: "course",
-    },
-    {
-      label: "お支払いについて",
-      value: "payment",
-    },
-    {
-      label: "エラー、トラブルについて",
-      value: "error",
-    },
-    {
-      label: "その他",
-      value: "others",
-    },
+    { label: "- 選択してください -", value: "none" },
+    { label: "コース内容について", value: "course" },
+    { label: "お支払いについて", value: "payment" },
+    { label: "エラー、トラブルについて", value: "error" },
+    { label: "その他", value: "others" },
   ];
 
   return (
@@ -38,8 +32,6 @@ const ClosableDialog = (props) => {
           <DialogContentText>
             contact form
           </DialogContentText>
-        </DialogContent>
-        <DialogActions>
           <SelectBox
             value={"inquiry title"}
             displayEmpty={true}
@@ -50,11 +42,15 @@ const ClosableDialog = (props) => {
               </MenuItem>
             ))}
           </SelectBox>
+        </DialogContent>
+        <div className="module-spacer--extra-extra-small" />
+        <DialogContent className={classes.button}>
           <PrimaryButton
             id={"button"}
             label={"送信"}
           />
-        </DialogActions>
+        </DialogContent>
+        <div className="module-spacer--extra-extra-small" />
       </Dialog>
     </div>
   );
