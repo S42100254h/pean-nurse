@@ -6,6 +6,7 @@ const SelectBox = (props) => {
     <FormControl fullWidth={true}>
       <Select
         value={props.value}
+        variant={props.variant}
         displayEmpty={props.displayEmpty}
         onChange={props.onChange}
         onKeyDown={props.onKeyDown}
