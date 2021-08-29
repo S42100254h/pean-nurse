@@ -55,6 +55,7 @@ const ClosableDrawer = (props) => {
       func: selectMenu,
       label: "設定",
       icon: <SettingsIcon />,
+      id: "setting",
       value: "/setting",
     },
     {
