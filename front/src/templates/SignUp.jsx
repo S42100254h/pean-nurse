@@ -53,6 +53,7 @@ const SignUp = () => {
       <div className="module-spacer--medium" />
       <PrimaryButton
         label={"アカウントを登録する"}
+        fullWidth={true}
         onClick={() => {
           dispatch(signUp(name, email, password, confirmPassword));
         }}
