@@ -74,7 +74,7 @@ const ClosableDialog = (props) => {
   }, [setText]);
 
   const handleAttached = useCallback((event) => {
-    setAttached(event.target.files[0].name);
+    setAttached(event.target.files[0]);
     // enable to attach same file
     event.target.value = "";
   });
@@ -149,7 +149,7 @@ const ClosableDialog = (props) => {
             { attached && (
               <label className={classes.attachedFile}>
                 <Close className={classes.close} onClick={() => setAttached("")} />
-                {attached}
+                {attached.name}
               </label>
             ) }
             <div className="module-spacer--extra-extra-small" />
