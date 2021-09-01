@@ -12,6 +12,7 @@ const TextInput = (props) => {
       rows={props.rows}
       value={props.value}
       type={props.type}
+      variant={props.variant}
       onChange={props.onChange}
       onKeyDown={props.onKeyDown}
     />

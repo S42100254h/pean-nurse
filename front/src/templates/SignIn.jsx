@@ -52,6 +52,7 @@ const SignIn = () => {
       <PrimaryButton
         id={"button"}
         label={"サインイン"}
+        fullWidth={true}
         onClick={() => {
           dispatch(signIn(email, password));
         }}
