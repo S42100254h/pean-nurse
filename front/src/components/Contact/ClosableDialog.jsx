@@ -129,6 +129,7 @@ const ClosableDialog = (props) => {
             <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
 
             <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
+            <img src="cat.png" alt="ねこ" width="180px" height="180px" />
           </div>
           <div className={classes.inputArea}>
             <TextInput fullWidth={true}
