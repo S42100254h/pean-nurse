@@ -5,6 +5,7 @@ import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, TextInput } from "../../components/UIkit";
 import { getUserEmail } from "../../reducks/users/selectors";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
   input: {
     display: "none",
   },
-  attachedFile: {
-    padding: "5px",
+  image: {
+    padding: "5px 8px 5px 5px",
     margin: "5px 0",
     fontSize: "11px",
     display: "inline-block",
@@ -59,7 +60,7 @@ const ClosableDialog = (props) => {
   const [email, setEmail] = useState(""),
     [select, setSelect] = useState(""),
     [text, setText] = useState(""),
-    [attached, setAttached] = useState("");
+    [image, setImage] = useState("");
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
@@ -73,12 +74,31 @@ const ClosableDialog = (props) => {
     setText(event.target.value);
   }, [setText]);
 
-  const handleAttached = useCallback((event) => {
-    setAttached(event.target.files[0]);
+  const inputImage = useCallback((event) => {
+    setImage(event.target.files[0]);
     // enable to attach same file
     event.target.value = "";
-  });
+  }, [setImage]);
   
+  const handleSendMail = (email, select, text, image) => {
+    const apiEndpoint = "http://localhost:4000/api/v1/inquiries/create";
+    
+    let form = new FormData();
+    form.append("email", email);
+    form.append("select", select);
+    form.append("text", text);
+    form.append("image", image);
+
+    axios
+      .post(apiEndpoint, form)
+      .then(() => {
+        console.log("success");
+      })
+      .catch(() => {
+        console.log("failure");
+      });
+  };
+
   useEffect(() => {
     setEmail(userEmail);
   }, [props.open]);
@@ -144,12 +164,12 @@ const ClosableDialog = (props) => {
             <label className={classes.label}>
               <AttachFile style={{ fontSize: "16px" }} />
               画像を添付する
-              <input type="file" className={classes.input} accept="image/jpeg, image/png" onChange={(e) => handleAttached(e)} />
+              <input type="file" className={classes.input} accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
             </label>
-            { attached && (
-              <label className={classes.attachedFile}>
-                <Close className={classes.close} onClick={() => setAttached("")} />
-                {attached.name}
+            { image && (
+              <label className={classes.image}>
+                <Close className={classes.close} onClick={() => setImage("")} />
+                {image.name}
               </label>
             ) }
             <div className="module-spacer--extra-extra-small" />
@@ -157,6 +177,7 @@ const ClosableDialog = (props) => {
               id={"button"}
               label={"送信"}
               fullWidth={true}
+              onClick={() => handleSendMail(email, select, text, image)}
             />
           </div>
         </DialogContent>
