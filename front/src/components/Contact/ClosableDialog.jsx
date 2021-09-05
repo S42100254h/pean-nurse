@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#4dd0e1",
     cursor: "pointer",
     fontSize: "12px",
+    "&:hover": {
+      opacity: 0.7,
+    },
   },
   input: {
     display: "none",
