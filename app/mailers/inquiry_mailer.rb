@@ -8,7 +8,7 @@ class InquiryMailer < ApplicationMailer
     attachments[@filename] = File.read(@file)
     mail(
       to: ENV["TO_MAIL_ADDRESS"],
-      subject: "【要確認】お問い合わせメール"
+      subject: "【要確認】お問い合わせメール",
     )
   end
 end
