@@ -8,7 +8,7 @@ RSpec.describe InquiryMailer, type: :mailer do
         expect(inquiry.valid?).to eq true
       end
     end
-    
+
     context "not applicable to email Regex(/\A[^@\s]+@[^@\s]+\z/)" do
       let(:inquiry) { build(:inquiry, email: "neko") }
       it "error occurs" do
@@ -17,7 +17,7 @@ RSpec.describe InquiryMailer, type: :mailer do
       end
     end
   end
-  
+
   describe "exception scenario" do
     describe "about email" do
       context "email is not entered" do
