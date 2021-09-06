@@ -413,3 +413,6 @@ Style/ZeroLengthPredicate:
 # 環境変数の連結を許可する。
 Style/StringConcatenation:
   Enabled: false
+
+Performance/CollectionLiteralInLoop:
+  Enabled: false
