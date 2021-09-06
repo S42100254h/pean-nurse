@@ -4,7 +4,7 @@ if Rails.env.production?
     address: 'smtp.gmail.com',
     domain: 'gmail.com',
     port: 587,
-    user_name: 'nursestepinquiry@gmail.com',
+    user_name: ENV["FROM_MAIL_ADDRESS"],
     password: ENV["MAILER_PASS"],
     authentication: 'plain',
     enable_starttls_auto: true
