@@ -30,7 +30,7 @@ gem "active_model_serializers"
 gem "bootsnap", ">= 1.4.4", require: false
 gem "carrierwave"
 gem "devise_token_auth"
-gem "dotenv-rails"
+gem "dotenv-rails", require: "dotenv/rails-now"
 gem "fog-aws"
 gem "rack-cors"
 
@@ -56,6 +56,7 @@ group :development do
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 2.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem "letter_opener"
   gem "spring"
 end
 
