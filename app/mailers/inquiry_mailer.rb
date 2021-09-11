@@ -3,9 +3,13 @@ class InquiryMailer < ApplicationMailer
 
   def send_mail(inquiry, file, filename)
     @inquiry = inquiry
-    @file = file
-    @filename = filename
-    attachments[@filename] = File.read(@file)
+
+    if file != nil
+      @file = file
+      @filename = filename
+      attachments[@filename] = File.read(@file)
+    end
+
     mail(
       to: ENV["TO_MAIL_ADDRESS"],
       subject: "【要確認】お問い合わせメール",
