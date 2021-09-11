@@ -15,4 +15,14 @@ class InquiryMailer < ApplicationMailer
       subject: "【要確認】お問い合わせメール",
     )
   end
+
+  def reply_mail(inquiry, file, filename)
+    @inquiry = inquiry
+    @file = file
+    @filename = filename
+    mail(
+      to: @inquiry.email,
+      subject: "【nurse-step】お問い合わせいただきありがとうございます",
+    )
+  end
 end
