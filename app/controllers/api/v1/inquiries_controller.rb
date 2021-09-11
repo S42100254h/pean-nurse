@@ -8,6 +8,7 @@ class Api::V1::InquiriesController < ApplicationController
 
     if @inquiry
       InquiryMailer.send_mail(@inquiry, @file, @filename).deliver
+      InquiryMailer.reply_mail(@inquiry, @file, @filename).deliver
     end
   end
 
