@@ -4,7 +4,7 @@ class InquiryMailer < ApplicationMailer
   def send_mail(inquiry, file, filename)
     @inquiry = inquiry
 
-    if file != nil
+    unless file.nil?
       @file = file
       @filename = filename
       attachments[@filename] = File.read(@file)
