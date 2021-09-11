@@ -136,7 +136,8 @@ const ClosableDialog = (props) => {
             <img src="cat.png" alt="ねこ" width="180px" height="180px" />
           </div>
           <div className={classes.inputArea}>
-            <TextInput fullWidth={true}
+            <TextInput
+              fullWidth={true}
               label={"メールアドレス"}
               multiline={false}
               required={true}
@@ -162,9 +163,10 @@ const ClosableDialog = (props) => {
             <div className="module-spacer--extra-extra-small" />
             <TextField
               fullWidth={true}
+              label="メッセージ"
               multiline={true}
               rows={6}
-              label="メッセージ"
+              value={text}
               variant="outlined"
               onChange={inputText}
             />
