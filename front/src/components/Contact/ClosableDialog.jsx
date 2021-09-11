@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, TextInput } from "../../components/UIkit";
-import { getUserEmail } from "../../reducks/users/selectors";
+import { getUserEmail, getUserName } from "../../reducks/users/selectors";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -59,11 +59,13 @@ const ClosableDialog = (props) => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
   const userEmail = getUserEmail(selector);
+  const userName = getUserName(selector);
 
   const [email, setEmail] = useState(""),
     [select, setSelect] = useState(""),
     [text, setText] = useState(""),
-    [image, setImage] = useState("");
+    [image, setImage] = useState(""),
+    [name, setName] = useState("");
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
@@ -83,7 +85,7 @@ const ClosableDialog = (props) => {
     event.target.value = "";
   }, [setImage]);
   
-  const handleSendMail = (email, select, text, image) => {
+  const handleSendMail = (email, select, text, image, name) => {
     const apiEndpoint = "http://localhost:4000/api/v1/inquiries/create";
     
     let form = new FormData();
@@ -91,6 +93,7 @@ const ClosableDialog = (props) => {
     form.append("select", select);
     form.append("text", text);
     form.append("image", image);
+    form.append("name", name);
 
     axios
       .post(apiEndpoint, form)
@@ -103,6 +106,7 @@ const ClosableDialog = (props) => {
   };
 
   useEffect(() => {
+    setName(userName);
     setEmail(userEmail);
   }, [props.open]);
 
@@ -181,7 +185,7 @@ const ClosableDialog = (props) => {
               id={"button"}
               label={"送信"}
               fullWidth={true}
-              onClick={() => handleSendMail(email, select, text, image)}
+              onClick={() => handleSendMail(email, select, text, image, name)}
             />
           </div>
         </DialogContent>
