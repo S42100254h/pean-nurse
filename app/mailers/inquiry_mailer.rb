@@ -21,8 +21,8 @@ class InquiryMailer < ApplicationMailer
     @file = file
     @filename = filename
     mail(
-      to: "sawabe0v0@gmail.com",
-      subject: "reply test"
+      to: @inquiry.email,
+      subject: "【nurse-step】お問い合わせいただきありがとうございます"
     )
   end
 end
