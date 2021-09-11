@@ -35,6 +35,18 @@ jobs:
           key: v1-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/nurse-step
+  get_environment_variables:
+    executor:
+      name: rails
+    steps:
+      - run:
+          name: Get environment variables
+          command: |
+            touch .env
+            echo MAILER_PASS=$MAILER_PASS > .env
+            echo FROM_MAIL_ADDRESS=$FROM_MAIL_ADDRESS > .env
+            echo TO_MAIL_ADDRESS=$TO_MAIL_ADDRESS > .env
+            
   bundle_dependencies:
     executor:
       name: rails
@@ -163,12 +175,14 @@ workflows:
   build_backend:
     jobs:
       - fetch_source_code_back
+      - get_environment_variables
       - bundle_dependencies:
           requires:
             - fetch_source_code_back
       - rspec:
           requires:
             - bundle_dependencies
+            - get_environment_variables
       - rubocop:
           requires:
             - bundle_dependencies
