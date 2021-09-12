@@ -7,7 +7,7 @@ class Api::V1::InquiriesController < ApplicationController
       @filename = params[:image].original_filename
     end
 
-    if @inquiry
+    if @inquiry.valid?
       InquiryMailer.send_mail(@inquiry, @file, @filename).deliver
       InquiryMailer.reply_mail(@inquiry, @file, @filename).deliver
     end
