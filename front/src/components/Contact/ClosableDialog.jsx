@@ -199,6 +199,7 @@ const ClosableDialog = (props) => {
               id={"button"}
               label={"送信"}
               fullWidth={true}
+              disabled={!email || !select || !text}
               onClick={() => handleSendMail(email, select, text, image, name)}
             />
           </div>
