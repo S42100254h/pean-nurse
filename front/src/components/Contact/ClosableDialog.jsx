@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
+import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, TextInput } from "../../components/UIkit";
@@ -88,6 +89,16 @@ const ClosableDialog = (props) => {
   const handleSendMail = (email, select, text, image, name) => {
     const apiEndpoint = "http://localhost:4000/api/v1/inquiries/create";
     
+    if(!isValidEmailFormat(email)) {
+      alert("メールアドレスの形式が不正です");
+      return false;
+    }
+    
+    if(!isValidRequiredInput(email, select, text)) {
+      alert("未入力の項目があります");
+      return false;
+    }
+
     let form = new FormData();
     form.append("email", email);
     form.append("select", select);
