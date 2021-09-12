@@ -176,6 +176,7 @@ const ClosableDialog = (props) => {
               fullWidth={true}
               label="メッセージ"
               multiline={true}
+              required={true}
               rows={6}
               value={text}
               variant="outlined"
