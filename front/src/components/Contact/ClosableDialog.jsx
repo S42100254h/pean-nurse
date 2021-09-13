@@ -66,7 +66,8 @@ const ClosableDialog = (props) => {
     [select, setSelect] = useState(""),
     [text, setText] = useState(""),
     [image, setImage] = useState(""),
-    [name, setName] = useState("");
+    [name, setName] = useState(""),
+    [isSubmitted, setIsSubmitted] = useState(false);
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
@@ -85,16 +86,22 @@ const ClosableDialog = (props) => {
     // enable to attach same file
     event.target.value = "";
   }, [setImage]);
-  
+
+  const handleIsSubmittedToggle = useCallback(() => {
+    setIsSubmitted(!isSubmitted);
+  },
+  [setIsSubmitted, isSubmitted]
+  );
+
   const handleSendMail = (email, select, text, image, name) => {
     const apiEndpoint = "http://localhost:4000/api/v1/inquiries/create";
-    
-    if(!isValidEmailFormat(email)) {
+
+    if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
     }
-    
-    if(!isValidRequiredInput(email, select, text)) {
+
+    if (!isValidRequiredInput(email, select, text)) {
       alert("未入力の項目があります");
       return false;
     }
@@ -109,10 +116,10 @@ const ClosableDialog = (props) => {
     axios
       .post(apiEndpoint, form)
       .then(() => {
-        console.log("success");
+        handleIsSubmittedToggle();
       })
       .catch(() => {
-        console.log("failure");
+        alert("メール送信に失敗しました。時間を置いて再度お試しください");
       });
   };
 
@@ -137,73 +144,81 @@ const ClosableDialog = (props) => {
         fullWidth={true}
         maxWidth={"md"}
       >
-        <DialogContent>
-          <div className={classes.textArea}>
-            <p>nurse-stepをご利用いただきありがとうございます。</p>
-            <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
-            <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
-
-            <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
+        {isSubmitted ? (
+          <DialogContent>
+            <p>貴重なご意見をいただきありがとうございます。</p>
+            <p>今後ともnurse-stepをよろしくお願いいたします！</p>
             <img src="cat.png" alt="ねこ" width="180px" height="180px" />
-          </div>
-          <div className={classes.inputArea}>
-            <TextInput
-              fullWidth={true}
-              label={"メールアドレス"}
-              multiline={false}
-              required={true}
-              row={1}
-              value={email}
-              variant="outlined"
-              onChange={inputEmail}
-            />
-            <div className="module-spacer--extra-extra-small" />
-            <SelectBox
-              displayEmpty={true}
-              value={select}
-              variant="outlined"
-              onChange={inputSelect}
-            >
-              <MenuItem value="">- 選択してください -</MenuItem>
-              {menus.map((menu) => (
-                <MenuItem value={menu.value} key={menu.id} >
-                  {menu.label}
-                </MenuItem>
-              ))}
-            </SelectBox>
-            <div className="module-spacer--extra-extra-small" />
-            <TextField
-              fullWidth={true}
-              label="メッセージ"
-              multiline={true}
-              required={true}
-              rows={6}
-              value={text}
-              variant="outlined"
-              onChange={inputText}
-            />
-            <div className="module-spacer--extra-extra-small" />
-            <label className={classes.label}>
-              <AttachFile style={{ fontSize: "16px" }} />
-              画像を添付する
-              <input type="file" className={classes.input} accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
-            </label>
-            { image && (
-              <label className={classes.image}>
-                <Close className={classes.close} onClick={() => setImage("")} />
-                {image.name}
+          </DialogContent>
+        ) : (
+          <DialogContent>
+            <div className={classes.textArea}>
+              <p>nurse-stepをご利用いただきありがとうございます。</p>
+              <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
+              <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
+
+              <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
+              <img src="cat.png" alt="ねこ" width="180px" height="180px" />
+            </div>
+            <div className={classes.inputArea}>
+              <TextInput
+                fullWidth={true}
+                label={"メールアドレス"}
+                multiline={false}
+                required={true}
+                row={1}
+                value={email}
+                variant="outlined"
+                onChange={inputEmail}
+              />
+              <div className="module-spacer--extra-extra-small" />
+              <SelectBox
+                displayEmpty={true}
+                value={select}
+                variant="outlined"
+                onChange={inputSelect}
+              >
+                <MenuItem value="">- 選択してください -</MenuItem>
+                {menus.map((menu) => (
+                  <MenuItem value={menu.value} key={menu.id} >
+                    {menu.label}
+                  </MenuItem>
+                ))}
+              </SelectBox>
+              <div className="module-spacer--extra-extra-small" />
+              <TextField
+                fullWidth={true}
+                label="メッセージ"
+                multiline={true}
+                required={true}
+                rows={6}
+                value={text}
+                variant="outlined"
+                onChange={inputText}
+              />
+              <div className="module-spacer--extra-extra-small" />
+              <label className={classes.label}>
+                <AttachFile style={{ fontSize: "16px" }} />
+                画像を添付する
+                <input type="file" className={classes.input} accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
               </label>
-            ) }
-            <div className="module-spacer--extra-extra-small" />
-            <PrimaryButton
-              id={"button"}
-              label={"送信"}
-              fullWidth={true}
-              disabled={!email || !select || !text}
-              onClick={() => handleSendMail(email, select, text, image, name)}
-            />
-          </div>
-        </DialogContent>
+              {image && (
+                <label className={classes.image}>
+                  <Close className={classes.close} onClick={() => setImage("")} />
+                  {image.name}
+                </label>
+              )}
+              <div className="module-spacer--extra-extra-small" />
+              <PrimaryButton
+                id={"button"}
+                label={"送信"}
+                fullWidth={true}
+                disabled={!email || !select || !text}
+                onClick={() => handleSendMail(email, select, text, image, name)}
+              />
+            </div>
+          </DialogContent>
+        )}
         <div className="module-spacer--extra-extra-small" />
       </Dialog>
     </div>
