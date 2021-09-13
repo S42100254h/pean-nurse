@@ -116,11 +116,10 @@ const ClosableDialog = (props) => {
     axios
       .post(apiEndpoint, form)
       .then(() => {
-        console.log("success");
         handleIsSubmittedToggle();
       })
       .catch(() => {
-        console.log("failure");
+        alert("メール送信に失敗しました。時間を置いて再度お試しください");
       });
   };
 
