@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab } from "@material-ui/core";
-import { TabPanel, TextInput, PrimaryButton } from "../components/UIkit";
+import { TabPanel, TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
@@ -171,8 +171,10 @@ const Setting = () => {
                 dispatch(editUserInfo(name, email));
               }}
             />
-            <div className="module-spacer--medium" />
-            <a href="#">アカウントを削除される場合はこちら</a>
+            <div className="module-spacer--large" />
+            <SecondaryButton
+              label={"アカウントを削除される場合はこちら"}
+            />
           </TabPanel>
           <TabPanel value={value} index={1}>
             Item two
