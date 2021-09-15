@@ -26,7 +26,7 @@ const Confirmation = (props) => {
   return (
     <>
       <Dialog
-        open={props.open}
+        open={props.isOpen}
         onClose={(e) => props.onClose(e)}
         ModalProps={{ keepMounted: true }}
         fullWidth={true}
@@ -45,11 +45,13 @@ const Confirmation = (props) => {
           <PrimaryButton
             label={"退会をやめる"}
             fullWidth={true}
+            onClick={props.onClickStop} 
           />
           <div className="module-spacer--extra-small" />
           <SecondaryButton
             label={"退会手続きを進める"}
             fullWidth={true}
+            onClick={props.onClickProceed}
           />
           <div className="module-spacer--extra-small" />
         </DialogContent>

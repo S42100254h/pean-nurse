@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { editImage, editUserInfo } from "../reducks/users/operations";
 import { ClickAway } from "../components/UIkit";
+import { Confirmation } from "../components/Confirmation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +81,8 @@ const Setting = () => {
   const [value, setValue] = useState(0),
     [name, setName] = useState(""),
     [email, setEmail] = useState(""),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -174,6 +176,7 @@ const Setting = () => {
             <div className="module-spacer--large" />
             <SecondaryButton
               label={"アカウントを削除される場合はこちら"}
+              onClick={() => setIsOpen(!isOpen)}
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -189,6 +192,12 @@ const Setting = () => {
         {open && (
           <ClickAway onClickAway={handleModalToggle} onChange={(e) => handleUpload(e)} />
         )}
+        <Confirmation
+          isOpen={isOpen}
+          onClose={() => setIsOpen(!isOpen)}
+          onClickStop={() => setIsOpen(!isOpen)}
+          onClickProceed={() => console.log("proceed")}
+        />
       </div>
     </div>
   );
