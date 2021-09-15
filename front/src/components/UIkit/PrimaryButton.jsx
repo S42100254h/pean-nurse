@@ -8,7 +8,6 @@ const useStyles = makeStyles({
     color: "#000",
     fontSize: 16,
     height: 48,
-    marginButton: 16,
   },
 });
 

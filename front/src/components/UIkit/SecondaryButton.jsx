@@ -6,6 +6,8 @@ const useStyeles = makeStyles({
   "button": {
     backgroundColor: "#f6f8fa",
     color: "#cf222e",
+    fontSize: 16,
+    height: 48,
     "&:hover": {
       color: "#f6f8fa",
       backgroundColor: "#a40e26"
