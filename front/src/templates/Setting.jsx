@@ -10,6 +10,7 @@ import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { editImage, editUserInfo } from "../reducks/users/operations";
 import { ClickAway } from "../components/UIkit";
 import { Confirmation } from "../components/Confirmation";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -196,7 +197,7 @@ const Setting = () => {
           isOpen={isOpen}
           onClose={() => setIsOpen(!isOpen)}
           onClickStop={() => setIsOpen(!isOpen)}
-          onClickProceed={() => console.log("proceed")}
+          onClickProceed={() => dispatch(push("/deactivate"))}
         />
       </div>
     </div>
