@@ -140,7 +140,7 @@ export const signOut = () => {
   }; 
 };
 
-export const delelteUser = () => {
+export const deleteUser = () => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
