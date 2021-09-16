@@ -1,23 +1,27 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyeles = makeStyles({
   "button": {
-    backgroundColor: "#4dd0e1",
-    color: "#000",
+    backgroundColor: "#f6f8fa",
+    color: "#cf222e",
     fontSize: 16,
     height: 48,
+    "&:hover": {
+      color: "#f6f8fa",
+      backgroundColor: "#a40e26"
+    },
   },
 });
 
-const PrimaryButton = (props) => {
-  const classes = useStyles();
-  
+const SecondaryButton = (props) => {
+  const classes = useStyeles();
+
   return (
     <Button
       className={classes.button}
-      variant="contained"
+      variant="outlined"
       fullWidth={props.fullWidth}
       disabled={props.disabled}
       onClick={() => props.onClick()}
@@ -27,4 +31,4 @@ const PrimaryButton = (props) => {
   );
 };
 
-export default PrimaryButton;
+export default SecondaryButton;

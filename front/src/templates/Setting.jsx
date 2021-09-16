@@ -2,13 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab } from "@material-ui/core";
-import { TabPanel, TextInput, PrimaryButton } from "../components/UIkit";
+import { TabPanel, TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { editImage, editUserInfo } from "../reducks/users/operations";
 import { ClickAway } from "../components/UIkit";
+import { Confirmation } from "../components/Confirmation";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +82,8 @@ const Setting = () => {
   const [value, setValue] = useState(0),
     [name, setName] = useState(""),
     [email, setEmail] = useState(""),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -171,8 +174,11 @@ const Setting = () => {
                 dispatch(editUserInfo(name, email));
               }}
             />
-            <div className="module-spacer--medium" />
-            <a href="#">アカウントを削除される場合はこちら</a>
+            <div className="module-spacer--large" />
+            <SecondaryButton
+              label={"アカウントを削除される場合はこちら"}
+              onClick={() => setIsOpen(!isOpen)}
+            />
           </TabPanel>
           <TabPanel value={value} index={1}>
             Item two
@@ -187,6 +193,12 @@ const Setting = () => {
         {open && (
           <ClickAway onClickAway={handleModalToggle} onChange={(e) => handleUpload(e)} />
         )}
+        <Confirmation
+          isOpen={isOpen}
+          onClose={() => setIsOpen(!isOpen)}
+          onClickStop={() => setIsOpen(!isOpen)}
+          onClickProceed={() => dispatch(push("/deactivate"))}
+        />
       </div>
     </div>
   );

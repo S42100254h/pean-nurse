@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { DashBoard, Home, Setting, SignUp, SignIn } from "./templates";
+import { Deactivate,DashBoard, Home, Setting, SignUp, SignIn } from "./templates";
 import Auth from "./Auth";
 
 const Router = () => {
@@ -12,6 +12,7 @@ const Router = () => {
         <Route exact path={"(/)?"} component={Home} />
         <Route exact path={"/dashboard"} component={DashBoard} />
         <Route exact path={"/setting"} component={Setting} />
+        <Route exact path={"/deactivate"} component={Deactivate} />
       </Auth>
     </Switch>
   );

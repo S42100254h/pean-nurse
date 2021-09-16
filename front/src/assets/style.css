@@ -11,6 +11,9 @@
 .module-spacer--medium {
   height: 32px
 }
+.module-spacer--large {
+  height: 40px
+}
 
 /*********** Section ***********/
 .c-main {

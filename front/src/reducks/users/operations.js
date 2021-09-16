@@ -140,6 +140,48 @@ export const signOut = () => {
   }; 
 };
 
+export const deleteUser = () => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+      
+      axios
+        .delete(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(push("/"));
+          localStorage.clear();
+          dispatch(signOutAction());
+          dispatch(showLoadingAction("Delete user..."));
+          notificationContent = {
+            variant: "success",
+            message: "ユーザー登録を削除しました"
+          };
+        })
+        .catch((error) => {
+          notificationContent = {
+            variant: "error",
+            message: "ユーザー登録の削除に失敗しました"
+          };
+        });
+      await _sleep(1000);
+      dispatch(hideLoadingAction());
+      await _sleep(300);
+      dispatch(setNotificationAction(notificationContent));
+    } else {
+      dispatch(push("/signin"));
+    }
+  };
+};
+
 export const editUserInfo = (name, email) => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
