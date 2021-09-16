@@ -6,10 +6,10 @@ import Auth from "./Auth";
 const Router = () => {
   return (
     <Switch>
+      <Route exact path={"(/)?"} component={Home} />
       <Route exact path={"/signup"} component={SignUp} />
       <Route exact path={"/signin"} component={SignIn} />
       <Auth>
-        <Route exact path={"(/)?"} component={Home} />
         <Route exact path={"/dashboard"} component={DashBoard} />
         <Route exact path={"/setting"} component={Setting} />
         <Route exact path={"/deactivate"} component={Deactivate} />
