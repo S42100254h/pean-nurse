@@ -53,6 +53,7 @@ const SignIn = () => {
         id={"button"}
         label={"サインイン"}
         fullWidth={true}
+        disabled={!email || !password}
         onClick={() => {
           dispatch(signIn(email, password));
         }}

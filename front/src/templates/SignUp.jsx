@@ -54,6 +54,7 @@ const SignUp = () => {
       <PrimaryButton
         label={"アカウントを登録する"}
         fullWidth={true}
+        disabled={!name || !email || !password || !confirmPassword}
         onClick={() => {
           dispatch(signUp(name, email, password, confirmPassword));
         }}
