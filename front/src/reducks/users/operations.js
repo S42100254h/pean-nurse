@@ -213,7 +213,7 @@ export const editUserInfo = (name, email) => {
 
           dispatch(editUserInfoAction(resp.data.data));
           dispatch(showLoadingAction("Update ..."));
-          dispatch(push("/"));
+          dispatch(push("/dashboard"));
           notificationContent = {
             variant: "success",
             message: "ユーザー情報を更新しました。"
