@@ -116,6 +116,7 @@ export const signOut = () => {
           },
         })
         .then(() => {
+          dispatch(push("/"));
           localStorage.clear();
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
