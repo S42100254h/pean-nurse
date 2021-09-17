@@ -13,4 +13,12 @@ export const isValidRequiredInput = (...args) => {
   return validator;
 };
 
+export const isValidPassword = (password, confirmPassword) => {
+  let validator = true;
+  if (password !== confirmPassword) {
+    validator = false;
+  }
+  return validator;
+};
+
 export const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

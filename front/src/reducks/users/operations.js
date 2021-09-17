@@ -1,5 +1,5 @@
 import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction } from "./actions";
-import { isValidEmailFormat, isValidRequiredInput, _sleep } from "../../function/common";
+import { isValidEmailFormat, isValidRequiredInput, isValidPassword, _sleep } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
@@ -21,6 +21,11 @@ export const signUp = (name, email, password, confirmPassword) => {
 
     if (password.length < 6) {
       alert("パスワードは６文字以上で入力してください");
+      return false;
+    }
+    
+    if (!isValidPassword(password, confirmPassword)) {
+      alert("パスワードとパスワード（確認用）が一致しません");
       return false;
     }
 
