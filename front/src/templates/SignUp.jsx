@@ -71,10 +71,10 @@ const SignUp = () => {
         fullWidth={true} label={"メールアドレス"} multiline={false} required={true} row={1} value={email} type={"email"} onChange={inputEmail} onKeyDown={handleOnKeyDown}
       />
       <TextInput
-        fullWidth={true} label={"パスワード"} type="password" multiline={false} required={true} row={1} value={password} type={"password"} onChange={inputPassword} onKeyDown={handleOnKeyDown}
+        fullWidth={true} label={"パスワード"} type="password" multiline={false} required={true} row={1} value={password} onChange={inputPassword} onKeyDown={handleOnKeyDown}
       />
       <TextInput
-        fullWidth={true} label={"パスワード（確認用）"} type="password" multiline={false} required={true} row={1} value={confirmPassword} type={"confirmPassword"} onChange={inputConfirmPassword} onKeyDown={handleOnKeyDown}
+        fullWidth={true} label={"パスワード（確認用）"} type="password" multiline={false} required={true} row={1} value={confirmPassword} onChange={inputConfirmPassword} onKeyDown={handleOnKeyDown}
       />
       <div className="module-spacer--medium" />
       <PrimaryButton
