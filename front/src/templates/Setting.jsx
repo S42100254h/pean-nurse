@@ -8,7 +8,7 @@ import { getUserEmail, getUserImage, getUserName } from "../reducks/users/select
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { editImage, editUserInfo } from "../reducks/users/operations";
-import { ClickAway } from "../components/UIkit";
+import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
 
