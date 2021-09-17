@@ -34,7 +34,7 @@ export const signUp = (name, email, password, confirmPassword) => {
 
         dispatch(signUpAction(resp.data.data));
         dispatch(showLoadingAction("Sign up..."));
-        dispatch(push("/"));
+        dispatch(push("/dashboard"));
         notificationContent = {
           variant: "success",
           message: "ユーザー登録に成功しました。"
@@ -80,7 +80,7 @@ export const signIn = (email, password) => {
         
         dispatch(signInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
-        dispatch(push("/"));
+        dispatch(push("/dashboard"));
         notificationContent = {
           variant: "success",
           message: "サインインしました。"
