@@ -1,9 +1,27 @@
 import React, { useCallback, useState } from "react";
+import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { TextInput, PrimaryButton } from "../components/UIkit";
 import { signIn } from "../reducks/users/operations";
 
+const useStyles = makeStyles({
+  "container": {
+    margin: "0 auto",
+    maxWidth: 400,
+    padding: "1rem",
+    height: "auto",
+    width: "calc(100% - 2rem)",
+  },
+  "headline": {
+    color: "#4dd0e1",
+    fontSize: "1.563rem",
+    margin: "0 auto 1rem auto",
+    textAlign: "center",
+  },
+});
+
 const SignIn = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [ email, setEmail ] = useState(""),
@@ -24,9 +42,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className="c-section-container">
-      <h2 className="u-text__headline u-text-center">サインイン</h2>
-      <div className="module-spacer--medium" />
+    <div className={classes.container}>
+      <h2 className={classes.headline}>サインイン</h2>
+      <div className="module-spacer--extra-small" />
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
