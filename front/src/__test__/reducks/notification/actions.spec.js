@@ -13,7 +13,7 @@ describe("actions.jsのテスト", () => {
       {
         type: CLOSE_NOTIFICATION
       }
-    )
+    );
   });
 
   it("setNotificationActionのテスト", () => {
@@ -25,6 +25,6 @@ describe("actions.jsのテスト", () => {
         type: SET_NOTIFICATION,
         payload: dummy,
       }
-    )
+    );
   });
 });
