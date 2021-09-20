@@ -121,14 +121,14 @@ export const signOut = () => {
           },
         })
         .then(() => {
-          dispatch(push("/"));
-          localStorage.clear();
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
           notificationContent = {
             variant: "success",
             message: "サインアウトしました。"
           };
+          dispatch(push("/"));
+          localStorage.clear();
         })
         .catch((error) => {
           notificationContent = {
@@ -163,14 +163,14 @@ export const deleteUser = () => {
           },
         })
         .then((resp) => {
-          dispatch(push("/"));
-          localStorage.clear();
           dispatch(signOutAction());
           dispatch(showLoadingAction("Delete user..."));
           notificationContent = {
             variant: "success",
             message: "ユーザー登録を削除しました"
           };
+          dispatch(push("/"));
+          localStorage.clear();
         })
         .catch((error) => {
           notificationContent = {
