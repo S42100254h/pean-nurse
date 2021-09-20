@@ -306,8 +306,6 @@ export const listenAuthState = () => {
         .catch((error) => {
           alert("サインインに失敗しました。");
         });
-    } else {
-      dispatch(push("/signin"));
     }
   };
 };
