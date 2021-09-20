@@ -170,6 +170,7 @@ const Setting = () => {
             <div className="module-spacer--medium" />
             <PrimaryButton
               label={"更新"}
+              fullWidth={true}
               onClick={() => {
                 dispatch(editUserInfo(name, email));
               }}
@@ -177,6 +178,7 @@ const Setting = () => {
             <div className="module-spacer--large" />
             <SecondaryButton
               label={"アカウントを削除される場合はこちら"}
+              fullWidth={true}
               onClick={() => setIsOpen(!isOpen)}
             />
           </TabPanel>
