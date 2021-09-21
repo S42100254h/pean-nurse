@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Redirect, Route } from "react-router";
+import { Route } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "./reducks/users/selectors";
 import { redirectToDashboard } from "./reducks/users/operations";
@@ -14,12 +14,12 @@ const UnAuthRoute = ({ ...props }) => {
     if (!isSignedIn) {
       dispatch(redirectToDashboard());
     }
-  }, [])
+  }, []);
   
   if (!isSignedIn) {
     return <Route { ...props } />;
   } else {
-    return <Redirect to="/dashboard" />;
+    return <></>;
   }
 };
 

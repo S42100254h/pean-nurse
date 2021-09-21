@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Redirect, Route } from "react-router";
+import { Route } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "./reducks/users/selectors";
 import { listenAuthState } from "./reducks/users/operations";
@@ -14,10 +14,10 @@ const PrivateRoute = ({ ...props }) => {
     if (!isSignedIn) {
       dispatch(listenAuthState());
     }
-  }, [])
+  }, []);
 
   if (!isSignedIn) {
-    return <Redirect to="/signin" />;
+    return <></>;
   } else {
     return  <Route { ...props } />; 
   }
