@@ -4,6 +4,8 @@ import { getSignedIn } from "./reducks/users/selectors";
 import { listenAuthState } from "./reducks/users/operations";
 import { Redirect, Route, Switch } from "react-router";
 import { Deactivate,DashBoard, Home, Setting, SignUp, SignIn } from "./templates";
+import PrivateRoute from "./PrivateRoute";
+import UnAuthRoute from "./UnAuthRoute";
 
 const Router = () => {
   const dispatch = useDispatch();
