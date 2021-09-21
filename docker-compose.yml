@@ -3,6 +3,7 @@ version: '3.2'
 services:
   database:
     restart: always
+    platform: linux/x86_64
     image: mysql:latest
     ports:
       - 3306:3306

@@ -42,7 +42,7 @@ const Profile = () => {
     <Container className={classes.profile} maxWidth="sm">
       <div className={classes.profileItems}>
         {userImage ? (
-          <Avatar src={userImage} className={classes.avatar} />
+          <Avatar src={userImage.url} className={classes.avatar} />
         ) : (
           <Avatar src="/broken-image.jpg" className={classes.avatar} />
         )}

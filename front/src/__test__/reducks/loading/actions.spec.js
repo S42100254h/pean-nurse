@@ -13,7 +13,7 @@ describe("actions.jsのテスト", () => {
       {
         type: HIDE_LOADING
       }
-    )
+    );
   });
   
   it("showLoadingActionのテスト", () => {
@@ -25,6 +25,6 @@ describe("actions.jsのテスト", () => {
         type: SHOW_LOADING,
         payload: dummy,
       }
-    )
+    );
   });
 });

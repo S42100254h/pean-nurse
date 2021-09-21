@@ -2,7 +2,8 @@ module.exports = {
   "extends": "eslint:recommended",
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true,
   },
   "parserOptions": {
     "sourceType": "module",
@@ -11,7 +12,10 @@ module.exports = {
       "jsx": true
     }
   },
-  "plugins": ["react"],
+  "plugins": [
+    "react",
+    "jest",
+  ],
   "rules": {
     "no-console": "warn",
     "semi": ["error", "always"],
