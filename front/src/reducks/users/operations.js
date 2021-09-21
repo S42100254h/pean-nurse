@@ -311,3 +311,39 @@ export const listenAuthState = () => {
     }
   };
 };
+
+export const redirectToDashboard = () => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/users/currentuser";
+
+      axios
+        .get(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((response) => {
+          const userData = response.data;
+
+          dispatch(signInAction({
+            isSignedIn: true,
+            uid: userData.uid,
+            name: userData.name,
+            image: userData.image,
+            email: userData.email,
+          }));
+          
+          dispatch(push("/dashboard"));
+        })
+        .catch((error) => {
+          alert("サインインに失敗しました。");
+        });
+    }
+  };
+};
