@@ -56,4 +56,26 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       end
     end
   end
+
+  describe "PATCH /api/v1/auth" do
+    subject { patch(api_v1_user_registration_path, headers: headers, params: params) }
+
+    describe "normal scenario" do
+      context "send correct user information" do
+        let(:headers) { user.create_new_auth_token }
+        let(:params) {
+          { name: "dummy", email: "dummy@example.com",
+            image: Rack::Test::UploadedFile.new(File.join(Rails.root, "front/public/cat.png")) }
+        }
+        let!(:user) { create(:user) }
+
+        it "Update user information" do
+          expect { subject }.to change { user.reload.name }.from(user.name).to(params[:name]) &
+                                change { user.reload.email }.from(user.email).to(params[:email]) &
+                                change { user.reload.image }.from(user.image).to(params[:image])
+          expect(response).to have_http_status(200)
+        end
+      end
+    end
+  end
 end
