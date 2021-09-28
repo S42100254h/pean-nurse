@@ -1,6 +1,6 @@
 import React from "react";
-import { Switch } from "react-router";
-import { Deactivate,DashBoard, Home, Setting, SignUp, SignIn } from "./templates";
+import { Route, Switch } from "react-router";
+import { Deactivate,DashBoard, Home, PageNotFound, Setting, SignUp, SignIn } from "./templates";
 import PrivateRoute from "./PrivateRoute";
 import UnAuthRoute from "./UnAuthRoute";
 
@@ -13,6 +13,7 @@ const Router = () => {
       <PrivateRoute exact path={"/dashboard"} component={DashBoard} />
       <PrivateRoute exact path={"/setting"} component={Setting} />
       <PrivateRoute exact path={"/deactivate"} component={Deactivate} />
+      <Route component={PageNotFound} />
     </Switch>
   );
 };
