@@ -72,7 +72,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         it "Update user information" do
           expect { subject }.to change { user.reload.name }.from(user.name).to(params[:name]) &
                                 change { user.reload.email }.from(user.email).to(params[:email]) &
-                                change { user.reload.image }.from(user.image).to(params[:image])
+                                change { user.reload.image.identifier }.from(user.image.path).to(params[:image].original_filename)
           expect(response).to have_http_status(200)
         end
       end
