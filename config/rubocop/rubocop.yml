@@ -416,3 +416,6 @@ Style/StringConcatenation:
 
 Performance/CollectionLiteralInLoop:
   Enabled: false
+
+Layout/LineLength:
+  Enabled: false
