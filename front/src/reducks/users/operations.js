@@ -7,7 +7,7 @@ import { push } from "connected-react-router";
 
 let notificationContent = {};
 
-export const signUp = (name, email, password, confirmPassword) => {
+export const signUp = (name, email, password, password_confirmation) => {
   return async (dispatch) => {
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
@@ -24,12 +24,12 @@ export const signUp = (name, email, password, confirmPassword) => {
       return false;
     }
     
-    if (!isValidPassword(password, confirmPassword)) {
+    if (!isValidPassword(password, password_confirmation)) {
       alert("パスワードとパスワード（確認用）が一致しません");
       return false;
     }
 
-    const body = { name: name, email: email, password: password, confirmPassword: confirmPassword };
+    const body = { name: name, email: email, password: password, password_confirmation: password_confirmation };
     axios
       .post("http://localhost:4000/api/v1/auth", body )
       .then((resp) => {
@@ -276,14 +276,14 @@ export const editImage = (image) => {
   };
 };
 
-export const editPassword = (oldPassword, password, confirmPassword) => {
+export const editPassword = (oldPassword, password, password_confirmation) => {
   return async (dispatch) => {
-    if(!isValidRequiredInput(oldPassword, password, confirmPassword)) {
+    if(!isValidRequiredInput(oldPassword, password, password_confirmation)) {
       alert("未入力の項目があります");
       return false;
     }
     
-    if (!isValidPassword(password, confirmPassword)) {
+    if (!isValidPassword(password, password_confirmation)) {
       alert("新しいパスワードと新しいパスワード（確認用）が一致しません");
       return false;
     }
@@ -299,10 +299,10 @@ export const editPassword = (oldPassword, password, confirmPassword) => {
       const uid = localStorage.getItem("uid");
       const apiEndpoint = "http://localhost:4000/api/v1/auth/password";
 
-      const body = { password: password, confirmPassword: confirmPassword };
+      const body = { password: password, password_confirmation: password_confirmation };
       
       axios
-        .patch(apiEndpoint, body, {
+        .put(apiEndpoint, body, {
           headers: {
             "access-token": auth_token,
             client: client,

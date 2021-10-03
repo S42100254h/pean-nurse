@@ -89,7 +89,7 @@ const Setting = () => {
     [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),
     [oldPassword, setOldPassword] = useState(""),
-    [confirmPassword, setConfirmPassword] = useState(""),
+    [password_confirmation, setPasswordConfirmation] = useState(""),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
@@ -113,9 +113,9 @@ const Setting = () => {
     setOldPassword(event.target.value);
   }, [setOldPassword]);
 
-  const inputConfirmPassword = useCallback((event) => {
-    setConfirmPassword(event.target.value);
-  }, [setConfirmPassword]);
+  const inputPasswordConfirmation = useCallback((event) => {
+    setPasswordConfirmation(event.target.value);
+  }, [setPasswordConfirmation]);
 
   useEffect(() => {
     setName(userName);
@@ -231,24 +231,24 @@ const Setting = () => {
               multiline={false}
               required={true}
               row={1}
-              value={confirmPassword}
-              onChange={inputConfirmPassword}
+              value={password_confirmation}
+              onChange={inputPasswordConfirmation}
             />
             <div className="module-spacer--medium" />
             <PrimaryButton
               label={"更新"}
               fullWidth={true}
-              disabled={!oldPassword || !password || !confirmPassword}
+              disabled={!oldPassword || !password || !password_confirmation}
               onClick={() => {
-                dispatch(editPassword(oldPassword, password, confirmPassword));
+                dispatch(editPassword(oldPassword, password, password_confirmation));
               }}
             />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item three
+            お知らせは随時こちらにアップロードします。
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Item four
+            現在は無料コースのみです。
           </TabPanel>
         </div>
         {open && (
