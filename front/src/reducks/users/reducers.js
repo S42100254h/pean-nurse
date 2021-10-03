@@ -36,6 +36,12 @@ export const UsersReducer = (state = initialState.users, action) => {
       ...state,
       image: action.payload.image,
     };
+  case Actions.EDIT_USER_PASSWORD:
+    return {
+      ...state,
+      password: action.payload.password,
+      confirmPassword: action.payload.confirmPassword,
+    };
   default:
     return state;
   }
