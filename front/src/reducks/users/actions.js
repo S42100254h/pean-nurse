@@ -36,3 +36,11 @@ export const editUserImageAction = (payload) => {
     payload,
   };
 };
+
+export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
+export const editUserPasswordAction = (payload) => {
+  return {
+    type: "EDIT_USER_PASSWORD",
+    payload,
+  };
+};
