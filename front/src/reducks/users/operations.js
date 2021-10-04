@@ -319,7 +319,7 @@ export const editPassword = (current_password, password, password_confirmation) 
         .catch(() => {
           notificationContent = {
             variant: "error",
-            message: "パスワードの更新に失敗しました。"
+            message: "パスワードの更新に失敗しました。入力内容をご確認ください。"
           };
         });
       await _sleep(2000);
