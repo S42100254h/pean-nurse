@@ -276,9 +276,9 @@ export const editImage = (image) => {
   };
 };
 
-export const editPassword = (oldPassword, password, password_confirmation) => {
+export const editPassword = (current_password, password, password_confirmation) => {
   return async (dispatch) => {
-    if(!isValidRequiredInput(oldPassword, password, password_confirmation)) {
+    if(!isValidRequiredInput(current_password, password, password_confirmation)) {
       alert("未入力の項目があります");
       return false;
     }
@@ -299,7 +299,7 @@ export const editPassword = (oldPassword, password, password_confirmation) => {
       const uid = localStorage.getItem("uid");
       const apiEndpoint = "http://localhost:4000/api/v1/auth/password";
 
-      const body = { password: password, password_confirmation: password_confirmation };
+      const body = { current_password: current_password, password: password, password_confirmation: password_confirmation };
       
       axios
         .put(apiEndpoint, body, {

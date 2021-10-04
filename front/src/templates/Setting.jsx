@@ -88,7 +88,7 @@ const Setting = () => {
     [name, setName] = useState(""),
     [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),
-    [oldPassword, setOldPassword] = useState(""),
+    [current_password, setCurrentPassword] = useState(""),
     [password_confirmation, setPasswordConfirmation] = useState(""),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
@@ -107,11 +107,11 @@ const Setting = () => {
 
   const inputPassword = useCallback((event) => {
     setPassword(event.target.value);
-  }, [setOldPassword]);
+  }, [setPassword]);
 
-  const inputOldPassword = useCallback((event) => {
-    setOldPassword(event.target.value);
-  }, [setOldPassword]);
+  const inputCurrentPassword = useCallback((event) => {
+    setCurrentPassword(event.target.value);
+  }, [setCurrentPassword]);
 
   const inputPasswordConfirmation = useCallback((event) => {
     setPasswordConfirmation(event.target.value);
@@ -211,8 +211,8 @@ const Setting = () => {
               multiline={false}
               required={true}
               row={1}
-              value={oldPassword}
-              onChange={inputOldPassword}
+              value={current_password}
+              onChange={inputCurrentPassword}
             />
             <TextInput
               fullWidth={true}
@@ -238,9 +238,9 @@ const Setting = () => {
             <PrimaryButton
               label={"更新"}
               fullWidth={true}
-              disabled={!oldPassword || !password || !password_confirmation}
+              disabled={!current_password || !password || !password_confirmation}
               onClick={() => {
-                dispatch(editPassword(oldPassword, password, password_confirmation));
+                dispatch(editPassword(current_password, password, password_confirmation));
               }}
             />
           </TabPanel>
