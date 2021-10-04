@@ -1,4 +1,4 @@
-import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction } from "./actions";
+import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction, editUserPasswordAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, isValidPassword, _sleep } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
@@ -7,7 +7,7 @@ import { push } from "connected-react-router";
 
 let notificationContent = {};
 
-export const signUp = (name, email, password, confirmPassword) => {
+export const signUp = (name, email, password, password_confirmation) => {
   return async (dispatch) => {
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
@@ -24,12 +24,12 @@ export const signUp = (name, email, password, confirmPassword) => {
       return false;
     }
     
-    if (!isValidPassword(password, confirmPassword)) {
+    if (!isValidPassword(password, password_confirmation)) {
       alert("パスワードとパスワード（確認用）が一致しません");
       return false;
     }
 
-    const body = { name: name, email: email, password: password, confirmPassword: confirmPassword };
+    const body = { name: name, email: email, password: password, password_confirmation: password_confirmation };
     axios
       .post("http://localhost:4000/api/v1/auth", body )
       .then((resp) => {
@@ -266,6 +266,60 @@ export const editImage = (image) => {
           notificationContent = {
             variant: "error",
             message: "画像の更新に失敗しました。"
+          };
+        });
+      await _sleep(2000);
+      dispatch(setNotificationAction(notificationContent));
+    } else {
+      dispatch(push("/signin"));
+    }
+  };
+};
+
+export const editPassword = (current_password, password, password_confirmation) => {
+  return async (dispatch) => {
+    if(!isValidRequiredInput(current_password, password, password_confirmation)) {
+      alert("未入力の項目があります");
+      return false;
+    }
+    
+    if (!isValidPassword(password, password_confirmation)) {
+      alert("新しいパスワードと新しいパスワード（確認用）が一致しません");
+      return false;
+    }
+
+    if(password.length < 6) {
+      alert("パスワードは６文字以上で入力してください");
+      return false;
+    }
+    
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/auth/password";
+
+      const body = { current_password: current_password, password: password, password_confirmation: password_confirmation };
+      
+      axios
+        .put(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(editUserPasswordAction(resp.data.data));
+          notificationContent = {
+            variant: "success",
+            message: "パスワードを更新しました。"
+          };
+        })
+        .catch(() => {
+          notificationContent = {
+            variant: "error",
+            message: "パスワードの更新に失敗しました。入力内容をご確認ください。"
           };
         });
       await _sleep(2000);

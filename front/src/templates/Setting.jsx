@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-import { editImage, editUserInfo } from "../reducks/users/operations";
+import { editImage, editPassword, editUserInfo } from "../reducks/users/operations";
 import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
@@ -69,6 +69,11 @@ const useStyles = makeStyles((theme) => ({
     left: "75px",
     zIndex: "1",
   },
+  headline: {
+    fontSize: "1.563rem",
+    margin: "0 auto 1rem auto",
+    textAlign: "center",
+  },
 }));
 
 const Setting = () => {
@@ -82,6 +87,9 @@ const Setting = () => {
   const [value, setValue] = useState(0),
     [name, setName] = useState(""),
     [email, setEmail] = useState(""),
+    [password, setPassword] = useState(""),
+    [current_password, setCurrentPassword] = useState(""),
+    [password_confirmation, setPasswordConfirmation] = useState(""),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
@@ -95,7 +103,19 @@ const Setting = () => {
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
-  }, [setEmail]);
+  }, [setPassword]);
+
+  const inputPassword = useCallback((event) => {
+    setPassword(event.target.value);
+  }, [setPassword]);
+
+  const inputCurrentPassword = useCallback((event) => {
+    setCurrentPassword(event.target.value);
+  }, [setCurrentPassword]);
+
+  const inputPasswordConfirmation = useCallback((event) => {
+    setPasswordConfirmation(event.target.value);
+  }, [setPasswordConfirmation]);
 
   useEffect(() => {
     setName(userName);
@@ -118,6 +138,12 @@ const Setting = () => {
     } else {
       dispatch(editImage(image));
       setOpen(!open);
+    }
+  };
+  
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      dispatch(editPassword(current_password, password, password_confirmation));
     }
   };
 
@@ -183,13 +209,53 @@ const Setting = () => {
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item two
+            <h2 className={classes.headline}>パスワード更新</h2>
+            <TextInput
+              fullWidth={true}
+              label={"現在のパスワード"}
+              type="password"
+              multiline={false}
+              required={true}
+              row={1}
+              value={current_password}
+              onChange={inputCurrentPassword}
+            />
+            <TextInput
+              fullWidth={true}
+              label={"新しいパスワード"}
+              type="password"
+              multiline={false}
+              required={true}
+              row={1}
+              value={password}
+              onChange={inputPassword}
+            />
+            <TextInput
+              fullWidth={true}
+              label={"新しいパスワード（確認用）"}
+              type="password"
+              multiline={false}
+              required={true}
+              row={1}
+              value={password_confirmation}
+              onChange={inputPasswordConfirmation}
+              onKeyDown={handleOnKeyDown}
+            />
+            <div className="module-spacer--medium" />
+            <PrimaryButton
+              label={"更新"}
+              fullWidth={true}
+              disabled={!current_password || !password || !password_confirmation}
+              onClick={() => {
+                dispatch(editPassword(current_password, password, password_confirmation));
+              }}
+            />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item three
+            お知らせは随時こちらにアップロードします。
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Item four
+            現在は無料コースのみです。
           </TabPanel>
         </div>
         {open && (
