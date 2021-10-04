@@ -140,6 +140,12 @@ const Setting = () => {
       setOpen(!open);
     }
   };
+  
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      dispatch(editPassword(current_password, password, password_confirmation));
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -233,6 +239,7 @@ const Setting = () => {
               row={1}
               value={password_confirmation}
               onChange={inputPasswordConfirmation}
+              onKeyDown={handleOnKeyDown}
             />
             <div className="module-spacer--medium" />
             <PrimaryButton
