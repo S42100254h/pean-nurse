@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { TextInput, PrimaryButton } from "../components/UIkit";
+import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
 import { signIn } from "../reducks/users/operations";
 
 const useStyles = makeStyles({
@@ -55,10 +55,9 @@ const SignIn = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
-      <TextInput
+      <PasswordInput
         fullWidth={true}
         label={"パスワード"}
-        type="password"
         multiline={false}
         required={true}
         row={1}
