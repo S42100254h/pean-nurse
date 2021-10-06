@@ -156,23 +156,20 @@ export const deleteUser = () => {
         .then((resp) => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Delete user..."));
-          notificationContent = {
-            variant: "success",
-            message: "ユーザー登録を削除しました"
-          };
           dispatch(push("/"));
           localStorage.clear();
         })
-        .catch((error) => {
-          notificationContent = {
-            variant: "error",
-            message: "ユーザー登録の削除に失敗しました"
-          };
+        .then(() => {
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を削除しました。" }));
+          }, 1000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の削除に失敗しました。" }));
+          }, 400);
         });
-      await _sleep(1000);
-      dispatch(hideLoadingAction());
-      await _sleep(300);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
