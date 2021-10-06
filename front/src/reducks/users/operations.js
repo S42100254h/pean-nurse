@@ -117,23 +117,20 @@ export const signOut = () => {
         .then(() => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
-          notificationContent = {
-            variant: "success",
-            message: "サインアウトしました。"
-          };
           dispatch(push("/"));
           localStorage.clear();
         })
-        .catch((error) => {
-          notificationContent = {
-            variant: "error",
-            message: "サインアウトに失敗しました。"
-          };
+        .then(() => {
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
+          }, 1000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
+          }, 400);
         });
-      await _sleep(1000);
-      dispatch(hideLoadingAction());
-      await _sleep(300);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
