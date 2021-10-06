@@ -1,23 +1,17 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
-import amber from "@material-ui/core/colors/amber";
 import green from "@material-ui/core/colors/green";
-import indigo from "@material-ui/core/colors/indigo";
 import red from "@material-ui/core/colors/red";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CloseIcon from "@material-ui/icons/Close";
 import ErrorIcon from "@material-ui/icons/Error";
-import InfoIcon from "@material-ui/icons/Info";
-import WarningIcon from "@material-ui/icons/Warning";
 import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 
 const variantIcon = {
   success: CheckCircleIcon,
-  warning: WarningIcon,
   error: ErrorIcon,
-  info: InfoIcon,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -29,12 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     backgroundColor: red[700],
-  },
-  info: {
-    backgroundColor: indigo[700],
-  },
-  warning: {
-    backgroundColor: amber[700],
   },
   icon: {
     fontSize: "1rem",
