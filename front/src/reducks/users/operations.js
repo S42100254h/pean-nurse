@@ -40,21 +40,18 @@ export const signUp = (name, email, password, password_confirmation) => {
         dispatch(signUpAction(resp.data.data));
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/dashboard"));
-        notificationContent = {
-          variant: "success",
-          message: "ユーザー登録に成功しました。"
-        };
+      })
+      .then(() => {
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "ユーザー登録に成功しました。"}));
+        }, 1000);
       })
       .catch(() => {
-        notificationContent = {
-          variant: "error",
-          message: "ユーザー登録に失敗しました。"
-        };
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "ユーザー登録に失敗しました。" }));
+        }, 400);
       });
-    await _sleep(1000);
-    dispatch(hideLoadingAction());
-    await _sleep(300);
-    dispatch(setNotificationAction(notificationContent));
   };
 };
 
