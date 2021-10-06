@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab } from "@material-ui/core";
-import { TabPanel, TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { TabPanel, TextInput, PasswordInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
@@ -210,30 +210,27 @@ const Setting = () => {
           </TabPanel>
           <TabPanel value={value} index={1}>
             <h2 className={classes.headline}>パスワード更新</h2>
-            <TextInput
+            <PasswordInput
               fullWidth={true}
               label={"現在のパスワード"}
-              type="password"
               multiline={false}
               required={true}
               row={1}
               value={current_password}
               onChange={inputCurrentPassword}
             />
-            <TextInput
+            <PasswordInput
               fullWidth={true}
               label={"新しいパスワード"}
-              type="password"
               multiline={false}
               required={true}
               row={1}
               value={password}
               onChange={inputPassword}
             />
-            <TextInput
+            <PasswordInput
               fullWidth={true}
               label={"新しいパスワード（確認用）"}
-              type="password"
               multiline={false}
               required={true}
               row={1}

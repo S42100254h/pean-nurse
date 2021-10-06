@@ -1,6 +1,6 @@
 import React, { useCallback, useState} from "react";
 import { makeStyles } from "@material-ui/core";
-import { TextInput, PrimaryButton } from "../components/UIkit";
+import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { signUp } from "../reducks/users/operations";
@@ -65,16 +65,46 @@ const SignUp = () => {
       <h2 className={classes.headline}>アカウント登録</h2>
       <div className="module-spacer--extra-small" />
       <TextInput
-        fullWidth={true} label={"ユーザー名"} multiline={false} required={true} row={1} value={name} type={"text"} onChange={inputName} onKeyDown={handleOnKeyDown}
+        fullWidth={true}
+        label={"ユーザー名"}
+        multiline={false}
+        required={true}
+        row={1}
+        value={name}
+        type={"text"}
+        onChange={inputName}
+        onKeyDown={handleOnKeyDown}
       />
       <TextInput
-        fullWidth={true} label={"メールアドレス"} multiline={false} required={true} row={1} value={email} type={"email"} onChange={inputEmail} onKeyDown={handleOnKeyDown}
+        fullWidth={true}
+        label={"メールアドレス"}
+        multiline={false}
+        required={true}
+        row={1}
+        value={email}
+        type={"email"}
+        onChange={inputEmail}
+        onKeyDown={handleOnKeyDown}
       />
-      <TextInput
-        fullWidth={true} label={"パスワード"} type="password" multiline={false} required={true} row={1} value={password} onChange={inputPassword} onKeyDown={handleOnKeyDown}
+      <PasswordInput
+        fullWidth={true}
+        label={"パスワード"}
+        multiline={false}
+        required={true}
+        row={1}
+        value={password}
+        onChange={inputPassword}
+        onKeyDown={handleOnKeyDown}
       />
-      <TextInput
-        fullWidth={true} label={"パスワード（確認用）"} type="password" multiline={false} required={true} row={1} value={confirmPassword} onChange={inputConfirmPassword} onKeyDown={handleOnKeyDown}
+      <PasswordInput
+        fullWidth={true}
+        label={"パスワード（確認用）"}
+        multiline={false}
+        required={true}
+        row={1}
+        value={confirmPassword}
+        onChange={inputConfirmPassword}
+        onKeyDown={handleOnKeyDown}
       />
       <div className="module-spacer--medium" />
       <PrimaryButton
