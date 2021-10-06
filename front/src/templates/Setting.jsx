@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/users/selectors";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-import { editImage, editPassword, editUserInfo } from "../reducks/users/operations";
+import { deleteImage, editImage, editPassword, editUserInfo } from "../reducks/users/operations";
 import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
@@ -256,7 +256,7 @@ const Setting = () => {
           </TabPanel>
         </div>
         {open && (
-          <ClickAway onClickAway={handleModalToggle} onChange={(e) => handleUpload(e)} />
+          <ClickAway onClickAway={handleModalToggle} onChange={(e) => handleUpload(e)} onClick={() => dispatch(deleteImage())} />
         )}
         <Confirmation
           isOpen={isOpen}
