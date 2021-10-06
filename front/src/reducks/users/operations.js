@@ -1,11 +1,9 @@
-import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction, editUserPasswordAction } from "./actions";
+import { deleteUserImageAction, editUserInfoAction, editUserImageAction, editUserPasswordAction, signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
-
-let notificationContent = {};
 
 export const signUp = (name, email, password, password_confirmation) => {
   return async (dispatch) => {
@@ -246,6 +244,43 @@ export const editImage = (image) => {
         .then(() => {
           setTimeout(() => {
             dispatch(setNotificationAction({ variant: "success", message: "画像を更新しました。" }));
+          }, 0);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "画像の更新に失敗しました。" }));
+          }, 400);
+        });
+    } else {
+      dispatch(push("/signin"));
+    }
+  };
+};
+
+export const deleteImage = () => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+
+      const body = { image: "" };
+      
+      axios
+        .patch(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then(() => {
+          dispatch(deleteUserImageAction());
+        })
+        .then(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "success", message: "画像をデフォルトに変更しました。" }));
           }, 0);
         })
         .catch(() => {

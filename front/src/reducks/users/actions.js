@@ -37,6 +37,13 @@ export const editUserImageAction = (payload) => {
   };
 };
 
+export const DELETE_USER_IMAGE = "DELETE_USER_IMAGE";
+export const deleteUserImageAction = () => {
+  return {
+    type: "DELETE_USER_IMAGE",
+  };
+};
+
 export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
 export const editUserPasswordAction = (payload) => {
   return {
