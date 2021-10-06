@@ -86,21 +86,18 @@ export const signIn = (email, password) => {
         dispatch(signInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/dashboard"));
-        notificationContent = {
-          variant: "success",
-          message: "サインインしました。"
-        };
+      })
+      .then(() => {
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "サインインしました。"}));
+        }, 1000);
       })
       .catch(() => {
-        notificationContent = {
-          variant: "error",
-          message: "サインインに失敗しました。"
-        };
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "サインインに失敗しました。入力内容をご確認ください。" }));
+        }, 400);
       });
-    await _sleep(1000);
-    dispatch(hideLoadingAction());
-    await _sleep(300);
-    dispatch(setNotificationAction(notificationContent));
   };
 };
 
