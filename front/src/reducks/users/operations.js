@@ -5,8 +5,6 @@ import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
 
-let notificationContent = {};
-
 export const signUp = (name, email, password, password_confirmation) => {
   return async (dispatch) => {
     if(!isValidEmailFormat(email)) {
