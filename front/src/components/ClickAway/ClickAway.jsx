@@ -54,7 +54,7 @@ const ClickAway = (props) => {
             </label>
           </div>
           <div className={classes.popContainer}>
-            <p className={classes.pop}>デフォルト画像に設定</p>
+            <p className={classes.pop} onClick={() => props.onClick()}>デフォルト画像に設定</p>
           </div>
         </div>
       </ClickAwayListener>
