@@ -30,6 +30,7 @@ const PasswordInput = (props) => {
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
+              tabIndex="-1"
               onClick={() => handleShowPasswordToggle()}
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
