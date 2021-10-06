@@ -1,5 +1,5 @@
 import { editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction, editUserPasswordAction } from "./actions";
-import { isValidEmailFormat, isValidRequiredInput, isValidPassword, _sleep } from "../../function/common";
+import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
@@ -40,21 +40,18 @@ export const signUp = (name, email, password, password_confirmation) => {
         dispatch(signUpAction(resp.data.data));
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/dashboard"));
-        notificationContent = {
-          variant: "success",
-          message: "ユーザー登録に成功しました。"
-        };
+      })
+      .then(() => {
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "ユーザー登録に成功しました。"}));
+        }, 1000);
       })
       .catch(() => {
-        notificationContent = {
-          variant: "error",
-          message: "ユーザー登録に失敗しました。"
-        };
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "ユーザー登録に失敗しました。" }));
+        }, 400);
       });
-    await _sleep(1000);
-    dispatch(hideLoadingAction());
-    await _sleep(300);
-    dispatch(setNotificationAction(notificationContent));
   };
 };
 
@@ -86,21 +83,18 @@ export const signIn = (email, password) => {
         dispatch(signInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/dashboard"));
-        notificationContent = {
-          variant: "success",
-          message: "サインインしました。"
-        };
+      })
+      .then(() => {
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "サインインしました。"}));
+        }, 1000);
       })
       .catch(() => {
-        notificationContent = {
-          variant: "error",
-          message: "サインインに失敗しました。"
-        };
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "サインインに失敗しました。入力内容をご確認ください。" }));
+        }, 400);
       });
-    await _sleep(1000);
-    dispatch(hideLoadingAction());
-    await _sleep(300);
-    dispatch(setNotificationAction(notificationContent));
   };
 };
 
@@ -123,23 +117,20 @@ export const signOut = () => {
         .then(() => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
-          notificationContent = {
-            variant: "success",
-            message: "サインアウトしました。"
-          };
           dispatch(push("/"));
           localStorage.clear();
         })
-        .catch((error) => {
-          notificationContent = {
-            variant: "error",
-            message: "サインアウトに失敗しました。"
-          };
+        .then(() => {
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
+          }, 1000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
+          }, 400);
         });
-      await _sleep(1000);
-      dispatch(hideLoadingAction());
-      await _sleep(300);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
@@ -165,23 +156,20 @@ export const deleteUser = () => {
         .then((resp) => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Delete user..."));
-          notificationContent = {
-            variant: "success",
-            message: "ユーザー登録を削除しました"
-          };
           dispatch(push("/"));
           localStorage.clear();
         })
-        .catch((error) => {
-          notificationContent = {
-            variant: "error",
-            message: "ユーザー登録の削除に失敗しました"
-          };
+        .then(() => {
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を削除しました。" }));
+          }, 1000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の削除に失敗しました。" }));
+          }, 400);
         });
-      await _sleep(1000);
-      dispatch(hideLoadingAction());
-      await _sleep(300);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
@@ -214,21 +202,18 @@ export const editUserInfo = (name, email) => {
           dispatch(editUserInfoAction(resp.data.data));
           dispatch(showLoadingAction("Update ..."));
           dispatch(push("/dashboard"));
-          notificationContent = {
-            variant: "success",
-            message: "ユーザー情報を更新しました。"
-          };
+        })
+        .then(() => {
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を更新しました。" }));
+          }, 1000);
         })
         .catch(() => {
-          notificationContent = {
-            variant: "error",
-            message: "ユーザー情報の更新に失敗しました。"
-          };
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の更新に失敗しました。" }));
+          }, 400);
         });
-      await _sleep(1000);
-      dispatch(hideLoadingAction());
-      await _sleep(300);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
@@ -257,19 +242,17 @@ export const editImage = (image) => {
         })
         .then((resp) => {
           dispatch(editUserImageAction(resp.data.data));
-          notificationContent = {
-            variant: "success",
-            message: "画像を更新しました。"
-          };
+        })
+        .then(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "success", message: "画像を更新しました。" }));
+          }, 0);
         })
         .catch(() => {
-          notificationContent = {
-            variant: "error",
-            message: "画像の更新に失敗しました。"
-          };
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "画像の更新に失敗しました。" }));
+          }, 400);
         });
-      await _sleep(2000);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
@@ -311,19 +294,17 @@ export const editPassword = (current_password, password, password_confirmation) 
         })
         .then((resp) => {
           dispatch(editUserPasswordAction(resp.data.data));
-          notificationContent = {
-            variant: "success",
-            message: "パスワードを更新しました。"
-          };
+        })
+        .then(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
+          }, 1000);
         })
         .catch(() => {
-          notificationContent = {
-            variant: "error",
-            message: "パスワードの更新に失敗しました。入力内容をご確認ください。"
-          };
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "パスワードの更新に失敗しました。入力内容をご確認ください。" }));
+          }, 400);
         });
-      await _sleep(2000);
-      dispatch(setNotificationAction(notificationContent));
     } else {
       dispatch(push("/signin"));
     }
