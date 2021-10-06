@@ -1,4 +1,5 @@
 export { default as Loading } from "./Loading";
+export { default as PasswordInput } from "./PasswordInput";
 export { default as PrimaryButton } from "./PrimaryButton";
 export { default as Profile } from "./Profile";
 export { default as SecondaryButton } from "./SecondaryButton";
