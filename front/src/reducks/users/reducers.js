@@ -36,6 +36,11 @@ export const UsersReducer = (state = initialState.users, action) => {
       ...state,
       image: action.payload.image,
     };
+  case Actions.DELETE_USER_IMAGE:
+    return {
+      ...state,
+      image: "",
+    };
   case Actions.EDIT_USER_PASSWORD:
     return {
       ...state,
