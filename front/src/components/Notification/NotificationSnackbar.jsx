@@ -1,46 +1,32 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
-import amber from "@material-ui/core/colors/amber";
-import green from "@material-ui/core/colors/green";
-import indigo from "@material-ui/core/colors/indigo";
-import red from "@material-ui/core/colors/red";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CloseIcon from "@material-ui/icons/Close";
 import ErrorIcon from "@material-ui/icons/Error";
-import InfoIcon from "@material-ui/icons/Info";
-import WarningIcon from "@material-ui/icons/Warning";
 import { makeStyles } from "@material-ui/styles";
-import classNames from "classnames";
 
 const variantIcon = {
   success: CheckCircleIcon,
-  warning: WarningIcon,
   error: ErrorIcon,
-  info: InfoIcon,
 };
 
 const useStyles = makeStyles((theme) => ({
-  SnackbarContent: {
+  success: {
+    backgroundColor: "#43A047",
     padding: "0 8px 0 8px",
   },
-  success: {
-    backgroundColor: green[600],
-  },
   error: {
-    backgroundColor: red[700],
-  },
-  info: {
-    backgroundColor: indigo[700],
-  },
-  warning: {
-    backgroundColor: amber[700],
+    backgroundColor: "#D32F2F",
+    padding: "0 8px 0 8px",
   },
   icon: {
     fontSize: "1rem",
     fontWeight: "bold",
+    opacity: 0.9,
+    marginRight: 1,
   },
-  iconVariant: {
+  closeIcon: {
     opacity: 0.9,
     marginRight: 1,
   },
@@ -58,17 +44,17 @@ const NotificationSnackbar = (props) => {
 
   return (
     <SnackbarContent
-      className={classNames(classes[props.variant], classes.SnackbarContent)}
+      className={classes[props.variant]}
       aria-describedby="client-snackbar"
       message={
         <span className={classes.message}>
-          <Icon className={classNames(classes.icon, classes.iconVariant)} />
+          <Icon className={classes.icon} />
           {props.message}
         </span>
       }
       action={[
         <IconButton key="close" aria-label="Close" color="inherit" onClick={props.onClose}>
-          <CloseIcon className={classes.icon} />
+          <CloseIcon className={classes.closeIcon} />
         </IconButton>
       ]}
     />
