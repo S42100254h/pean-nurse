@@ -27,9 +27,11 @@ export const signUp = (name, email, password, password_confirmation) => {
       return false;
     }
 
+    const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
     const body = { name: name, email: email, password: password, password_confirmation: password_confirmation };
+
     axios
-      .post("http://localhost:4000/api/v1/auth", body )
+      .post(apiEndpoint, body )
       .then((resp) => {
         localStorage.setItem("access-token", resp.headers["access-token"]);
         localStorage.setItem("client", resp.headers["client"]);
@@ -70,9 +72,11 @@ export const signIn = (email, password) => {
       return false;
     }
 
+    const apiEndpoint = process.env.REACT_APP_API_URL + "auth/sign_in";
     const body = { email: email, password: password };
+
     axios
-      .post("http://localhost:4000/api/v1/auth/sign_in", body)
+      .post(apiEndpoint, body)
       .then((resp) => {
         localStorage.setItem("access-token", resp.headers["access-token"]);
         localStorage.setItem("client", resp.headers["client"]);
@@ -102,7 +106,7 @@ export const signOut = () => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/auth/sign_out";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "auth/sign_out";
 
       axios
         .delete(apiEndpoint, {
@@ -141,7 +145,7 @@ export const deleteUser = () => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
       
       axios
         .delete(apiEndpoint, {
@@ -180,7 +184,7 @@ export const editUserInfo = (name, email) => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { name: name, email: email };
 
@@ -224,7 +228,7 @@ export const editImage = (image) => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       let form = new FormData();
       form.append("image", image);
@@ -263,7 +267,7 @@ export const deleteImage = () => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/auth";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { image: "" };
       
@@ -315,7 +319,7 @@ export const editPassword = (current_password, password, password_confirmation) 
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/auth/password";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
 
       const body = { current_password: current_password, password: password, password_confirmation: password_confirmation };
       
@@ -352,7 +356,7 @@ export const listenAuthState = () => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/users/currentuser";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/currentuser";
 
       axios
         .get(apiEndpoint, {
@@ -388,7 +392,7 @@ export const redirectToDashboard = () => {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
       const uid = localStorage.getItem("uid");
-      const apiEndpoint = "http://localhost:4000/api/v1/users/currentuser";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/currentuser";
 
       axios
         .get(apiEndpoint, {
