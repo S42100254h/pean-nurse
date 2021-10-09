@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { Deactivate,DashBoard, ForgetPassword, ForgetPasswordSent, Home, PageNotFound, Setting, SignUp, SignIn } from "./templates";
+import { Deactivate,DashBoard, ForgetPassword, ForgetPasswordSent, Home, PageNotFound, ResetPassword, Setting, SignUp, SignIn } from "./templates";
 import PrivateRoute from "./PrivateRoute";
 import UnAuthRoute from "./UnAuthRoute";
 
@@ -10,6 +10,7 @@ const Router = () => {
       <UnAuthRoute exact path={"(/)?"} component={Home} />
       <UnAuthRoute exact path={"/forgetpassword"} component={ForgetPassword} />
       <UnAuthRoute exact path={"/forgetpassword/sent"} component={ForgetPasswordSent} />
+      <UnAuthRoute exact path={"/resetpassword"} component={ResetPassword} />
       <UnAuthRoute exact path={"/signup"} component={SignUp} />
       <UnAuthRoute exact path={"/signin"} component={SignIn} />
       <PrivateRoute exact path={"/dashboard"} component={DashBoard} />
