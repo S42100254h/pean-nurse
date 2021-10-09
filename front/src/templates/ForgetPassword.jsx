@@ -1,7 +1,8 @@
-import React, { useCallback, useState} from "react";
+import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { TextInput, PrimaryButton } from "../components/UIkit";
+import { forgetPassword } from "../reducks/users/operations";
 
 const useStyles = makeStyles({
   container: {
@@ -19,21 +20,27 @@ const useStyles = makeStyles({
   },
   textContainer: {
     padding: "10px",
-    border: "1px solid #cf222e",
+    border: "1px solid #b0c4de",
     borderRadius: "4px",
-    backgroundColor: "#FFEEFF",
+    backgroundColor: "#f0f8ff",
   },
 });
 
 const ForgetPassword = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  
+
   const [email, setEmail] = useState("");
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
   }, [setEmail]);
+
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      dispatch(forgetPassword(email));
+    }
+  };
 
   return (
     <div className={classes.container} >
@@ -60,7 +67,9 @@ const ForgetPassword = () => {
         label={"送信"}
         fullWidth={true}
         disabled={!email}
-        onClick={() => console.log("test")}
+        onClick={() =>
+          dispatch(forgetPassword(email))
+        }
       />
     </div>
   );
