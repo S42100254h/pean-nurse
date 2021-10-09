@@ -36,6 +36,8 @@ DeviseTokenAuth.setup do |config|
   # attribute updates. Set it to :password if you want it to be checked only if
   # password is updated.
   config.check_current_password_before_update = :password
+  
+  config.default_password_reset_url = ENV["RESET_PASSWORD_URL"]
 
   # By default we will use callbacks for single omniauth.
   # It depends on fields like email, provider and uid.
