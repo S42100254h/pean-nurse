@@ -1,5 +1,6 @@
 export { default as Deactivate } from "./Deactivate";
 export { default as DashBoard } from "./DashBoard";
+export { default as ForgetPassword } from "./ForgetPassword";
 export { default as Home } from "./Home";
 export { default as PageNotFound } from "./PageNotFound";
 export { default as Setting } from "./Setting";
