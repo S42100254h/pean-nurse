@@ -350,6 +350,31 @@ export const editPassword = (current_password, password, password_confirmation) 
   };
 };
 
+export const forgetPassword = (email) => {
+  return async (dispatch) => {
+    const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
+ 
+    const body = { email: email };
+
+    axios
+      .post(apiEndpoint, body)
+      .then(() => {
+        dispatch(showLoadingAction("Send Email ..."));
+        dispatch(push("/forgetpassword/sent"));
+
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "メールを送信しました。" }));
+        }, 1000);
+      })
+      .catch(() => {
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "メールの送信に失敗しました。メールアドレスをご確認ください。" }));
+        }, 400);
+      });
+  };
+};
+
 export const listenAuthState = () => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
