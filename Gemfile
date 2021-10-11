@@ -30,6 +30,7 @@ gem "active_model_serializers"
 gem "bootsnap", ">= 1.4.4", require: false
 gem "carrierwave"
 gem "devise_token_auth"
+gem "devise"
 gem "dotenv-rails", require: "dotenv/rails-now"
 gem "fog-aws"
 gem "rack-cors"

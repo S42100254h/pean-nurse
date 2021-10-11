@@ -331,6 +331,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   carrierwave
+  devise
   devise_token_auth
   dotenv-rails
   factory_bot_rails
