@@ -353,7 +353,6 @@ export const editPassword = (current_password, password, password_confirmation) 
 export const forgetPassword = (email) => {
   return async (dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
- 
     const body = { email: email };
 
     axios
@@ -370,6 +369,30 @@ export const forgetPassword = (email) => {
       .catch(() => {
         setTimeout(() => {
           dispatch(setNotificationAction({ variant: "error", message: "メールの送信に失敗しました。メールアドレスをご確認ください。" }));
+        }, 400);
+      });
+  };
+};
+
+export const resetPassword = (password, password_confirmation) => {
+  return async (dispatch) => {
+    const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
+    const body = { password: password, password_confirmation: password_confirmation };
+
+    axios
+      .put(apiEndpoint, body)
+      .then(() => {
+        dispatch(showLoadingAction("Update Password ..."));
+        dispatch(push("/signin"));
+
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
+        }, 1000);
+      })
+      .catch(() => {
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "パスワードの更新に失敗しました。はじめからやり直してください。" }));
         }, 400);
       });
   };
