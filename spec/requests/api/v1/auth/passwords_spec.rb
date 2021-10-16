@@ -28,4 +28,18 @@ RSpec.describe "Api::V1::Auth::Passwords", type: :request do
       end
     end
   end
+
+  describe "GET /api/v1/auth/password/edit" do
+    subject { get(edit_api_v1_user_password_path(reset_password_token: token)) }
+
+    let(:token) { user.send_reset_password_instructions }
+    let!(:user) { create(:user) }
+    
+    it "redirect url" do
+      subject
+      headers = response.headers
+      expect(headers["Location"]).to include ENV["RESET_PASSWORD_URL"]
+      expect(response).to have_http_status(302)
+    end
+  end
 end
