@@ -378,9 +378,20 @@ export const resetPassword = (password, password_confirmation) => {
   return async (dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
     const body = { password: password, password_confirmation: password_confirmation };
+    
+    const params = new URLSearchParams(window.location.search);
+    const auth_token = params.get("access-token");
+    const client = params.get("client");
+    const uid = params.get("uid");
 
     axios
-      .put(apiEndpoint, body)
+      .put(apiEndpoint, body, {
+        headers: {
+          "access-token": auth_token,
+          client: client,
+          uid: uid,
+        },
+      })
       .then(() => {
         dispatch(showLoadingAction("Update Password ..."));
         dispatch(push("/signin"));
