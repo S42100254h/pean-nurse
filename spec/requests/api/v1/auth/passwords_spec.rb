@@ -15,5 +15,17 @@ RSpec.describe "Api::V1::Auth::Passwords", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
+    context "send wrong email" do
+      let(:params) { { email: "dummy@gmail.com" } }
+      let!(:user) { create(:user, email: "neko@gmail.com") }
+
+      it "email is not sent" do
+        subject
+        res = response.body
+        expect(res).to include "Unable to find user with email 'dummy@gmail.com'."
+        expect(response).to have_http_status(404)
+      end
+    end
   end
 end
