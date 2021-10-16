@@ -398,12 +398,12 @@ export const resetPassword = (password, password_confirmation) => {
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
+          dispatch(setNotificationAction({ variant: "success", message: "パスワードを再設定しました。" }));
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "パスワードの更新に失敗しました。はじめからやり直してください。" }));
+          dispatch(setNotificationAction({ variant: "error", message: "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。" }));
         }, 400);
       });
   };
