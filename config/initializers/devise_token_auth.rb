@@ -37,6 +37,8 @@ DeviseTokenAuth.setup do |config|
   # password is updated.
   config.check_current_password_before_update = :password
 
+  config.default_password_reset_url = ENV["RESET_PASSWORD_URL"]
+
   # By default we will use callbacks for single omniauth.
   # It depends on fields like email, provider and uid.
   # config.default_callbacks = true

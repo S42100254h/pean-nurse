@@ -350,6 +350,65 @@ export const editPassword = (current_password, password, password_confirmation) 
   };
 };
 
+export const forgetPassword = (email) => {
+  return async (dispatch) => {
+    const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
+    const body = { email: email };
+
+    axios
+      .post(apiEndpoint, body)
+      .then(() => {
+        dispatch(showLoadingAction("Send Email ..."));
+        dispatch(push("/forgetpassword/sent"));
+
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "メールを送信しました。" }));
+        }, 1000);
+      })
+      .catch(() => {
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "メールの送信に失敗しました。メールアドレスをご確認ください。" }));
+        }, 400);
+      });
+  };
+};
+
+export const resetPassword = (password, password_confirmation) => {
+  return async (dispatch) => {
+    const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
+    const body = { password: password, password_confirmation: password_confirmation };
+    
+    const params = new URLSearchParams(window.location.search);
+    const auth_token = params.get("access-token");
+    const client = params.get("client");
+    const uid = params.get("uid");
+
+    axios
+      .put(apiEndpoint, body, {
+        headers: {
+          "access-token": auth_token,
+          client: client,
+          uid: uid,
+        },
+      })
+      .then(() => {
+        dispatch(showLoadingAction("Update Password ..."));
+        dispatch(push("/signin"));
+
+        setTimeout(() => {
+          dispatch(hideLoadingAction());
+          dispatch(setNotificationAction({ variant: "success", message: "パスワードを再設定しました。" }));
+        }, 1000);
+      })
+      .catch(() => {
+        setTimeout(() => {
+          dispatch(setNotificationAction({ variant: "error", message: "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。" }));
+        }, 400);
+      });
+  };
+};
+
 export const listenAuthState = () => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
