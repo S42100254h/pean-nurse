@@ -40,6 +40,12 @@ const ResetPassword = () => {
   const inputPasswordConfirmation = useCallback((event) => {
     setPasswordConfirmation(event.target.value);
   }, [setPasswordConfirmation]);
+  
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      dispatch(resetPassword(password, password_confirmation));
+    }
+  };
 
   return (
     <div className={classes.container}>
@@ -66,6 +72,7 @@ const ResetPassword = () => {
         row={1}
         value={password_confirmation}
         onChange={inputPasswordConfirmation}
+        onKeyDown={handleOnKeyDown}
       />
       <div className="module-spacer--extra-small" />
       <PrimaryButton
