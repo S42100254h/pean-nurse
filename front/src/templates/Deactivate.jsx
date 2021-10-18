@@ -5,18 +5,18 @@ import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../reducks/users/operations";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   "span": {
     color: "#cf222e",
     fontWeight: "bold",
   },
   "container": {
     padding: "10px",
-    border: "1px solid #cf222e",
+    border: "1px solid #b0c4de",
     borderRadius: "4px",
-    backgroundColor: "#FFEEFF",
+    backgroundColor: theme.palette.primary.light,
   },
-});
+}));
 
 const Deactivate = () => {
   const classes = useStyles();
