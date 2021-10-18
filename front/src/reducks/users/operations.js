@@ -40,8 +40,7 @@ export const signUp = (name, email, password, password_confirmation) => {
         dispatch(signUpAction(resp.data.data));
         dispatch(showLoadingAction("Sign up..."));
         dispatch(push("/dashboard"));
-      })
-      .then(() => {
+
         setTimeout(() => {
           dispatch(hideLoadingAction());
           dispatch(setNotificationAction({ variant: "success", message: "ユーザー登録に成功しました。"}));
@@ -85,8 +84,7 @@ export const signIn = (email, password) => {
         dispatch(signInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/dashboard"));
-      })
-      .then(() => {
+
         setTimeout(() => {
           dispatch(hideLoadingAction());
           dispatch(setNotificationAction({ variant: "success", message: "サインインしました。"}));
@@ -121,8 +119,7 @@ export const signOut = () => {
           dispatch(showLoadingAction("Sign out..."));
           dispatch(push("/"));
           localStorage.clear();
-        })
-        .then(() => {
+          
           setTimeout(() => {
             dispatch(hideLoadingAction());
             dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
@@ -160,8 +157,7 @@ export const deleteUser = () => {
           dispatch(showLoadingAction("Delete user..."));
           dispatch(push("/"));
           localStorage.clear();
-        })
-        .then(() => {
+          
           setTimeout(() => {
             dispatch(hideLoadingAction());
             dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を削除しました。" }));
@@ -204,8 +200,7 @@ export const editUserInfo = (name, email) => {
           dispatch(editUserInfoAction(resp.data.data));
           dispatch(showLoadingAction("Update ..."));
           dispatch(push("/dashboard"));
-        })
-        .then(() => {
+          
           setTimeout(() => {
             dispatch(hideLoadingAction());
             dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を更新しました。" }));
@@ -244,8 +239,7 @@ export const editImage = (image) => {
         })
         .then((resp) => {
           dispatch(editUserImageAction(resp.data.data));
-        })
-        .then(() => {
+          
           setTimeout(() => {
             dispatch(setNotificationAction({ variant: "success", message: "画像を更新しました。" }));
           }, 0);
@@ -281,8 +275,7 @@ export const deleteImage = () => {
         })
         .then(() => {
           dispatch(deleteUserImageAction());
-        })
-        .then(() => {
+          
           setTimeout(() => {
             dispatch(setNotificationAction({ variant: "success", message: "画像をデフォルトに変更しました。" }));
           }, 0);
@@ -333,8 +326,7 @@ export const editPassword = (current_password, password, password_confirmation) 
         })
         .then((resp) => {
           dispatch(editUserPasswordAction(resp.data.data));
-        })
-        .then(() => {
+
           setTimeout(() => {
             dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
           }, 1000);
