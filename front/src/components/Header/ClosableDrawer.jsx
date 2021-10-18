@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "../../reducks/users/selectors";
 import { signOut } from "../../reducks/users/operations";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   drawer: {
     flexShrink: 0,
     width: 256,

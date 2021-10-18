@@ -5,7 +5,7 @@ import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { ClosableDialog } from "./index";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: "fixed",
     bottom: "0",

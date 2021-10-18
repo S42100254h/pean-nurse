@@ -8,7 +8,7 @@ import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
 import { getSignedIn } from "../../reducks/users/selectors";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     zIndex: 9999,

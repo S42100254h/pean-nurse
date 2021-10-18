@@ -2,7 +2,7 @@ import React from "react";
 import { Profile } from "../components/UIkit";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   profile: {
     marginTop: "20px",
   },

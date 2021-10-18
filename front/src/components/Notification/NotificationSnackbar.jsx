@@ -11,7 +11,7 @@ const variantIcon = {
   error: ErrorIcon,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   success: {
     backgroundColor: "#43A047",
     padding: "0 8px 0 8px",

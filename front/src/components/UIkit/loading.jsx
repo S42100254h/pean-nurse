@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { getLoadingState, getLoadingText } from "../../reducks/loading/selectors";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     alignItems: "center",
     background: "white",
