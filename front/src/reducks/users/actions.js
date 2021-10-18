@@ -43,11 +43,3 @@ export const deleteUserImageAction = () => {
     type: "DELETE_USER_IMAGE",
   };
 };
-
-export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
-export const editUserPasswordAction = (payload) => {
-  return {
-    type: "EDIT_USER_PASSWORD",
-    payload,
-  };
-};

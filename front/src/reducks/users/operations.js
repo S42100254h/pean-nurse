@@ -1,4 +1,4 @@
-import { deleteUserImageAction, editUserInfoAction, editUserImageAction, editUserPasswordAction, signUpAction, signInAction, signOutAction } from "./actions";
+import { deleteUserImageAction, editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
@@ -324,9 +324,7 @@ export const editPassword = (current_password, password, password_confirmation) 
             uid: uid,
           },
         })
-        .then((resp) => {
-          dispatch(editUserPasswordAction(resp.data.data));
-
+        .then(() => {
           setTimeout(() => {
             dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
           }, 1000);

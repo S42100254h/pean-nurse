@@ -5,14 +5,12 @@ import {
   EDIT_USER_INFO,
   EDIT_USER_IMAGE,
   DELETE_USER_IMAGE,
-  EDIT_USER_PASSWORD,
   signUpAction,
   signInAction,
   signOutAction,
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
-  editUserPasswordAction,
 } from "../../../reducks/users/actions";
 
 describe("actions.jsのテスト", () => {
@@ -80,18 +78,6 @@ describe("actions.jsのテスト", () => {
     expect(action).toStrictEqual(
       {
         type: DELETE_USER_IMAGE
-      }
-    )
-  });
-  
-  it("editUserPasswordActionのテスト", () => {
-    const dummy = { current_password: "currentpassword", password: "newpassword", password_confirmation: "newpassword" };
-    const action = editUserPasswordAction(dummy);
-
-    expect(action).toStrictEqual(
-      {
-        type: EDIT_USER_PASSWORD,
-        payload: dummy
       }
     )
   });
