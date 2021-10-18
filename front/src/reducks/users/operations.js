@@ -152,7 +152,7 @@ export const deleteUser = () => {
             uid: uid,
           },
         })
-        .then((resp) => {
+        .then(() => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Delete user..."));
           dispatch(push("/"));
@@ -325,7 +325,11 @@ export const editPassword = (current_password, password, password_confirmation) 
           },
         })
         .then(() => {
+          dispatch(showLoadingAction("Update Password ..."));
+          dispatch(push("/dashboard"));
+
           setTimeout(() => {
+            dispatch(hideLoadingAction());
             dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
           }, 1000);
         })
