@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Api::V1::Auth::Passwords", type: :request do
   describe "POST /api/v1/auth/password" do
     subject { post(api_v1_user_password_path, params: params) }
-    
+
     context "send correct email" do
       let(:params) { { email: user.email } }
       let!(:user) { create(:user, email: "neko@gmail.com") }
@@ -34,7 +34,7 @@ RSpec.describe "Api::V1::Auth::Passwords", type: :request do
 
     let(:token) { user.send_reset_password_instructions }
     let!(:user) { create(:user) }
-    
+
     it "redirect url" do
       subject
       headers = response.headers
@@ -42,7 +42,7 @@ RSpec.describe "Api::V1::Auth::Passwords", type: :request do
       expect(response).to have_http_status(302)
     end
   end
-  
+
   describe "PUT /api/v1/auth/password" do
     subject { put(api_v1_user_password_path, headers: headers, params: params) }
 
@@ -55,7 +55,7 @@ RSpec.describe "Api::V1::Auth::Passwords", type: :request do
         subject
         # http status 200 だが、パスワードの変更ができない。修正が必要。
         # expect { subject }.to change { user.reload.password }.from(user.password).to(params[:password]) &
-                              # change { user.reload.password_confirmation }.from(user.password_confirmation).to(params[:password_confirmation])
+        # change { user.reload.password_confirmation }.from(user.password_confirmation).to(params[:password_confirmation])
         expect(response).to have_http_status(200)
       end
     end
