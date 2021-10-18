@@ -57,7 +57,7 @@ describe("actions.jsのテスト", () => {
         type: EDIT_USER_INFO,
         payload: dummy
       }
-    )
+    );
   });
   
   it("editUserImageActionのテスト", () => {
@@ -69,7 +69,7 @@ describe("actions.jsのテスト", () => {
         type: EDIT_USER_IMAGE,
         payload: dummy
       }
-    )
+    );
   });
 
   it("deleteUserImageActionのテスト", () => {
@@ -79,6 +79,6 @@ describe("actions.jsのテスト", () => {
       {
         type: DELETE_USER_IMAGE
       }
-    )
+    );
   });
 });
