@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { ClosableDialog } from "./index";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   root: {
     position: "fixed",
     bottom: "0",
@@ -24,12 +23,10 @@ const useStyles = makeStyles(() => ({
     fontSize: "0.8rem",
     marginLeft: "8px",
   },
-}));
+});
 
 const Contact = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
   const [open, setOpen] = useState(false);
   
   const handleDialogToggle = useCallback((event) => {

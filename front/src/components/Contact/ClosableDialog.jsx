@@ -8,7 +8,7 @@ import { getUserEmail, getUserName } from "../../reducks/users/selectors";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   container: {
     width: 1200,
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
     fontSize: "14px",
     cursor: "pointer",
   },
-}));
+});
 
 const ClosableDialog = (props) => {
   const classes = useStyles();

@@ -8,7 +8,7 @@ import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
 import { getSignedIn } from "../../reducks/users/selectors";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     zIndex: 9999,
@@ -51,7 +51,7 @@ const useStyles = makeStyles(() => ({
     height: "98%",
     marginLeft: "auto",
   },
-}));
+});
 
 const Header = () => {
   const classes = useStyles();

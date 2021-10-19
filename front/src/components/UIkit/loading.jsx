@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { getLoadingState, getLoadingText } from "../../reducks/loading/selectors";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   root: {
     alignItems: "center",
     background: "white",
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     zIndex: 10,
   },
-}));
+});
 
 const Loading = ({ children }) => {
   const classes = useStyles();

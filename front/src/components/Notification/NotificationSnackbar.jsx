@@ -11,7 +11,7 @@ const variantIcon = {
   error: ErrorIcon,
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   success: {
     backgroundColor: "#43A047",
     padding: "0 8px 0 8px",
@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
     fontSize: "0.8rem",
     fontWeight: "bold",
   },
-}));
+});
 
 const NotificationSnackbar = (props) => {
   const classes = useStyles();
