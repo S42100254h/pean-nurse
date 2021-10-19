@@ -11,6 +11,7 @@ const useStyeles = makeStyles((theme) => ({
     "&:hover": {
       color: theme.palette.basic.light,
       backgroundColor: theme.palette.secondary.dark,
+      transitionDuration: "0.5s",
     },
   },
 }));
