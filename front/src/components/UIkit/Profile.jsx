@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { getUserName, getUserImage } from "../../reducks/users/selectors";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   "profile": {
-    backgroundColor: "#FEEEED",
-    border: "1px solid #FEEEED",
+    backgroundColor: "#fff",
+    boxShadow: "0 0 1px grey",
     height: "150px",
     borderRadius: "4px",
   },
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     height: "80px",
     margin: "0 20px",
   },
-}));
+});
 
 const Profile = () => {
   const classes = useStyles();

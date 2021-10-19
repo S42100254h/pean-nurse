@@ -2,18 +2,18 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core";
 
-const useStyeles = makeStyles({
+const useStyeles = makeStyles((theme) => ({
   "button": {
-    backgroundColor: "#f6f8fa",
-    color: "#cf222e",
+    backgroundColor: theme.palette.basic.light,
+    color: theme.palette.secondary.dark,
     fontSize: 16,
     height: 48,
     "&:hover": {
-      color: "#f6f8fa",
-      backgroundColor: "#a40e26"
+      color: theme.palette.basic.light,
+      backgroundColor: theme.palette.secondary.dark,
     },
   },
-});
+}));
 
 const SecondaryButton = (props) => {
   const classes = useStyeles();

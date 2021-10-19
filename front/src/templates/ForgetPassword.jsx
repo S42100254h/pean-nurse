@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { TextInput, PrimaryButton } from "../components/UIkit";
 import { forgetPassword } from "../reducks/users/operations";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     margin: "0 auto",
     maxWidth: 400,
@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     width: "calc(100% - 2rem)",
   },
   headline: {
-    color: "#4dd0e1",
+    color: theme.palette.primary.main,
     fontSize: "1.563rem",
     margin: "0 auto 1rem auto",
     textAlign: "center",
@@ -22,9 +22,9 @@ const useStyles = makeStyles({
     padding: "10px",
     border: "1px solid #b0c4de",
     borderRadius: "4px",
-    backgroundColor: "#f0f8ff",
+    backgroundColor: theme.palette.primary.light,
   },
-});
+}));
 
 const ForgetPassword = () => {
   const classes = useStyles();

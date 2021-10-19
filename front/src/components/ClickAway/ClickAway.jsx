@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { ClickAwayListener } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   modal: {
     position: "fixed",
     top: "30vh",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     inset: "0",
     zIndex: "20000",
   },
-}));
+});
 
 const ClickAway = (props) => {
   const classes = useStyles();
