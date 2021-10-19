@@ -4,9 +4,8 @@ import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { getUserName, getUserImage } from "../../reducks/users/selectors";
-import { theme } from "../../assets/theme";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   "profile": {
     backgroundColor: "#fff",
     boxShadow: "0 0 1px grey",
@@ -31,7 +30,7 @@ const useStyles = makeStyles(() => ({
     height: "80px",
     margin: "0 20px",
   },
-}));
+});
 
 const Profile = () => {
   const classes = useStyles();
