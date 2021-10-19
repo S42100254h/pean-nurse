@@ -8,6 +8,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     fontSize: 16,
     height: 48,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+      transitionDuration: "0.5s",
+    },
   },
 }));
 
