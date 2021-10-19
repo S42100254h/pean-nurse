@@ -1,4 +1,5 @@
 import React from "react";
+import { CssBaseline } from "@material-ui/core";
 import Router from "./Router";
 import { makeStyles } from "@material-ui/core";
 import { Header } from "./components/Header";
@@ -18,14 +19,17 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <Loading>
-      <Header />
-      <main className={classes.main}>
-        <Notification />
-        <Router />
-      </main>
-      <Contact />
-    </Loading>
+    <>
+      <CssBaseline />
+      <Loading>
+        <Header />
+        <main className={classes.main}>
+          <Notification />
+          <Router />
+        </main>
+        <Contact />
+      </Loading>
+    </>
   );
 };
 
