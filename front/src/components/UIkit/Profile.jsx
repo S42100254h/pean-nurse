@@ -8,8 +8,8 @@ import { theme } from "../../assets/theme";
 
 const useStyles = makeStyles(() => ({
   "profile": {
-    backgroundColor: theme.palette.primary.light,
-    border: "1px solid #b0c4de",
+    backgroundColor: "#fff",
+    boxShadow: "0 0 1px grey",
     height: "150px",
     borderRadius: "4px",
   },

@@ -12,7 +12,7 @@ import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "40px",
     display: "block",
@@ -29,7 +29,8 @@ const useStyles = makeStyles(() => ({
     width: "200px",
     minheight: "100%",
     borderRadius: "4px",
-    backgroundColor: "#FEEEED",
+    backgroundColor: "#fff",
+    boxShadow: "0 0 1px grey",
     display: "grid",
     padding: "16px 0",
   },
@@ -47,7 +48,8 @@ const useStyles = makeStyles(() => ({
     width: "750px",
     height: "100%",
     borderRadius: "4px",
-    backgroundColor: "#FEEEED",
+    backgroundColor: "#fff",
+    boxShadow: "0 0 1px grey",
     textAlign: "center",
     padding: "45px 100px",
   },
