@@ -8,13 +8,13 @@ import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
 import { getSignedIn } from "../../reducks/users/selectors";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     zIndex: 9999,
   },
   menuBar: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff",
     height: "60px",
   },
   headerLogo: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     height: "100%",
     float: "left",
     "&:hover": {
-      borderBottom: "5px solid #F6ADC6",
+      borderBottom: "5px solid #55AFD6",
       transition: "0.05s",
     },
   },
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
     height: "98%",
     marginLeft: "auto",
   },
-});
+}));
 
 const Header = () => {
   const classes = useStyles();

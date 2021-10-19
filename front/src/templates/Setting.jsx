@@ -156,6 +156,7 @@ const Setting = () => {
         <div>
           <Tabs
             orientation="vertical"
+            indicatorColor="primary"
             value={value}
             onChange={handleChange}
             className={classes.tabList}
