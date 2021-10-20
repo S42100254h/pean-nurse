@@ -26,8 +26,8 @@ const useStyles = makeStyles({
     margin: "15px auto",
   },
   "avatar": {
-    width: "80px",
-    height: "80px",
+    width: "100px",
+    height: "100px",
     margin: "0 20px",
   },
 });
