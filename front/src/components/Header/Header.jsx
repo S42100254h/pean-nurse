@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     float: "left",
     "&:hover": {
       borderBottom: "5px solid #55AFD6",
-      transition: "0.05s",
+      transition: "0.075s",
     },
   },
   leftToolbar: {
