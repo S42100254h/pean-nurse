@@ -190,6 +190,7 @@ const Setting = () => {
               value={name}
               onChange={inputName}
             />
+            <div className="module-spacer--extra-extra-small" />
             <TextInput
               fullWidth={true}
               label={"メールアドレス"}
@@ -225,6 +226,7 @@ const Setting = () => {
               value={current_password}
               onChange={inputCurrentPassword}
             />
+            <div className="module-spacer--extra-extra-small" />
             <PasswordInput
               fullWidth={true}
               label={"新しいパスワード"}
@@ -234,6 +236,7 @@ const Setting = () => {
               value={password}
               onChange={inputPassword}
             />
+            <div className="module-spacer--extra-extra-small" />
             <PasswordInput
               fullWidth={true}
               label={"新しいパスワード（確認用）"}
