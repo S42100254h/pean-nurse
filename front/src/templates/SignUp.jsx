@@ -75,6 +75,7 @@ const SignUp = () => {
         onChange={inputName}
         onKeyDown={handleOnKeyDown}
       />
+      <div className="module-spacer--extra-extra-small" />
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -86,6 +87,7 @@ const SignUp = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
+      <div className="module-spacer--extra-extra-small" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード"}
@@ -96,6 +98,7 @@ const SignUp = () => {
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}
       />
+      <div className="module-spacer--extra-extra-small" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード（確認用）"}

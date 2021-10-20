@@ -66,6 +66,7 @@ const SignIn = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
+      <div className="module-spacer--extra-extra-small" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード"}
