@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 0 1px grey",
     display: "grid",
     padding: "16px 0",
+    "& .Mui-selected": {
+      backgroundColor: theme.palette.background.default,
+    },
   },
   tabListItem: {
     display: "block",
