@@ -72,7 +72,7 @@ const CourseList = () => {
         direction="row"
       >
         {courses.map((course) => (
-          <Grid item xs={6} sm={4} md={3} key={course.id}>
+          <Grid item xs={12} sm={4} md={3} key={course.id}>
             <Course
               title={course.title}
               image={course.image}
