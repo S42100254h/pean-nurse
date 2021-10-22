@@ -78,7 +78,7 @@ const Header = () => {
             <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("dashboard"))} />
             <div className={classes.leftToolbar}>
               <p className={classes.headerItem} onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</p>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/courses"))}>コース一覧</p>
+              <p className={classes.headerItem} onClick={() => dispatch(push("/courselist"))}>コース一覧</p>
               <p className={classes.headerItem} onClick={() => dispatch(push("/help"))}>ヘルプ</p>
             </div>
             <Box className={classes.iconButtons}>

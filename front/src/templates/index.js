@@ -1,3 +1,4 @@
+export { default as CourseList } from "./CourseList";
 export { default as Deactivate } from "./Deactivate";
 export { default as DashBoard } from "./DashBoard";
 export { default as ForgetPassword } from "./ForgetPassword";
