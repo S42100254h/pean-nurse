@@ -6,11 +6,13 @@ import { forgetPassword } from "../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    margin: "0 auto",
-    maxWidth: 400,
-    padding: "1rem",
+    margin: "30px auto",
+    maxWidth: 600,
+    padding: "35px 70px",
     height: "auto",
     width: "calc(100% - 2rem)",
+    backgroundColor: "#fff",
+    boxShadow: "0 0 1px grey",
   },
   headline: {
     color: theme.palette.primary.main,
