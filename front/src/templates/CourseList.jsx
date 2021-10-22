@@ -7,6 +7,7 @@ const useStyles = makeStyles({
   container: {
     maxWidth: 1080,
     margin: "0 auto",
+    padding: "0 30px",
   },
   headline: {
     fontSize: 18,
