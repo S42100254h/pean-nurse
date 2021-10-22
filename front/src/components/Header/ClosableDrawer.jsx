@@ -48,8 +48,8 @@ const ClosableDrawer = (props) => {
       func: selectMenu,
       label: "コース一覧",
       icon: <AppsIcon />,
-      id: "courses",
-      value: "/courses",
+      id: "courselist",
+      value: "/courselist",
     },
     {
       func: selectMenu,
