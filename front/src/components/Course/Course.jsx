@@ -4,11 +4,17 @@ import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
   container: {
-    width: 200,
-    height: 250,
+    width: 240,
+    height: 280,
     backgroundColor: "#fff",
     boxShadow: "0 0 1px grey",
     textAlign: "center",
+    transitionDuration: "0.3s",
+    "&:hover": {
+      transitionDuration: "0.5s",
+      boxShadow: "0 0 8px grey",
+      opacity: 0.75,
+    },
   },
   title: {
     fontSize: 20,
@@ -36,7 +42,7 @@ const Course = (props) => {
       className={classes.container}
     >
       <div className={classes.title}>{props.title}</div>
-      <img src={props.image} width="100px" height="100px" />
+      <img src={props.image} width="120px" height="120px" />
       <div className={classes.caption}>{props.caption}</div>
       <div>全{props.number}コース</div>
     </Box>
