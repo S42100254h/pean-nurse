@@ -21,9 +21,6 @@ const useStyles = makeStyles({
     height: "auto",
     padding: "10px 0px",
   },
-  image: {
-
-  },
   caption: {
     padding: "10px 0px",
     fontSize: 12,
