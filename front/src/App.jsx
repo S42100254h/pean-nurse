@@ -3,6 +3,7 @@ import { CssBaseline } from "@material-ui/core";
 import Router from "./Router";
 import { makeStyles } from "@material-ui/core";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { Contact } from "./components/Contact";
 import { Notification } from "./components/Notification";
 import { Loading } from "./components/UIkit";
@@ -28,6 +29,7 @@ const App = () => {
           <Router />
         </main>
         <Contact />
+        <Footer />
       </Loading>
     </>
   );
