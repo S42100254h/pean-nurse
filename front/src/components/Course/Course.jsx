@@ -4,7 +4,7 @@ import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
   container: {
-    maxWidth: 240,
+    maxWidth: 600,
     height: 280,
     backgroundColor: "#fff",
     boxShadow: "0 0 1px grey",
@@ -20,9 +20,6 @@ const useStyles = makeStyles({
     fontSize: 20,
     height: "auto",
     padding: "10px 0px",
-  },
-  image: {
-
   },
   caption: {
     padding: "10px 0px",
