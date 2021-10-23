@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   bottomContainer: {
     height: 430,
     textAlign: "center",
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: "#2B546A",
     color: "#fff",
   },
   bottomHeading: {
