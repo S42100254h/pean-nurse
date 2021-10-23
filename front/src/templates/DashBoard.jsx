@@ -1,5 +1,5 @@
 import React from "react";
-import { Profile } from "../components/UIkit";
+import { Profile } from "../components/Profile";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
