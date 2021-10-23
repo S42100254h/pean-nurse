@@ -14,6 +14,7 @@ const useStyles = makeStyles({
       transitionDuration: "0.5s",
       boxShadow: "0 0 8px grey",
       opacity: 0.75,
+      cursor: "pointer",
     },
   },
   title: {
