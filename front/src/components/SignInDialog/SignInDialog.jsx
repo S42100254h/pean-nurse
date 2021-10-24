@@ -58,7 +58,6 @@ const SignInDialog = (props) => {
       <Dialog
         open={props.open}
         onClose={(e) => props.onClose(e)}
-        ModalProps={{ keepMounted: true }}
         fullWidth={true}
         maxWidth={"sm"}
       >

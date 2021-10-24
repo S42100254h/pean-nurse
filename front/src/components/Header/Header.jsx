@@ -6,6 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
 import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
+import { SignInDialog } from "../SignInDialog";
 import { getSignedIn } from "../../reducks/users/selectors";
 
 const useStyles = makeStyles({
@@ -59,7 +60,8 @@ const Header = () => {
   const selector = useSelector((state) => state);
   const isSignedIn = getSignedIn(selector);
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false),
+    [isSignInOpen, setIsSignInOpen] = useState(false);
 
   const handleDrawerToggle = useCallback((event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -68,6 +70,15 @@ const Header = () => {
     setOpen(!open);
   },
   [setOpen, open]
+  );
+
+  const handleDialogToggle = useCallback((event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    setIsSignInOpen(!isSignInOpen);
+  },
+  [setIsSignInOpen, isSignInOpen]
   );
 
   return (
@@ -91,13 +102,14 @@ const Header = () => {
           <Toolbar className={classes.toolBar}>
             <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
             <div className={classes.rightToolbar}>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/signin"))}>サインイン</p>
+              <p className={classes.headerItem} onClick={handleDialogToggle}>サインイン</p>
               <p className={classes.headerItem} onClick={() => dispatch(push("/signup"))}>無料会員登録</p>
             </div>
           </Toolbar>
         )}
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
+      <SignInDialog open={isSignInOpen} onClose={handleDialogToggle} />
     </Box>
   );
 };
