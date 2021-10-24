@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PasswordInput, PrimaryButton, TextInput } from "../UIkit";
-import { signIn } from "../../reducks/users/operations";
+import { signUp } from "../../reducks/users/operations";
 import { push } from "connected-react-router";
 
 const useStyles = makeStyles({
@@ -71,7 +71,7 @@ const SignUpDialog = (props) => {
       >
         <DialogContent>
           <div className={classes.container}>
-            <h2 className={classes.headline}>サインイン</h2>
+            <h2 className={classes.headline}>アカウント登録</h2>
             <div className="module-spacer--extra-small" />
             <TextInput
               fullWidth={true}

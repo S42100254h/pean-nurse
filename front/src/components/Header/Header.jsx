@@ -7,6 +7,7 @@ import { push } from "connected-react-router";
 import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
+import { SignUpDialog } from "../SignUpDialog";
 import { getSignedIn } from "../../reducks/users/selectors";
 
 const useStyles = makeStyles({
@@ -61,7 +62,8 @@ const Header = () => {
   const isSignedIn = getSignedIn(selector);
 
   const [open, setOpen] = useState(false),
-    [isSignInOpen, setIsSignInOpen] = useState(false);
+    [isSignInOpen, setIsSignInOpen] = useState(false),
+    [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const handleDrawerToggle = useCallback((event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -72,13 +74,22 @@ const Header = () => {
   [setOpen, open]
   );
 
-  const handleDialogToggle = useCallback((event) => {
+  const handleSignInDialogToggle = useCallback((event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
     setIsSignInOpen(!isSignInOpen);
   },
   [setIsSignInOpen, isSignInOpen]
+  );
+
+  const handleSignUpDialogToggle = useCallback((event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    setIsSignUpOpen(!isSignUpOpen);
+  },
+  [setIsSignUpOpen, isSignUpOpen]
   );
 
   return (
@@ -102,14 +113,15 @@ const Header = () => {
           <Toolbar className={classes.toolBar}>
             <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
             <div className={classes.rightToolbar}>
-              <p className={classes.headerItem} onClick={handleDialogToggle}>サインイン</p>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/signup"))}>無料会員登録</p>
+              <p className={classes.headerItem} onClick={handleSignInDialogToggle}>サインイン</p>
+              <p className={classes.headerItem} onClick={handleSignUpDialogToggle}>無料会員登録</p>
             </div>
           </Toolbar>
         )}
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
-      <SignInDialog open={isSignInOpen} onClose={handleDialogToggle} />
+      <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} />
+      <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} />
     </Box>
   );
 };
