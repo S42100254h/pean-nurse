@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { PrimaryButton } from "../components/UIkit";
+import { SignUpDialog } from "../components/SignUpDialog";
 
 const useStyles = makeStyles((theme) => ({
   topContainer: {
@@ -74,6 +75,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleDialogToggle = () => setOpen(!open);
 
   return (
     <div>
@@ -83,7 +87,7 @@ const Home = () => {
         <PrimaryButton
           id={"button"}
           label={"今すぐ始める"}
-          onClick={() => console.log("click!")}
+          onClick={handleDialogToggle}
         />
       </div>   
       <div className={classes.middleContainer}>
@@ -114,9 +118,10 @@ const Home = () => {
         <PrimaryButton
           id={"button"}
           label={"無料会員登録"}
-          onClick={() => console.log("click!")}
+          onClick={handleDialogToggle}
         />
       </div>
+      <SignUpDialog open={open} onClose={handleDialogToggle} />
     </div>
   );
 };
