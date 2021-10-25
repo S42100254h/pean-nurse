@@ -65,32 +65,9 @@ const Header = () => {
     [isSignInOpen, setIsSignInOpen] = useState(false),
     [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
-  const handleDrawerToggle = useCallback((event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setOpen(!open);
-  },
-  [setOpen, open]
-  );
-
-  const handleSignInDialogToggle = useCallback((event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setIsSignInOpen(!isSignInOpen);
-  },
-  [setIsSignInOpen, isSignInOpen]
-  );
-
-  const handleSignUpDialogToggle = useCallback((event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setIsSignUpOpen(!isSignUpOpen);
-  },
-  [setIsSignUpOpen, isSignUpOpen]
-  );
+  const handleDrawerToggle = () => setOpen(!open);
+  const handleSignInDialogToggle = () => setIsSignInOpen(!isSignInOpen);
+  const handleSignUpDialogToggle = () => setIsSignUpOpen(!isSignUpOpen);
 
   return (
     <Box className={classes.root}>
@@ -104,7 +81,7 @@ const Header = () => {
               <p className={classes.headerItem} onClick={() => dispatch(push("/help"))}>ヘルプ</p>
             </div>
             <Box className={classes.iconButtons}>
-              <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
+              <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -120,8 +97,8 @@ const Header = () => {
         )}
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
-      <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} />
-      <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} />
+      <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
+      <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
     </Box>
   );
 };
