@@ -2,17 +2,17 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { ClickAwayListener } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   modal: {
     position: "fixed",
     top: "30vh",
     left: "55vw",
     width: "230px",
     height: "100px",
-    border: "2px solid #fff",
     textAlign: "left",
     marginLeft: "20px",
     borderRadius: "3px",
+    boxShadow: "0 0 4px grey",
     backgroundColor: "#fff",
     zIndex: "999",
   },
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     width: "100%",
     boxSizing: "border-box",
     "&:hover": {
-      backgroundColor: "#f8f8ff",
+      backgroundColor: theme.palette.basic.light,
     },
   },
   pop: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     inset: "0",
     zIndex: "20000",
   },
-});
+}));
 
 const ClickAway = (props) => {
   const classes = useStyles();
