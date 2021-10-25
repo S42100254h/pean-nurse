@@ -103,7 +103,10 @@ const SignInDialog = (props) => {
               パスワードを忘れた場合は
               <span
                 className={classes.link}
-                onClick={() => dispatch(push("/forgetpassword"))}
+                onClick={() => {
+                  dispatch(push("/forgetpassword"));
+                  props.onClick();
+                }}
               >
                 こちら
               </span>

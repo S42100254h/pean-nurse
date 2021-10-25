@@ -130,7 +130,14 @@ const SignUpDialog = (props) => {
               }}
             />
             <div className="module-spacer--extra-small" />
-            <p className={classes.link} onClick={() => dispatch(push("/signin"))}>アカウントをお持ちの方はこちら</p>
+            <p
+              className={classes.link}
+              onClick={() => {
+                dispatch(push("/signin"));
+                props.onClick();
+              }}>
+                アカウントをお持ちの方はこちら
+            </p>
           </div>
         </DialogContent>
       </Dialog>
