@@ -6,6 +6,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
 import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
+import { SignInDialog } from "../SignInDialog";
+import { SignUpDialog } from "../SignUpDialog";
 import { getSignedIn } from "../../reducks/users/selectors";
 
 const useStyles = makeStyles({
@@ -59,16 +61,13 @@ const Header = () => {
   const selector = useSelector((state) => state);
   const isSignedIn = getSignedIn(selector);
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false),
+    [isSignInOpen, setIsSignInOpen] = useState(false),
+    [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
-  const handleDrawerToggle = useCallback((event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setOpen(!open);
-  },
-  [setOpen, open]
-  );
+  const handleDrawerToggle = () => setOpen(!open);
+  const handleSignInDialogToggle = () => setIsSignInOpen(!isSignInOpen);
+  const handleSignUpDialogToggle = () => setIsSignUpOpen(!isSignUpOpen);
 
   return (
     <Box className={classes.root}>
@@ -82,7 +81,7 @@ const Header = () => {
               <p className={classes.headerItem} onClick={() => dispatch(push("/help"))}>ヘルプ</p>
             </div>
             <Box className={classes.iconButtons}>
-              <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
+              <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -91,13 +90,15 @@ const Header = () => {
           <Toolbar className={classes.toolBar}>
             <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
             <div className={classes.rightToolbar}>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/signin"))}>サインイン</p>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/signup"))}>無料会員登録</p>
+              <p className={classes.headerItem} onClick={handleSignInDialogToggle}>サインイン</p>
+              <p className={classes.headerItem} onClick={handleSignUpDialogToggle}>無料会員登録</p>
             </div>
           </Toolbar>
         )}
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
+      <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
+      <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
     </Box>
   );
 };
