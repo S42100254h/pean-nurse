@@ -121,7 +121,7 @@ const Home = () => {
           onClick={handleDialogToggle}
         />
       </div>
-      <SignUpDialog open={open} onClose={handleDialogToggle} />
+      <SignUpDialog open={open} onClose={handleDialogToggle} onClick={handleDialogToggle} />
     </div>
   );
 };

@@ -50,6 +50,7 @@ const SignInDialog = (props) => {
   const handleOnKeyDown = (event) => {
     if (event.keyCode === 13) {
       dispatch(signIn(email, password));
+      props.onClick();
     }
   };
 
@@ -94,6 +95,7 @@ const SignInDialog = (props) => {
               disabled={!email || !password}
               onClick={() => {
                 dispatch(signIn(email, password));
+                props.onClick();
               }}
             />
             <div className="module-spacer--extra-small" />
