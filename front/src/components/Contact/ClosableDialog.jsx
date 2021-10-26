@@ -94,7 +94,7 @@ const ClosableDialog = (props) => {
   );
 
   const handleSendMail = (email, select, text, image, name) => {
-    const apiEndpoint = "http://localhost:4000/api/v1/inquiries/create";
+    const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
 
     if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
