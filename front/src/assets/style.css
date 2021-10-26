@@ -173,4 +173,14 @@
   .module-spacer--medium {
       height: 48px
   }
-} 
+}
+
+/*********** react-transition-group ***********/
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 330ms ease-in;
+}
