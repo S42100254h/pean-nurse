@@ -48,3 +48,41 @@ export const adminSignIn = (email, password) => {
       });
   };
 };
+
+export const adminSignOut = () => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = process.env.REACT_APP_API_URL + "admin/sign_out";
+
+      axios
+        .delete(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then(() => {
+          dispatch(adminSignOutAction());
+          dispatch(showLoadingAction("Sign out..."));
+          dispatch(push("/adminsignin"));
+          localStorage.clear();
+          
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
+          }, 1000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
+          }, 400);
+        });
+    } else {
+      dispatch(push("/adminsignin"));
+    }
+  }; 
+};
