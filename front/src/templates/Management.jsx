@@ -1,9 +1,9 @@
 import React from "react";
 
-const ManagementBoard = () => {
+const Management = () => {
   return (
     <div>management board</div>
   );
 };
 
-export default ManagementBoard;
+export default Management;
