@@ -419,3 +419,6 @@ Performance/CollectionLiteralInLoop:
 
 Layout/LineLength:
   Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: false
