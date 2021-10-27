@@ -86,3 +86,38 @@ export const adminSignOut = () => {
     }
   }; 
 };
+
+export const listenAdminState = () => {
+  return async (dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = process.env.REACT_APP_API_URL + "admins/currentadmin";
+
+      axios
+        .get(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((response) => {
+          const adminData = response.data;
+
+          dispatch(adminSignInAction({
+            isSignedIn: true,
+            uid: adminData.uid,
+            name: adminData.name,
+            email: adminData.email,
+          }));
+        })
+        .catch(() => {
+          alert("サインインに失敗しました。");
+        });
+    } else {
+      dispatch(push("/"));
+    }
+  };
+};
