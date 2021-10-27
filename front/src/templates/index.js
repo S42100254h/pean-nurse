@@ -5,6 +5,7 @@ export { default as DashBoard } from "./DashBoard";
 export { default as ForgetPassword } from "./ForgetPassword";
 export { default as ForgetPasswordSent } from "./ForgetPasswordSent";
 export { default as Home } from "./Home";
+export { default as ManagementBoard } from "./ManagementBoard";
 export { default as PageNotFound } from "./PageNotFound";
 export { default as ResetPassword } from "./ResetPassword";
 export { default as Setting } from "./Setting";
