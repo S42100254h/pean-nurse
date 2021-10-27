@@ -1,4 +1,10 @@
 const initialState = {
+  admins: {
+    isSignedIn: false,
+    uid: "",
+    name: "",
+    email: "",
+  },
   loading: {
     state: false,
     text: "",
