@@ -15,7 +15,7 @@ describe("actions.jsのテスト", () => {
         type: ADMIN_SIGN_IN,
         payload: dummy,
       }
-    )
+    );
   });
 
   it("adminSignOutActionのテスト", () => {
@@ -25,6 +25,6 @@ describe("actions.jsのテスト", () => {
       {
         type: ADMIN_SIGN_OUT,
       }
-    )
+    );
   });
 });
