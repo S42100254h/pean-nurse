@@ -82,7 +82,7 @@ export const adminSignOut = () => {
           }, 400);
         });
     } else {
-      dispatch(push("/adminsignin"));
+      dispatch(push("/"));
     }
   }; 
 };
