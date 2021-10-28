@@ -14,7 +14,7 @@ const NoAdminRoute = ({ ...props }) => {
     if (!isSignedIn) {
       dispatch(redirectToManagement());
     }
-  }, [])
+  }, []);
   
   if (!isSignedIn) {
     return <Route { ...props } />;
