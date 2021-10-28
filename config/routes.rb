@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         registrations: "api/v1/auth/registrations",
       }
       get "users/currentuser"
+      get "admins/currentadmin"
       mount_devise_token_auth_for "Admin", at: "admin"
     end
   end
