@@ -17,6 +17,7 @@ import {
   SignIn
 } from "./templates";
 import AdminRoute from "./AdminRoute";
+import NoAdminRoute from "./NoAdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import UnAuthRoute from "./UnAuthRoute";
 
@@ -25,8 +26,8 @@ const Router = withRouter(({ location }) =>
     <CSSTransition key={location.key} classNames="item" timeout={1000} exit={false} >
       <Switch>
         <AdminRoute exact path={"/management"} component={Management} />
+        <NoAdminRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"(/)?"} component={Home} />
-        <UnAuthRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"/forgetpassword"} component={ForgetPassword} />
         <UnAuthRoute exact path={"/forgetpassword/sent"} component={ForgetPasswordSent} />
         <UnAuthRoute exact path={"/resetpassword"} component={ResetPassword} />
