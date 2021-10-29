@@ -6,7 +6,7 @@ export const AdminsReducer = (state = initialState.admins, action) => {
   case Actions.ADMIN_SIGN_IN:
     return {
       ...state,
-      isSignedIn: true,
+      isAdminSignedIn: true,
       uid: action.payload.uid,
       name: action.payload.name,
       email: action.payload.email,

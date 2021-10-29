@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
@@ -9,6 +9,7 @@ import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
 import { SignUpDialog } from "../SignUpDialog";
 import { getSignedIn } from "../../reducks/users/selectors";
+import { getAdminSignedIn } from "../../reducks/admins/selectors";
 
 const useStyles = makeStyles({
   root: {
@@ -60,6 +61,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const isSignedIn = getSignedIn(selector);
+  const isAdminSignedIn = getAdminSignedIn(selector);
 
   const [open, setOpen] = useState(false),
     [isSignInOpen, setIsSignInOpen] = useState(false),
@@ -71,34 +73,51 @@ const Header = () => {
 
   return (
     <Box className={classes.root}>
-      <AppBar position="fixed" className={classes.menuBar}>
-        {isSignedIn ? (
-          <Toolbar className={classes.toolBar}>
-            <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("dashboard"))} />
-            <div className={classes.leftToolbar}>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</p>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/courselist"))}>コース一覧</p>
-              <p className={classes.headerItem} onClick={() => dispatch(push("/help"))}>ヘルプ</p>
-            </div>
-            <Box className={classes.iconButtons}>
-              <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
-                <MenuIcon />
-              </IconButton>
-            </Box>
-          </Toolbar>
-        ) : (
-          <Toolbar className={classes.toolBar}>
-            <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
-            <div className={classes.rightToolbar}>
-              <p className={classes.headerItem} onClick={handleSignInDialogToggle}>サインイン</p>
-              <p className={classes.headerItem} onClick={handleSignUpDialogToggle}>無料会員登録</p>
-            </div>
-          </Toolbar>
-        )}
-      </AppBar>
-      <ClosableDrawer open={open} onClose={handleDrawerToggle} />
-      <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
-      <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
+      {isAdminSignedIn ? (
+        <Box>
+          <AppBar position="fixed" className={classes.menuBar}>
+            <Toolbar className={classes.toolBar}>
+              <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/management"))} />
+              <div className={classes.leftToolbar}>
+                <p className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</p>
+                <p className={classes.headerItem} onClick={() => dispatch(push("/users"))}>ユーザー管理</p>
+                <p className={classes.headerItem} onClick={() => dispatch(push("/quizzes"))}>クイズ管理</p>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </Box>
+      ) : (
+        <Box>
+          <AppBar position="fixed" className={classes.menuBar}>
+            {isSignedIn ? (
+              <Toolbar className={classes.toolBar}>
+                <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/dashboard"))} />
+                <div className={classes.leftToolbar}>
+                  <p className={classes.headerItem} onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</p>
+                  <p className={classes.headerItem} onClick={() => dispatch(push("/courselist"))}>コース一覧</p>
+                  <p className={classes.headerItem} onClick={() => dispatch(push("/help"))}>ヘルプ</p>
+                </div>
+                <Box className={classes.iconButtons}>
+                  <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
+                    <MenuIcon />
+                  </IconButton>
+                </Box>
+              </Toolbar>
+            ) : (
+              <Toolbar className={classes.toolBar}>
+                <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
+                <div className={classes.rightToolbar}>
+                  <p className={classes.headerItem} onClick={handleSignInDialogToggle}>サインイン</p>
+                  <p className={classes.headerItem} onClick={handleSignUpDialogToggle}>無料会員登録</p>
+                </div>
+              </Toolbar>
+            )}
+          </AppBar>
+          <ClosableDrawer open={open} onClose={handleDrawerToggle} />
+          <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
+          <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
+        </Box>
+      )}
     </Box>
   );
 };

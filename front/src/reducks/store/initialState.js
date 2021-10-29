@@ -1,6 +1,6 @@
 const initialState = {
   admins: {
-    isSignedIn: false,
+    isAdminSignedIn: false,
     uid: "",
     name: "",
     email: "",
