@@ -117,8 +117,8 @@ export const signOut = () => {
         .then(() => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
-          dispatch(push("/"));
           localStorage.clear();
+          dispatch(push("/"));
           
           setTimeout(() => {
             dispatch(hideLoadingAction());
