@@ -68,8 +68,8 @@ export const adminSignOut = () => {
         .then(() => {
           dispatch(adminSignOutAction());
           dispatch(showLoadingAction("Sign out..."));
-          dispatch(push("/adminsignin"));
           localStorage.clear();
+          dispatch(push("/adminsignin"));
           
           setTimeout(() => {
             dispatch(hideLoadingAction());
