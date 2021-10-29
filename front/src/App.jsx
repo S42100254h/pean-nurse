@@ -13,6 +13,7 @@ import "./assets/reset.css";
 const useStyles = makeStyles(() => ({
   main: {
     padding: "70px 0 60px 0",
+    minHeight: "calc(100vh - 300px)",
   },
 }));
 

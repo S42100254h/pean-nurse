@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     height: 300,
     backgroundColor: theme.palette.basic.dark,
     boxShadow: "0 0 1px grey",
+    position: "relative",
   },
   textleftContainer: {
     padding: "50px 40px",

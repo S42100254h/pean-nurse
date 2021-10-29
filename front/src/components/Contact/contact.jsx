@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     backgroundColor: "#F08080",
     borderRadius: "2px",
     cursor: "pointer",
+    zIndex: 999,
   },
   icon: {
     float: "left",
