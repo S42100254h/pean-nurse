@@ -107,7 +107,7 @@ export const listenAdminState = () => {
           const adminData = response.data;
 
           dispatch(adminSignInAction({
-            isSignedIn: true,
+            isAdminSignedIn: true,
             uid: adminData.uid,
             name: adminData.name,
             email: adminData.email,

@@ -2,9 +2,9 @@ import { createSelector } from "reselect";
 
 const adminsSelector = (state) => state.admins;
 
-export const getSignedIn = createSelector(
+export const getAdminSignedIn = createSelector(
   [adminsSelector],
-  state => state.isSignedIn
+  state => state.isAdminSignedIn
 );
 
 export const getName = createSelector(
