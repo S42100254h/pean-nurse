@@ -8,6 +8,7 @@ import logo from "../../assets/img/icons/logo.png";
 import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
 import { SignUpDialog } from "../SignUpDialog";
+import { DropDown } from "../UIkit";
 import { getSignedIn } from "../../reducks/users/selectors";
 import { getAdminSignedIn } from "../../reducks/admins/selectors";
 
@@ -65,7 +66,49 @@ const Header = () => {
 
   const [open, setOpen] = useState(false),
     [isSignInOpen, setIsSignInOpen] = useState(false),
-    [isSignUpOpen, setIsSignUpOpen] = useState(false);
+    [isSignUpOpen, setIsSignUpOpen] = useState(false),
+    [anchorEl, setAnchorEl] = useState(null),
+    [menus, setMenus] = useState([]);
+  
+  const dropDownOpen = Boolean(anchorEl);
+  
+  const userMenu = [
+    {
+      label: "ユーザー一覧",
+      id: "userlist",
+      value: "/user/list",
+    },
+    {
+      label: "ユーザー詳細",
+      id: "userdetail",
+      value: "/user/detail",
+    },
+  ];
+  
+  const quizMenu = [
+    {
+      label: "クイズ一覧",
+      id: "quizlist",
+      value: "/quiz/list"
+    },
+    {
+      label: "クイズ詳細",
+      id: "quizdetail",
+      value: "/quiz/detail",
+    },
+    {
+      label: "クイズ作成",
+      id: "createquiz",
+      value: "/quiz/create",
+    },
+  ];
+
+  const handleClick = (event, menus) => {
+    setAnchorEl(event.currentTarget);
+    setMenus(menus);
+  };
+
+  const handleClose = () => setAnchorEl(null);
 
   const handleDrawerToggle = () => setOpen(!open);
   const handleSignInDialogToggle = () => setIsSignInOpen(!isSignInOpen);
@@ -79,11 +122,17 @@ const Header = () => {
             <Toolbar className={classes.toolBar}>
               <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/management"))} />
               <div className={classes.leftToolbar}>
-                <p className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</p>
-                <p className={classes.headerItem} onClick={() => dispatch(push("/users"))}>ユーザー管理</p>
-                <p className={classes.headerItem} onClick={() => dispatch(push("/quizzes"))}>クイズ管理</p>
+                <div className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</div>
+                <div className={classes.headerItem} onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</div>
+                <div className={classes.headerItem} onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</div>
               </div>
             </Toolbar>
+            <DropDown
+              anchorEl={anchorEl}
+              open={dropDownOpen}
+              onClose={handleClose}
+              menus={menus}
+            />
           </AppBar>
         </Box>
       ) : (
