@@ -17,7 +17,7 @@ executors:
   node:
     docker:
       - image: circleci/node:12
-    working_directory: ~/nurse-step/front
+    working_directory: ~/nurse-step
 
 commands:
   install_bundler:
@@ -133,48 +133,49 @@ jobs:
     steps:
     - checkout
     - save_cache:
-        key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+        key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
         paths:
-            - ~/nurse-step/front
+            - ~/nurse-step
 
   npm_dependencies:
     executor: node
     steps:
       - restore_cache: # ソースコードの復元
-          key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+          key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # node_modulesを復元
-          key: v4-dependencies-{{ checksum "package-lock.json" }}
+          key: v7-dependencies-{{ checksum "front/package.json" }}
       - run:
           name: npm install dependencies
+          working_directory: ~/nurse-step/front
           command: npm install
       - save_cache:
-          key: v4-dependencies-{{ checksum "package-lock.json" }}
+          key: v7-dependencies-{{ checksum "front/package.json" }}
           paths:
-            - ~/nurse-step/front/.node_modules
+            - ~/nurse-step/front/node_modules
 
   jest:
     executor: node
     steps:
       - restore_cache: # ソースコードの復元
-          key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+          key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # node_modulesを復元
-          key: v4-dependencies-{{ checksum "front/package-lock.json" }}            
+          key: v7-dependencies-{{ checksum "front/package.json" }}            
       - run:
           name: execute test
-          working_directory: ~/nurse-step/front
           command: npm test
+          working_directory: ~/nurse-step/front
 
   eslint:
     executor: node
     steps:
       - restore_cache: # ソースコードの復元
-          key: v3-nurse-step-{{ .Environment.CIRCLE_SHA2 }}
+          key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # node_modulesを復元
-          key: v4-dependencies-{{ checksum "front/package-lock.json" }}
+          key: v7-dependencies-{{ checksum "front/package.json" }}
       - run:
           name: execute eslint
+          command: npm run lint
           working_directory: ~/nurse-step/front
-          command: npm test
 
 workflows:
   build_backend:
