@@ -422,3 +422,7 @@ Layout/LineLength:
 
 Rails/BulkChangeTable:
   Enabled: false
+
+Rails/ReversibleMigration:
+  Enabled: false
+  
