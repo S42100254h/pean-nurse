@@ -9,7 +9,7 @@ RSpec.describe Choice, type: :model do
       end
     end
   end
-  
+
   describe "exception scenario" do
     context "choice was not entered" do
       let(:choice) { build(:choice, choice: nil) }
