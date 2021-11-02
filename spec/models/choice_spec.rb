@@ -9,4 +9,14 @@ RSpec.describe Choice, type: :model do
       end
     end
   end
+  
+  describe "exception scenario" do
+    context "choice was not entered" do
+      let(:choice) { build(:choice, choice: nil) }
+      it "error occurs" do
+        choice.valid?
+        expect(choice.errors.messages[:choice]).to include "can't be blank"
+      end
+    end
+  end
 end
