@@ -10,7 +10,7 @@ describe("AdminsReducerのテスト", () => {
     const action = adminSignInAction(dummy);
     const newState = AdminsReducer(init, action);
     
-    expect(newState.isSignedIn).toStrictEqual(true);
+    expect(newState.isAdminSignedIn).toStrictEqual(true);
     expect(newState.email).toStrictEqual(dummy.email);
   });
 
@@ -18,7 +18,7 @@ describe("AdminsReducerのテスト", () => {
     const action = adminSignOutAction();
     const newState = AdminsReducer(init, action);
 
-    expect(newState.isSignedIn).toStrictEqual(false);
+    expect(newState.isAdminSignedIn).toStrictEqual(false);
     expect(newState.uid).toStrictEqual("");
     expect(newState.name).toStrictEqual("");
     expect(newState.email).toStrictEqual("");
