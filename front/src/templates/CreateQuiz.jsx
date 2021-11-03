@@ -1,23 +1,27 @@
 import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { TextInput, PrimaryButton } from "../components/UIkit";
+import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import { ConfirmDialog } from "../components/ConfirmDialog";
+import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles({
-  "container": {
+  container: {
     margin: "30px auto",
-    maxWidth: 600,
+    maxWidth: 800,
     padding: "35px 70px",
     height: "auto",
     width: "calc(100% - 2rem)",
     backgroundColor: "#fff",
     boxShadow: "0 0 1px grey",
   },
-  "headline": {
+  headline: {
     color: "#4dd0e1",
     fontSize: "1.563rem",
     margin: "0 auto 1rem auto",
     textAlign: "center",
+  },
+  select: {
+    fontSize: 12,
   },
 });
 
@@ -26,10 +30,14 @@ const CreateQuiz = () => {
   
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
-    [choice2, setChoice2] =useState(""),
-    [choice3, setChoice3] =useState(""),
-    [choice4, setChoice4] =useState(""),
-    [open, setOpen] =useState(false);
+    [choice2, setChoice2] = useState(""),
+    [choice3, setChoice3] = useState(""),
+    [choice4, setChoice4] = useState(""),
+    [select1, setSelect1] = useState(""),
+    [select2, setSelect2] = useState(""),
+    [select3, setSelect3] = useState(""),
+    [select4, setSelect4] = useState(""),
+    [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
     setQuiz(event.target.value);
@@ -52,7 +60,28 @@ const CreateQuiz = () => {
     setChoice4(event.target.value);
   }, [setChoice4]);
   
+  const inputSelect1 = useCallback((event) => {
+    setSelect1(event.target.value);
+  }, [setSelect1]);
+
+  const inputSelect2 = useCallback((event) => {
+    setSelect2(event.target.value);
+  }, [setSelect2]);
+
+  const inputSelect3 = useCallback((event) => {
+    setSelect3(event.target.value);
+  }, [setSelect3]);
+
+  const inputSelect4 = useCallback((event) => {
+    setSelect4(event.target.value);
+  }, [setSelect4]);
+
   const handleDialogToggle = () => setOpen(!open);
+
+  const menus = [
+    { label: "wrong", value: "wrong", id: "wrong" },
+    { label: "right", value: "right", id: "right" },
+  ];
 
   return (
     <div className={classes.container}>
@@ -76,9 +105,23 @@ const CreateQuiz = () => {
         required={true}
         row={1}
         value={choice1}
-        type={""}
+        type={"text"}
         onChange={inputChoice1}
       />
+      <SelectBox
+        displayEmpty={true}
+        value={select1}
+        variant="standard"
+        onChange={inputSelect1}
+        className={classes.select}
+      >
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
+      </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
         fullWidth={true}
@@ -87,31 +130,68 @@ const CreateQuiz = () => {
         required={true}
         row={1}
         value={choice2}
-        type={""}
+        type={"text"}
         onChange={inputChoice2}
       />
+      <SelectBox
+        displayEmpty={true}
+        value={select2}
+        variant="standard"
+        onChange={inputSelect2}
+      >
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
+      </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
         fullWidth={true}
         label={"選択肢３"}
         multiline={true}
-        required={true}
         row={1}
         value={choice3}
-        type={""}
+        type={"text"}
         onChange={inputChoice3}
       />
+      <SelectBox
+        displayEmpty={true}
+        value={select3}
+        variant="standard"
+        onChange={inputSelect3}
+      >
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
+      </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
         fullWidth={true}
         label={"選択肢４"}
         multiline={true}
-        required={true}
         row={1}
         value={choice4}
-        type={""}
+        type={"text"}
         onChange={inputChoice4}
       />
+      <SelectBox
+        displayEmpty={true}
+        value={select4}
+        variant="standard"
+        onChange={inputSelect4}
+      >
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
+      </SelectBox>
       <div className="module-spacer--medium" />
       <PrimaryButton
         label={"クイズを作成する"}
@@ -125,6 +205,10 @@ const CreateQuiz = () => {
         choice2={choice2}
         choice3={choice3}
         choice4={choice4}
+        select1={select1}
+        select2={select2}
+        select3={select3}
+        select4={select4}
         open={open}
         onClose={handleDialogToggle}
       />
