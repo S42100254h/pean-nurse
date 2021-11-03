@@ -7,6 +7,8 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   def show
+    quiz = Quiz.find(params[:id])
+    render json: quiz
   end
 
   def create
