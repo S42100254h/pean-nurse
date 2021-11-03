@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'quizzes/create'
-      get 'quizzes/indes'
-      get 'quizzes/show'
-      get 'quizzes/update'
+      resources :quizzes
     end
   end
   namespace :api do
