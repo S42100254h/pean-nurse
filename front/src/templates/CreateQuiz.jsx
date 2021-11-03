@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { TextInput, PrimaryButton } from "../components/UIkit";
+import { ConfirmDialog } from "../components/ConfirmDialog";
 
 const useStyles = makeStyles({
   "container": {
@@ -117,6 +118,15 @@ const CreateQuiz = () => {
         fullWidth={true}
         disabled={!quiz || !choice1 || !choice2}
         onClick={() => handleDialogToggle()}
+      />
+      <ConfirmDialog
+        quiz={quiz}
+        choice1={choice1}
+        choice2={choice2}
+        choice3={choice3}
+        choice4={choice4}
+        open={open}
+        onClose={handleDialogToggle}
       />
     </div>
   );
