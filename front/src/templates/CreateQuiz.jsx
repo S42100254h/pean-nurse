@@ -76,7 +76,23 @@ const CreateQuiz = () => {
     setSelect4(event.target.value);
   }, [setSelect4]);
 
-  const handleDialogToggle = () => setOpen(!open);
+  const handleDialogClose = () => setOpen(false);
+  
+  const handleDialogOpen = () => {
+    if (![select1, select2, select3, select4].includes("right")) {
+      alert("少なくとも１つは正しい選択肢が必要です。");
+      return;
+    }
+    if (![select1, select2, select3, select4].includes("wrong")) {
+      alert("少なくとも１つは誤った選択肢が必要です。");
+      return;
+    }
+    if (choice1 && !select1 || choice2 && !select2 || choice3 && !select3 || choice4 && !select4) {
+      alert("「right」または「wrong」を選択してください。");
+      return;
+    }
+    setOpen(true);
+  };
 
   const menus = [
     { label: "wrong", value: "wrong", id: "wrong" },
@@ -197,7 +213,7 @@ const CreateQuiz = () => {
         label={"クイズを作成する"}
         fullWidth={true}
         disabled={!quiz || !choice1 || !choice2}
-        onClick={() => handleDialogToggle()}
+        onClick={() => handleDialogOpen()}
       />
       <ConfirmDialog
         quiz={quiz}
@@ -210,7 +226,7 @@ const CreateQuiz = () => {
         select3={select3}
         select4={select4}
         open={open}
-        onClose={handleDialogToggle}
+        onClose={handleDialogClose}
       />
     </div>
   );
