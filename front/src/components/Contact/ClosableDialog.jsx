@@ -177,6 +177,7 @@ const ClosableDialog = (props) => {
                 value={select}
                 variant="outlined"
                 onChange={inputSelect}
+                fullWidth={true}
               >
                 <MenuItem value="">- 選択してください -</MenuItem>
                 {menus.map((menu) => (
