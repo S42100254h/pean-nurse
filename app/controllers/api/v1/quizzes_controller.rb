@@ -1,4 +1,6 @@
-class Api::V1::QuizzesController < ApplicationController
+class Api::V1::QuizzesController < Api::V1::ApiController
+  before_action :authenticate_admin!, only: [:create, :update, :destroy]
+
   def index
   end
 
@@ -6,6 +8,8 @@ class Api::V1::QuizzesController < ApplicationController
   end
 
   def create
+    quiz = Quiz.create!(quiz_params)
+    render json: quiz
   end
 
 
@@ -15,4 +19,9 @@ class Api::V1::QuizzesController < ApplicationController
   def destroy
   end
 
+  private
+
+    def quiz_params
+      params.require(:quiz).permit(:title)
+    end
 end
