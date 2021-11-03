@@ -34,7 +34,6 @@ const ConfirmDialog = (props) => {
       <Dialog
         open={props.open}
         onClose={(e) => props.onClose(e)}
-        ModalProps={{ keepMounted: true }}
         fullWidth={false}
         maxWidth={"md"}
       >
@@ -49,21 +48,25 @@ const ConfirmDialog = (props) => {
             <div className={classes.textContainer}>
               <p className={classes.caption}>選択肢１</p>
               <div>{props.choice1}</div>
+              <div>-{props.select1}-</div>
             </div>
             <div className={classes.textContainer}>
               <p className={classes.caption}>選択肢２</p>
               <div>{props.choice2}</div>
+              <div>-{props.select2}-</div>
             </div>
             {props.choice3 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢３</p>
                 <div>{props.choice3}</div>
+                <div>-{props.select3}-</div>
               </div>
             )}
             {props.choice4 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢４</p>
                 <div>{props.choice4}</div>
+                <div>-{props.select4}-</div>
               </div>
             )}
             <div className="module-spacer--extra-extra-small" />
