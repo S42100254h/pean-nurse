@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import {
   AdminSignIn,
   CourseList,
+  CreateQuiz,
   Deactivate,
   DashBoard,
   ForgetPassword,
@@ -26,6 +27,7 @@ const Router = withRouter(({ location }) =>
     <CSSTransition key={location.key} classNames="item" timeout={1000} exit={false} >
       <Switch>
         <AdminRoute exact path={"/management"} component={Management} />
+        <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
         <NoAdminRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"(/)?"} component={Home} />
         <UnAuthRoute exact path={"/forgetpassword"} component={ForgetPassword} />

@@ -1,5 +1,6 @@
 export { default as AdminSignIn } from "./AdminSignIn";
 export { default as CourseList } from "./CourseList";
+export { default as CreateQuiz } from "./CreateQuiz";
 export { default as Deactivate } from "./Deactivate";
 export { default as DashBoard } from "./DashBoard";
 export { default as ForgetPassword } from "./ForgetPassword";
