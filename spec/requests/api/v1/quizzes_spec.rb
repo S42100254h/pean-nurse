@@ -57,4 +57,20 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       end
     end
   end
+  
+  describe "PATCH/api/v1/quizzes/:id" do
+    subject { patch(api_v1_quiz_path(quiz_id), params: params, headers: headers) }
+    
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:current_admin) { create(:admin) }
+    let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current } } }
+    let(:quiz_id) { quiz.id }
+    let(:quiz) { create(:quiz) }
+    
+    it "quiz is updated" do
+      expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
+                            not_change { quiz.reload.created_at }
+      expect(response).to have_http_status(200)
+    end
+  end
 end
