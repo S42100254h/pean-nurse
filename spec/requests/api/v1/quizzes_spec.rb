@@ -73,4 +73,18 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+  
+  describe "DELETE/api/v1/quizzes/:id" do
+    subject { delete(api_v1_quiz_path(quiz_id), headers: headers) }
+    
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:current_admin) { create(:admin) }
+    let(:quiz_id) { quiz.id }
+    let!(:quiz) { create(:quiz) }
+    
+    it "quiz is deleted" do
+      expect { subject }.to change { Quiz.count }.by(-1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end

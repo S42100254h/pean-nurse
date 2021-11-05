@@ -24,6 +24,8 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   def destroy
+    @quiz.destroy!
+    render json: @quiz
   end
 
   private
