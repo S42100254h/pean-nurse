@@ -27,7 +27,7 @@ RSpec.describe "Api::V1::Choices", type: :request do
       create_list(:choice, 4, quiz_id: 1)
       create_list(:choice, 8, quiz_id: 2)
     end
-    
+
     let(:quiz_id) { 1 }
 
     it "get list of choices which is related to quiz_id" do
@@ -55,10 +55,10 @@ RSpec.describe "Api::V1::Choices", type: :request do
         expect(response).to have_http_status(200)
       end
     end
-    
+
     context "specified id does not exist" do
       let(:choice_id) { 99999 }
-      
+
       it "can't get detail of choice" do
         expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end

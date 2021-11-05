@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Choices", type: :request do
-
   describe "GET /show" do
     it "returns http success" do
       get "/api/v1/choices/show"
@@ -36,5 +35,4 @@ RSpec.describe "Api::V1::Choices", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
-
 end

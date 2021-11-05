@@ -3,7 +3,7 @@ class Api::V1::ChoicesController < Api::V1::ApiController
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
-    choices = Choice.where("quiz_id": params[:quiz_id])
+    choices = Choice.where(quiz_id: params[:quiz_id])
     render json: choices
   end
 
