@@ -17,7 +17,6 @@ class Api::V1::QuizzesController < Api::V1::ApiController
     render json: quiz
   end
 
-
   def update
     @quiz.update!(quiz_params)
     render json: @quiz
@@ -29,7 +28,7 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   private
-  
+
     def set_quiz
       @quiz = Quiz.find(params[:id])
     end
