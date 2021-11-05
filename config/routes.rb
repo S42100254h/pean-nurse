@@ -1,32 +1,17 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      get 'choices/show'
-      get 'choices/index'
-      get 'choices/create'
-      get 'choices/update'
-      get 'choices/destroy'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      resources :quizzes
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      post "inquiries/create"
-    end
-  end
   namespace "api", format: "json" do
     namespace "v1" do
       mount_devise_token_auth_for "User", at: "auth", controllers: {
 
         registrations: "api/v1/auth/registrations",
       }
+      mount_devise_token_auth_for "Admin", at: "admin"
       get "users/currentuser"
       get "admins/currentadmin"
-      mount_devise_token_auth_for "Admin", at: "admin"
+      resources :quizzes
+      resources :choices, only: [:show, :create, :update, :destroy]
+      get "choices/index/:quiz_id", to: "choices#index"
+      post "inquiries/create"
     end
   end
 
