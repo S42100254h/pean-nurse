@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get 'choices/show'
+      get 'choices/index'
+      get 'choices/create'
+      get 'choices/update'
+      get 'choices/destroy'
+    end
+  end
+  namespace :api do
+    namespace :v1 do
       resources :quizzes
     end
   end
