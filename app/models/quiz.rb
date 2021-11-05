@@ -1,5 +1,5 @@
 class Quiz < ApplicationRecord
-  has_one :category, dependent: :destroy
-  has_one :choice, dependent: :destroy
+  has_many :categories, dependent: :destroy
+  has_many :choices, dependent: :destroy
   validates :title, presence: true
 end

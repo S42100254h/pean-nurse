@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Api::V1::Quizzes", type: :request do
-  describe "POST/api/v1/quizzes" do
+  describe "POST /api/v1/quizzes" do
     subject { post(api_v1_quizzes_path, params: params, headers: headers) }
 
     context "send correct quiz information" do
@@ -16,7 +16,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "GET/api/v1/quizzes" do
+  describe "GET /api/v1/quizzes" do
     subject { get(api_v1_quizzes_path) }
 
     before do
@@ -32,7 +32,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "GET/api/v1/quizzes/:id" do
+  describe "GET /api/v1/quizzes/:id" do
     subject { get(api_v1_quiz_path(quiz_id)) }
 
     context "specified id exists" do
@@ -57,7 +57,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "PATCH/api/v1/quizzes/:id" do
+  describe "PATCH /api/v1/quizzes/:id" do
     subject { patch(api_v1_quiz_path(quiz_id), params: params, headers: headers) }
 
     let(:headers) { current_admin.create_new_auth_token }
@@ -73,7 +73,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "DELETE/api/v1/quizzes/:id" do
+  describe "DELETE /api/v1/quizzes/:id" do
     subject { delete(api_v1_quiz_path(quiz_id), headers: headers) }
 
     let(:headers) { current_admin.create_new_auth_token }
