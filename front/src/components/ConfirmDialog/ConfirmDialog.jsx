@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
+import { createQuiz } from "../../function/quiz";
 
 const useStyles = makeStyles({
   container: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles({
 
 const ConfirmDialog = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -73,7 +76,7 @@ const ConfirmDialog = (props) => {
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => console.log("click!")}
+              onClick={() => dispatch(createQuiz(props.quiz, props.choice1, props.select1, props.choice2, props.select2, props.choice3, props.select3, props.choice4, props.select4 ))}
             />
           </div>
         </DialogContent>
