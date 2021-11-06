@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
 import { createQuiz } from "../../function/quiz";
-import { Choice } from "./index";
+import { Choice, Quiz } from "./index";
 
 const useStyles = makeStyles({
   container: {
@@ -17,19 +17,9 @@ const useStyles = makeStyles({
     margin: "0 auto 1rem auto",
     textAlign: "center",
   },
-  textContainer: {
-    width: 700,
-    padding: 10,
-    marginBottom: 15,
-    boxShadow: "0 0 1px grey",
-    borderRadius: "4px",
-  },
-  caption: {
-    fontWeight: "bold",
-  },
 });
 
-const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose })=> {
+const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
@@ -45,10 +35,7 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
           <div className={classes.container}>
             <div className={classes.headline}>以下の内容でクイズを作成してもよろしいですか？</div>
             <div className="module-spacer--extra-small" />
-            <div className={classes.textContainer}>
-              <p className={classes.caption}>問題</p>
-              <div>{quiz}</div>
-            </div>
+            <Quiz quiz={quiz} label={"問題"} />
             <Choice choice={choice1} select={select1} label={"選択肢１"} />
             <Choice choice={choice2} select={select2} label={"選択肢２"} />
             <Choice choice={choice3} select={select3} label={"選択肢３"} />
