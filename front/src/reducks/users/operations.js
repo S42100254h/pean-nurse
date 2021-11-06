@@ -31,7 +31,7 @@ export const signUp = (name, email, password, password_confirmation) => {
     const body = { name: name, email: email, password: password, password_confirmation: password_confirmation };
 
     axios
-      .post(apiEndpoint, body )
+      .post(apiEndpoint, body)
       .then((resp) => {
         localStorage.setItem("access-token", resp.headers["access-token"]);
         localStorage.setItem("client", resp.headers["client"]);

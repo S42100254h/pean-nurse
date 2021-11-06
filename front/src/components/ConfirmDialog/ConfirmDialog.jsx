@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
+import { createQuiz } from "../../function/quiz";
 
 const useStyles = makeStyles({
   container: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles({
 
 const ConfirmDialog = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -45,35 +48,55 @@ const ConfirmDialog = (props) => {
               <p className={classes.caption}>問題</p>
               <div>{props.quiz}</div>
             </div>
-            <div className={classes.textContainer}>
-              <p className={classes.caption}>選択肢１</p>
-              <div>{props.choice1}</div>
-              <div>-{props.select1}-</div>
-            </div>
-            <div className={classes.textContainer}>
-              <p className={classes.caption}>選択肢２</p>
-              <div>{props.choice2}</div>
-              <div>-{props.select2}-</div>
-            </div>
+            {props.choice1 && (
+              <div className={classes.textContainer}>
+                <p className={classes.caption}>選択肢１</p>
+                <div>{props.choice1}</div>
+                {props.select1 ? (
+                  <div>- right -</div>
+                ) : (
+                  <div>- wrong -</div>
+                )}
+              </div>
+            )}
+            {props.choice2 && (
+              <div className={classes.textContainer}>
+                <p className={classes.caption}>選択肢２</p>
+                <div>{props.choice2}</div>
+                {props.select2 ? (
+                  <div>- right -</div>
+                ) : (
+                  <div>- wrong -</div>
+                )}
+              </div>
+            )}
             {props.choice3 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢３</p>
                 <div>{props.choice3}</div>
-                <div>-{props.select3}-</div>
+                {props.select3 ? (
+                  <div>- right -</div>
+                ) : (
+                  <div>- wrong -</div>
+                )}
               </div>
             )}
             {props.choice4 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢４</p>
                 <div>{props.choice4}</div>
-                <div>-{props.select4}-</div>
+                {props.select4 ? (
+                  <div>- right -</div>
+                ) : (
+                  <div>- wrong -</div>
+                )}
               </div>
             )}
             <div className="module-spacer--extra-extra-small" />
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => console.log("click!")}
+              onClick={() => dispatch(createQuiz(props.quiz, props.choice1, props.select1, props.choice2, props.select2, props.choice3, props.select3, props.choice4, props.select4 ))}
             />
           </div>
         </DialogContent>

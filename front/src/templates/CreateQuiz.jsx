@@ -79,24 +79,25 @@ const CreateQuiz = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes("right")) {
+    if (![select1, select2, select3, select4].includes(true)) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes("wrong")) {
+    if (![select1, select2, select3, select4].includes(false)) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
-    if (choice1 && !select1 || choice2 && !select2 || choice3 && !select3 || choice4 && !select4) {
+    if (choice1 && select1 === "" || choice2 && select2 === "" || choice3 && select3 === "" || choice4 && select4 === "") {
       alert("「right」または「wrong」を選択してください。");
+      console.log(select1);
       return;
     }
     setOpen(true);
   };
 
   const menus = [
-    { label: "wrong", value: "wrong", id: "wrong" },
-    { label: "right", value: "right", id: "right" },
+    { label: "wrong", value: false, id: "wrong" },
+    { label: "right", value: true, id: "right" },
   ];
 
   return (
