@@ -3,7 +3,7 @@ import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions
 import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
 
-export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4 ) => {
+export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4) => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");

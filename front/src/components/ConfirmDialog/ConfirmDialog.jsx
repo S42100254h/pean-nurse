@@ -28,15 +28,15 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmDialog = (props) => {
+const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose })=> {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  
   return (
     <div>
       <Dialog
-        open={props.open}
-        onClose={(e) => props.onClose(e)}
+        open={open}
+        onClose={(e) => onClose(e)}
         fullWidth={false}
         maxWidth={"md"}
       >
@@ -46,46 +46,46 @@ const ConfirmDialog = (props) => {
             <div className="module-spacer--extra-small" />
             <div className={classes.textContainer}>
               <p className={classes.caption}>問題</p>
-              <div>{props.quiz}</div>
+              <div>{quiz}</div>
             </div>
-            {props.choice1 && (
+            {choice1 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢１</p>
-                <div>{props.choice1}</div>
-                {props.select1 ? (
+                <div>{choice1}</div>
+                {select1 ? (
                   <div>- right -</div>
                 ) : (
                   <div>- wrong -</div>
                 )}
               </div>
             )}
-            {props.choice2 && (
+            {choice2 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢２</p>
-                <div>{props.choice2}</div>
-                {props.select2 ? (
+                <div>{choice2}</div>
+                {select2 ? (
                   <div>- right -</div>
                 ) : (
                   <div>- wrong -</div>
                 )}
               </div>
             )}
-            {props.choice3 && (
+            {choice3 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢３</p>
-                <div>{props.choice3}</div>
-                {props.select3 ? (
+                <div>{choice3}</div>
+                {select3 ? (
                   <div>- right -</div>
                 ) : (
                   <div>- wrong -</div>
                 )}
               </div>
             )}
-            {props.choice4 && (
+            {choice4 && (
               <div className={classes.textContainer}>
                 <p className={classes.caption}>選択肢４</p>
-                <div>{props.choice4}</div>
-                {props.select4 ? (
+                <div>{choice4}</div>
+                {select4 ? (
                   <div>- right -</div>
                 ) : (
                   <div>- wrong -</div>
@@ -96,7 +96,7 @@ const ConfirmDialog = (props) => {
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(props.quiz, props.choice1, props.select1, props.choice2, props.select2, props.choice3, props.select3, props.choice4, props.select4 ))}
+              onClick={() => dispatch(createQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4 ))}
             />
           </div>
         </DialogContent>
