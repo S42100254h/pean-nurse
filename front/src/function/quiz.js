@@ -17,7 +17,6 @@ export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, se
         .post(quizApiEndpoint, quizBody, { headers: headers })
         .then((resp) => {
           const newQuizId = resp.data.id;
-          console.log(newQuizId);
           const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices";
           
           const choiceBodyList =  [];
