@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
 import { createQuiz } from "../../function/quiz";
+import { Choice, Quiz } from "./index";
 
 const useStyles = makeStyles({
   container: {
@@ -16,27 +17,17 @@ const useStyles = makeStyles({
     margin: "0 auto 1rem auto",
     textAlign: "center",
   },
-  textContainer: {
-    width: 700,
-    padding: 10,
-    marginBottom: 15,
-    boxShadow: "0 0 1px grey",
-    borderRadius: "4px",
-  },
-  caption: {
-    fontWeight: "bold",
-  },
 });
 
-const ConfirmDialog = (props) => {
+const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  
   return (
     <div>
       <Dialog
-        open={props.open}
-        onClose={(e) => props.onClose(e)}
+        open={open}
+        onClose={(e) => onClose(e)}
         fullWidth={false}
         maxWidth={"md"}
       >
@@ -44,59 +35,16 @@ const ConfirmDialog = (props) => {
           <div className={classes.container}>
             <div className={classes.headline}>以下の内容でクイズを作成してもよろしいですか？</div>
             <div className="module-spacer--extra-small" />
-            <div className={classes.textContainer}>
-              <p className={classes.caption}>問題</p>
-              <div>{props.quiz}</div>
-            </div>
-            {props.choice1 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢１</p>
-                <div>{props.choice1}</div>
-                {props.select1 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
-            {props.choice2 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢２</p>
-                <div>{props.choice2}</div>
-                {props.select2 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
-            {props.choice3 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢３</p>
-                <div>{props.choice3}</div>
-                {props.select3 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
-            {props.choice4 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢４</p>
-                <div>{props.choice4}</div>
-                {props.select4 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
+            <Quiz quiz={quiz} label={"問題"} />
+            <Choice choice={choice1} select={select1} label={"選択肢１"} />
+            <Choice choice={choice2} select={select2} label={"選択肢２"} />
+            <Choice choice={choice3} select={select3} label={"選択肢３"} />
+            <Choice choice={choice4} select={select4} label={"選択肢４"} />
             <div className="module-spacer--extra-extra-small" />
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(props.quiz, props.choice1, props.select1, props.choice2, props.select2, props.choice3, props.select3, props.choice4, props.select4 ))}
+              onClick={() => dispatch(createQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4 ))}
             />
           </div>
         </DialogContent>
