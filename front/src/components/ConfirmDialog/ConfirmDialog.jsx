@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
 import { createQuiz } from "../../function/quiz";
+import { Choice } from "./index";
 
 const useStyles = makeStyles({
   container: {
@@ -48,50 +49,10 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
               <p className={classes.caption}>問題</p>
               <div>{quiz}</div>
             </div>
-            {choice1 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢１</p>
-                <div>{choice1}</div>
-                {select1 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
-            {choice2 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢２</p>
-                <div>{choice2}</div>
-                {select2 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
-            {choice3 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢３</p>
-                <div>{choice3}</div>
-                {select3 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
-            {choice4 && (
-              <div className={classes.textContainer}>
-                <p className={classes.caption}>選択肢４</p>
-                <div>{choice4}</div>
-                {select4 ? (
-                  <div>- right -</div>
-                ) : (
-                  <div>- wrong -</div>
-                )}
-              </div>
-            )}
+            <Choice choice={choice1} select={select1} label={"選択肢１"} />
+            <Choice choice={choice2} select={select2} label={"選択肢２"} />
+            <Choice choice={choice3} select={select3} label={"選択肢３"} />
+            <Choice choice={choice4} select={select4} label={"選択肢４"} />
             <div className="module-spacer--extra-extra-small" />
             <PrimaryButton
               label={"クイズを作成する"}
