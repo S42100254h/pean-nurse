@@ -20,12 +20,11 @@ export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, se
           console.log(newQuizId);
           const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices";
           
-          const choiceBodyList =  [
-            { choice: { choice: choice1, is_right: select1, quiz_id: newQuizId } },
-            { choice: { choice: choice2, is_right: select2, quiz_id: newQuizId } },
-            { choice: { choice: choice3, is_right: select3, quiz_id: newQuizId } },
-            { choice: { choice: choice4, is_right: select4, quiz_id: newQuizId } },
-          ];
+          const choiceBodyList =  [];
+          if (choice1) choiceBodyList.push({ choice: { choice: choice1, is_right: select1, quiz_id: newQuizId } });
+          if (choice2) choiceBodyList.push({ choice: { choice: choice2, is_right: select2, quiz_id: newQuizId } });
+          if (choice3) choiceBodyList.push({ choice: { choice: choice3, is_right: select3, quiz_id: newQuizId } });
+          if (choice4) choiceBodyList.push({ choice: { choice: choice4, is_right: select4, quiz_id: newQuizId } });
 
           for ( let i = 0; i < choiceBodyList.length; i++) {
             axios
