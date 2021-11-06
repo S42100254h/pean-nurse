@@ -218,14 +218,8 @@ const CreateQuiz = () => {
       />
       <ConfirmDialog
         quiz={quiz}
-        choice1={choice1}
-        choice2={choice2}
-        choice3={choice3}
-        choice4={choice4}
-        select1={select1}
-        select2={select2}
-        select3={select3}
-        select4={select4}
+        choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
+        select1={select1} select2={select2} select3={select3} select4={select4}
         open={open}
         onClose={handleDialogClose}
       />
