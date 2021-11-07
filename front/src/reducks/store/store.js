@@ -10,6 +10,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import { AdminsReducer } from "../admins/reducers";
 import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
+import { QuizzesReducer } from "../quizzes/reducers";
 import { UsersReducer } from "../users/reducers";
 
 export const createStore = (history) => {
@@ -19,6 +20,7 @@ export const createStore = (history) => {
       admins: AdminsReducer,
       loading: LoadingReducer,
       notification: NotificationReducer,
+      quizzes: QuizzesReducer,
       users: UsersReducer
     }),
     composeWithDevTools(
