@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
+import { fetchQuizzes } from "../reducks/quizzes/operations";
 
 const useStyles = makeStyles({
   container: {
@@ -15,6 +17,11 @@ const useStyles = makeStyles({
 
 const QuizList = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchQuizzes());
+  }, []);
 
   return (
     <div className={classes.container}>
