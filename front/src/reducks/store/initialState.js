@@ -14,6 +14,9 @@ const initialState = {
     variant: "success",
     message: "",
   },
+  quizzes: {
+    list: [],
+  },
   users: {
     isSignedIn: false,
     uid: "",
