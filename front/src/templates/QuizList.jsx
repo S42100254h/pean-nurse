@@ -6,6 +6,7 @@ import { getQuizzes } from "../reducks/quizzes/selectors";
 import { DataGrid } from "@mui/x-data-grid";
 import { PrimaryButton } from "../components/UIkit";
 import { push } from "connected-react-router";
+import moment from "moment";
 
 const useStyles = makeStyles({
   container: {
@@ -42,8 +43,17 @@ const QuizList = () => {
     { field: "created_at", headerName: "作成日", width: 200 },
     { field: "updated_at", headerName: "更新日", width: 200 },
   ];
-  
-  const rows = quizzes;
+
+  const rows = quizzes.map((quiz) => {
+    return (
+      {
+        id: quiz.id,
+        title: quiz.title,
+        created_at: moment(quiz.created_at).fromNow(),
+        updated_at: moment(quiz.updated_at).fromNow(),
+      }
+    );
+  });
 
   return (
     <div className={classes.container}>
