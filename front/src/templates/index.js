@@ -8,6 +8,7 @@ export { default as ForgetPasswordSent } from "./ForgetPasswordSent";
 export { default as Home } from "./Home";
 export { default as Management } from "./Management";
 export { default as PageNotFound } from "./PageNotFound";
+export { default as QuizDetail } from "./QuizDetail";
 export { default as QuizList } from "./QuizList";
 export { default as ResetPassword } from "./ResetPassword";
 export { default as Setting } from "./Setting";

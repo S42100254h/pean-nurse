@@ -12,6 +12,7 @@ import {
   Home,
   Management,
   PageNotFound,
+  QuizDetail,
   QuizList,
   ResetPassword,
   Setting,
@@ -29,6 +30,7 @@ const Router = withRouter(({ location }) =>
       <Switch>
         <AdminRoute exact path={"/management"} component={Management} />
         <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
+        <AdminRoute exact path={"/quiz/detail/:id"} component={QuizDetail} />
         <AdminRoute exact path={"/quiz/list"} component={QuizList} />
         <NoAdminRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"(/)?"} component={Home} />

@@ -37,7 +37,7 @@ const QuizList = () => {
       field: "detail",
       headerName: "詳細",
       width: 100,
-      renderCell: (params) => <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/list/" + params.id))} />
+      renderCell: (params) => <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/detail/" + params.id))} />
     },
     { field: "title", headerName: "タイトル", width: 530 },
     { field: "created_at", headerName: "作成日", width: 200 },
