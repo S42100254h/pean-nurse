@@ -59,14 +59,22 @@ const QuizDetail = () => {
       .get(choiceApiEndpoint)
       .then((resp) => {
         if (isMounted) {
-          setChoice1(resp.data[0].choice);
-          setChoice2(resp.data[1].choice);
-          setChoice3(resp.data[2].choice);
-          setChoice4(resp.data[3].choice);
-          setSelect1(resp.data[0].is_right);
-          setSelect2(resp.data[1].is_right);
-          setSelect3(resp.data[2].is_right);
-          setSelect4(resp.data[3].is_right);
+          if (resp.data[0]) {
+            setSelect1(resp.data[0].is_right);
+            setChoice1(resp.data[0].choice);
+          }
+          if (resp.data[1]) {
+            setSelect2(resp.data[1].is_right);
+            setChoice2(resp.data[1].choice);
+          }
+          if (resp.data[2]) {
+            setChoice3(resp.data[2].choice);
+            setSelect3(resp.data[2].is_right);
+          }
+          if (resp.data[3]) {
+            setChoice4(resp.data[3].choice);
+            setSelect4(resp.data[3].is_right);
+          }
         }
       });
 
