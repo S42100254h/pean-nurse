@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
@@ -31,7 +30,6 @@ const useStyles = makeStyles({
 const QuizDetail = () => {
   const classes = useStyles();
   const match = useRouteMatch();
-  const dispatch  = useDispatch();
 
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
