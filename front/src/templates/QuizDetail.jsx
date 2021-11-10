@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from "react";
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
+import axios from "axios";
 
 const useStyles = makeStyles({
   container: {
@@ -29,7 +30,8 @@ const useStyles = makeStyles({
 
 const QuizDetail = () => {
   const classes = useStyles();
-  const { id } = useParams();
+  const match = useRouteMatch();
+  const dispatch  = useDispatch();
 
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
@@ -41,6 +43,20 @@ const QuizDetail = () => {
     [select3, setSelect3] = useState(""),
     [select4, setSelect4] = useState(""),
     [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
+    let isMounted = true;
+    
+    axios
+      .get(apiEndpoint)
+      .then((resp) => {
+        if (isMounted) {
+          setQuiz(resp.data.title);
+        }
+      });
+    return () => { isMounted = false; };
+  }, []);
 
   const inputQuiz = useCallback((event) => {
     setQuiz(event.target.value);
