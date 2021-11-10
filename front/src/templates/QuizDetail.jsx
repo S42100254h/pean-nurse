@@ -45,16 +45,33 @@ const QuizDetail = () => {
     [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
+    const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
     let isMounted = true;
     
     axios
-      .get(apiEndpoint)
+      .get(quizApiEndpoint)
       .then((resp) => {
         if (isMounted) {
           setQuiz(resp.data.title);
         }
       });
+    
+    axios
+      .get(choiceApiEndpoint)
+      .then((resp) => {
+        if (isMounted) {
+          setChoice1(resp.data[0].choice);
+          setChoice2(resp.data[1].choice);
+          setChoice3(resp.data[2].choice);
+          setChoice4(resp.data[3].choice);
+          setSelect1(resp.data[0].is_right);
+          setSelect2(resp.data[1].is_right);
+          setSelect3(resp.data[2].is_right);
+          setSelect4(resp.data[3].is_right);
+        }
+      });
+
     return () => { isMounted = false; };
   }, []);
 
@@ -108,7 +125,6 @@ const QuizDetail = () => {
     }
     if (choice1 && select1 === "" || choice2 && select2 === "" || choice3 && select3 === "" || choice4 && select4 === "") {
       alert("「right」または「wrong」を選択してください。");
-      console.log(select1);
       return;
     }
     setOpen(true);
