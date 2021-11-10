@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
+import axios from "axios";
 
 const useStyles = makeStyles({
   container: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 
 const QuizDetail = () => {
   const classes = useStyles();
-  const { id } = useParams();
+  const match = useRouteMatch();
 
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
@@ -41,6 +41,45 @@ const QuizDetail = () => {
     [select3, setSelect3] = useState(""),
     [select4, setSelect4] = useState(""),
     [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
+    const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
+    let isMounted = true;
+    
+    axios
+      .get(quizApiEndpoint)
+      .then((resp) => {
+        if (isMounted) {
+          setQuiz(resp.data.title);
+        }
+      });
+    
+    axios
+      .get(choiceApiEndpoint)
+      .then((resp) => {
+        if (isMounted) {
+          if (resp.data[0]) {
+            setSelect1(resp.data[0].is_right);
+            setChoice1(resp.data[0].choice);
+          }
+          if (resp.data[1]) {
+            setSelect2(resp.data[1].is_right);
+            setChoice2(resp.data[1].choice);
+          }
+          if (resp.data[2]) {
+            setChoice3(resp.data[2].choice);
+            setSelect3(resp.data[2].is_right);
+          }
+          if (resp.data[3]) {
+            setChoice4(resp.data[3].choice);
+            setSelect4(resp.data[3].is_right);
+          }
+        }
+      });
+
+    return () => { isMounted = false; };
+  }, []);
 
   const inputQuiz = useCallback((event) => {
     setQuiz(event.target.value);
@@ -92,7 +131,6 @@ const QuizDetail = () => {
     }
     if (choice1 && select1 === "" || choice2 && select2 === "" || choice3 && select3 === "" || choice4 && select4 === "") {
       alert("「right」または「wrong」を選択してください。");
-      console.log(select1);
       return;
     }
     setOpen(true);
