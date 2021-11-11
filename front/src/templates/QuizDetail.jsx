@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
+import { editQuiz } from "../function/quiz";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -40,6 +41,10 @@ const QuizDetail = () => {
     [select2, setSelect2] = useState(""),
     [select3, setSelect3] = useState(""),
     [select4, setSelect4] = useState(""),
+    [id1, setId1] = useState(""),
+    [id2, setId2] = useState(""),
+    [id3, setId3] = useState(""),
+    [id4, setId4] = useState(""),
     [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -62,18 +67,22 @@ const QuizDetail = () => {
           if (resp.data[0]) {
             setSelect1(resp.data[0].is_right);
             setChoice1(resp.data[0].choice);
+            setId1(resp.data[0].id);
           }
           if (resp.data[1]) {
             setSelect2(resp.data[1].is_right);
             setChoice2(resp.data[1].choice);
+            setId2(resp.data[1].id);
           }
           if (resp.data[2]) {
             setChoice3(resp.data[2].choice);
             setSelect3(resp.data[2].is_right);
+            setId3(resp.data[2].id);
           }
           if (resp.data[3]) {
             setChoice4(resp.data[3].choice);
             setSelect4(resp.data[3].is_right);
+            setId4(resp.data[3].id);
           }
         }
       });
@@ -92,7 +101,6 @@ const QuizDetail = () => {
   const inputChoice2 = useCallback((event) => {
     setChoice2(event.target.value);
   }, [setChoice2]);
-  
 
   const inputChoice3 = useCallback((event) => {
     setChoice3(event.target.value);
@@ -258,11 +266,16 @@ const QuizDetail = () => {
         onClick={() => handleDialogOpen()}
       />
       <ConfirmDialog
+        id={match.params.id}
         quiz={quiz}
         choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
         select1={select1} select2={select2} select3={select3} select4={select4}
+        id1={id1} id2={id2} id3={id3} id4={id4}
         open={open}
         onClose={handleDialogClose}
+        headline={"以下の内容でクイズを更新してもよろしいですか？"}
+        buttonLabel={"クイズを更新する"}
+        func={editQuiz}
       />
     </div>
   );

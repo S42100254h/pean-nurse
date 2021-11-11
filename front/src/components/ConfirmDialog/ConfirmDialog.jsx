@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
-import { createQuiz, editQuiz } from "../../function/quiz";
 import { Choice, Quiz } from "./index";
 
 const useStyles = makeStyles({
@@ -19,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose, headline, buttonLabel, func }) => {
+const ConfirmDialog = ({ id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, headline, buttonLabel, func }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
@@ -44,7 +43,7 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
             <PrimaryButton
               label={buttonLabel}
               fullWidth={true}
-              onClick={() => dispatch(func(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4))}
+              onClick={() => dispatch(func(id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4))}
             />
           </div>
         </DialogContent>
