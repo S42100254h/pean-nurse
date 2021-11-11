@@ -12,6 +12,7 @@ const useStyles = makeStyles({
   container: {
     margin: "25px auto",
     width: "calc(100% - 20rem)",
+    maxWidth: 1080,
   },
   headline: {
     color: "#4dd0e1",
@@ -40,8 +41,8 @@ const QuizList = () => {
       renderCell: (params) => <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/detail/" + params.id))} />
     },
     { field: "title", headerName: "タイトル", width: 530 },
-    { field: "created_at", headerName: "作成日", width: 200 },
-    { field: "updated_at", headerName: "更新日", width: 200 },
+    { field: "created_at", headerName: "作成日", width: 180 },
+    { field: "updated_at", headerName: "更新日", width: 180 },
   ];
 
   const rows = quizzes.map((quiz) => {
