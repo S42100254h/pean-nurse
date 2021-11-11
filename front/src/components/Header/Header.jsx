@@ -92,11 +92,6 @@ const Header = () => {
       value: "/quiz/list"
     },
     {
-      label: "クイズ詳細",
-      id: "quizdetail",
-      value: "/quiz/detail",
-    },
-    {
       label: "クイズ作成",
       id: "createquiz",
       value: "/quiz/create",
