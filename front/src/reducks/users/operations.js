@@ -239,7 +239,7 @@ export const editImage = (image) => {
         })
         .then((resp) => {
           dispatch(editUserImageAction(resp.data.data));
-          
+
           setTimeout(() => {
             dispatch(setNotificationAction({ variant: "success", message: "画像を更新しました。" }));
           }, 0);

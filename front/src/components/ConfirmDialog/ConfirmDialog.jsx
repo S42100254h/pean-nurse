@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
-import { createQuiz } from "../../function/quiz";
 import { Choice, Quiz } from "./index";
 
 const useStyles = makeStyles({
@@ -19,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }) => {
+const ConfirmDialog = ({ id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, headline, buttonLabel, func }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
@@ -33,7 +32,7 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
       >
         <DialogContent>
           <div className={classes.container}>
-            <div className={classes.headline}>以下の内容でクイズを作成してもよろしいですか？</div>
+            <div className={classes.headline}>{headline}</div>
             <div className="module-spacer--extra-small" />
             <Quiz quiz={quiz} label={"問題"} />
             <Choice choice={choice1} select={select1} label={"選択肢１"} />
@@ -42,9 +41,9 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
             <Choice choice={choice4} select={select4} label={"選択肢４"} />
             <div className="module-spacer--extra-extra-small" />
             <PrimaryButton
-              label={"クイズを作成する"}
+              label={buttonLabel}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4 ))}
+              onClick={() => dispatch(func(id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4))}
             />
           </div>
         </DialogContent>

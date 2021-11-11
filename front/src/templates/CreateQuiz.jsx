@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
+import { createQuiz } from "../function/quiz";
 
 const useStyles = makeStyles({
   container: {
@@ -222,6 +223,9 @@ const CreateQuiz = () => {
         select1={select1} select2={select2} select3={select3} select4={select4}
         open={open}
         onClose={handleDialogClose}
+        headline={"以下の内容でクイズを作成してもよろしいですか？"}
+        buttonLabel={"クイズを作成する"}
+        func={createQuiz}
       />
     </div>
   );
