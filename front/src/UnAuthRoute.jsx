@@ -15,7 +15,7 @@ const UnAuthRoute = ({ ...props }) => {
       dispatch(redirectToDashboard());
     }
   }, []);
-  
+ 
   if (!isSignedIn) {
     return <Route { ...props } />;
   } else {
