@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from "react-router";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import {
   AdminSignIn,
+  CourseOverview,
   CourseList,
   CreateQuiz,
   Deactivate,
@@ -40,6 +41,7 @@ const Router = withRouter(({ location }) =>
         <UnAuthRoute exact path={"/signup"} component={SignUp} />
         <UnAuthRoute exact path={"/signin"} component={SignIn} />
         <PrivateRoute exact path={"/courselist"} component={CourseList} />
+        <PrivateRoute exact path={"/courselist/:id"} component={CourseOverview} />
         <PrivateRoute exact path={"/dashboard"} component={DashBoard} />
         <PrivateRoute exact path={"/setting"} component={Setting} />
         <PrivateRoute exact path={"/deactivate"} component={Deactivate} />
