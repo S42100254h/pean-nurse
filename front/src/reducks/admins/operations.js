@@ -69,7 +69,7 @@ export const adminSignOut = () => {
           dispatch(adminSignOutAction());
           dispatch(showLoadingAction("Sign out..."));
           localStorage.clear();
-          dispatch(push("/adminsignin"));
+          dispatch(push("/"));
           
           setTimeout(() => {
             dispatch(hideLoadingAction());

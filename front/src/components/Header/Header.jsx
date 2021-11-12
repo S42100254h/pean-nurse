@@ -11,6 +11,7 @@ import { SignUpDialog } from "../SignUpDialog";
 import { DropDown } from "../UIkit";
 import { getSignedIn } from "../../reducks/users/selectors";
 import { getAdminSignedIn } from "../../reducks/admins/selectors";
+import { adminSignOut } from "../../reducks/admins/operations";
 
 const useStyles = makeStyles({
   root: {
@@ -120,6 +121,9 @@ const Header = () => {
                 <div className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</div>
                 <div className={classes.headerItem} onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</div>
                 <div className={classes.headerItem} onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</div>
+              </div>
+              <div className={classes.rightToolbar}>
+                <div className={classes.headerItem} onClick={() => dispatch(adminSignOut())}>サインアウト</div>
               </div>
             </Toolbar>
             <DropDown
