@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import Course from "../components/Course/Course";
 import { Grid } from "@material-ui/core";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles({
   container: {
@@ -21,7 +23,7 @@ const courses = [
     image: "cat.png",
     caption: "ALS, パーキンソン病 ...",
     number: 7,
-    id: "neurology",
+    id: "Neurology",
   },
   {
     title: "脳神経外科",
@@ -42,14 +44,14 @@ const courses = [
     image: "cat.png",
     caption: "大動脈乖離, 心筋梗塞 ...",
     number: 1,
-    id: "Cardiovascular surgery",
+    id: "Cardiovascular_surgery",
   },
   {
     title: "産婦人科",
     image: "cat.png",
     caption: "子宮筋腫, 帝王切開 ...",
     number: 3,
-    id: "Obstetrics and gynecology",
+    id: "Obstetrics_and_gynecology",
   },
   {
     title: "血液内科",
@@ -62,6 +64,7 @@ const courses = [
 
 const CourseList = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.container}>
@@ -78,6 +81,7 @@ const CourseList = () => {
               image={course.image}
               caption={course.caption}
               number={course.number}
+              onClick={() => dispatch(push("/courselist/" + course.id))}
             />
           </Grid>
         ))}
