@@ -149,9 +149,6 @@ export const redirectToManagement = () => {
           }));
           
           dispatch(push("/management"));
-        })
-        .catch(() => {
-          alert("サインインに失敗しました。");
         });
     }
   };

@@ -467,9 +467,6 @@ export const redirectToDashboard = () => {
           }));
           
           dispatch(push("/dashboard"));
-        })
-        .catch((error) => {
-          alert("サインインに失敗しました。");
         });
     }
   };
