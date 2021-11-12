@@ -35,10 +35,10 @@ const useStyles = makeStyles({
 });
 
 const courseCards = [
-  {label: "神経内科Ⅰ"},
-  {label: "神経内科Ⅱ"},
-  {label: "神経内科Ⅲ"},
-  {label: "神経内科Ⅳ"},
+  { id: 1, label: "神経内科Ⅰ"},
+  { id: 2, label: "神経内科Ⅱ"},
+  { id: 3, label: "神経内科Ⅲ"},
+  { id: 4, label: "神経内科Ⅳ"},
 ];
 
 const CourseOverview = () => {
@@ -50,7 +50,7 @@ const CourseOverview = () => {
       <div className={classes.subHeadline}>ALS, パーキンソン病 ...</div>
       <div className="module-spacer--small" />
       {courseCards.map((card) => (
-        <CourseCard label={card.label} />
+        <CourseCard key={card.id} label={card.label} />
       ))}
     </div>
   );
