@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import { CourseCard } from "../components/CourseCard";
 
 const useStyles = makeStyles({
   container: {
@@ -33,6 +34,13 @@ const useStyles = makeStyles({
   },
 });
 
+const courseCards = [
+  {label: "神経内科Ⅰ"},
+  {label: "神経内科Ⅱ"},
+  {label: "神経内科Ⅲ"},
+  {label: "神経内科Ⅳ"},
+];
+
 const CourseOverview = () => {
   const classes = useStyles();
 
@@ -40,9 +48,10 @@ const CourseOverview = () => {
     <div className={classes.container}>
       <div className={classes.headline}>神経内科</div>
       <div className={classes.subHeadline}>ALS, パーキンソン病 ...</div>
-      <div>神経内科Ⅰ</div>
-      <div>神経内科Ⅱ</div>
-      <div>神経内科Ⅲ</div>
+      <div className="module-spacer--small" />
+      {courseCards.map((card) => (
+        <CourseCard label={card.label} />
+      ))}
     </div>
   );
 };
