@@ -23,7 +23,7 @@ const courses = [
     image: "cat.png",
     caption: "ALS, パーキンソン病 ...",
     number: 7,
-    id: "neurology",
+    id: "Neurology",
   },
   {
     title: "脳神経外科",
