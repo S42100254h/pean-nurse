@@ -35,15 +35,15 @@ const QuizList = () => {
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
+    { field: "title", headerName: "タイトル", width: 510 },
+    { field: "created_at", headerName: "作成日", width: 140 },
+    { field: "updated_at", headerName: "更新日", width: 140 },
     {
       field: "detail",
       headerName: "詳細",
       width: 100,
       renderCell: (params) => <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/detail/" + params.id))} />
     },
-    { field: "title", headerName: "タイトル", width: 510 },
-    { field: "created_at", headerName: "作成日", width: 140 },
-    { field: "updated_at", headerName: "更新日", width: 140 },
     {
       field: "delete",
       headerName: "削除",
