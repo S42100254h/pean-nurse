@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 600,
     borderRadius: "4px",
     backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
+    border: "1px solid rgba(0,0,0,0.1)",
     padding: "16px 0",
     margin: "0 auto",
     "& .Mui-selected": {
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     borderRadius: "4px",
     backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
+    border: "1px solid rgba(0,0,0,0.1)",
     textAlign: "center",
     padding: "45px 70px",
   },
