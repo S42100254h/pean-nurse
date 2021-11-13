@@ -9,7 +9,7 @@ export const fetchQuizzesAction = (payload) => {
 export const DELETE_QUIZ = "DELETE_QUIZ";
 export const deleteQuizAction = (payload) => {
   return {
-    type: "DLETE_QUIZ",
+    type: "DELETE_QUIZ",
     payload,
   };
 };
