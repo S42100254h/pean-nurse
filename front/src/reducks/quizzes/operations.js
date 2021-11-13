@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { fetchQuizzesAction, deleteQuizAction } from "./actions";
-import { getQuizzes } from "./selectors";
 import { setNotificationAction } from "../notification/actions";
 
 export const fetchQuizzes = () => {
@@ -22,8 +20,7 @@ export const fetchQuizzes = () => {
 };
 
 export const deleteQuiz = (id) => {
-  const selector = useSelector((state) => state);
-  return async (dispatch) => {
+  return async (dispatch, getQuizzes) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -31,7 +28,7 @@ export const deleteQuiz = (id) => {
       const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
 
       axios
-        .get(apiEndpoint, {
+        .delete(apiEndpoint, {
           headers: {
             "access-token": auth_token,
             client: client,
@@ -39,10 +36,14 @@ export const deleteQuiz = (id) => {
           },
         })
         .then(() => {
-          const prevQuizzes = getQuizzes(selector);
+          const prevQuizzes = getQuizzes().quizzes.list;
           const nextQuizzes = prevQuizzes.filter((quiz) => quiz.id !== id);
           dispatch(deleteQuizAction(nextQuizzes));
-          dispatch(push("/quiz/list"));
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "クイズの削除に失敗しました。" }));
+          }, 400);
         });
     }
   };

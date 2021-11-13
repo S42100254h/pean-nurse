@@ -48,7 +48,7 @@ const QuizList = () => {
       field: "delete",
       headerName: "削除",
       width: 100,
-      renderCell: (params) => <SecondaryButton label={"削除"} rowId={params.id} onClick={() => console.log("delete!")} />
+      renderCell: (params) => <SecondaryButton label={"削除"} rowId={params.id} onClick={() => dispatch(deleteQuiz(params.id))} />
     },
   ];
 
