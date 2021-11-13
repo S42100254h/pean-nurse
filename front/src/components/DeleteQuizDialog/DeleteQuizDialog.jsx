@@ -4,13 +4,13 @@ import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, SecondaryButton } from "../../components/UIkit";
 
 const useStyles = makeStyles({
-  "heading": {
+  heading: {
     fontSize: 24,
     textAlign: "center",
     paddingBottom: 4,
     borderBottom: "1.3px solid",
   },
-  "image": {
+  image: {
     display: "block",
     margin: "auto",
   },
