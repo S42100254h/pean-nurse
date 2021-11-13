@@ -96,10 +96,13 @@ const QuizList = () => {
         open={open}
         onClose={() => {
           setSelectedId("");
-          setOpen(!open);
+          setOpen(false);
         }}
-        onClickStop={() => setOpen(!open)}
-        onClickProceed={() => dispatch(deleteQuiz(selectedId))}
+        onClickStop={() => setOpen(false)}
+        onClickProceed={() => {
+          dispatch(deleteQuiz(selectedId));
+          setOpen(false);
+        }}
       />
     </div>
   ); 

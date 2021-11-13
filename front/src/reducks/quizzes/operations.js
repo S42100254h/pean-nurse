@@ -1,6 +1,7 @@
 import axios from "axios";
 import { fetchQuizzesAction, deleteQuizAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
+import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 
 export const fetchQuizzes = () => {
   return async (dispatch) => {
@@ -39,6 +40,12 @@ export const deleteQuiz = (id) => {
           const prevQuizzes = getQuizzes().quizzes.list;
           const nextQuizzes = prevQuizzes.filter((quiz) => quiz.id !== id);
           dispatch(deleteQuizAction(nextQuizzes));
+          dispatch(showLoadingAction("Delete quiz..."));
+
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "クイズを削除しました。" }));
+          }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
