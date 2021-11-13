@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     width: 700,
     padding: 10,
     marginBottom: 15,
-    border: "1px solid #AAAAAA",
+    border: "1px solid rgba(0,0,0,0.1)",
     borderRadius: "4px",
   },
   caption: {
