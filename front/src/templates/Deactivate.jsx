@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { SecondaryButton, TextInput } from "../components/UIkit";
-import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../reducks/users/operations";
 
