@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { fetchQuizzes } from "../reducks/quizzes/operations";
@@ -6,6 +6,7 @@ import { getQuizzes } from "../reducks/quizzes/selectors";
 import { deleteQuiz } from "../reducks/quizzes/operations";
 import { DataGrid } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { DeleteQuizDialog } from "../components/DeleteQuizDialog";
 import { push } from "connected-react-router";
 import moment from "moment";
 
@@ -33,6 +34,9 @@ const QuizList = () => {
     dispatch(fetchQuizzes());
   }, []);
 
+  const [open, setOpen] = useState(false),
+    [selectedId, setSelectedId] = useState("");
+
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
     { field: "title", headerName: "タイトル", width: 510 },
@@ -42,13 +46,26 @@ const QuizList = () => {
       field: "detail",
       headerName: "詳細",
       width: 100,
-      renderCell: (params) => <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/detail/" + params.id))} />
+      renderCell: (params) =>
+        <PrimaryButton
+          label={"詳細"}
+          rowId={params.id}
+          onClick={() => dispatch(push("/quiz/detail/" + params.id))}
+        />
     },
     {
       field: "delete",
       headerName: "削除",
       width: 100,
-      renderCell: (params) => <SecondaryButton label={"削除"} rowId={params.id} onClick={() => dispatch(deleteQuiz(params.id))} />
+      renderCell: (params) =>
+        <SecondaryButton
+          label={"削除"}
+          rowId={params.id}
+          onClick={() => {
+            setSelectedId(params.id);
+            setOpen(true);
+          }}
+        />
     },
   ];
 
@@ -75,6 +92,15 @@ const QuizList = () => {
           rowsPerPageOptions={[10]}
         />
       </div>
+      <DeleteQuizDialog
+        open={open}
+        onClose={() => {
+          setSelectedId("");
+          setOpen(!open);
+        }}
+        onClickStop={() => setOpen(!open)}
+        onClickProceed={() => dispatch(deleteQuiz(selectedId))}
+      />
     </div>
   ); 
 };
