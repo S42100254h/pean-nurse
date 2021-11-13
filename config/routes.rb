@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get "users/currentuser"
       get "admins/currentadmin"
       resources :quizzes
+      resources :categories
       resources :choices, only: [:show, :create, :update, :destroy]
       get "choices/index/:quiz_id", to: "choices#index"
       post "inquiries/create"
