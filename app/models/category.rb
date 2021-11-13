@@ -1,4 +1,5 @@
 class Category < ApplicationRecord
-  belongs_to :quiz
+  has_many :category_quiz_relations, dependent: :destroy
+  has_many :quiz, through: :category_quiz_relations
   validates :name, presence: true
 end
