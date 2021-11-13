@@ -33,7 +33,7 @@ const DeleteQuizDialog = (props) => {
             <div className="module-spacer--extra-small" />
             <h2>本当にクイズを削除してもよろしいですか？</h2>
             <div className="module-spacer--extra-extra-small" />
-            <img src="cat.png" alt="ねこ" width="180px" height="180px" className={classes.image} />
+            <img src={`${window.location.origin}/cat.png`} alt="ねこ" width="180px" height="180px" className={classes.image} />
           </div>
           <div className="module-spacer--extra-small" />
           <PrimaryButton
