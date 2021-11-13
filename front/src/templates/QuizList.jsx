@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { fetchQuizzes } from "../reducks/quizzes/operations";
 import { getQuizzes } from "../reducks/quizzes/selectors";
+import { deleteQuiz } from "../reducks/quizzes/operations";
 import { DataGrid } from "@mui/x-data-grid";
-import { PrimaryButton } from "../components/UIkit";
+import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { push } from "connected-react-router";
 import moment from "moment";
 
@@ -40,9 +41,15 @@ const QuizList = () => {
       width: 100,
       renderCell: (params) => <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/detail/" + params.id))} />
     },
-    { field: "title", headerName: "タイトル", width: 530 },
-    { field: "created_at", headerName: "作成日", width: 180 },
-    { field: "updated_at", headerName: "更新日", width: 180 },
+    { field: "title", headerName: "タイトル", width: 510 },
+    { field: "created_at", headerName: "作成日", width: 140 },
+    { field: "updated_at", headerName: "更新日", width: 140 },
+    {
+      field: "delete",
+      headerName: "削除",
+      width: 100,
+      renderCell: (params) => <SecondaryButton label={"削除"} rowId={params.id} onClick={() => console.log("delete!")} />
+    },
   ];
 
   const rows = quizzes.map((quiz) => {
