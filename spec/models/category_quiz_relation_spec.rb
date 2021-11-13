@@ -12,7 +12,7 @@ RSpec.describe CategoryQuizRelation, type: :model do
       end
     end
   end
-  
+
   describe "exception scenario" do
     context "category_id is blank" do
       let(:category) { create(:category) }
