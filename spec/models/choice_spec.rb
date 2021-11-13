@@ -18,5 +18,13 @@ RSpec.describe Choice, type: :model do
         expect(choice.errors.messages[:choice]).to include "can't be blank"
       end
     end
+
+    context "is_right was not entered" do
+      let(:choice) { build(:choice, is_right: nil) }
+      it "error occurs" do
+        choice.valid?
+        expect(choice.errors.messages[:is_right]).to include "is not included in the list"
+      end
+    end
   end
 end
