@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmDialog = ({ id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, headline, buttonLabel, func }) => {
+const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, headline, buttonLabel, func }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
@@ -43,7 +43,7 @@ const ConfirmDialog = ({ id, quiz, choice1, select1, choice2, select2, choice3, 
             <PrimaryButton
               label={buttonLabel}
               fullWidth={true}
-              onClick={() => dispatch(func(id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4))}
+              onClick={() => dispatch(func(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4))}
             />
           </div>
         </DialogContent>
