@@ -18,5 +18,15 @@ RSpec.describe Quiz, type: :model do
         expect(quiz.errors.messages[:title]).to include "can't be blank"
       end
     end
+    
+    context "same title has already existed" do
+      let(:quiz) { build(:quiz, title: "neko") }
+      let!(:old_quiz) { create(:quiz, title: "neko") }
+      
+      it "error occurs" do
+        quiz.valid?
+        expect(quiz.errors.messages[:title]).to include "has already been taken"
+      end
+    end
   end
 end
