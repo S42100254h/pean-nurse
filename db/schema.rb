@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_085717) do
+ActiveRecord::Schema.define(version: 2021_11_15_104927) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_085717) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_quizzes_on_title", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
