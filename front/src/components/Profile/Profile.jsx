@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     height: "auto",
     width: "calc(100% - 2rem)",
     backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
+    border: "1px solid rgba(0,0,0,0.1)",
     borderRadius: "4px",
   },
   avatar: {
