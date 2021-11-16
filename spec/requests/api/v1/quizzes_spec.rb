@@ -5,12 +5,29 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     subject { post(api_v1_quizzes_path, params: params, headers: headers) }
 
     context "send correct quiz information" do
+      let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids } }
+      let(:current_admin) { create(:admin) }
+      let(:headers) { current_admin.create_new_auth_token }
+      let!(:category_ids) { category.id }
+      let!(:category) { create(:category) }
+
+      it "Quiz and CategoryQuizRelation are created" do
+        expect { subject }.to change { Quiz.count }.by(1) &
+                              change { CategoryQuizRelation.count }.by(1)
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "send correct quiz information without category_ids" do
       let(:params) { { quiz: attributes_for(:quiz) } }
       let(:current_admin) { create(:admin) }
       let(:headers) { current_admin.create_new_auth_token }
+      let!(:category_ids) { category.id }
+      let!(:category) { create(:category) }
 
       it "Quiz is created" do
-        expect { subject }.to change { Quiz.count }.by(1)
+        expect { subject }.to change { Quiz.count }.by(1) &
+                              change { CategoryQuizRelation.count }.by(0)
         expect(response).to have_http_status(200)
       end
     end
