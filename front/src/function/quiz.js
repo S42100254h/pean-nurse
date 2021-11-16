@@ -63,7 +63,7 @@ export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, se
   };
 };
 
-export const editQuiz = (id, quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4) => {
+export const editQuiz = (quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id) => {
   return async (dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
