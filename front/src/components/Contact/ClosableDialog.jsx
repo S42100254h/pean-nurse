@@ -139,7 +139,17 @@ const ClosableDialog = (props) => {
     <div>
       <Dialog
         open={props.open}
-        onClose={(e) => props.onClose(e)}
+        onClose={(e) => {
+          props.onClose(e);
+          setTimeout(() => {
+            setEmail("");
+            setSelect("");
+            setText("");
+            setImage("");
+            setName("");
+            setIsSubmitted(false);
+          }, 200);
+        }}
         ModalProps={{ keepMounted: true }}
         fullWidth={true}
         maxWidth={"md"}
@@ -147,13 +157,13 @@ const ClosableDialog = (props) => {
         {isSubmitted ? (
           <DialogContent>
             <p>貴重なご意見をいただきありがとうございます。</p>
-            <p>今後ともnurse-stepをよろしくお願いいたします！</p>
+            <p>今後ともPeANをよろしくお願いいたします！</p>
             <img src="cat.png" alt="ねこ" width="180px" height="180px" />
           </DialogContent>
         ) : (
           <DialogContent>
             <div className={classes.textArea}>
-              <p>nurse-stepをご利用いただきありがとうございます。</p>
+              <p>PeANをご利用いただきありがとうございます。</p>
               <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
               <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
 
