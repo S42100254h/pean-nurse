@@ -5,6 +5,7 @@ import {
   AdminSignIn,
   CourseOverview,
   CourseList,
+  CreateCategory,
   CreateQuiz,
   Deactivate,
   DashBoard,
@@ -29,6 +30,7 @@ const Router = withRouter(({ location }) =>
   <TransitionGroup>
     <CSSTransition key={location.key} classNames="item" timeout={1000} exit={false} >
       <Switch>
+        <AdminRoute exact path={"/category/create"} component={CreateCategory} />
         <AdminRoute exact path={"/management"} component={Management} />
         <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
         <AdminRoute exact path={"/quiz/detail/:id"} component={QuizDetail} />
