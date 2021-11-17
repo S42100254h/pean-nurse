@@ -98,6 +98,19 @@ const Header = () => {
       value: "/quiz/create",
     },
   ];
+  
+  const categoryMenu = [
+    {
+      label: "カテゴリー一覧",
+      id: "categorylist",
+      value: "/category/list",
+    },
+    {
+      label: "カテゴリー作成",
+      id: "createcategory",
+      value: "/category/create",
+    },
+  ];
 
   const handleClick = (event, menus) => {
     setAnchorEl(event.currentTarget);
@@ -121,6 +134,7 @@ const Header = () => {
                 <div className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</div>
                 <div className={classes.headerItem} onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</div>
                 <div className={classes.headerItem} onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</div>
+                <div className={classes.headerItem} onClick={(event) => handleClick(event, categoryMenu)}>カテゴリー管理</div>
               </div>
               <div className={classes.rightToolbar}>
                 <div className={classes.headerItem} onClick={() => dispatch(adminSignOut())}>サインアウト</div>
