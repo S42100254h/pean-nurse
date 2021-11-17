@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
-import { fetchQuizzes } from "../reducks/quizzes/operations";
+import { deleteQuiz, fetchQuizzes } from "../reducks/quizzes/operations";
 import { getQuizzes } from "../reducks/quizzes/selectors";
-import { deleteQuiz } from "../reducks/quizzes/operations";
 import { DataGrid } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteQuizDialog } from "../components/DeleteQuizDialog";
