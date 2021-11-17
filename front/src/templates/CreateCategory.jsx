@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { TextInput, PrimaryButton } from "../components/UIkit";
+import { createCategory } from "../function/category";
 
 const useStyles = makeStyles({
   container: {
@@ -22,6 +24,7 @@ const useStyles = makeStyles({
 
 const CreateCategory = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [category, setCategory] = useState("");
 
@@ -46,7 +49,7 @@ const CreateCategory = () => {
         label={"カテゴリーを作成する"}
         fullWidth={true}
         disabled={!category}
-        onClick={() => console.log("click!")}
+        onClick={() => dispatch(createCategory(category))}
       />
     </div>
   );
