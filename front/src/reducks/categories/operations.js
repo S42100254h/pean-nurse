@@ -19,3 +19,39 @@ export const fetchCategories = () => {
       });
   };
 };
+
+export const deleteCategory = (id) => {
+  return async (dispatch, getCategories) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token");
+      const client = localStorage.getItem("client");
+      const uid = localStorage.getItem("uid");
+      const apiEndpoint = process.env.REACT_APP_API_URL + "categories/" + id;
+
+      axios
+        .delete(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then(() => {
+          const prevCategories = getCategories().categories.list;
+          const nextCategories = prevCategories.filter((category) => category.id !== id);
+          dispatch(deleteCategoryAction(nextCategories));
+          dispatch(showLoadingAction("Delete category..."));
+
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "カテゴリーを削除しました。" }));
+          }, 1000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "カテゴリーの削除に失敗しました。" }));
+          }, 400);
+        });
+    }
+  };
+};
