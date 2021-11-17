@@ -87,7 +87,6 @@ export const editQuiz = (quiz, choice1, select1, choice2, select2, choice3, sele
 
           for ( let i = 0; i < choiceBodyList.length; i++) {
             const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/" + idList[i];
-            console.log(choiceApiEndpoint);
 
             axios
               .patch(choiceApiEndpoint, choiceBodyList[i], { headers: headers })

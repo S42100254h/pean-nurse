@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import { AdminsReducer } from "../admins/reducers";
+import { CategoriesReducer } from "../categories/reducers";
 import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
 import { QuizzesReducer } from "../quizzes/reducers";
@@ -18,6 +19,7 @@ export const createStore = (history) => {
     combineReducers({
       router: connectRouter(history),
       admins: AdminsReducer,
+      categories: CategoriesReducer,
       loading: LoadingReducer,
       notification: NotificationReducer,
       quizzes: QuizzesReducer,

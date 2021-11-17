@@ -5,6 +5,9 @@ const initialState = {
     name: "",
     email: "",
   },
+  categories: {
+    list: [],
+  },
   loading: {
     state: false,
     text: "",
