@@ -5,7 +5,7 @@ import { deleteCategory, fetchCategories } from "../reducks/categories/operation
 import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid } from "@mui/x-data-grid";
 import { SecondaryButton } from "../components/UIkit";
-import { push } from "connected-react-router";
+import { DeleteDialog } from "../components/DeleteDialog";
 
 const useStyles = makeStyles({
   container: {
@@ -67,6 +67,18 @@ const CategoryList = () => {
           rowsPerPageOptions={[10]}
         />
       </div>
+      <DeleteDialog
+        open={open}
+        onClose={() => {
+          setSelectedId("");
+          setOpen(false);
+        }}
+        onClickStop={() => setOpen(false)}
+        onClickProceed={() => {
+          dispatch(deleteCategory(selectedId));
+          setOpen(false);
+        }}
+      />
     </div>
   );
 };
