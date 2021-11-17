@@ -5,7 +5,7 @@ import { deleteQuiz, fetchQuizzes } from "../reducks/quizzes/operations";
 import { getQuizzes } from "../reducks/quizzes/selectors";
 import { DataGrid } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
-import { DeleteQuizDialog } from "../components/DeleteQuizDialog";
+import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
 import moment from "moment";
 
@@ -91,7 +91,7 @@ const QuizList = () => {
           rowsPerPageOptions={[10]}
         />
       </div>
-      <DeleteQuizDialog
+      <DeleteDialog
         open={open}
         onClose={() => {
           setSelectedId("");

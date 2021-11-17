@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { PrimaryButton, SecondaryButton } from "../../components/UIkit";
+import { PrimaryButton, SecondaryButton } from "../UIkit";
 
 const useStyles = makeStyles({
   heading: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DeleteQuizDialog = (props) => {
+const DeleteDialog = (props) => {
   const classes = useStyles();
 
   return (
@@ -29,9 +29,9 @@ const DeleteQuizDialog = (props) => {
       >
         <DialogContent>
           <div>
-            <h1 className={classes.heading}>クイズを削除する</h1>
+            <h1 className={classes.heading}>削除する</h1>
             <div className="module-spacer--extra-small" />
-            <h2>本当にクイズを削除してもよろしいですか？</h2>
+            <h2>本当に削除してもよろしいですか？</h2>
             <div className="module-spacer--extra-extra-small" />
             <img src={`${window.location.origin}/cat.png`} alt="ねこ" width="180px" height="180px" className={classes.image} />
           </div>
@@ -43,7 +43,7 @@ const DeleteQuizDialog = (props) => {
           />
           <div className="module-spacer--extra-small" />
           <SecondaryButton
-            label={"クイズを削除する"}
+            label={"削除する"}
             fullWidth={true}
             onClick={props.onClickProceed}
           />
@@ -54,4 +54,4 @@ const DeleteQuizDialog = (props) => {
   );
 };
 
-export default DeleteQuizDialog;
+export default DeleteDialog;
