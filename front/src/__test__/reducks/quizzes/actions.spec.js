@@ -19,7 +19,7 @@ describe("actions.jsのテスト", () => {
   });
   
   it("deleteQuizActionのテスト", () => {
-    const dummy = { id: 1, title: "neko"};
+    const dummy = { id: 1, title: "neko" };
     const action = deleteQuizAction(dummy);
 
     expect(action).toStrictEqual(
