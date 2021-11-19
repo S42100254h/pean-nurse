@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import Select from "react-select";
-import { ConfirmDialog } from "../components/ConfirmDialog";
+import { ConfirmCreateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
 import { createQuiz } from "../function/quiz";
 import { fetchCategories } from "../reducks/categories/operations";
@@ -243,16 +243,12 @@ const CreateQuiz = () => {
         disabled={!quiz || !choice1 || !choice2}
         onClick={() => handleDialogOpen()}
       />
-      <ConfirmDialog
+      <ConfirmCreateDialog
         quiz={quiz}
         choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
         select1={select1} select2={select2} select3={select3} select4={select4}
-        categoryArray={categoryArray}
         open={open}
         onClose={handleDialogClose}
-        headline={"以下の内容でクイズを作成してもよろしいですか？"}
-        buttonLabel={"クイズを作成する"}
-        func={createQuiz}
       />
     </div>
   );

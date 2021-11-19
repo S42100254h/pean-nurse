@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
-import { ConfirmDialog } from "../components/ConfirmDialog";
+import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
 import { editQuiz } from "../function/quiz";
 import axios from "axios";
@@ -265,7 +265,7 @@ const QuizDetail = () => {
         disabled={!quiz || !choice1 || !choice2}
         onClick={() => handleDialogOpen()}
       />
-      <ConfirmDialog
+      <ConfirmUpdateDialog
         id={match.params.id}
         quiz={quiz}
         choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
@@ -273,9 +273,6 @@ const QuizDetail = () => {
         id1={id1} id2={id2} id3={id3} id4={id4}
         open={open}
         onClose={handleDialogClose}
-        headline={"以下の内容でクイズを更新してもよろしいですか？"}
-        buttonLabel={"クイズを更新する"}
-        func={editQuiz}
       />
     </div>
   );
