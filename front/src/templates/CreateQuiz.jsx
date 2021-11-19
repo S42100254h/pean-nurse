@@ -1,9 +1,13 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
+import Select from "react-select";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
 import { createQuiz } from "../function/quiz";
+import { fetchCategories } from "../reducks/categories/operations";
+import { getCategories } from "../reducks/categories/selectors";
 
 const useStyles = makeStyles({
   container: {
@@ -28,7 +32,14 @@ const useStyles = makeStyles({
 
 const CreateQuiz = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const categories = getCategories(selector);
   
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
+
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
     [choice2, setChoice2] = useState(""),
@@ -38,6 +49,7 @@ const CreateQuiz = () => {
     [select2, setSelect2] = useState(""),
     [select3, setSelect3] = useState(""),
     [select4, setSelect4] = useState(""),
+    [categoryArray, setCategoryArray] = useState([]),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
@@ -101,6 +113,14 @@ const CreateQuiz = () => {
     { label: "right", value: true, id: "right" },
   ];
 
+  const options = categories.map((category) => (
+    {
+      id: category.id,
+      value: category.id,
+      label: category.name,
+    }
+  ));
+
   return (
     <div className={classes.container}>
       <h2 className={classes.headline}>クイズ作成</h2>
@@ -114,6 +134,12 @@ const CreateQuiz = () => {
         value={quiz}
         type={"text"}
         onChange={inputQuiz}
+      />
+      <div className="module-spacer--small" />
+      <Select
+        isMulti
+        options={options}
+        placeholder={"カテゴリーを選択してください"}
       />
       <div className="module-spacer--small" />
       <TextInput
@@ -221,6 +247,7 @@ const CreateQuiz = () => {
         quiz={quiz}
         choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
         select1={select1} select2={select2} select3={select3} select4={select4}
+        categoryArray={categoryArray}
         open={open}
         onClose={handleDialogClose}
         headline={"以下の内容でクイズを作成してもよろしいですか？"}
