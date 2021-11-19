@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
 import { Choice, Quiz } from "./index";
+import { editQuiz } from "../../function/quiz";
 
 const useStyles = makeStyles({
   container: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, headline, buttonLabel, func, id }) => {
+const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, id }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
@@ -32,7 +33,7 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
       >
         <DialogContent>
           <div className={classes.container}>
-            <div className={classes.headline}>{headline}</div>
+            <div className={classes.headline}>以下の内容でクイズを更新してもよろしいですか？</div>
             <div className="module-spacer--extra-small" />
             <Quiz quiz={quiz} label={"問題"} />
             <Choice choice={choice1} select={select1} label={"選択肢１"} />
@@ -41,9 +42,9 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
             <Choice choice={choice4} select={select4} label={"選択肢４"} />
             <div className="module-spacer--extra-extra-small" />
             <PrimaryButton
-              label={buttonLabel}
+              label={"クイズを更新する"}
               fullWidth={true}
-              onClick={() => dispatch(func(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id))}
+              onClick={() => dispatch(editQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id))}
             />
           </div>
         </DialogContent>
@@ -52,4 +53,4 @@ const ConfirmDialog = ({ quiz, choice1, select1, choice2, select2, choice3, sele
   );
 };
 
-export default ConfirmDialog;
+export default ConfirmUpdateDialog;
