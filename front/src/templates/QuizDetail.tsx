@@ -129,11 +129,11 @@ const QuizDetail = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes(true)) {
+    if (![select1, select2, select3, select4].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes(false)) {
+    if (![select1, select2, select3, select4].includes("false")) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
@@ -145,8 +145,8 @@ const QuizDetail = () => {
   };
 
   const menus = [
-    { label: "wrong", value: false, id: "wrong" },
-    { label: "right", value: true, id: "right" },
+    { label: "wrong", value: "false", id: "wrong" },
+    { label: "right", value: "true", id: "right" },
   ];
 
   return (

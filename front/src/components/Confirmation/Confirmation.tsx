@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { PrimaryButton, SecondaryButton } from "../../components/UIkit";
+import { PrimaryButton, SecondaryButton } from "../UIkit";
 
 const useStyles = makeStyles({
   heading: {

@@ -13,7 +13,7 @@ import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     marginTop: "40px",
     display: "block",
@@ -65,14 +65,14 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "75px",
     left: "75px",
-    zIndex: "1",
+    zIndex: 1,
   },
   headline: {
     fontSize: "1.563rem",
     margin: "0 auto 1rem auto",
     textAlign: "center",
   },
-}));
+});
 
 const Setting = () => {
   const classes = useStyles();

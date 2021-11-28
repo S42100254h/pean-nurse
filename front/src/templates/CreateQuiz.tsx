@@ -5,7 +5,6 @@ import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import Select from "react-select";
 import { ConfirmCreateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
-import { createQuiz } from "../function/quiz";
 import { fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 
@@ -49,7 +48,6 @@ const CreateQuiz = () => {
     [select2, setSelect2] = useState(""),
     [select3, setSelect3] = useState(""),
     [select4, setSelect4] = useState(""),
-    [categoryArray, setCategoryArray] = useState([]),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
@@ -92,11 +90,11 @@ const CreateQuiz = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes(true)) {
+    if (![select1, select2, select3, select4].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes(false)) {
+    if (![select1, select2, select3, select4].includes("false")) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
@@ -109,8 +107,8 @@ const CreateQuiz = () => {
   };
 
   const menus = [
-    { label: "wrong", value: false, id: "wrong" },
-    { label: "right", value: true, id: "right" },
+    { label: "wrong", value: "false", id: "wrong" },
+    { label: "right", value: "true", id: "right" },
   ];
 
   const options = categories.map((category) => (

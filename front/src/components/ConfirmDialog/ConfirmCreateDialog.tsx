@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, id }) => {
+const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
@@ -44,7 +44,7 @@ const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id))}
+              onClick={() => dispatch(createQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4))}
             />
           </div>
         </DialogContent>

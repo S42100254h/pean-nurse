@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "3px",
     boxShadow: "0 0 4px grey",
     backgroundColor: "#fff",
-    zIndex: "999",
+    zIndex: 999,
   },
   popContainer: {
     height: "50%",
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   clickAwayContainer: {
     position: "fixed",
     inset: "0",
-    zIndex: "20000",
+    zIndex: 20000,
   },
 }));
 

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
-import { PrimaryButton, SelectBox, TextInput } from "../../components/UIkit";
+import { PrimaryButton, SelectBox, TextInput } from "../UIkit";
 import { getUserEmail, getUserName } from "../../reducks/users/selectors";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -65,7 +65,7 @@ const ClosableDialog = (props) => {
   const [email, setEmail] = useState(""),
     [select, setSelect] = useState(""),
     [text, setText] = useState(""),
-    [image, setImage] = useState(""),
+    [image, setImage] = useState<any>(""),
     [name, setName] = useState(""),
     [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -150,7 +150,6 @@ const ClosableDialog = (props) => {
             setIsSubmitted(false);
           }, 200);
         }}
-        ModalProps={{ keepMounted: true }}
         fullWidth={true}
         maxWidth={"md"}
       >
