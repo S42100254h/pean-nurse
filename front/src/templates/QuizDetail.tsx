@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
-import { editQuiz } from "../function/quiz";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -28,9 +27,13 @@ const useStyles = makeStyles({
   },
 });
 
+type MatchParams = {
+  id: string;
+};
+
 const QuizDetail = () => {
   const classes = useStyles();
-  const match = useRouteMatch();
+  const match = useRouteMatch<MatchParams>();
 
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
