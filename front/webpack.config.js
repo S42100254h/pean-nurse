@@ -1,14 +1,14 @@
 const path = require("path");
 module.exports = {
   entry: {
-    bundle: "./src/index.ts",
+    bundle: "./src/index.tsx",
   },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js"],
   },
   devServer: {
     static: {
@@ -18,7 +18,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx$/,
         loader: "ts-loader",
       },
     ],
