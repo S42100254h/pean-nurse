@@ -1,4 +1,6 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   entry: {
     bundle: "./src/index.tsx",
@@ -7,6 +9,12 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "PeAN",
+      template: "./public/index.html",
+    })
+  ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
