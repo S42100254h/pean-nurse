@@ -147,7 +147,6 @@ const Setting = () => {
 
   return (
     <div className={classes.root}>
-      <div onClose={(e) => handleModalToggle(e)} />
       <div className={classes.container}>
         <Grid container spacing={4} justify="center">
           <Grid item xs={12} sm={3}>

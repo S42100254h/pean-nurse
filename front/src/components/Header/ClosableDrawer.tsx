@@ -78,7 +78,6 @@ const ClosableDrawer = (props) => {
         classes={{ paper: classes.drawerPaper }}
         ModalProps={{ keepMounted: true }}
       >
-        <div onClose={(e) => props.onClose(e)} onKeyDown={(e) => props.onClose(e)} />
         <div>
           <List>
             {menus.map((menu) => (
