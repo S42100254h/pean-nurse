@@ -1,4 +1,5 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 
@@ -21,6 +22,7 @@ module.exports = {
       display: "standalone",
       start_url: "index.html",
     }),
+    new Dotenv(),
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
