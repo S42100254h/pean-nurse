@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
   entry: {
@@ -13,7 +14,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "PeAN",
       template: "./public/index.html",
-    })
+    }),
+    new WebpackPwaManifest({
+      short_name: "PeAN",
+      name: "PeAN",
+      display: "standalone",
+      start_url: "index.html",
+    }),
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
@@ -35,7 +42,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
