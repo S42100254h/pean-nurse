@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, SecondaryButton } from "../UIkit";
+import cat from "../../assets/img/cat.png";
 
 const useStyles = makeStyles({
   heading: {
@@ -38,7 +39,7 @@ const Confirmation = (props) => {
             <h2>退会手続きの前にご確認ください</h2>
             <div className="module-spacer--extra-extra-small" />
             <p>アカウントを削除すると、これまでのデータが<span className={classes.span}>すべて削除されます</span></p>
-            <img src="cat.png" alt="ねこ" width="180px" height="180px" className={classes.image} />
+            <img src={cat} alt="ねこ" width="180px" height="180px" className={classes.image} />
           </div>
           <div className="module-spacer--extra-small" />
           <PrimaryButton

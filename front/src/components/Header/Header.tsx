@@ -4,7 +4,7 @@ import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
-import logo from "../../assets/img/icons/logo.png";
+import logo from "../../assets/img/logo.png";
 import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
 import { SignUpDialog } from "../SignUpDialog";

@@ -6,6 +6,7 @@ import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, TextInput } from "../UIkit";
 import { getUserEmail, getUserName } from "../../reducks/users/selectors";
 import { useSelector } from "react-redux";
+import cat from "../../assets/img/cat.png";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -157,7 +158,7 @@ const ClosableDialog = (props) => {
           <DialogContent>
             <p>貴重なご意見をいただきありがとうございます。</p>
             <p>今後ともPeANをよろしくお願いいたします！</p>
-            <img src="cat.png" alt="ねこ" width="180px" height="180px" />
+            <img src={cat} alt="ねこ" width="180px" height="180px" />
           </DialogContent>
         ) : (
           <DialogContent>
@@ -167,7 +168,7 @@ const ClosableDialog = (props) => {
               <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
 
               <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
-              <img src="cat.png" alt="ねこ" width="180px" height="180px" />
+              <img src={cat} alt="ねこ" width="180px" height="180px" />
             </div>
             <div className={classes.inputArea}>
               <TextInput
