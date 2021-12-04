@@ -1,16 +1,39 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+
 module.exports = {
   entry: {
-    bundle: "./src/index.ts",
+    bundle: "./src/index.tsx",
   },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "PeAN",
+      template: "./public/index.html",
+    }),
+    new WebpackPwaManifest({
+      short_name: "PeAN",
+      name: "PeAN",
+      display: "standalone",
+      start_url: "index.html",
+    }),
+    new FaviconsWebpackPlugin("./src/assets/img/logo.png"),
+    new Dotenv(),
+  ],
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js"],
   },
   devServer: {
+    host: "0.0.0.0",
+    port: 3000,
+    hot: true,
+    historyApiFallback: true,
     static: {
       directory: path.join(__dirname, "dist"),
     },
@@ -18,8 +41,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx$/,
         loader: "ts-loader",
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]",
+          outputPath: "img",
+        },
       },
     ],
   },
