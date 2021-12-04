@@ -4,7 +4,7 @@ RSpec.describe InquiryMailer, type: :mailer do
   describe "send_mail" do
     subject(:mail) do
       @inquiry = inquiry
-      @file = File.join(Rails.root, "front", "public", "cat.png")
+      @file = File.join(Rails.root, "front", "src", "assets", "img", "cat.png")
       @filename = "cat.png"
 
       InquiryMailer.send_mail(@inquiry, @file, @filename).deliver
