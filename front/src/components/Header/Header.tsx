@@ -4,7 +4,7 @@ import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
-import logo from "../../assets/img/logo.png";
+import pean from "../../assets/img/pean.png";
 import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
 import { SignUpDialog } from "../SignUpDialog";
@@ -129,7 +129,7 @@ const Header = () => {
         <Box>
           <AppBar position="fixed" className={classes.menuBar}>
             <Toolbar className={classes.toolBar}>
-              <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/management"))} />
+              <img src={pean} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/management"))} />
               <div className={classes.leftToolbar}>
                 <div className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</div>
                 <div className={classes.headerItem} onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</div>
@@ -153,7 +153,7 @@ const Header = () => {
           <AppBar position="fixed" className={classes.menuBar}>
             {isSignedIn ? (
               <Toolbar className={classes.toolBar}>
-                <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/dashboard"))} />
+                <img src={pean} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/dashboard"))} />
                 <div className={classes.leftToolbar}>
                   <p className={classes.headerItem} onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</p>
                   <p className={classes.headerItem} onClick={() => dispatch(push("/courselist"))}>コース一覧</p>
@@ -167,7 +167,7 @@ const Header = () => {
               </Toolbar>
             ) : (
               <Toolbar className={classes.toolBar}>
-                <img src={logo} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
+                <img src={pean} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
                 <div className={classes.rightToolbar}>
                   <p className={classes.headerItem} onClick={handleSignInDialogToggle}>サインイン</p>
                   <p className={classes.headerItem} onClick={handleSignUpDialogToggle}>無料会員登録</p>
