@@ -50,7 +50,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpg|png|ico)$/,
         loader: "file-loader",
         options: {
           name: "[name].[ext]",
