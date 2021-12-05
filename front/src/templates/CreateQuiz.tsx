@@ -100,7 +100,6 @@ const CreateQuiz = () => {
     }
     if (choice1 && select1 === "" || choice2 && select2 === "" || choice3 && select3 === "" || choice4 && select4 === "") {
       alert("「right」または「wrong」を選択してください。");
-      console.log(select1);
       return;
     }
     setOpen(true);

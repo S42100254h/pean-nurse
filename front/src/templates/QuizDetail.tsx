@@ -40,10 +40,10 @@ const QuizDetail = () => {
     [choice2, setChoice2] = useState(""),
     [choice3, setChoice3] = useState(""),
     [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(""),
-    [select2, setSelect2] = useState(""),
-    [select3, setSelect3] = useState(""),
-    [select4, setSelect4] = useState(""),
+    [select1, setSelect1] = useState<boolean>(false),
+    [select2, setSelect2] = useState<boolean>(false),
+    [select3, setSelect3] = useState<boolean>(false),
+    [select4, setSelect4] = useState<boolean>(false),
     [id1, setId1] = useState(""),
     [id2, setId2] = useState(""),
     [id3, setId3] = useState(""),
@@ -132,16 +132,12 @@ const QuizDetail = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes("true")) {
+    if (![select1, select2, select3, select4].includes(true)) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes("false")) {
+    if (![select1, select2, select3, select4].includes(false)) {
       alert("少なくとも１つは誤った選択肢が必要です。");
-      return;
-    }
-    if (choice1 && select1 === "" || choice2 && select2 === "" || choice3 && select3 === "" || choice4 && select4 === "") {
-      alert("「right」または「wrong」を選択してください。");
       return;
     }
     setOpen(true);
