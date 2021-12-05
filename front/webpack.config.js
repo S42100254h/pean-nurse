@@ -1,6 +1,7 @@
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const InterpolateHtmlPlugin = require("interpolate-html-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
@@ -23,6 +24,9 @@ module.exports = {
       name: "PeAN",
       display: "standalone",
       start_url: "index.html",
+    }),
+    new InterpolateHtmlPlugin({
+      "PUBLIC_URL": "http://localhost:3000/",
     }),
     new FaviconsWebpackPlugin("./src/assets/img/favicon.ico"),
     new Dotenv(),
