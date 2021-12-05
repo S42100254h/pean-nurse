@@ -2,7 +2,6 @@ const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InterpolateHtmlPlugin = require("interpolate-html-plugin");
-const WebpackPwaManifest = require("webpack-pwa-manifest");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 module.exports = {
@@ -19,14 +18,8 @@ module.exports = {
       template: "./public/index.html",
       favicons: "./src/assets/img/favicon.ico",
     }),
-    new WebpackPwaManifest({
-      short_name: "PeAN",
-      name: "PeAN",
-      display: "standalone",
-      start_url: "index.html",
-    }),
     new InterpolateHtmlPlugin({
-      "PUBLIC_URL": "http://localhost:3000/",
+      "PUBLIC_URL": "http://localhost:3000",
     }),
     new FaviconsWebpackPlugin("./src/assets/img/favicon.ico"),
     new Dotenv(),
