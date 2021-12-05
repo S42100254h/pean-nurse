@@ -16,6 +16,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "PeAN",
       template: "./public/index.html",
+      favicons: "./src/assets/img/favicon.ico",
     }),
     new WebpackPwaManifest({
       short_name: "PeAN",
@@ -23,7 +24,7 @@ module.exports = {
       display: "standalone",
       start_url: "index.html",
     }),
-    new FaviconsWebpackPlugin("./src/assets/img/logo.png"),
+    new FaviconsWebpackPlugin("./src/assets/img/favicon.ico"),
     new Dotenv(),
   ],
   resolve: {
