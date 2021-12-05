@@ -6319,7 +6319,7 @@
   optionalDependencies:
     "html-webpack-plugin" ">=5.0.0"
 
-"favicons@>= 6.2.0":
+"favicons@^6.2.2", "favicons@>= 6.2.0":
   "integrity" "sha512-qhvFqbhlXA/JYIDYuxTrE4uT9rcpTCrWvF3UG0GxBoLl/XgFBBTrZkQvASrkMebSwDCJ9kKGypRWIbvoRZLBsw=="
   "resolved" "https://registry.npmjs.org/favicons/-/favicons-6.2.2.tgz"
   "version" "6.2.2"
