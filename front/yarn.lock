@@ -7104,7 +7104,7 @@
     "relateurl" "^0.2.7"
     "terser" "^5.10.0"
 
-"html-webpack-plugin@^5.5.0", "html-webpack-plugin@>=5.0.0":
+"html-webpack-plugin@^5.5.0", "html-webpack-plugin@>=4.5.1", "html-webpack-plugin@>=5.0.0":
   "integrity" "sha512-sy88PC2cRTVxvETRgUHFrL4No3UxvcH8G1NepGhqaTT+GXN2kTamqasot0inS5hXeg1cMbFDt27zzo9p35lZVw=="
   "resolved" "https://registry.npmjs.org/html-webpack-plugin/-/html-webpack-plugin-5.5.0.tgz"
   "version" "5.5.0"
@@ -7437,6 +7437,13 @@
     "get-intrinsic" "^1.1.0"
     "has" "^1.0.3"
     "side-channel" "^1.0.4"
+
+"interpolate-html-plugin@^4.0.0":
+  "integrity" "sha512-wYEOLd/Ts0C5bo4p7pkX5XicCSYn/5dsGGWnlg2rnW0IzZfJmrdt8UEVcsNmX9t5j3kweLcHrh9J6SVH43q7/Q=="
+  "resolved" "https://registry.npmjs.org/interpolate-html-plugin/-/interpolate-html-plugin-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "escape-string-regexp" "^1.0.5"
 
 "interpret@^2.2.0":
   "integrity" "sha512-Ju0Bz/cEia55xDwUWEa8+olFpCiQoypjnQySseKtmjNrnps3P+xfpUmGr90T7yjlVJmOtybRvPXhKMbHr+fWnw=="
