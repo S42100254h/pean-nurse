@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, SecondaryButton } from "../UIkit";
+import cat from "../../assets/img/cat.png";
 
 const useStyles = makeStyles({
   heading: {
@@ -33,7 +34,7 @@ const DeleteDialog = (props) => {
             <div className="module-spacer--extra-small" />
             <h2>本当に削除してもよろしいですか？</h2>
             <div className="module-spacer--extra-extra-small" />
-            <img src={`${window.location.origin}/cat.png`} alt="ねこ" width="180px" height="180px" className={classes.image} />
+            <img src={cat} alt="ねこ" width="180px" height="180px" className={classes.image} />
           </div>
           <div className="module-spacer--extra-small" />
           <PrimaryButton
