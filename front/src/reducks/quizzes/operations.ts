@@ -2,9 +2,10 @@ import axios from "axios";
 import { fetchQuizzesAction, deleteQuizAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { Dispatch } from "redux";
 
 export const fetchQuizzes = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes";
     
     axios
@@ -20,8 +21,8 @@ export const fetchQuizzes = () => {
   };
 };
 
-export const deleteQuiz = (id) => {
-  return async (dispatch, getQuizzes) => {
+export const deleteQuiz = (id: number) => {
+  return async (dispatch: Dispatch, getQuizzes) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");

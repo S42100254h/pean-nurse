@@ -32,7 +32,7 @@ const CategoryList = () => {
   }, []);
 
   const [open, setOpen] = useState(false),
-    [selectedId, setSelectedId] = useState("");
+    [selectedId, setSelectedId] = useState<number | null>(null);
   
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
@@ -70,7 +70,7 @@ const CategoryList = () => {
       <DeleteDialog
         open={open}
         onClose={() => {
-          setSelectedId("");
+          setSelectedId(null);
           setOpen(false);
         }}
         onClickStop={() => setOpen(false)}

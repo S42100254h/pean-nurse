@@ -2,9 +2,10 @@ import axios from "axios";
 import { fetchCategoriesAction, deleteCategoryAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { Dispatch } from "redux";
 
 export const fetchCategories = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "categories";
     
     axios
@@ -20,8 +21,8 @@ export const fetchCategories = () => {
   };
 };
 
-export const deleteCategory = (id) => {
-  return async (dispatch, getCategories) => {
+export const deleteCategory = (id: number) => {
+  return async (dispatch: Dispatch, getCategories) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");

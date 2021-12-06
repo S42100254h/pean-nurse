@@ -4,9 +4,10 @@ import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
+import { Dispatch } from "redux";
 
-export const adminSignIn = (email, password) => {
-  return async (dispatch) => {
+export const adminSignIn = (email: string, password: string) => {
+  return async (dispatch: Dispatch) => {
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
@@ -50,7 +51,7 @@ export const adminSignIn = (email, password) => {
 };
 
 export const adminSignOut = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -88,7 +89,7 @@ export const adminSignOut = () => {
 };
 
 export const listenAdminState = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -123,7 +124,7 @@ export const listenAdminState = () => {
 };
 
 export const redirectToManagement = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");

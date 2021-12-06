@@ -4,9 +4,10 @@ import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
+import { Dispatch } from "redux";
 
-export const signUp = (name, email, password, password_confirmation) => {
-  return async (dispatch) => {
+export const signUp = (name: string, email: string, password: string, password_confirmation: string) => {
+  return async (dispatch: Dispatch) => {
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
@@ -54,8 +55,8 @@ export const signUp = (name, email, password, password_confirmation) => {
   };
 };
 
-export const signIn = (email, password) => {
-  return async (dispatch) => {
+export const signIn = (email: string, password: string) => {
+  return async (dispatch: Dispatch) => {
     if(!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
@@ -99,7 +100,7 @@ export const signIn = (email, password) => {
 };
 
 export const signOut = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -137,7 +138,7 @@ export const signOut = () => {
 };
 
 export const deleteUser = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -174,8 +175,8 @@ export const deleteUser = () => {
   };
 };
 
-export const editUserInfo = (name, email) => {
-  return async (dispatch) => {
+export const editUserInfo = (name: string, email: string) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -217,8 +218,8 @@ export const editUserInfo = (name, email) => {
   };
 };
 
-export const editImage = (image) => {
-  return async (dispatch) => {
+export const editImage = (image: File) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -256,7 +257,7 @@ export const editImage = (image) => {
 };
 
 export const deleteImage = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -291,8 +292,8 @@ export const deleteImage = () => {
   };
 };
 
-export const editPassword = (current_password, password, password_confirmation) => {
-  return async (dispatch) => {
+export const editPassword = (current_password: string, password: string, password_confirmation: string) => {
+  return async (dispatch: Dispatch) => {
     if(!isValidRequiredInput(current_password, password, password_confirmation)) {
       alert("未入力の項目があります");
       return false;
@@ -344,8 +345,8 @@ export const editPassword = (current_password, password, password_confirmation) 
   };
 };
 
-export const forgetPassword = (email) => {
-  return async (dispatch) => {
+export const forgetPassword = (email: string) => {
+  return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
     const body = { email: email };
 
@@ -368,8 +369,8 @@ export const forgetPassword = (email) => {
   };
 };
 
-export const resetPassword = (password, password_confirmation) => {
-  return async (dispatch) => {
+export const resetPassword = (password: string, password_confirmation: string) => {
+  return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
     const body = { password: password, password_confirmation: password_confirmation };
     
@@ -404,7 +405,7 @@ export const resetPassword = (password, password_confirmation) => {
 };
 
 export const listenAuthState = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
@@ -440,7 +441,7 @@ export const listenAuthState = () => {
 };
 
 export const redirectToDashboard = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token");
       const client = localStorage.getItem("client");
