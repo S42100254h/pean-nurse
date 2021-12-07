@@ -53,9 +53,9 @@ export const adminSignIn = (email: string, password: string) => {
 export const adminSignOut = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "admin/sign_out";
 
       axios
@@ -91,9 +91,9 @@ export const adminSignOut = () => {
 export const listenAdminState = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "admins/currentadmin";
 
       axios
@@ -126,9 +126,9 @@ export const listenAdminState = () => {
 export const redirectToManagement = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "admins/currentadmin";
 
       axios

@@ -102,9 +102,9 @@ export const signIn = (email: string, password: string) => {
 export const signOut = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth/sign_out";
 
       axios
@@ -140,9 +140,9 @@ export const signOut = () => {
 export const deleteUser = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
       
       axios
@@ -178,9 +178,9 @@ export const deleteUser = () => {
 export const editUserInfo = (name: string, email: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { name: name, email: email };
@@ -221,9 +221,9 @@ export const editUserInfo = (name: string, email: string) => {
 export const editImage = (image: File) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       let form = new FormData();
@@ -259,9 +259,9 @@ export const editImage = (image: File) => {
 export const deleteImage = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { image: "" };
@@ -310,9 +310,9 @@ export const editPassword = (current_password: string, password: string, passwor
     }
     
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
 
       const body = { current_password: current_password, password: password, password_confirmation: password_confirmation };
@@ -375,9 +375,9 @@ export const resetPassword = (password: string, password_confirmation: string) =
     const body = { password: password, password_confirmation: password_confirmation };
     
     const params = new URLSearchParams(window.location.search);
-    const auth_token = params.get("access-token");
-    const client = params.get("client");
-    const uid = params.get("uid");
+    const auth_token = params.get("access-token") || "";
+    const client = params.get("client") || "";
+    const uid = params.get("uid") || "";
 
     axios
       .put(apiEndpoint, body, {
@@ -407,9 +407,9 @@ export const resetPassword = (password: string, password_confirmation: string) =
 export const listenAuthState = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/currentuser";
 
       axios
@@ -443,9 +443,9 @@ export const listenAuthState = () => {
 export const redirectToDashboard = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/currentuser";
 
       axios

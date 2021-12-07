@@ -44,10 +44,10 @@ const QuizDetail = () => {
     [select2, setSelect2] = useState<boolean>(false),
     [select3, setSelect3] = useState<boolean>(false),
     [select4, setSelect4] = useState<boolean>(false),
-    [id1, setId1] = useState(""),
-    [id2, setId2] = useState(""),
-    [id3, setId3] = useState(""),
-    [id4, setId4] = useState(""),
+    [id1, setId1] = useState<number | null>(null),
+    [id2, setId2] = useState<number | null>(null),
+    [id3, setId3] = useState<number | null>(null),
+    [id4, setId4] = useState<number | null>(null),
     [open, setOpen] = useState(false);
 
   useEffect(() => {

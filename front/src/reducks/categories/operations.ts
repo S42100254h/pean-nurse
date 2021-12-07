@@ -22,11 +22,11 @@ export const fetchCategories = () => {
 };
 
 export const deleteCategory = (id: number) => {
-  return async (dispatch: Dispatch, getCategories) => {
+  return async (dispatch: Dispatch, getCategories: Function) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "categories/" + id;
 
       axios

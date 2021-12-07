@@ -44,10 +44,10 @@ const CreateQuiz = () => {
     [choice2, setChoice2] = useState(""),
     [choice3, setChoice3] = useState(""),
     [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(""),
-    [select2, setSelect2] = useState(""),
-    [select3, setSelect3] = useState(""),
-    [select4, setSelect4] = useState(""),
+    [select1, setSelect1] = useState(false),
+    [select2, setSelect2] = useState(false),
+    [select3, setSelect3] = useState(false),
+    [select4, setSelect4] = useState(false),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
@@ -90,16 +90,12 @@ const CreateQuiz = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes("true")) {
+    if (![select1, select2, select3, select4].includes(true)) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes("false")) {
+    if (![select1, select2, select3, select4].includes(false)) {
       alert("少なくとも１つは誤った選択肢が必要です。");
-      return;
-    }
-    if (choice1 && select1 === "" || choice2 && select2 === "" || choice3 && select3 === "" || choice4 && select4 === "") {
-      alert("「right」または「wrong」を選択してください。");
       return;
     }
     setOpen(true);

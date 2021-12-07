@@ -19,7 +19,21 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }) => {
+type Props = {
+  quiz: string;
+  choice1: string;
+  select1: boolean;
+  choice2: string;
+  select2: boolean;
+  choice3: string;
+  select3: boolean;
+  choice4: string;
+  select4: boolean;
+  open: boolean;
+  onClose: Function;
+};
+
+const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }: Props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   

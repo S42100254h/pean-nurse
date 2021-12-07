@@ -56,7 +56,7 @@ const SignUp = () => {
     setConfirmPassword(event.target.value);
   }, [setConfirmPassword]);
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       dispatch(signUp(name, email, password, confirmPassword));
     }

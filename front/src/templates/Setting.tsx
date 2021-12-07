@@ -91,7 +91,7 @@ const Setting = () => {
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 

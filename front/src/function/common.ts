@@ -1,9 +1,9 @@
-export const isValidEmailFormat = (email) => {
+export const isValidEmailFormat = (email: string) => {
   const regex = /([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})/i;
   return regex.test(email);
 };
 
-export const isValidRequiredInput = (...args) => {
+export const isValidRequiredInput = (...args: any) => {
   let validator = true;
   for (let i = 0; i < args.length; i=(i+1)|0) {
     if (args[i] === "") {
@@ -13,7 +13,7 @@ export const isValidRequiredInput = (...args) => {
   return validator;
 };
 
-export const isValidPassword = (password, confirmPassword) => {
+export const isValidPassword = (password: string, confirmPassword: string) => {
   let validator = true;
   if (password !== confirmPassword) {
     validator = false;
