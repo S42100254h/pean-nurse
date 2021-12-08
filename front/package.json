@@ -31,6 +31,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "typescript-fsa": "^3.0.0",
+    "typescript-fsa-reducers": "^1.2.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
