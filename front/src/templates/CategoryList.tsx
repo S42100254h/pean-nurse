@@ -6,6 +6,7 @@ import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid } from "@mui/x-data-grid";
 import { SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   container: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
 const CategoryList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
   
   useEffect(() => {

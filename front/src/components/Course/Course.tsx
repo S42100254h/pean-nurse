@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 
@@ -31,7 +31,15 @@ const useStyles = makeStyles({
   },
 });
 
-const Course = (props) => {
+type Props = {
+  title: string;
+  image: any;
+  caption: string;
+  number: number;
+  onClick: MouseEventHandler;
+};
+
+const Course = (props: Props) => {
   const classes = useStyles();
 
   return (

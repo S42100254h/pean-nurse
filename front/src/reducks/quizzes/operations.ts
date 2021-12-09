@@ -3,6 +3,7 @@ import { fetchQuizzesAction, deleteQuizAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { Dispatch } from "redux";
+import { Quiz } from "../../types/entity/quiz";
 
 export const fetchQuizzes = () => {
   return async (dispatch: Dispatch) => {
@@ -39,7 +40,7 @@ export const deleteQuiz = (id: number) => {
         })
         .then(() => {
           const prevQuizzes = getQuizzes().quizzes.list;
-          const nextQuizzes = prevQuizzes.filter((quiz) => quiz.id !== id);
+          const nextQuizzes = prevQuizzes.filter((quiz: Quiz) => quiz.id !== id);
           dispatch(deleteQuizAction(nextQuizzes));
           dispatch(showLoadingAction("Delete quiz..."));
 

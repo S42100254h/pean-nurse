@@ -7,6 +7,7 @@ import { ConfirmCreateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
 import { fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   container: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
 const CreateQuiz = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
   
   useEffect(() => {

@@ -47,7 +47,7 @@ const SignInDialog = (props) => {
     setPassword(event.target.value);
   }, [setPassword]);
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       dispatch(signIn(email, password));
       props.onClick();

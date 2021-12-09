@@ -21,7 +21,12 @@ const useStyles = makeStyles({
   },
 });
 
-const CourseCard = (props) => {
+type Props = {
+  key: number;
+  label: string;
+};
+
+const CourseCard = (props: Props) => {
   const classes = useStyles();
 
   return (

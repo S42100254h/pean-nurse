@@ -17,7 +17,14 @@ const useStyles = makeStyles({
   },
 });
 
-const DeleteDialog = (props) => {
+type Props = {
+  open: boolean;
+  onClose: Function;
+  onClickStop: Function;
+  onClickProceed: Function;
+};
+
+const DeleteDialog = (props: Props) => {
   const classes = useStyles();
 
   return (

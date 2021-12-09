@@ -12,6 +12,7 @@ import { DropDown } from "../UIkit";
 import { getSignedIn } from "../../reducks/users/selectors";
 import { getAdminSignedIn } from "../../reducks/admins/selectors";
 import { adminSignOut } from "../../reducks/admins/operations";
+import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({
   root: {
@@ -61,7 +62,7 @@ const useStyles = makeStyles({
 const Header = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
   const isAdminSignedIn = getAdminSignedIn(selector);
 

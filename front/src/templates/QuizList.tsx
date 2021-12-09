@@ -8,6 +8,9 @@ import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
 import moment from "moment";
+import { GridCellParams } from "@mui/x-data-grid";
+import { Quiz } from "../types/entity/quiz";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   container: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles({
 const QuizList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const quizzes = getQuizzes(selector);
 
   useEffect(() => {
@@ -45,7 +48,7 @@ const QuizList = () => {
       field: "detail",
       headerName: "詳細",
       width: 100,
-      renderCell: (params) =>
+      renderCell: (params: GridCellParams) =>
         <PrimaryButton
           label={"詳細"}
           rowId={params.id}
@@ -68,7 +71,7 @@ const QuizList = () => {
     },
   ];
 
-  const rows = quizzes.map((quiz) => {
+  const rows = quizzes.map((quiz: Quiz) => {
     return (
       {
         id: quiz.id,

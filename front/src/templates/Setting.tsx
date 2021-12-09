@@ -12,6 +12,7 @@ import { deleteImage, editImage, editPassword, editUserInfo } from "../reducks/u
 import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   root: {
@@ -77,7 +78,7 @@ const useStyles = makeStyles({
 const Setting = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const userImage = getUserImage(selector);
   const userName = getUserName(selector);
   const userEmail = getUserEmail(selector);
@@ -139,7 +140,7 @@ const Setting = () => {
     }
   };
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       dispatch(editPassword(current_password, password, password_confirmation));
     }

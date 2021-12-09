@@ -10,6 +10,7 @@ import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "../../reducks/users/selectors";
 import { signOut } from "../../reducks/users/operations";
+import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles(() => ({
   drawer: {
@@ -21,24 +22,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ClosableDrawer = (props) => {
+type Props = {
+  open: boolean;
+  onClose: Function;
+};
+
+const ClosableDrawer = (props: Props) => {
   const classes = useStyles();
-  const { container } = props;
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
   
-  const selectMenu = (event, path) => {
+  const selectMenu = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, path: string) => {
     dispatch(push(path));
     props.onClose(event);
   };
   
-  const handleSignOut = (event) => {
+  const handleSignOut = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     dispatch(signOut());
     props.onClose(event);
   };
   
-  const handleSignIn = (event) => {
+  const handleSignIn = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     dispatch(push("/signin"));
     props.onClose(event);
   };
@@ -70,7 +75,6 @@ const ClosableDrawer = (props) => {
   return (
     <nav className={classes.drawer}>
       <Drawer
-        container={container}
         variant="temporary"
         anchor="right"
         open={props.open}

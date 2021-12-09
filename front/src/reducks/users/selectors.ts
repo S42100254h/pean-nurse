@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
+import { RootState } from "../../types/entity/rootState";
 
-const usersSelector = (state) => state.users;
+const usersSelector = (state: RootState) => state.users;
 
 export const getUserId = createSelector(
   [usersSelector],

@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
+import { RootState } from "../../types/entity/rootState";
 
-const loadingSelector = (state) => state.loading;
+const loadingSelector = (state: RootState) => state.loading;
 
 export const getLoadingState = createSelector(
   [loadingSelector],

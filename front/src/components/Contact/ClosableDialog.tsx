@@ -8,6 +8,7 @@ import { getUserEmail, getUserName } from "../../reducks/users/selectors";
 import { useSelector } from "react-redux";
 import cat from "../../assets/img/cat.png";
 import axios from "axios";
+import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({
   container: {
@@ -59,7 +60,7 @@ const useStyles = makeStyles({
 
 const ClosableDialog = (props) => {
   const classes = useStyles();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const userEmail = getUserEmail(selector);
   const userName = getUserName(selector);
 
@@ -94,7 +95,7 @@ const ClosableDialog = (props) => {
   [setIsSubmitted, isSubmitted]
   );
 
-  const handleSendMail = (email, select, text, image, name) => {
+  const handleSendMail = (email: string, select, text: string, image, name: string) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
 
     if (!isValidEmailFormat(email)) {

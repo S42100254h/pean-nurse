@@ -3,6 +3,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { getLoadingState, getLoadingText } from "../../reducks/loading/selectors";
+import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 
 const Loading = ({ children }) => {
   const classes = useStyles();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const isBeingLoaded = getLoadingState(selector);
   const loadingText = getLoadingText(selector);
 
