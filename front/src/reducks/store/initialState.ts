@@ -1,4 +1,6 @@
-const initialState = {
+import { RootState } from "../../types/entity/rootState";
+
+const initialState: RootState = {
   admins: {
     isAdminSignedIn: false,
     uid: "",
@@ -25,7 +27,7 @@ const initialState = {
     uid: "",
     name: "",
     email: "",
-    image: "",
+    image: null,
   },
 };
 
