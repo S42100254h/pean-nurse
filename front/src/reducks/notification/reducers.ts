@@ -1,21 +1,15 @@
+import { reducerWithInitialState } from "typescript-fsa-reducers";
 import initialState from "../store/initialState";
 import * as Actions from "./actions";
 
-export const NotificationReducer = (state = initialState.notification, action) => {
-  switch (action.type) {
-  case Actions.CLOSE_NOTIFICATION:
-    return {
-      ...state,
-      isOpen: false,
-    };
-  case Actions.SET_NOTIFICATION:
-    return {
-      ...state,
-      isOpen: true,
-      variant: action.payload.variant,
-      message: action.payload.message,
-    };
-  default:
-    return state;
-  }
-};
+export const NotificationReducer = reducerWithInitialState(initialState.notification)
+  .case(Actions.closeNotificationAction, (state) => ({
+    ...state,
+    isOpen: false,
+  }))
+  .case(Actions.setNotificationAction, (state, payload) => ({
+    ...state,
+    isOpen: true,
+    variant: payload.variant,
+    message: payload.message,
+  }));

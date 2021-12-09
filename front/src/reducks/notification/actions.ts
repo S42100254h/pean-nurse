@@ -1,14 +1,7 @@
-export const CLOSE_NOTIFICATION = "CLOSE_NOTIFICATION";
-export const closeNotificationAction = () => {
-  return {
-    type: "CLOSE_NOTIFICATION"
-  };
-};
+import actionCreatorFactory from "typescript-fsa";
+import { Notification } from "../../types/entity/notification";
 
-export const SET_NOTIFICATION = "SET_NOTIFICATION";
-export const setNotificationAction = (payload) => {
-  return {
-    type: "SET_NOTIFICATION",
-    payload,
-  };
-};
+const actionCreator = actionCreatorFactory();
+
+export const closeNotificationAction = actionCreator("CLOSE_NOTIFICATION");
+export const setNotificationAction = actionCreator<Partial<Notification>>("SET_NOTIFICATION");
