@@ -1,14 +1,7 @@
-export const ADMIN_SIGN_IN = "ADMIN_SIGN_IN";
-export const adminSignInAction = (payload) => {
-  return {
-    type: "ADMIN_SIGN_IN",
-    payload,
-  };
-};
+import actionCreatorFactory from "typescript-fsa";
+import { Admin } from "../../types/entity/admin";
 
-export const ADMIN_SIGN_OUT = "ADMIN_SIGN_OUT";
-export const adminSignOutAction = () => {
-  return {
-    type: "ADMIN_SIGN_OUT"
-  };
-};
+const actionCreator = actionCreatorFactory();
+
+export const adminSignInAction = actionCreator<Admin>("ADMIN_SIGN_IN");
+export const adminSignOutAction = actionCreator("ADMIN_SIGN_OUT");
