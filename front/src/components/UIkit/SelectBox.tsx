@@ -1,7 +1,17 @@
 import React from "react";
 import { FormControl, Select } from "@material-ui/core";
 
-const SelectBox = (props) => {
+type Props = {
+  children: JSX.Element | JSX.Element;
+  fullWidth: true;
+  value: string | boolean;
+  variant: "filled" | "outlined" | "standard" | undefined;
+  displayEmpty: boolean;
+  onChange: (event: object) => void;
+  onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement>;
+};
+
+const SelectBox = (props: Partial<Props>) => {
   return (
     <FormControl fullWidth={props.fullWidth}>
       <Select

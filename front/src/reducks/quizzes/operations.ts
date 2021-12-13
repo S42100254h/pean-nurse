@@ -2,9 +2,11 @@ import axios from "axios";
 import { fetchQuizzesAction, deleteQuizAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { Dispatch } from "redux";
+import { Quiz } from "../../types/entity/quiz";
 
 export const fetchQuizzes = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes";
     
     axios
@@ -20,12 +22,12 @@ export const fetchQuizzes = () => {
   };
 };
 
-export const deleteQuiz = (id) => {
-  return async (dispatch, getQuizzes) => {
+export const deleteQuiz = (id: string | number) => {
+  return async (dispatch: Dispatch, getQuizzes: Function) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
 
       axios
@@ -38,7 +40,7 @@ export const deleteQuiz = (id) => {
         })
         .then(() => {
           const prevQuizzes = getQuizzes().quizzes.list;
-          const nextQuizzes = prevQuizzes.filter((quiz) => quiz.id !== id);
+          const nextQuizzes = prevQuizzes.filter((quiz: Quiz) => quiz.id !== id);
           dispatch(deleteQuizAction(nextQuizzes));
           dispatch(showLoadingAction("Delete quiz..."));
 

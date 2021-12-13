@@ -32,7 +32,13 @@ const useStyles = makeStyles({
   },
 });
 
-const SignInDialog = (props) => {
+type Props = {
+  open: boolean;
+  onClose: Function;
+  onClick: Function;
+};
+
+const SignInDialog = (props: Props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -47,7 +53,7 @@ const SignInDialog = (props) => {
     setPassword(event.target.value);
   }, [setPassword]);
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(signIn(email, password));
       props.onClick();
@@ -71,7 +77,7 @@ const SignInDialog = (props) => {
               label={"メールアドレス"}
               multiline={false}
               required={true}
-              row={1}
+              rows={1}
               value={email}
               onChange={inputEmail}
               onKeyDown={handleOnKeyDown}
@@ -82,7 +88,7 @@ const SignInDialog = (props) => {
               label={"パスワード"}
               multiline={false}
               required={true}
-              row={1}
+              rows={1}
               value={password}
               onChange={inputPassword}
               onKeyDown={handleOnKeyDown}

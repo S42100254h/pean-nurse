@@ -14,7 +14,13 @@ const useStyles = makeStyles({
   },
 });
 
-const Choice = (props) => {
+type Props = {
+  choice: string;
+  select: boolean;
+  label: string;
+};
+
+const Choice = (props: Props) => {
   const classes = useStyles();
 
   return (

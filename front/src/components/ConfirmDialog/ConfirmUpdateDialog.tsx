@@ -19,7 +19,26 @@ const useStyles = makeStyles({
   },
 });
 
-const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, id }) => {
+type Props = {
+  quiz: string;
+  choice1: string;
+  select1: boolean;
+  choice2: string;
+  select2: boolean;
+  choice3: string;
+  select3: boolean;
+  choice4: string;
+  select4: boolean;
+  id1: number | null;
+  id2: number | null;
+  id3: number | null;
+  id4: number | null;
+  open: boolean;
+  onClose: Function;
+  id: string;
+};
+
+const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, id }: Props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   

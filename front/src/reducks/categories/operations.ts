@@ -2,9 +2,11 @@ import axios from "axios";
 import { fetchCategoriesAction, deleteCategoryAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { Dispatch } from "redux";
+import { Category } from "../../types/entity/category";
 
 export const fetchCategories = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "categories";
     
     axios
@@ -20,12 +22,12 @@ export const fetchCategories = () => {
   };
 };
 
-export const deleteCategory = (id) => {
-  return async (dispatch, getCategories) => {
+export const deleteCategory = (id: string | number) => {
+  return async (dispatch: Dispatch, getCategories: Function) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "categories/" + id;
 
       axios
@@ -37,8 +39,8 @@ export const deleteCategory = (id) => {
           },
         })
         .then(() => {
-          const prevCategories = getCategories().categories.list;
-          const nextCategories = prevCategories.filter((category) => category.id !== id);
+          const prevCategories: Category[] = getCategories().categories.list;
+          const nextCategories: Category[] = prevCategories.filter((category) => category.id !== id);
           dispatch(deleteCategoryAction(nextCategories));
           dispatch(showLoadingAction("Delete category..."));
 

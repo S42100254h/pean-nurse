@@ -2,13 +2,14 @@ import axios from "axios";
 import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
+import { Dispatch } from "redux";
 
-export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4) => {
-  return async (dispatch) => {
+export const createQuiz = (quiz: string, choice1: string, select1: boolean, choice2: string, select2: boolean, choice3: string, select3: boolean, choice4: string, select4: boolean) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const headers = { "access-token": auth_token, client: client, uid: uid };
       const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes";
       const quizBody = { title: quiz };
@@ -19,7 +20,7 @@ export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, se
           const newQuizId = resp.data.id;
           const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices";
 
-          const choiceBodyList =  [];
+          const choiceBodyList: object[] =  [];
           if (choice1) choiceBodyList.push({ choice: { choice: choice1, is_right: select1, quiz_id: newQuizId } });
           if (choice2) choiceBodyList.push({ choice: { choice: choice2, is_right: select2, quiz_id: newQuizId } });
           if (choice3) choiceBodyList.push({ choice: { choice: choice3, is_right: select3, quiz_id: newQuizId } });
@@ -63,12 +64,12 @@ export const createQuiz = (quiz, choice1, select1, choice2, select2, choice3, se
   };
 };
 
-export const editQuiz = (quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id) => {
-  return async (dispatch) => {
+export const editQuiz = (quiz: string, choice1: string, select1: boolean, choice2: string, select2: boolean, choice3: string, select3: boolean, choice4: string, select4: boolean, id1: number | null, id2: number | null, id3: number | null, id4: number | null, id: string) => {
+  return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token");
-      const client = localStorage.getItem("client");
-      const uid = localStorage.getItem("uid");
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
       const headers = { "access-token": auth_token, client: client, uid: uid };
       const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
       const quizBody = { title: quiz };
@@ -77,7 +78,7 @@ export const editQuiz = (quiz, choice1, select1, choice2, select2, choice3, sele
         .patch(quizApiEndpoint, quizBody, { headers: headers })
         .then(() => {
 
-          const choiceBodyList =  [];
+          const choiceBodyList: object[] =  [];
           if (choice1) choiceBodyList.push({ choice: { choice: choice1, is_right: select1, quiz_id: id }});
           if (choice2) choiceBodyList.push({ choice: { choice: choice2, is_right: select2, quiz_id: id }});
           if (choice3) choiceBodyList.push({ choice: { choice: choice3, is_right: select3, quiz_id: id }});

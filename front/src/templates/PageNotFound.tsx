@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
 import { getSignedIn } from "../reducks/users/selectors";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   "container": {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
 const PageNotFound = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
 
   const handlePush = () => {

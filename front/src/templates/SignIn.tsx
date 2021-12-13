@@ -48,7 +48,7 @@ const SignIn = () => {
     setPassword(event.target.value);
   }, [setPassword]);
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(signIn(email, password));
     }
@@ -63,7 +63,7 @@ const SignIn = () => {
         label={"メールアドレス"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={email}
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
@@ -74,7 +74,7 @@ const SignIn = () => {
         label={"パスワード"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={password}
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}

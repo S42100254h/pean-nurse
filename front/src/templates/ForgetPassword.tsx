@@ -38,7 +38,7 @@ const ForgetPassword = () => {
     setEmail(event.target.value);
   }, [setEmail]);
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(forgetPassword(email));
     }
@@ -58,7 +58,7 @@ const ForgetPassword = () => {
         label={"メールアドレス"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={email}
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}

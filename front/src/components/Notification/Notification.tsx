@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeNotificationAction } from "../../reducks/notification/actions";
 import { getNotificationIsOpen, getNotificationVariant, getNotificationMessage } from "../../reducks/notification/selectors";
 import { NotificationSnackbar } from "./index";
+import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({
   Snackbar: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
 const Notification = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const isOpen = getNotificationIsOpen(selector);
   const variant = getNotificationVariant(selector);
   const message = getNotificationMessage(selector);

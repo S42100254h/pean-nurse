@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { getUserName, getUserImage } from "../../reducks/users/selectors";
+import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({
   container: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
 
 const Profile = () => {
   const classes = useStyles();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const userName = getUserName(selector);
   const userImage = getUserImage(selector);
   

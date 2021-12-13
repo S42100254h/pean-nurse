@@ -13,8 +13,9 @@ import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
 import { QuizzesReducer } from "../quizzes/reducers";
 import { UsersReducer } from "../users/reducers";
+import { History } from "history";
 
-export const createStore = (history) => {
+export const createStore = (history: History) => {
   return reduxCreateStore(
     combineReducers({
       router: connectRouter(history),

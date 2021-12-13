@@ -1,15 +1,7 @@
-export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
-export const fetchCategoriesAction = (payload) => {
-  return {
-    type: "FETCH_CATEGORIES",
-    payload,
-  };
-};
+import actionCreatorFactory from "typescript-fsa";
+import { Category } from "../../types/entity/category";
 
-export const DELETE_CATEGORY = "DELETE_CATEGORY";
-export const deleteCategoryAction = (payload) => {
-  return {
-    type: "DELETE_CATEGORY",
-    payload,
-  };
-};
+const actionCreator = actionCreatorFactory();
+
+export const fetchCategoriesAction = actionCreator<Category[]>("FETCH_CATEGORIES");
+export const deleteCategoryAction = actionCreator<Category[]>("DELETE_CATEGORY");

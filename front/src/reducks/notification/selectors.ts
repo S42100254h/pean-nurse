@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
+import { RootState } from "../../types/entity/rootState";
 
-const notificationSelector = (state) => state.notification;
+const notificationSelector = (state: RootState) => state.notification;
 
 export const getNotificationIsOpen = createSelector(
   [notificationSelector],

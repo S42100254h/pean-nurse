@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { deleteQuiz, fetchQuizzes } from "../reducks/quizzes/operations";
 import { getQuizzes } from "../reducks/quizzes/selectors";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
 import moment from "moment";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   container: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
 const QuizList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const quizzes = getQuizzes(selector);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const QuizList = () => {
   }, []);
 
   const [open, setOpen] = useState(false),
-    [selectedId, setSelectedId] = useState("");
+    [selectedId, setSelectedId] = useState<string | number>("");
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
@@ -45,7 +46,7 @@ const QuizList = () => {
       field: "detail",
       headerName: "詳細",
       width: 100,
-      renderCell: (params) =>
+      renderCell: (params: GridCellParams) =>
         <PrimaryButton
           label={"詳細"}
           rowId={params.id}
@@ -56,7 +57,7 @@ const QuizList = () => {
       field: "delete",
       headerName: "削除",
       width: 100,
-      renderCell: (params) =>
+      renderCell: (params: GridCellParams) =>
         <SecondaryButton
           label={"削除"}
           rowId={params.id}

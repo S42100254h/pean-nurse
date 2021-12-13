@@ -12,6 +12,7 @@ import { deleteImage, editImage, editPassword, editUserInfo } from "../reducks/u
 import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
+import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
   root: {
@@ -77,7 +78,7 @@ const useStyles = makeStyles({
 const Setting = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   const userImage = getUserImage(selector);
   const userName = getUserName(selector);
   const userEmail = getUserEmail(selector);
@@ -91,7 +92,7 @@ const Setting = () => {
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
@@ -129,18 +130,18 @@ const Setting = () => {
   [setOpen, open]
   );
 
-  const handleUpload = (e) => {
-    const image = e.target.files[0];
-    if (image === undefined) {
+  const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files === null) {
       return;
     } else {
+      const image = event.target.files[0];
       dispatch(editImage(image));
       setOpen(!open);
     }
   };
 
-  const handleOnKeyDown = (event) => {
-    if (event.keyCode === 13) {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.keyCode== 13) {
       dispatch(editPassword(current_password, password, password_confirmation));
     }
   };
@@ -183,7 +184,7 @@ const Setting = () => {
                   label={"ユーザー名"}
                   multiline={false}
                   required={true}
-                  row={1}
+                  rows={1}
                   value={name}
                   onChange={inputName}
                 />
@@ -193,7 +194,7 @@ const Setting = () => {
                   label={"メールアドレス"}
                   multiline={false}
                   required={true}
-                  row={1}
+                  rows={1}
                   value={email}
                   onChange={inputEmail}
                 />
@@ -219,7 +220,7 @@ const Setting = () => {
                   label={"現在のパスワード"}
                   multiline={false}
                   required={true}
-                  row={1}
+                  rows={1}
                   value={current_password}
                   onChange={inputCurrentPassword}
                 />
@@ -229,7 +230,7 @@ const Setting = () => {
                   label={"新しいパスワード"}
                   multiline={false}
                   required={true}
-                  row={1}
+                  rows={1}
                   value={password}
                   onChange={inputPassword}
                 />
@@ -239,7 +240,7 @@ const Setting = () => {
                   label={"新しいパスワード（確認用）"}
                   multiline={false}
                   required={true}
-                  row={1}
+                  rows={1}
                   value={password_confirmation}
                   onChange={inputPasswordConfirmation}
                   onKeyDown={handleOnKeyDown}
@@ -263,7 +264,7 @@ const Setting = () => {
             </div>
           </Grid>
           {open && (
-            <ClickAway onClickAway={handleModalToggle} onChange={(e) => handleUpload(e)} onClick={() => dispatch(deleteImage())} />
+            <ClickAway onClickAway={handleModalToggle} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpload(e)} onClick={() => dispatch(deleteImage())} />
           )}
           <Confirmation
             isOpen={isOpen}

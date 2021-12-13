@@ -21,7 +21,15 @@ const useStyles = makeStyles({
   },
 });
 
-const Confirmation = (props) => {
+type Props = {
+  isOpen: boolean;
+  onClose: Function;
+  onClickStop: Function;
+  onClickProceed: Function;
+  
+};
+
+const Confirmation = (props: Props) => {
   const classes = useStyles();
 
   return (

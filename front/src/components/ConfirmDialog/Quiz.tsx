@@ -14,7 +14,12 @@ const useStyles = makeStyles({
   },
 });
 
-const Quiz = (props) => {
+type Props = {
+  quiz: string;
+  label: string;
+};
+
+const Quiz = (props: Props) => {
   const classes = useStyles();
   
   return (

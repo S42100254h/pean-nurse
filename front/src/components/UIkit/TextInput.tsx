@@ -1,7 +1,20 @@
-import React from "react";
+import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
 import TextField from "@material-ui/core/TextField";
 
-const TextInput = (props) => {
+type Props = {
+  fullWidth: boolean;
+  label: string;
+  multiline: boolean;
+  required: boolean;
+  rows: number;
+  value: string;
+  type: string;
+  variant: "standard" | "filled" | "outlined" | undefined;
+  onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  onKeyDown: KeyboardEventHandler<HTMLDivElement>;
+};
+
+const TextInput = (props: Partial<Props>) => {
   return (
     <TextField
       fullWidth={props.fullWidth}

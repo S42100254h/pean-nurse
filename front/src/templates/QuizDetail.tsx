@@ -40,14 +40,14 @@ const QuizDetail = () => {
     [choice2, setChoice2] = useState(""),
     [choice3, setChoice3] = useState(""),
     [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState<boolean>(false),
-    [select2, setSelect2] = useState<boolean>(false),
-    [select3, setSelect3] = useState<boolean>(false),
-    [select4, setSelect4] = useState<boolean>(false),
-    [id1, setId1] = useState(""),
-    [id2, setId2] = useState(""),
-    [id3, setId3] = useState(""),
-    [id4, setId4] = useState(""),
+    [select1, setSelect1] = useState(false),
+    [select2, setSelect2] = useState(false),
+    [select3, setSelect3] = useState(false),
+    [select4, setSelect4] = useState(false),
+    [id1, setId1] = useState<number | null>(null),
+    [id2, setId2] = useState<number | null>(null),
+    [id3, setId3] = useState<number | null>(null),
+    [id4, setId4] = useState<number | null>(null),
     [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -157,7 +157,7 @@ const QuizDetail = () => {
         label={"問題文"}
         multiline={true}
         required={true}
-        row={1}
+        rows={1}
         value={quiz}
         type={"text"}
         onChange={inputQuiz}
@@ -168,7 +168,7 @@ const QuizDetail = () => {
         label={"選択肢１"}
         multiline={true}
         required={true}
-        row={1}
+        rows={1}
         value={choice1}
         type={"text"}
         onChange={inputChoice1}
@@ -178,14 +178,15 @@ const QuizDetail = () => {
         value={select1}
         variant="standard"
         onChange={inputSelect1}
-        className={classes.select}
       >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
+        <div className={classes.select}>
+          <MenuItem value="">- 選択してください -</MenuItem>
+          {menus.map((menu) => (
+            <MenuItem value={menu.value} key={menu.id} >
+              {menu.label}
+            </MenuItem>
+          ))}
+        </div>
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -193,7 +194,7 @@ const QuizDetail = () => {
         label={"選択肢２"}
         multiline={true}
         required={true}
-        row={1}
+        rows={1}
         value={choice2}
         type={"text"}
         onChange={inputChoice2}
@@ -204,19 +205,21 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect2}
       >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
+        <div>
+          <MenuItem value="">- 選択してください -</MenuItem>
+          {menus.map((menu) => (
+            <MenuItem value={menu.value} key={menu.id} >
+              {menu.label}
+            </MenuItem>
+          ))}
+        </div>
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
         fullWidth={true}
         label={"選択肢３"}
         multiline={true}
-        row={1}
+        rows={1}
         value={choice3}
         type={"text"}
         onChange={inputChoice3}
@@ -227,19 +230,21 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect3}
       >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
+        <div>
+          <MenuItem value="">- 選択してください -</MenuItem>
+          {menus.map((menu) => (
+            <MenuItem value={menu.value} key={menu.id} >
+              {menu.label}
+            </MenuItem>
+          ))}
+        </div>
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
         fullWidth={true}
         label={"選択肢４"}
         multiline={true}
-        row={1}
+        rows={1}
         value={choice4}
         type={"text"}
         onChange={inputChoice4}
@@ -250,12 +255,14 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect4}
       >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
+        <div>
+          <MenuItem value="">- 選択してください -</MenuItem>
+          {menus.map((menu) => (
+            <MenuItem value={menu.value} key={menu.id} >
+              {menu.label}
+            </MenuItem>
+          ))}
+        </div>
       </SelectBox>
       <div className="module-spacer--medium" />
       <PrimaryButton

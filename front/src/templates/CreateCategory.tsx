@@ -38,9 +38,9 @@ const CreateCategory = () => {
       <div className="module-spacer--medium" />
       <TextInput
         fullWidth={true}
-        lable={"カテゴリー名"}
+        label={"カテゴリー名"}
         required={true}
-        row={1}
+        rows={1}
         value={category}
         onChange={inputCategory}
       />

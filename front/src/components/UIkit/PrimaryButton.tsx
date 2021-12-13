@@ -15,7 +15,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PrimaryButton = (props) => {
+type Props = {
+  id?: string;
+  rowId? : string | number;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  label: string;
+  onClick: Function;
+};
+
+const PrimaryButton = (props: Props) => {
   const classes = useStyles();
   
   return (

@@ -3,10 +3,11 @@ import { Route } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminSignedIn } from "./reducks/admins/selectors";
 import { redirectToManagement } from "./reducks/admins/operations";
+import { RootState } from "./types/entity/rootState";
 
 const NoAdminRoute = ({ ...props }) => {
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: RootState) => state);
   
   const isAdminSignedIn = getAdminSignedIn(selector);
   
