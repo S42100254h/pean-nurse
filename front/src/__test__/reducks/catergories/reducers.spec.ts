@@ -19,8 +19,8 @@ describe("CategoriesReducerのテスト", () => {
   });
   
   it("action.type === DELETE_CATEGORY", () => {
-    const init = [{ id: 1, name: "neko"}, { id: 2, name: "cat" }];
-    const dummy = [{ id:1, name: "neko" }];
+    const init = { list: [{ id: 1, name: "neko"}, { id: 2, name: "cat" }]};
+    const dummy = [{ id: 1, name: "neko" }];
     const action = deleteCategoryAction(dummy);
     const newState = CategoriesReducer(init, action);
 
