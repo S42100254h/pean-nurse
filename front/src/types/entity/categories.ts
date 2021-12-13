@@ -1,3 +1,5 @@
+import { Category} from "./category";
+
 export type Categories = {
-  list: object[];
+  list: Category[];
 };

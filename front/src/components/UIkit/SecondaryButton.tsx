@@ -16,7 +16,15 @@ const useStyeles = makeStyles((theme) => ({
   },
 }));
 
-const SecondaryButton = (props) => {
+type Props = {
+  fullWidth?: boolean;
+  disabled?: boolean;
+  rowId?: string | number;
+  label: string;
+  onClick: Function;
+};
+
+const SecondaryButton = (props: Props) => {
   const classes = useStyeles();
 
   return (

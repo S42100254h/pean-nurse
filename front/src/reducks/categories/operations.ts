@@ -3,6 +3,7 @@ import { fetchCategoriesAction, deleteCategoryAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { Dispatch } from "redux";
+import { Category } from "../../types/entity/category";
 
 export const fetchCategories = () => {
   return async (dispatch: Dispatch) => {
@@ -21,7 +22,7 @@ export const fetchCategories = () => {
   };
 };
 
-export const deleteCategory = (id: number) => {
+export const deleteCategory = (id: string | number) => {
   return async (dispatch: Dispatch, getCategories: Function) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -38,8 +39,8 @@ export const deleteCategory = (id: number) => {
           },
         })
         .then(() => {
-          const prevCategories = getCategories().categories.list;
-          const nextCategories = prevCategories.filter((category) => category.id !== id);
+          const prevCategories: Category[] = getCategories().categories.list;
+          const nextCategories: Category[] = prevCategories.filter((category) => category.id !== id);
           dispatch(deleteCategoryAction(nextCategories));
           dispatch(showLoadingAction("Delete category..."));
 

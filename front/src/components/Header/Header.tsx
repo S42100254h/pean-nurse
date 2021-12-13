@@ -66,15 +66,21 @@ const Header = () => {
   const isSignedIn = getSignedIn(selector);
   const isAdminSignedIn = getAdminSignedIn(selector);
 
+  type Menu = {
+    id: string;
+    value: string;
+    label: string;
+  };
+
   const [open, setOpen] = useState(false),
     [isSignInOpen, setIsSignInOpen] = useState(false),
     [isSignUpOpen, setIsSignUpOpen] = useState(false),
-    [anchorEl, setAnchorEl] = useState(null),
-    [menus, setMenus] = useState([]);
+    [anchorEl, setAnchorEl] = useState<Element | null>(null),
+    [menus, setMenus] = useState<Menu[]>([]);
   
   const dropDownOpen = Boolean(anchorEl);
   
-  const userMenu = [
+  const userMenu: Menu[] = [
     {
       label: "ユーザー一覧",
       id: "userlist",
@@ -87,7 +93,7 @@ const Header = () => {
     },
   ];
   
-  const quizMenu = [
+  const quizMenu: Menu[] = [
     {
       label: "クイズ一覧",
       id: "quizlist",
@@ -100,7 +106,7 @@ const Header = () => {
     },
   ];
   
-  const categoryMenu = [
+  const categoryMenu: Menu[] = [
     {
       label: "カテゴリー一覧",
       id: "categorylist",
@@ -112,8 +118,8 @@ const Header = () => {
       value: "/category/create",
     },
   ];
-
-  const handleClick = (event, menus) => {
+  
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, menus: Menu[]) => {
     setAnchorEl(event.currentTarget);
     setMenus(menus);
   };
@@ -144,7 +150,7 @@ const Header = () => {
             <DropDown
               anchorEl={anchorEl}
               open={dropDownOpen}
-              onClose={handleClose}
+              onClose={() => handleClose()}
               menus={menus}
             />
           </AppBar>

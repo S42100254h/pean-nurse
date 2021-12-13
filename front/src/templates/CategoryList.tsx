@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { deleteCategory, fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { RootState } from "../types/entity/rootState";
@@ -33,7 +33,7 @@ const CategoryList = () => {
   }, []);
 
   const [open, setOpen] = useState(false),
-    [selectedId, setSelectedId] = useState<number | null>(null);
+    [selectedId, setSelectedId] = useState<string | number>("");
   
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
@@ -42,7 +42,7 @@ const CategoryList = () => {
       field: "delete",
       headerName: "削除",
       width: 120,
-      renderCell: (params) =>
+      renderCell: (params: GridCellParams) =>
         <SecondaryButton
           label={"削除"}
           rowId={params.id}
@@ -71,7 +71,7 @@ const CategoryList = () => {
       <DeleteDialog
         open={open}
         onClose={() => {
-          setSelectedId(null);
+          setSelectedId("");
           setOpen(false);
         }}
         onClickStop={() => setOpen(false)}

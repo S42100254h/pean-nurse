@@ -1,5 +1,5 @@
 export type Notification = {
-  isOpen: boolean;
+  isOpen?: boolean;
   variant: "success" | "error";
-  message: string;
+  message: string | undefined;
 };

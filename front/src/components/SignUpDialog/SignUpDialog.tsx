@@ -30,7 +30,13 @@ const useStyles = makeStyles({
   },
 });
 
-const SignUpDialog = (props) => {
+type Props = {
+  open: boolean;
+  onClose: Function;
+  onClick: Function;
+};
+
+const SignUpDialog = (props: Props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -55,7 +61,7 @@ const SignUpDialog = (props) => {
     setConfirmPassword(event.target.value);
   }, [setConfirmPassword]);
 
-  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(signUp(name, email, password, confirmPassword));
       props.onClick();
@@ -79,7 +85,7 @@ const SignUpDialog = (props) => {
               label={"ユーザー名"}
               multiline={false}
               required={true}
-              row={1}
+              rows={1}
               value={name}
               type={"text"}
               onChange={inputName}
@@ -91,7 +97,7 @@ const SignUpDialog = (props) => {
               label={"メールアドレス"}
               multiline={false}
               required={true}
-              row={1}
+              rows={1}
               value={email}
               type={"email"}
               onChange={inputEmail}
@@ -103,7 +109,7 @@ const SignUpDialog = (props) => {
               label={"パスワード"}
               multiline={false}
               required={true}
-              row={1}
+              rows={1}
               value={password}
               onChange={inputPassword}
               onKeyDown={handleOnKeyDown}
@@ -114,7 +120,7 @@ const SignUpDialog = (props) => {
               label={"パスワード（確認用）"}
               multiline={false}
               required={true}
-              row={1}
+              rows={1}
               value={confirmPassword}
               onChange={inputConfirmPassword}
               onKeyDown={handleOnKeyDown}

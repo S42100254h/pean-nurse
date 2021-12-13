@@ -56,7 +56,7 @@ const SignUp = () => {
     setConfirmPassword(event.target.value);
   }, [setConfirmPassword]);
 
-  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(signUp(name, email, password, confirmPassword));
     }
@@ -71,7 +71,7 @@ const SignUp = () => {
         label={"ユーザー名"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={name}
         type={"text"}
         onChange={inputName}
@@ -83,7 +83,7 @@ const SignUp = () => {
         label={"メールアドレス"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={email}
         type={"email"}
         onChange={inputEmail}
@@ -95,7 +95,7 @@ const SignUp = () => {
         label={"パスワード"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={password}
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}
@@ -106,7 +106,7 @@ const SignUp = () => {
         label={"パスワード（確認用）"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={confirmPassword}
         onChange={inputConfirmPassword}
         onKeyDown={handleOnKeyDown}

@@ -58,7 +58,12 @@ const useStyles = makeStyles({
   },
 });
 
-const ClosableDialog = (props) => {
+type Props = {
+  open: boolean;
+  onClose: Function;
+};
+
+const ClosableDialog = (props: Props) => {
   const classes = useStyles();
   const selector = useSelector((state: RootState) => state);
   const userEmail = getUserEmail(selector);
@@ -67,7 +72,7 @@ const ClosableDialog = (props) => {
   const [email, setEmail] = useState(""),
     [select, setSelect] = useState(""),
     [text, setText] = useState(""),
-    [image, setImage] = useState<any>(""),
+    [image, setImage] = useState<File | null>(null),
     [name, setName] = useState(""),
     [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -95,7 +100,7 @@ const ClosableDialog = (props) => {
   [setIsSubmitted, isSubmitted]
   );
 
-  const handleSendMail = (email: string, select, text: string, image, name: string) => {
+  const handleSendMail = (email: string, select: string, text: string, image: File | null, name: string) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
 
     if (!isValidEmailFormat(email)) {
@@ -108,12 +113,19 @@ const ClosableDialog = (props) => {
       return false;
     }
 
-    let form = new FormData();
+    interface CostomFormData extends FormData {
+      append(name: string, value: string | Blob | null, fileName?: string): void;
+    };
+
+    let form: CostomFormData = new FormData();
     form.append("email", email);
     form.append("select", select);
     form.append("text", text);
     form.append("image", image);
     form.append("name", name);
+    
+    console.log(image);
+    console.log(form);
 
     axios
       .post(apiEndpoint, form)
@@ -147,7 +159,7 @@ const ClosableDialog = (props) => {
             setEmail("");
             setSelect("");
             setText("");
-            setImage("");
+            setImage(null);
             setName("");
             setIsSubmitted(false);
           }, 200);
@@ -177,7 +189,7 @@ const ClosableDialog = (props) => {
                 label={"メールアドレス"}
                 multiline={false}
                 required={true}
-                row={1}
+                rows={1}
                 value={email}
                 variant="outlined"
                 onChange={inputEmail}
@@ -190,12 +202,14 @@ const ClosableDialog = (props) => {
                 onChange={inputSelect}
                 fullWidth={true}
               >
-                <MenuItem value="">- 選択してください -</MenuItem>
-                {menus.map((menu) => (
-                  <MenuItem value={menu.value} key={menu.id} >
-                    {menu.label}
-                  </MenuItem>
-                ))}
+                <div>
+                  <MenuItem value="">- 選択してください -</MenuItem>
+                  {menus.map((menu) => (
+                    <MenuItem value={menu.value} key={menu.id} >
+                      {menu.label}
+                    </MenuItem>
+                  ))}
+                </div>
               </SelectBox>
               <div className="module-spacer--extra-extra-small" />
               <TextField
@@ -216,7 +230,7 @@ const ClosableDialog = (props) => {
               </label>
               {image && (
                 <label className={classes.image}>
-                  <Close className={classes.close} onClick={() => setImage("")} />
+                  <Close className={classes.close} onClick={() => setImage(null)} />
                   {image.name}
                 </label>
               )}

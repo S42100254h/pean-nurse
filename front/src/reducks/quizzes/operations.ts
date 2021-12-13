@@ -22,7 +22,7 @@ export const fetchQuizzes = () => {
   };
 };
 
-export const deleteQuiz = (id: number) => {
+export const deleteQuiz = (id: string | number) => {
   return async (dispatch: Dispatch, getQuizzes: Function) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";

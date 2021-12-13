@@ -38,7 +38,13 @@ const useStyles = makeStyles({
   },
 });
 
-const NotificationSnackbar = (props) => {
+type Props = {
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  variant: "success" | "error";
+  message: string | undefined;
+};
+
+const NotificationSnackbar = (props: Props) => {
   const classes = useStyles();
   const Icon = variantIcon[props.variant];
 

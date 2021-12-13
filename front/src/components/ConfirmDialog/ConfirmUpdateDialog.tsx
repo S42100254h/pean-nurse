@@ -29,10 +29,10 @@ type Props = {
   select3: boolean;
   choice4: string;
   select4: boolean;
-  id1: number;
-  id2: number;
-  id3: number;
-  id4: number;
+  id1: number | null;
+  id2: number | null;
+  id3: number | null;
+  id4: number | null;
   open: boolean;
   onClose: Function;
   id: string;

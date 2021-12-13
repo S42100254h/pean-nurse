@@ -3,10 +3,23 @@ import { useDispatch } from "react-redux";
 import { ListItemText, Menu, MenuItem } from "@material-ui/core";
 import { push } from "connected-react-router";
 
-const DropDown = (props) => {
+type Props = {
+  onClose: () => void;
+  anchorEl: Element | null;
+  open: boolean;
+  menus: Menu[];
+};
+
+type Menu = {
+  id: string;
+  value: string;
+  label: string;
+}
+
+const DropDown = (props: Props) => {
   const dispatch = useDispatch();
   
-  const selectMenu = (path) => {
+  const selectMenu = (path: string) => {
     dispatch(push(path));
     props.onClose();
   };

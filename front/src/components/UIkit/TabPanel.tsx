@@ -1,7 +1,13 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Box } from "@material-ui/core";
 
-const TabPanel = (props) => {
+type Props = {
+  children: ReactNode;
+  value: number;
+  index: number;
+};
+
+const TabPanel = (props: Props) => {
   const { children, value, index } = props;
 
   return (

@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { deleteQuiz, fetchQuizzes } from "../reducks/quizzes/operations";
 import { getQuizzes } from "../reducks/quizzes/selectors";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
 import moment from "moment";
-import { GridCellParams } from "@mui/x-data-grid";
-import { Quiz } from "../types/entity/quiz";
 import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({
@@ -37,7 +35,7 @@ const QuizList = () => {
   }, []);
 
   const [open, setOpen] = useState(false),
-    [selectedId, setSelectedId] = useState<number | null>(null);
+    [selectedId, setSelectedId] = useState<string | number>("");
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
@@ -59,7 +57,7 @@ const QuizList = () => {
       field: "delete",
       headerName: "削除",
       width: 100,
-      renderCell: (params) =>
+      renderCell: (params: GridCellParams) =>
         <SecondaryButton
           label={"削除"}
           rowId={params.id}
@@ -71,7 +69,7 @@ const QuizList = () => {
     },
   ];
 
-  const rows = quizzes.map((quiz: Quiz) => {
+  const rows = quizzes.map((quiz) => {
     return (
       {
         id: quiz.id,
@@ -97,7 +95,7 @@ const QuizList = () => {
       <DeleteDialog
         open={open}
         onClose={() => {
-          setSelectedId(null);
+          setSelectedId("");
           setOpen(false);
         }}
         onClickStop={() => setOpen(false)}

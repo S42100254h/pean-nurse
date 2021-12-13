@@ -5,7 +5,19 @@ import { InputAdornment } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 
-const PasswordInput = (props) => {
+type Props = {
+  fullWidth: boolean;
+  label: string;
+  multiline: boolean;
+  required: boolean;
+  rows: number;
+  value: string;
+  variant: "filled" | "outlined" | "standard" | undefined;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
+};
+
+const PasswordInput = (props: Partial<Props>) => {
   const [showPassword, setShowPassword] = useState(false);  
 
   const handleShowPasswordToggle = () => {

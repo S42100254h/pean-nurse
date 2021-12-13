@@ -43,7 +43,7 @@ const ResetPassword = () => {
     setPasswordConfirmation(event.target.value);
   }, [setPasswordConfirmation]);
   
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(resetPassword(password, password_confirmation));
     }
@@ -62,7 +62,7 @@ const ResetPassword = () => {
         label={"パスワード（６文字以上）"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={password}
         onChange={inputPassword}
       />
@@ -71,7 +71,7 @@ const ResetPassword = () => {
         label={"確認用パスワード"}
         multiline={false}
         required={true}
-        row={1}
+        rows={1}
         value={password_confirmation}
         onChange={inputPasswordConfirmation}
         onKeyDown={handleOnKeyDown}

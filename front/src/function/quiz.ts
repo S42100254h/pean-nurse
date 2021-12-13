@@ -64,7 +64,7 @@ export const createQuiz = (quiz: string, choice1: string, select1: boolean, choi
   };
 };
 
-export const editQuiz = (quiz: string, choice1: string, select1: boolean, choice2: string, select2: boolean, choice3: string, select3: boolean, choice4: string, select4: boolean, id1: number, id2: number, id3: number, id4: number, id: string) => {
+export const editQuiz = (quiz: string, choice1: string, select1: boolean, choice2: string, select2: boolean, choice3: string, select3: boolean, choice4: string, select4: boolean, id1: number | null, id2: number | null, id3: number | null, id4: number | null, id: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
