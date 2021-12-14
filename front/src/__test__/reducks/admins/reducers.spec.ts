@@ -6,7 +6,7 @@ describe("AdminsReducerのテスト", () => {
   const init = initialState.admins;
 
   it("action.type === ADMIN_SIGN_INのときのテスト", () => {
-    const dummy = { email: "dummy@gmail.com", password: "dummypassword" };
+    const dummy = { isAdminSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com" };
     const action = adminSignInAction(dummy);
     const newState = AdminsReducer(init, action);
     

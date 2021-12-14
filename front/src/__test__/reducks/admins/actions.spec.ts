@@ -1,18 +1,16 @@
 import {
   adminSignInAction,
   adminSignOutAction,
-  ADMIN_SIGN_IN,
-  ADMIN_SIGN_OUT,
 } from "../../../reducks/admins/actions";
 
 describe("actions.jsのテスト", () => {
   it("adminSignInActionのテスト", () => {
-    const dummy = { email: "dummy@gmail.com", password: "dummypassword" };
+    const dummy = { isAdminSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com" };
     const action = adminSignInAction(dummy);
 
     expect(action).toStrictEqual(
       {
-        type: ADMIN_SIGN_IN,
+        type: "ADMIN_SIGN_IN",
         payload: dummy,
       }
     );
@@ -23,7 +21,8 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: ADMIN_SIGN_OUT,
+        type: "ADMIN_SIGN_OUT",
+        payload: undefined
       }
     );
   });
