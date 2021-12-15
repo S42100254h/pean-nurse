@@ -144,7 +144,7 @@ export const deleteUser = () => {
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
-      
+ 
       axios
         .delete(apiEndpoint, {
           headers: {
@@ -199,6 +199,7 @@ export const editUserInfo = (name: string, email: string) => {
           localStorage.setItem("uid", resp.headers["uid"]);
 
           dispatch(editUserInfoAction(resp.data.data));
+          console.log(resp.data.data);
           dispatch(showLoadingAction("Update ..."));
           dispatch(push("/dashboard"));
           
