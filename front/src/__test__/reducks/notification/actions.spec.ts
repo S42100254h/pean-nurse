@@ -1,6 +1,4 @@
 import {
-  CLOSE_NOTIFICATION,
-  SET_NOTIFICATION,
   closeNotificationAction,
   setNotificationAction,
 } from "../../../reducks/notification/actions"; 
@@ -11,18 +9,24 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: CLOSE_NOTIFICATION
+        type: "CLOSE_NOTIFICATION",
+        payload: undefined,
       }
     );
   });
 
   it("setNotificationActionのテスト", () => {
-    const dummy = { variant: "success", message: "test" };
+    type Notification = {
+      variant: "success" | "error";
+      message: string | undefined;
+    };
+
+    const dummy: Notification = { variant: "success", message: "test" };
     const action = setNotificationAction(dummy);
 
     expect(action).toStrictEqual(
       {
-        type: SET_NOTIFICATION,
+        type: "SET_NOTIFICATION",
         payload: dummy,
       }
     );

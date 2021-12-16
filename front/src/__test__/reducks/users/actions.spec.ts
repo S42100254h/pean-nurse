@@ -1,10 +1,4 @@
 import {
-  SIGN_UP,
-  SIGN_IN,
-  SIGN_OUT,
-  EDIT_USER_INFO,
-  EDIT_USER_IMAGE,
-  DELETE_USER_IMAGE,
   signUpAction,
   signInAction,
   signOutAction,
@@ -15,24 +9,24 @@ import {
 
 describe("actions.jsのテスト", () => {
   it("signUpActionのテスト", () => {
-    const dummy = { name: "dummy", email: "dummy@gmail.com", password: "dummypassword", password_confirmation: "dummypassword" };
+    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signUpAction(dummy);
 
     expect(action).toStrictEqual(
       {
-        type: SIGN_UP,
+        type: "SIGN_UP",
         payload: dummy
       }
     );
   });
 
   it("signInActionのテスト", () => {
-    const dummy = { email: "dummy@gmail.com", password: "dummypassword" };
+    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signInAction(dummy);
 
     expect(action).toStrictEqual(
       {
-        type: SIGN_IN,
+        type: "SIGN_IN",
         payload: dummy
       }
     );
@@ -43,30 +37,31 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: SIGN_OUT
+        type: "SIGN_OUT",
+        payload: undefined
       }
     );
   });
   
   it("editUserInfoActionのテスト", () => {
-    const dummy = { name: "dummy", email:"dummy@gmail.com" };
+    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: null };
     const action = editUserInfoAction(dummy);
-    
+
     expect(action).toStrictEqual(
       {
-        type: EDIT_USER_INFO,
+        type: "EDIT_USER_INFO",
         payload: dummy
       }
     );
   });
   
   it("editUserImageActionのテスト", () => {
-    const dummy = { image: "dummy.png" };
+    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: { url: "cat.png" } };
     const action = editUserImageAction(dummy);
 
     expect(action).toStrictEqual(
       {
-        type: EDIT_USER_IMAGE,
+        type: "EDIT_USER_IMAGE",
         payload: dummy
       }
     );
@@ -77,7 +72,8 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: DELETE_USER_IMAGE
+        type: "DELETE_USER_IMAGE",
+        payload: undefined
       }
     );
   });

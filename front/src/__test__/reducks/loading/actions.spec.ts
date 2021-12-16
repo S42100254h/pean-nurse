@@ -1,6 +1,4 @@
 import {
-  HIDE_LOADING,
-  SHOW_LOADING,
   hideLoadingAction,
   showLoadingAction,
 } from "../../../reducks/loading/actions";
@@ -11,7 +9,8 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: HIDE_LOADING
+        type: "HIDE_LOADING",
+        payload: undefined,
       }
     );
   });
@@ -22,7 +21,7 @@ describe("actions.jsのテスト", () => {
 
     expect(action).toStrictEqual(
       {
-        type: SHOW_LOADING,
+        type: "SHOW_LOADING",
         payload: dummy,
       }
     );

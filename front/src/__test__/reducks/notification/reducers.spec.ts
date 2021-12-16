@@ -15,7 +15,12 @@ describe("NotificationReducerのテスト", () => {
   });
   
   it("action.type === SET_NOTIFICATIONのときのテスト", () => {
-    const dummy = { variant: "success", message: "test" };
+    type Notification = {
+      variant: "success" | "error";
+      message: string | undefined;
+    };
+
+    const dummy: Notification = { variant: "success", message: "test" };
     const action = setNotificationAction(dummy);
     const newState = NotificationReducer(init, action);
     
