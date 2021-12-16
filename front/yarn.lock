@@ -3931,9 +3931,9 @@
     "semver" "^7.3.5"
 
 "css-minimizer-webpack-plugin@^3.2.0":
-  "integrity" "sha512-5q4myvkmm29jRlI73Fl8Mc008i6o6hCEKnV6/fOrzRVDWD6EFGwDRX+SM2qCVeZ7XiztRDKHpTGDUeUMAOOagg=="
-  "resolved" "https://registry.npmjs.org/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.2.0.tgz"
-  "version" "3.2.0"
+  "integrity" "sha512-+SU5aHgGZkk2kxKsq/BZXnYee2cjHIiFARF2gGaG6gIFtLJ87330GeafqhxAemwi/WgQ40v0OQ7pBVljKAMoXg=="
+  "resolved" "https://registry.npmjs.org/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.3.0.tgz"
+  "version" "3.3.0"
   dependencies:
     "@types/cssnano" "^4.0.1"
     "cssnano" "^5.0.6"
@@ -6743,7 +6743,7 @@
     "merge-stream" "^2.0.0"
     "supports-color" "^7.0.0"
 
-"jest-worker@^27.0.2", "jest-worker@^27.0.6", "jest-worker@^27.3.1", "jest-worker@^27.4.5":
+"jest-worker@^27.0.2", "jest-worker@^27.3.1", "jest-worker@^27.4.1", "jest-worker@^27.4.5":
   "integrity" "sha512-f2s8kEdy15cv9r7q4KkzGXvlY0JTcmCbMHZBfSQDwW77REr45IDWwd0lksDFeVHH2jJ5pqb90T77XscrjeGzzg=="
   "resolved" "https://registry.npmjs.org/jest-worker/-/jest-worker-27.4.5.tgz"
   "version" "27.4.5"
@@ -10150,11 +10150,11 @@
     "supports-hyperlinks" "^2.0.0"
 
 "terser-webpack-plugin@^5.1.3", "terser-webpack-plugin@^5.2.5":
-  "integrity" "sha512-3luOVHku5l0QBeYS8r4CdHYWEGMmIj3H1U64jgkdZzECcSOJAyJ9TjuqcQZvw1Y+4AOBN9SeYJPJmFn2cM4/2g=="
-  "resolved" "https://registry.npmjs.org/terser-webpack-plugin/-/terser-webpack-plugin-5.2.5.tgz"
-  "version" "5.2.5"
+  "integrity" "sha512-LPIisi3Ol4chwAaPP8toUJ3L4qCM1G0wao7L3qNv57Drezxj6+VEyySpPw4B1HSO2Eg/hDY/MNF5XihCAoqnsQ=="
+  "resolved" "https://registry.npmjs.org/terser-webpack-plugin/-/terser-webpack-plugin-5.3.0.tgz"
+  "version" "5.3.0"
   dependencies:
-    "jest-worker" "^27.0.6"
+    "jest-worker" "^27.4.1"
     "schema-utils" "^3.1.1"
     "serialize-javascript" "^6.0.0"
     "source-map" "^0.6.1"
