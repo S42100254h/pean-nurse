@@ -162,7 +162,7 @@ jobs:
           key: v7-dependencies-{{ checksum "front/package.json" }}            
       - run:
           name: execute test
-          command: npm test
+          command: npm test --runInBand
           working_directory: ~/nurse-step/front
 
   eslint:
