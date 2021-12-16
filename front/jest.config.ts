@@ -9,7 +9,7 @@ export default {
     "js"
   ],
   transform: {
-    "^.+\\.ts$": "ts-jest"
+    "^.+\\.ts$": "@swc/jest"
   },
   globals: {
     "ts-jest": {

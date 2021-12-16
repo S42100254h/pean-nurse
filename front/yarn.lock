@@ -1273,6 +1273,13 @@
     "slash" "^3.0.0"
     "strip-ansi" "^6.0.0"
 
+"@jest/create-cache-key-function@^27.3.1":
+  "integrity" "sha512-aSSCAJwUNX4R1hJQoyimsND5l+2EsFgzlepS8NuOJJHjXij/UdxYFngac44tmv9IYdI+kglAyORg0plt4/aFMQ=="
+  "resolved" "https://registry.npmjs.org/@jest/create-cache-key-function/-/create-cache-key-function-27.4.2.tgz"
+  "version" "27.4.2"
+  dependencies:
+    "@jest/types" "^27.4.2"
+
 "@jest/environment@^27.4.4":
   "integrity" "sha512-q+niMx7cJgt/t/b6dzLOh4W8Ef/8VyKG7hxASK39jakijJzbFBGpptx3RXz13FFV7OishQ9lTbv+dQ5K3EhfDQ=="
   "resolved" "https://registry.npmjs.org/@jest/environment/-/environment-27.4.4.tgz"
@@ -1846,6 +1853,18 @@
     "prop-types" "^15.7.2"
     "reselect" "^4.1.5"
 
+"@napi-rs/triples@^1.0.3":
+  "integrity" "sha512-XQr74QaLeMiqhStEhLn1im9EOMnkypp7MZOwQhGzqp2Weu5eQJbpPxWxixxlYRKWPOmJjsk6qYfYH9kq43yc2w=="
+  "resolved" "https://registry.npmjs.org/@napi-rs/triples/-/triples-1.1.0.tgz"
+  "version" "1.1.0"
+
+"@node-rs/helper@^1.0.0":
+  "integrity" "sha512-R5wEmm8nbuQU0YGGmYVjEc0OHtYsuXdpRG+Ut/3wZ9XAvQWyThN08bTh2cBJgoZxHQUPtvRfeQuxcAgLuiBISg=="
+  "resolved" "https://registry.npmjs.org/@node-rs/helper/-/helper-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "@napi-rs/triples" "^1.0.3"
+
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -2055,6 +2074,38 @@
     "@svgr/plugin-jsx" "^5.5.0"
     "@svgr/plugin-svgo" "^5.5.0"
     "loader-utils" "^2.0.0"
+
+"@swc/core-darwin-x64@^1.2.120":
+  "integrity" "sha512-lX639zOJ0agdpdCrPiQk1bmEh3oAcbrEhNEgJROxU0mVhO6xkzPCdmy27LDSOzJS9GLrP/4cMewcaYRmv9VAbA=="
+  "resolved" "https://registry.npmjs.org/@swc/core-darwin-x64/-/core-darwin-x64-1.2.120.tgz"
+  "version" "1.2.120"
+
+"@swc/core@*", "@swc/core@^1.2.120", "@swc/core@>=1.2.50":
+  "integrity" "sha512-9bSN4ZdDQsAiKEdNT0lv/8o0/70xkGFieq/I4cKdA9dQibAtfagzRyLPkCm54XKqd9NwvI9neAfYydbesyY/nw=="
+  "resolved" "https://registry.npmjs.org/@swc/core/-/core-1.2.120.tgz"
+  "version" "1.2.120"
+  dependencies:
+    "@node-rs/helper" "^1.0.0"
+  optionalDependencies:
+    "@swc/core-android-arm64" "^1.2.120"
+    "@swc/core-darwin-arm64" "^1.2.120"
+    "@swc/core-darwin-x64" "^1.2.120"
+    "@swc/core-freebsd-x64" "^1.2.120"
+    "@swc/core-linux-arm-gnueabihf" "^1.2.120"
+    "@swc/core-linux-arm64-gnu" "^1.2.120"
+    "@swc/core-linux-arm64-musl" "^1.2.120"
+    "@swc/core-linux-x64-gnu" "^1.2.120"
+    "@swc/core-linux-x64-musl" "^1.2.120"
+    "@swc/core-win32-arm64-msvc" "^1.2.120"
+    "@swc/core-win32-ia32-msvc" "^1.2.120"
+    "@swc/core-win32-x64-msvc" "^1.2.120"
+
+"@swc/jest@^0.2.15":
+  "integrity" "sha512-Ja+YCVPOGPX/nFnPvPKaWpx2HUwrtuvHP1onHOey1gNGhq8CktQ7xQhCFSuyYBQJiW3WOZ+qMsv3aZk1XUBSOg=="
+  "resolved" "https://registry.npmjs.org/@swc/jest/-/jest-0.2.15.tgz"
+  "version" "0.2.15"
+  dependencies:
+    "@jest/create-cache-key-function" "^27.3.1"
 
 "@testing-library/dom@^8.0.0", "@testing-library/dom@>=7.21.4":
   "integrity" "sha512-3KQDyx9r0RKYailW2MiYrSSKEfH0GTkI51UGEvJenvcoDoeRYs0PZpi2SXqtnMClQvCqdtTTpOfFETDTVADpAg=="
