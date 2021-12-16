@@ -2,7 +2,6 @@ const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InterpolateHtmlPlugin = require("interpolate-html-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -22,7 +21,6 @@ module.exports = {
     new InterpolateHtmlPlugin({
       "PUBLIC_URL": "http://localhost:3000",
     }),
-    new FaviconsWebpackPlugin("./src/assets/img/favicon.ico"),
     new Dotenv(),
   ],
   resolve: {
