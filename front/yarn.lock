@@ -2080,7 +2080,7 @@
   "resolved" "https://registry.npmjs.org/@swc/core-darwin-x64/-/core-darwin-x64-1.2.120.tgz"
   "version" "1.2.120"
 
-"@swc/core@*", "@swc/core@>=1.2.50":
+"@swc/core@*", "@swc/core@^1.2.120", "@swc/core@>=1.2.50":
   "integrity" "sha512-9bSN4ZdDQsAiKEdNT0lv/8o0/70xkGFieq/I4cKdA9dQibAtfagzRyLPkCm54XKqd9NwvI9neAfYydbesyY/nw=="
   "resolved" "https://registry.npmjs.org/@swc/core/-/core-1.2.120.tgz"
   "version" "1.2.120"
