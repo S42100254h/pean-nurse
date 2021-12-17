@@ -34,4 +34,4 @@ export const UsersReducer = reducerWithInitialState(initialState.users)
   .case(Actions.deleteUserImageAction, (state) => ({
     ...state,
     image: null,
-  }))
+  }));

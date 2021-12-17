@@ -115,7 +115,7 @@ const ClosableDialog = (props: Props) => {
 
     interface CostomFormData extends FormData {
       append(name: string, value: string | Blob | null, fileName?: string): void;
-    };
+    }
 
     let form: CostomFormData = new FormData();
     form.append("email", email);
