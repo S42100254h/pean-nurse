@@ -124,9 +124,6 @@ const ClosableDialog = (props: Props) => {
     form.append("image", image);
     form.append("name", name);
     
-    console.log(image);
-    console.log(form);
-
     axios
       .post(apiEndpoint, form)
       .then(() => {
