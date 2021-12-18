@@ -40,10 +40,10 @@ const QuizDetail = () => {
     [choice2, setChoice2] = useState(""),
     [choice3, setChoice3] = useState(""),
     [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(false),
-    [select2, setSelect2] = useState(false),
-    [select3, setSelect3] = useState(false),
-    [select4, setSelect4] = useState(false),
+    [select1, setSelect1] = useState(""),
+    [select2, setSelect2] = useState(""),
+    [select3, setSelect3] = useState(""),
+    [select4, setSelect4] = useState(""),
     [id1, setId1] = useState<number | null>(null),
     [id2, setId2] = useState<number | null>(null),
     [id3, setId3] = useState<number | null>(null),
@@ -132,11 +132,11 @@ const QuizDetail = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes(true)) {
+    if (![select1, select2, select3, select4].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes(false)) {
+    if (![select1, select2, select3, select4].includes("false")) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }

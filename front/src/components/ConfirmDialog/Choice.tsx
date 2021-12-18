@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 type Props = {
   choice: string;
-  select: boolean;
+  select: string;
   label: string;
 };
 
