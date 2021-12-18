@@ -22,9 +22,6 @@ const useStyles = makeStyles({
     margin: "0 auto 1rem auto",
     textAlign: "center",
   },
-  select: {
-    fontSize: 12,
-  },
 });
 
 type MatchParams = {
@@ -40,10 +37,10 @@ const QuizDetail = () => {
     [choice2, setChoice2] = useState(""),
     [choice3, setChoice3] = useState(""),
     [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(false),
-    [select2, setSelect2] = useState(false),
-    [select3, setSelect3] = useState(false),
-    [select4, setSelect4] = useState(false),
+    [select1, setSelect1] = useState(""),
+    [select2, setSelect2] = useState(""),
+    [select3, setSelect3] = useState(""),
+    [select4, setSelect4] = useState(""),
     [id1, setId1] = useState<number | null>(null),
     [id2, setId2] = useState<number | null>(null),
     [id3, setId3] = useState<number | null>(null),
@@ -132,11 +129,11 @@ const QuizDetail = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes(true)) {
+    if (select1 == "false" && select2 == "false" && select3 == "false" && select4 == "false" ) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes(false)) {
+    if (select1 == "true" && select2 == "true" && select3 == "true" && select4 == "true" ) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
@@ -179,14 +176,12 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect1}
       >
-        <div className={classes.select}>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -205,14 +200,12 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect2}
       >
-        <div>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -230,14 +223,12 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect3}
       >
-        <div>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -255,14 +246,12 @@ const QuizDetail = () => {
         variant="standard"
         onChange={inputSelect4}
       >
-        <div>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--medium" />
       <PrimaryButton

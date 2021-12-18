@@ -25,9 +25,6 @@ const useStyles = makeStyles({
     margin: "0 auto 1rem auto",
     textAlign: "center",
   },
-  select: {
-    fontSize: 12,
-  },
 });
 
 const CreateQuiz = () => {
@@ -45,10 +42,10 @@ const CreateQuiz = () => {
     [choice2, setChoice2] = useState(""),
     [choice3, setChoice3] = useState(""),
     [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(false),
-    [select2, setSelect2] = useState(false),
-    [select3, setSelect3] = useState(false),
-    [select4, setSelect4] = useState(false),
+    [select1, setSelect1] = useState(""),
+    [select2, setSelect2] = useState(""),
+    [select3, setSelect3] = useState(""),
+    [select4, setSelect4] = useState(""),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
@@ -91,11 +88,11 @@ const CreateQuiz = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes(true)) {
+    if (![select1, select2, select3, select4].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes(false)) {
+    if (![select1, select2, select3, select4].includes("false")) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
@@ -152,14 +149,12 @@ const CreateQuiz = () => {
         variant="standard"
         onChange={inputSelect1}
       >
-        <div className={classes.select}>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -178,14 +173,12 @@ const CreateQuiz = () => {
         variant="standard"
         onChange={inputSelect2}
       >
-        <div>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -203,14 +196,12 @@ const CreateQuiz = () => {
         variant="standard"
         onChange={inputSelect3}
       >
-        <div>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--extra-extra-small" />
       <TextInput
@@ -228,14 +219,12 @@ const CreateQuiz = () => {
         variant="standard"
         onChange={inputSelect4}
       >
-        <div>
-          <MenuItem value="">- 選択してください -</MenuItem>
-          {menus.map((menu) => (
-            <MenuItem value={menu.value} key={menu.id} >
-              {menu.label}
-            </MenuItem>
-          ))}
-        </div>
+        <MenuItem value="">- 選択してください -</MenuItem>
+        {menus.map((menu) => (
+          <MenuItem value={menu.value} key={menu.id} >
+            {menu.label}
+          </MenuItem>
+        ))}
       </SelectBox>
       <div className="module-spacer--medium" />
       <PrimaryButton

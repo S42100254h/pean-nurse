@@ -22,13 +22,13 @@ const useStyles = makeStyles({
 type Props = {
   quiz: string;
   choice1: string;
-  select1: boolean;
+  select1: string;
   choice2: string;
-  select2: boolean;
+  select2: string;
   choice3: string;
-  select3: boolean;
+  select3: string;
   choice4: string;
-  select4: boolean;
+  select4: string;
   id1: number | null;
   id2: number | null;
   id3: number | null;
