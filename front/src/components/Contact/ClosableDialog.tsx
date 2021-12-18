@@ -115,7 +115,7 @@ const ClosableDialog = (props: Props) => {
 
     interface CostomFormData extends FormData {
       append(name: string, value: string | Blob | null, fileName?: string): void;
-    };
+    }
 
     let form: CostomFormData = new FormData();
     form.append("email", email);
@@ -124,9 +124,6 @@ const ClosableDialog = (props: Props) => {
     form.append("image", image);
     form.append("name", name);
     
-    console.log(image);
-    console.log(form);
-
     axios
       .post(apiEndpoint, form)
       .then(() => {

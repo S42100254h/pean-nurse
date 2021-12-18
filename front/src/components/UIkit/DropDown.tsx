@@ -7,10 +7,10 @@ type Props = {
   onClose: () => void;
   anchorEl: Element | null;
   open: boolean;
-  menus: Menu[];
+  menus: MenuProps[];
 };
 
-type Menu = {
+type MenuProps = {
   id: string;
   value: string;
   label: string;

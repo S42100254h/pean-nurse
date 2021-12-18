@@ -199,7 +199,6 @@ export const editUserInfo = (name: string, email: string) => {
           localStorage.setItem("uid", resp.headers["uid"]);
 
           dispatch(editUserInfoAction(resp.data.data));
-          console.log(resp.data.data);
           dispatch(showLoadingAction("Update ..."));
           dispatch(push("/dashboard"));
           

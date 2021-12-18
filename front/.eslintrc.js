@@ -6,6 +6,7 @@ module.exports = {
     "es6": true,
     "jest/globals": true,
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2018,
@@ -16,6 +17,7 @@ module.exports = {
   "plugins": [
     "react",
     "jest",
+    "@typescript-eslint",
   ],
   "rules": {
     "no-console": "warn",
@@ -24,6 +26,6 @@ module.exports = {
     "indent": ["error", 2],
     "no-undef": "warn",
     "space-before-blocks": ["warn", { "functions": "always" }],
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
   }
 };

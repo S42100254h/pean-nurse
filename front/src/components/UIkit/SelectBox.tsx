@@ -2,7 +2,7 @@ import React from "react";
 import { FormControl, Select } from "@material-ui/core";
 
 type Props = {
-  children: JSX.Element | JSX.Element;
+  children: React.ReactNode;
   fullWidth: true;
   value: string | boolean;
   variant: "filled" | "outlined" | "standard" | undefined;
