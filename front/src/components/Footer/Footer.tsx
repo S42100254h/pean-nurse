@@ -44,7 +44,7 @@ const Footer = () => {
         container
         spacing={2}
         direction="row"
-        justify="flex-end"
+        justifyContent="flex-end"
         className={classes.root}
       >
         <Grid item>

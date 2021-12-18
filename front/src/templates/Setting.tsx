@@ -149,7 +149,7 @@ const Setting = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <Grid container spacing={4} justify="center">
+        <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} sm={3}>
             <div>
               <Tabs
