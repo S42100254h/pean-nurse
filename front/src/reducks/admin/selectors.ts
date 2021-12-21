@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { RootState } from "../../types/entity/rootState";
 
-const adminsSelector = (state: RootState) => state.admins;
+const adminsSelector = (state: RootState) => state.admin;
 
 export const getAdminSignedIn = createSelector(
   [adminsSelector],

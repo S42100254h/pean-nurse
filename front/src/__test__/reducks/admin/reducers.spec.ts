@@ -3,7 +3,7 @@ import { adminSignInAction, adminSignOutAction } from "../../../reducks/admin/ac
 import initialState from "../../../reducks/store/initialState";
 
 describe("AdminsReducerのテスト", () => {
-  const init = initialState.admins;
+  const init = initialState.admin;
 
   it("action.type === ADMIN_SIGN_INのときのテスト", () => {
     const dummy = { isAdminSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com" };

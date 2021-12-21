@@ -6,7 +6,7 @@ import { Quizzes } from "./quizzes";
 import { User } from "./user";
 
 export type RootState = {
-  admins: Admin;
+  admin: Admin;
   categories: Categories;
   loading: Loading;
   notification: Notification;

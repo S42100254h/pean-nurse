@@ -1,7 +1,7 @@
 import { RootState } from "../../types/entity/rootState";
 
 const initialState: RootState = {
-  admins: {
+  admin: {
     isAdminSignedIn: false,
     uid: "",
     name: "",

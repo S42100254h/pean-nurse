@@ -19,7 +19,7 @@ export const createStore = (history: History) => {
   return reduxCreateStore(
     combineReducers({
       router: connectRouter(history),
-      admins: AdminsReducer,
+      admin: AdminsReducer,
       categories: CategoriesReducer,
       loading: LoadingReducer,
       notification: NotificationReducer,
