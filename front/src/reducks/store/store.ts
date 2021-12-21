@@ -24,7 +24,7 @@ export const createStore = (history: History) => {
       loading: LoadingReducer,
       notification: NotificationReducer,
       quizzes: QuizzesReducer,
-      users: UsersReducer
+      user: UsersReducer
     }),
     composeWithDevTools(
       applyMiddleware(

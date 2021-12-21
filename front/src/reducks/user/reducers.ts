@@ -2,7 +2,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 import initialState from "../store/initialState";
 import * as Actions from "./actions";
 
-export const UsersReducer = reducerWithInitialState(initialState.users)
+export const UsersReducer = reducerWithInitialState(initialState.user)
   .case(Actions.signUpAction, (state, payload) => ({
     ...state,
     isSignedIn: true,
@@ -20,7 +20,7 @@ export const UsersReducer = reducerWithInitialState(initialState.users)
     image: payload.image,
   }))
   .case(Actions.signOutAction, () => ({
-    ...initialState.users,
+    ...initialState.user,
   }))
   .case(Actions.editUserInfoAction, (state, payload) => ({
     ...state,

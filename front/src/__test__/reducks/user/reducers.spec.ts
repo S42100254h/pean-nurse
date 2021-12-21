@@ -3,7 +3,7 @@ import { signInAction, signUpAction, signOutAction, editUserInfoAction, editUser
 import initialState from "../../../reducks/store/initialState";
 
 describe("UsersReducerのテスト", () => {
-  const init = initialState.users;
+  const init = initialState.user;
   it("action.type === SIGN_INのときのテスト", () => {
     const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signInAction(dummy);

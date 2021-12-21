@@ -11,5 +11,5 @@ export type RootState = {
   loading: Loading;
   notification: Notification;
   quizzes: Quizzes;
-  users: User;
+  user: User;
 };
