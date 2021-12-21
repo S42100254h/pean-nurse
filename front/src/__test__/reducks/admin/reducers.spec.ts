@@ -1,9 +1,9 @@
-import { AdminsReducer } from "../../../reducks/admins/reducers";
-import { adminSignInAction, adminSignOutAction } from "../../../reducks/admins/actions";
+import { AdminsReducer } from "../../../reducks/admin/reducers";
+import { adminSignInAction, adminSignOutAction } from "../../../reducks/admin/actions";
 import initialState from "../../../reducks/store/initialState";
 
 describe("AdminsReducerのテスト", () => {
-  const init = initialState.admins;
+  const init = initialState.admin;
 
   it("action.type === ADMIN_SIGN_INのときのテスト", () => {
     const dummy = { isAdminSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com" };

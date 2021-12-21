@@ -1,7 +1,7 @@
 import {
   adminSignInAction,
   adminSignOutAction,
-} from "../../../reducks/admins/actions";
+} from "../../../reducks/admin/actions";
 
 describe("actions.jsのテスト", () => {
   it("adminSignInActionのテスト", () => {
