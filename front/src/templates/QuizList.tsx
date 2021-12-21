@@ -80,12 +80,17 @@ const QuizList = () => {
     );
   });
 
+  const sortedRows = rows.sort((a, b) => {
+    // ascending order by updated_at
+    return (a.updated_at < b.updated_at) ? -1 : 1;
+  });
+
   return (
     <div className={classes.container}>
       <h2 className={classes.headline}>クイズ一覧</h2>
       <div style={{ width: "100%", backgroundColor: "#fff" }}>
         <DataGrid
-          rows={rows}
+          rows={sortedRows}
           columns={columns}
           autoHeight
           pageSize={10}
