@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminSignedIn } from "./reducks/admins/selectors";
-import { listenAdminState } from "./reducks/admins/operations";
+import { getAdminSignedIn } from "./reducks/admin/selectors";
+import { listenAdminState } from "./reducks/admin/operations";
 import { RootState } from "./types/entity/rootState";
 
 const AdminRoute = ({ ...props }) => {

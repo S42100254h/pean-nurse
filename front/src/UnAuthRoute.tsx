@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Route } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "./reducks/user/selectors";
-import { getAdminSignedIn } from "./reducks/admins/selectors";
+import { getAdminSignedIn } from "./reducks/admin/selectors";
 import { redirectToDashboard } from "./reducks/user/operations";
-import { redirectToManagement } from "./reducks/admins/operations";
+import { redirectToManagement } from "./reducks/admin/operations";
 import { RootState } from "./types/entity/rootState";
 
 const UnAuthRoute = ({ ...props }) => {

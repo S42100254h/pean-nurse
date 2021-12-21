@@ -10,8 +10,8 @@ import { SignInDialog } from "../SignInDialog";
 import { SignUpDialog } from "../SignUpDialog";
 import { DropDown } from "../UIkit";
 import { getSignedIn } from "../../reducks/user/selectors";
-import { getAdminSignedIn } from "../../reducks/admins/selectors";
-import { adminSignOut } from "../../reducks/admins/operations";
+import { getAdminSignedIn } from "../../reducks/admin/selectors";
+import { adminSignOut } from "../../reducks/admin/operations";
 import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({

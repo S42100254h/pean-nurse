@@ -1,5 +1,5 @@
-import { AdminsReducer } from "../../../reducks/admins/reducers";
-import { adminSignInAction, adminSignOutAction } from "../../../reducks/admins/actions";
+import { AdminsReducer } from "../../../reducks/admin/reducers";
+import { adminSignInAction, adminSignOutAction } from "../../../reducks/admin/actions";
 import initialState from "../../../reducks/store/initialState";
 
 describe("AdminsReducerのテスト", () => {

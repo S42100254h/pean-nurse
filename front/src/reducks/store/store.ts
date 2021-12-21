@@ -7,7 +7,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 
-import { AdminsReducer } from "../admins/reducers";
+import { AdminsReducer } from "../admin/reducers";
 import { CategoriesReducer } from "../categories/reducers";
 import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
