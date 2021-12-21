@@ -29,6 +29,9 @@ const initialState: RootState = {
     email: "",
     image: null,
   },
+  users: {
+    list: [],
+  },
 };
 
 export default initialState;
