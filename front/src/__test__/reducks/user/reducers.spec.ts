@@ -1,5 +1,5 @@
-import { UsersReducer } from "../../../reducks/users/reducers";
-import { signInAction, signUpAction, signOutAction, editUserInfoAction, editUserImageAction, deleteUserImageAction } from "../../../reducks/users/actions";
+import { UsersReducer } from "../../../reducks/user/reducers";
+import { signInAction, signUpAction, signOutAction, editUserInfoAction, editUserImageAction, deleteUserImageAction } from "../../../reducks/user/actions";
 import initialState from "../../../reducks/store/initialState";
 
 describe("UsersReducerのテスト", () => {

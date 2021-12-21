@@ -12,7 +12,7 @@ import { CategoriesReducer } from "../categories/reducers";
 import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
 import { QuizzesReducer } from "../quizzes/reducers";
-import { UsersReducer } from "../users/reducers";
+import { UsersReducer } from "../user/reducers";
 import { History } from "history";
 
 export const createStore = (history: History) => {

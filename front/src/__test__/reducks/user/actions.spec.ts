@@ -5,7 +5,7 @@ import {
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
-} from "../../../reducks/users/actions";
+} from "../../../reducks/user/actions";
 
 describe("actions.jsのテスト", () => {
   it("signUpActionのテスト", () => {

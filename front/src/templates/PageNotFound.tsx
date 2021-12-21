@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
-import { getSignedIn } from "../reducks/users/selectors";
+import { getSignedIn } from "../reducks/user/selectors";
 import { RootState } from "../types/entity/rootState";
 
 const useStyles = makeStyles({

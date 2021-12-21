@@ -4,7 +4,7 @@ import { isValidEmailFormat, isValidRequiredInput } from "../../function/common"
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, TextInput } from "../UIkit";
-import { getUserEmail, getUserName } from "../../reducks/users/selectors";
+import { getUserEmail, getUserName } from "../../reducks/user/selectors";
 import { useSelector } from "react-redux";
 import cat from "../../assets/img/cat.png";
 import axios from "axios";
