@@ -8,8 +8,8 @@ import { HelpOutline } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { getSignedIn } from "../../reducks/users/selectors";
-import { signOut } from "../../reducks/users/operations";
+import { getSignedIn } from "../../reducks/user/selectors";
+import { signOut } from "../../reducks/user/operations";
 import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles(() => ({

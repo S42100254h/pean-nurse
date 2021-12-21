@@ -2,7 +2,7 @@ import React, { useCallback, useState }  from "react";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { PasswordInput, PrimaryButton } from "../components/UIkit";
-import { resetPassword } from "../reducks/users/operations";
+import { resetPassword } from "../reducks/user/operations";
 
 const useStyles = makeStyles({
   container: {

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import { getUserName, getUserImage } from "../../reducks/users/selectors";
+import { getUserName, getUserImage } from "../../reducks/user/selectors";
 import { RootState } from "../../types/entity/rootState";
 
 const useStyles = makeStyles({

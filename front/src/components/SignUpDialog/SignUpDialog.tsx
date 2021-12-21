@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PasswordInput, PrimaryButton, TextInput } from "../UIkit";
-import { signUp } from "../../reducks/users/operations";
+import { signUp } from "../../reducks/user/operations";
 import { push } from "connected-react-router";
 
 const useStyles = makeStyles({

@@ -1,9 +1,9 @@
-import { UsersReducer } from "../../../reducks/users/reducers";
-import { signInAction, signUpAction, signOutAction, editUserInfoAction, editUserImageAction, deleteUserImageAction } from "../../../reducks/users/actions";
+import { UsersReducer } from "../../../reducks/user/reducers";
+import { signInAction, signUpAction, signOutAction, editUserInfoAction, editUserImageAction, deleteUserImageAction } from "../../../reducks/user/actions";
 import initialState from "../../../reducks/store/initialState";
 
 describe("UsersReducerのテスト", () => {
-  const init = initialState.users;
+  const init = initialState.user;
   it("action.type === SIGN_INのときのテスト", () => {
     const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signInAction(dummy);

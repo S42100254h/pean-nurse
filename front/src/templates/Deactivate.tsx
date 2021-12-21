@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { SecondaryButton, TextInput } from "../components/UIkit";
 import { useDispatch } from "react-redux";
-import { deleteUser } from "../reducks/users/operations";
+import { deleteUser } from "../reducks/user/operations";
 
 const useStyles = makeStyles((theme) => ({
   "span": {

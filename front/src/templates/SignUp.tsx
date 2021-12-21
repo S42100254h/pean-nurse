@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
-import { signUp } from "../reducks/users/operations";
+import { signUp } from "../reducks/user/operations";
 
 const useStyles = makeStyles({
   "container": {

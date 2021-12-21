@@ -22,7 +22,7 @@ const initialState: RootState = {
   quizzes: {
     list: [],
   },
-  users: {
+  user: {
     isSignedIn: false,
     uid: "",
     name: "",
