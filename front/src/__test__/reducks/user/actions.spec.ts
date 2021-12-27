@@ -7,8 +7,8 @@ import {
   deleteUserImageAction,
 } from "../../../reducks/user/actions";
 
-describe("actions.jsのテスト", () => {
-  it("signUpActionのテスト", () => {
+describe ("actions.tsのテスト", () => {
+  it ("signUpActionのテスト", () => {
     const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signUpAction(dummy);
 
@@ -20,7 +20,7 @@ describe("actions.jsのテスト", () => {
     );
   });
 
-  it("signInActionのテスト", () => {
+  it ("signInActionのテスト", () => {
     const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signInAction(dummy);
 
@@ -32,7 +32,7 @@ describe("actions.jsのテスト", () => {
     );
   });
 
-  it("signOutActionのテスト", () => {
+  it ("signOutActionのテスト", () => {
     const action = signOutAction();
 
     expect(action).toStrictEqual(
@@ -43,7 +43,7 @@ describe("actions.jsのテスト", () => {
     );
   });
   
-  it("editUserInfoActionのテスト", () => {
+  it ("editUserInfoActionのテスト", () => {
     const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: null };
     const action = editUserInfoAction(dummy);
 
@@ -55,7 +55,7 @@ describe("actions.jsのテスト", () => {
     );
   });
   
-  it("editUserImageActionのテスト", () => {
+  it ("editUserImageActionのテスト", () => {
     const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: { url: "cat.png" } };
     const action = editUserImageAction(dummy);
 
@@ -67,7 +67,7 @@ describe("actions.jsのテスト", () => {
     );
   });
 
-  it("deleteUserImageActionのテスト", () => {
+  it ("deleteUserImageActionのテスト", () => {
     const action = deleteUserImageAction();
 
     expect(action).toStrictEqual(

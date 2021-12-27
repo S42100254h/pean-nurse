@@ -3,8 +3,8 @@ import {
   setNotificationAction,
 } from "../../../reducks/notification/actions"; 
 
-describe("actions.jsのテスト", () => {
-  it("closeNotificationActionのテスト", () => {
+describe ("actions.tsのテスト", () => {
+  it ("closeNotificationActionのテスト", () => {
     const action = closeNotificationAction();
 
     expect(action).toStrictEqual(
@@ -15,7 +15,7 @@ describe("actions.jsのテスト", () => {
     );
   });
 
-  it("setNotificationActionのテスト", () => {
+  it ("setNotificationActionのテスト", () => {
     type Notification = {
       variant: "success" | "error";
       message: string | undefined;
