@@ -3,8 +3,8 @@ import {
   showLoadingAction,
 } from "../../../reducks/loading/actions";
 
-describe("actions.jsのテスト", () => {
-  it("hideLoadingActionのテスト", () => {
+describe ("actions.tsのテスト", () => {
+  it ("hideLoadingActionのテスト", () => {
     const action = hideLoadingAction();
 
     expect(action).toStrictEqual(
@@ -15,7 +15,7 @@ describe("actions.jsのテスト", () => {
     );
   });
   
-  it("showLoadingActionのテスト", () => {
+  it ("showLoadingActionのテスト", () => {
     const dummy = "test";
     const action = showLoadingAction(dummy);
 

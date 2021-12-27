@@ -2,10 +2,10 @@ import initialState from "../../../reducks/store/initialState";
 import { QuizzesReducer } from "../../../reducks/quizzes/reducers";
 import { fetchQuizzesAction, deleteQuizAction } from "../../../reducks/quizzes/actions";
 
-describe("QuizzesReducerのテスト", () => {
+describe ("QuizzesReducerのテスト", () => {
   const init = initialState.quizzes;
   
-  it("action.type === FETCH_QUIZZES", () => {
+  it ("action.type === FETCH_QUIZZES", () => {
     const dummy = [
       {
         id: 1, title: "neko", created_at: "2021-01-01", updated_at: "2021-02-01"
@@ -25,7 +25,7 @@ describe("QuizzesReducerのテスト", () => {
     );
   });
   
-  it("action.type === DELETE_QUIZ", () => {
+  it ("action.type === DELETE_QUIZ", () => {
     const init =  {
       list: [
         {

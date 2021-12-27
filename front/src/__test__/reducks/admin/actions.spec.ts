@@ -3,8 +3,8 @@ import {
   adminSignOutAction,
 } from "../../../reducks/admin/actions";
 
-describe("actions.jsのテスト", () => {
-  it("adminSignInActionのテスト", () => {
+describe ("actions.tsのテスト", () => {
+  it ("adminSignInActionのテスト", () => {
     const dummy = { isAdminSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com" };
     const action = adminSignInAction(dummy);
 
@@ -16,7 +16,7 @@ describe("actions.jsのテスト", () => {
     );
   });
 
-  it("adminSignOutActionのテスト", () => {
+  it ("adminSignOutActionのテスト", () => {
     const action = adminSignOutAction();
 
     expect(action).toStrictEqual(
