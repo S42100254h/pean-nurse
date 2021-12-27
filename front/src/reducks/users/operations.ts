@@ -18,7 +18,7 @@ export const fetchUsers = () => {
         setTimeout(() => {
           dispatch(setNotificationAction({ variant: "error", message: "ユーザー一覧の取得に失敗しました。" }));
         }, 400);
-      })
+      });
   };
 };
 
