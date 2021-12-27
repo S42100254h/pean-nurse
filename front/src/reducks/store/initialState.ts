@@ -23,6 +23,7 @@ const initialState: RootState = {
     list: [],
   },
   user: {
+    id: "",
     isSignedIn: false,
     uid: "",
     name: "",
