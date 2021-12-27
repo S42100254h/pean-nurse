@@ -13,6 +13,7 @@ import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
 import { QuizzesReducer } from "../quizzes/reducers";
 import { UserReducer } from "../user/reducers";
+import { UsersReducer } from "../users/reducers";
 import { History } from "history";
 
 export const createStore = (history: History) => {
@@ -25,6 +26,7 @@ export const createStore = (history: History) => {
       notification: NotificationReducer,
       quizzes: QuizzesReducer,
       user: UserReducer,
+      users: UsersReducer,
     }),
     composeWithDevTools(
       applyMiddleware(
