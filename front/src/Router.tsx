@@ -20,7 +20,8 @@ import {
   ResetPassword,
   Setting,
   SignUp,
-  SignIn
+  SignIn,
+  UserList,
 } from "./templates";
 import AdminRoute from "./AdminRoute";
 import NoAdminRoute from "./NoAdminRoute";
@@ -37,6 +38,7 @@ const Router = withRouter(({ location }) =>
         <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
         <AdminRoute exact path={"/quiz/detail/:id"} component={QuizDetail} />
         <AdminRoute exact path={"/quiz/list"} component={QuizList} />
+        <AdminRoute exact path={"/user/list"} component={UserList} />
         <NoAdminRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"(/)?"} component={Home} />
         <UnAuthRoute exact path={"/forgetpassword"} component={ForgetPassword} />
