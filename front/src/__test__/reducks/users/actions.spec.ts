@@ -22,4 +22,24 @@ describe ("actions.tsのテスト", () => {
       }
     )
   });
+
+  it ("deleteUserActionのテスト", () => {
+    const dummy = [
+      {
+        id: 1, isSignedIn: true, uid: "cat@gmail.com", name: "cat", email: "cat@gmail.com", image: null
+      },
+      {
+        id: 2, isSignedIn: true, uid: "dog@gmail.com", name: "dog", email: "dog@gmail.com", image: null
+      },
+    ];
+    
+    const action = deleteUserAction(dummy);
+    
+    expect(action).toStrictEqual(
+      {
+        type: "DELETE_USERS",
+        payload: dummy,
+      }
+    );
+  });
 });
