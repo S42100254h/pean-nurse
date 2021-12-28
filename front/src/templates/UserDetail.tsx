@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
-import { TextInput } from "../components/UIkit";
+import { TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -30,7 +30,8 @@ const UserDetail = () => {
   const classes = useStyles();
   const match = useRouteMatch<MatchParams>();
   
-  const [name, setName] = useState("");
+  const [name, setName] = useState(""),
+    [email, setEmail] = useState("");
   
   useEffect(() => {
     if (localStorage.getItem("access-token")) {
@@ -51,6 +52,7 @@ const UserDetail = () => {
         .then((resp) => {
           if (isMounted) {
             setName(resp.data.name);
+            setEmail(resp.data.email);
           }
         })
     }
@@ -59,6 +61,10 @@ const UserDetail = () => {
   const inputName = useCallback((event) => {
     setName(event.target.value);
   }, [setName]);
+  
+  const inputMail = useCallback((event) => {
+    setEmail(event.target.value);
+  }, [setEmail]);
 
   return (
     <div className={classes.container}>
@@ -73,6 +79,29 @@ const UserDetail = () => {
         value={name}
         type={"text"}
         onChange={inputName}
+      />
+      <TextInput
+        fullWidth={true}
+        label={"メールアドレス"}
+        multiline={true}
+        required={true}
+        rows={1}
+        value={email}
+        type={"text"}
+        onChange={inputMail}
+      />
+      <div className="module-spacer--medium" />
+      <PrimaryButton
+        label={"ユーザー情報を更新する"}
+        fullWidth={true}
+        disabled={!name || !email}
+        onClick={() => console.log("update!")}
+      />
+      <div className="module-spacer--extra-small" />
+      <SecondaryButton
+        label={"アカウントを削除する"}
+        fullWidth={true}
+        onClick={() => console.log("delete!")}
       />
     </div>
   );
