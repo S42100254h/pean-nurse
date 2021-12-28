@@ -21,6 +21,7 @@ import {
   Setting,
   SignUp,
   SignIn,
+  UserDetail,
   UserList,
 } from "./templates";
 import AdminRoute from "./AdminRoute";
@@ -39,6 +40,7 @@ const Router = withRouter(({ location }) =>
         <AdminRoute exact path={"/quiz/detail/:id"} component={QuizDetail} />
         <AdminRoute exact path={"/quiz/list"} component={QuizList} />
         <AdminRoute exact path={"/user/list"} component={UserList} />
+        <AdminRoute exact path={"/user/detail/:id"} component={UserDetail} />
         <NoAdminRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"(/)?"} component={Home} />
         <UnAuthRoute exact path={"/forgetpassword"} component={ForgetPassword} />
