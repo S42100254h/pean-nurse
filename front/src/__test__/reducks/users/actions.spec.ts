@@ -20,7 +20,7 @@ describe ("actions.tsのテスト", () => {
         type: "FETCH_USERS",
         payload: dummy,
       }
-    )
+    );
   });
 
   it ("deleteUserActionのテスト", () => {
