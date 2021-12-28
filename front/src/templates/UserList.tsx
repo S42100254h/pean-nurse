@@ -78,6 +78,11 @@ const UserList = () => {
     );
   });
   
+  const sortedRows = rows.sort((a, b) => {
+    // descending order by id
+    return (a.id > b.id) ? -1 : 1;
+  });
+  
   return (
     <div className={classes.container}>
       <h2 className={classes.headline}>ユーザー一覧</h2>
