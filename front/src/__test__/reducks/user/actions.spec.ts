@@ -9,7 +9,7 @@ import {
 
 describe ("actions.tsのテスト", () => {
   it ("signUpActionのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signUpAction(dummy);
 
     expect(action).toStrictEqual(
@@ -21,7 +21,7 @@ describe ("actions.tsのテスト", () => {
   });
 
   it ("signInActionのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signInAction(dummy);
 
     expect(action).toStrictEqual(
@@ -44,7 +44,7 @@ describe ("actions.tsのテスト", () => {
   });
   
   it ("editUserInfoActionのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: null };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: null };
     const action = editUserInfoAction(dummy);
 
     expect(action).toStrictEqual(
@@ -56,7 +56,7 @@ describe ("actions.tsのテスト", () => {
   });
   
   it ("editUserImageActionのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: { url: "cat.png" } };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: { url: "cat.png" } };
     const action = editUserImageAction(dummy);
 
     expect(action).toStrictEqual(
