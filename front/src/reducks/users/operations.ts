@@ -7,18 +7,29 @@ import { User } from "../../types/entity/user";
 
 export const fetchUsers = () => {
   return async (dispatch: Dispatch) => {
-    const apiEndpoint = process.env.REACT_APP_API_URL + "users";
-    
-    axios
-      .get(apiEndpoint)
-      .then((resp) => {
-        dispatch(fetchUsersAction(resp.data));
-      })
-      .catch(() => {
-        setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "ユーザー一覧の取得に失敗しました。" }));
-        }, 400);
-      });
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users";
+
+      axios
+        .get(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(fetchUsersAction(resp.data));
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(setNotificationAction({ variant: "error", message: "ユーザー一覧の取得に失敗しました。" }));
+          }, 400);
+        });
+    }
   };
 };
 
