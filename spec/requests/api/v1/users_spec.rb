@@ -34,4 +34,20 @@ RSpec.describe "Api::V1::Users", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET /api/v1/users/:id" do
+    subject { get(api_v1_user_path(user_id), headers: headers) }
+
+    let(:current_admin) { create(:admin) }
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:user_id) { user.id }
+    let!(:user) { create(:user) }
+
+    it "get detail of user" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.keys).to eq ["id", "provider", "uid", "allow_password_change", "name", "nickname", "image", "email", "created_at", "updated_at"]
+      expect(response).to have_http_status(200)
+    end
+  end
 end
