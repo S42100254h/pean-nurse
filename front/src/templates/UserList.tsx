@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   container: {
     margin: "25px auto",
     width: "calc(100% - 20rem)",
-    maxWidth: 1080,
+    maxWidth: 900,
   },
   headline: {
     color: "#4dd0e1",
@@ -39,18 +39,48 @@ const UserList = () => {
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
-    { field: "name", headerName: "ユーザー名", width: 200 },
+    { field: "name", headerName: "ユーザー名", width: 320 },
     { field: "email", headerName: "メールアドレス", width: 300 },
+    {
+      field: "detail",
+      headerName: "詳細",
+      width: 100,
+      renderCell: (params: GridCellParams) =>
+        <PrimaryButton
+          label={"詳細"}
+          rowId={params.id}
+          onClick={() => dispatch(push("/quiz/detail/" + params.id))}
+        />
+    },
+    {
+      field: "delete",
+      headerName: "削除",
+      width: 100,
+      renderCell: (params: GridCellParams) =>
+        <SecondaryButton
+          label={"削除"}
+          rowId={params.id}
+          onClick={() => {
+            setSelectedId(params.id);
+            setOpen(true);
+          }}
+        />
+    },
   ];
   
   const rows = users.map((user) => {
     return (
       {
-        id: user.uid,
+        id: user.id,
         name: user.name,
         email: user.email,
       }
     );
+  });
+  
+  const sortedRows = rows.sort((a, b) => {
+    // descending order by id
+    return (a.id > b.id) ? -1 : 1;
   });
   
   return (
