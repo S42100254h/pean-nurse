@@ -18,7 +18,7 @@ RSpec.describe "Api::V1::Users", type: :request do
 
   describe "GET /api/v1/users" do
     subject { get(api_v1_users_path) }
-    
+
     before do
       create_list(:user, 8)
     end
