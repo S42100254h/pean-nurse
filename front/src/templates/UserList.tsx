@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   container: {
     margin: "25px auto",
     width: "calc(100% - 20rem)",
-    maxWidth: 1080,
+    maxWidth: 900,
   },
   headline: {
     color: "#4dd0e1",
@@ -39,7 +39,7 @@ const UserList = () => {
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
-    { field: "name", headerName: "ユーザー名", width: 200 },
+    { field: "name", headerName: "ユーザー名", width: 320 },
     { field: "email", headerName: "メールアドレス", width: 300 },
     {
       field: "detail",
