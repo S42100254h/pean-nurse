@@ -54,7 +54,7 @@ const UserDetail = () => {
             setName(resp.data.name);
             setEmail(resp.data.email);
           }
-        })
+        });
     }
   }, []);
   
