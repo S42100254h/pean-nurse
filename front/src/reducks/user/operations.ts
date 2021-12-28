@@ -424,6 +424,7 @@ export const listenAuthState = () => {
           const userData = response.data;
 
           dispatch(signInAction({
+            id: userData.id,
             isSignedIn: true,
             uid: userData.uid,
             name: userData.name,
@@ -460,6 +461,7 @@ export const redirectToDashboard = () => {
           const userData = response.data;
 
           dispatch(signInAction({
+            id: userData.id,
             isSignedIn: true,
             uid: userData.uid,
             name: userData.name,

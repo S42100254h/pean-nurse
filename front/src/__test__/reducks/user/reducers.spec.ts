@@ -5,7 +5,7 @@ import initialState from "../../../reducks/store/initialState";
 describe ("UsersReducerのテスト", () => {
   const init = initialState.user;
   it ("action.type === SIGN_INのときのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signInAction(dummy);
     const newState = UserReducer(init, action);
 
@@ -14,7 +14,7 @@ describe ("UsersReducerのテスト", () => {
   });
 
   it ("action.type === SIGN_UPのときのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-user", email: "dummy@gmail.com", image: null };
     const action = signUpAction(dummy);
     const newState = UserReducer(init, action);
 
@@ -36,7 +36,7 @@ describe ("UsersReducerのテスト", () => {
   });
   
   it ("action.type === EDIT_USER_INFOのときのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: null };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: null };
     const action = editUserInfoAction(dummy);
     const newState = UserReducer(init, action);
 
@@ -45,7 +45,7 @@ describe ("UsersReducerのテスト", () => {
   });
 
   it ("action.type === EDIT_USER_IMAGEのときのテスト", () => {
-    const dummy = { isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: { url: "cat.png" } };
+    const dummy = { id: 1, isSignedIn: true, uid: "dummy@gmail.com", name: "dummy-admin", email: "dummy@gmail.com", image: { url: "cat.png" } };
     const action = editUserImageAction(dummy);
     const newState = UserReducer(init, action);
     
