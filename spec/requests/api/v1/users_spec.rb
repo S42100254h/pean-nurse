@@ -17,11 +17,14 @@ RSpec.describe "Api::V1::Users", type: :request do
   end
 
   describe "GET /api/v1/users" do
-    subject { get(api_v1_users_path) }
+    subject { get(api_v1_users_path, headers: headers) }
 
     before do
       create_list(:user, 8)
     end
+
+    let(:current_admin) { create(:admin) }
+    let(:headers) { current_admin.create_new_auth_token }
 
     it "get list of users" do
       subject
