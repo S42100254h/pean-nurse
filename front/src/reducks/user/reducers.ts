@@ -5,6 +5,7 @@ import * as Actions from "./actions";
 export const UserReducer = reducerWithInitialState(initialState.user)
   .case(Actions.signUpAction, (state, payload) => ({
     ...state,
+    id: payload.id,
     isSignedIn: true,
     uid: payload.uid,
     name: payload.name,
@@ -13,6 +14,7 @@ export const UserReducer = reducerWithInitialState(initialState.user)
   }))
   .case(Actions.signInAction, (state, payload) => ({
     ...state,
+    id: payload.id,
     isSignedIn: true,
     uid: payload.uid,
     name: payload.name,
