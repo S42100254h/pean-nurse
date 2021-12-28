@@ -49,7 +49,7 @@ const UserList = () => {
         <PrimaryButton
           label={"詳細"}
           rowId={params.id}
-          onClick={() => dispatch(push("/quiz/detail/" + params.id))}
+          onClick={() => dispatch(push("/user/detail/" + params.id))}
         />
     },
     {
