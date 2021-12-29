@@ -1,4 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApiController
+  before_action :set_user, only: [:destroy]
   before_action :authenticate_user!, only: [:currentuser]
   before_action :authenticate_admin!, only: [:index, :show, :destroy]
 
