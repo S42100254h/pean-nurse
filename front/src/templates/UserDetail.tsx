@@ -60,6 +60,8 @@ const UserDetail = () => {
             setEmail(resp.data.email);
           }
         });
+
+      return () => { isMounted = false; };
     }
   }, []);
   
