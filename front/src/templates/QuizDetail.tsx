@@ -288,7 +288,9 @@ const QuizDetail = () => {
         onClickProceed={() => {
           dispatch(deleteQuiz(match.params.id));
           setIsOpen(false);
-          dispatch(push("/quiz/list"));
+          setTimeout(() => {
+            dispatch(push("/quiz/list"));
+          }, 100);
         }}
       />
     </div>
