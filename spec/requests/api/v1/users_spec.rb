@@ -50,4 +50,18 @@ RSpec.describe "Api::V1::Users", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "DELET /api/v1/users/:id" do
+    subject { delete(api_v1_user_path(user_id), headers: headers) }
+
+    let(:current_admin) { create(:admin) }
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:user_id) { user.id }
+    let!(:user) { create(:user) }
+
+    it "delete user" do
+      expect { subject }.to change { User.count }.by(-1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end
