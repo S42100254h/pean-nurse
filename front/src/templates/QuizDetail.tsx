@@ -1,9 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
-import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
+import { SelectBox, TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
+import { DeleteDialog } from "../components/DeleteDialog";
+import { deleteQuiz } from "../reducks/quizzes/operations";
+import { push } from "connected-react-router";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -30,6 +34,7 @@ type MatchParams = {
 
 const QuizDetail = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
 
   const [quiz, setQuiz] = useState(""),
@@ -45,7 +50,8 @@ const QuizDetail = () => {
     [id2, setId2] = useState<number | null>(null),
     [id3, setId3] = useState<number | null>(null),
     [id4, setId4] = useState<number | null>(null),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
@@ -260,6 +266,12 @@ const QuizDetail = () => {
         disabled={!quiz || !choice1 || !choice2}
         onClick={() => handleDialogOpen()}
       />
+      <div className="module-spacer--extra-small" />
+      <SecondaryButton
+        label={"クイズを削除する"}
+        fullWidth={true}
+        onClick={() => setIsOpen(true)}
+      />
       <ConfirmUpdateDialog
         id={match.params.id}
         quiz={quiz}
@@ -268,6 +280,16 @@ const QuizDetail = () => {
         id1={id1} id2={id2} id3={id3} id4={id4}
         open={open}
         onClose={handleDialogClose}
+      />
+      <DeleteDialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        onClickStop={() => setIsOpen(false)}
+        onClickProceed={() => {
+          dispatch(deleteQuiz(match.params.id));
+          setIsOpen(false);
+          dispatch(push("/quiz/list"));
+        }}
       />
     </div>
   );
