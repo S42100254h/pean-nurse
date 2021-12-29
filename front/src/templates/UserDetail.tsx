@@ -118,7 +118,9 @@ const UserDetail = () => {
         onClickProceed={() => {
           dispatch(deleteUser(match.params.id));
           setOpen(false);
-          dispatch(push("/user/list"));
+          setTimeout(() => {
+            dispatch(push("/user/list"));
+          }, 100);
         }}
       />
     </div>
