@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import { TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { deleteUser } from "../reducks/users/operations";
+import { DeleteDialog } from "../components/DeleteDialog";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -28,10 +31,12 @@ type MatchParams = {
 
 const UserDetail = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
   
   const [name, setName] = useState(""),
-    [email, setEmail] = useState("");
+    [email, setEmail] = useState(""),
+    [open, setOpen] = useState(false);
   
   useEffect(() => {
     if (localStorage.getItem("access-token")) {
@@ -101,7 +106,16 @@ const UserDetail = () => {
       <SecondaryButton
         label={"アカウントを削除する"}
         fullWidth={true}
-        onClick={() => console.log("delete!")}
+        onClick={() => setOpen(true)}
+      />
+      <DeleteDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        onClickStop={() => setOpen(false)}
+        onClickProceed={() => {
+          dispatch(deleteUser(match.params.id));
+          setOpen(false);
+        }}
       />
     </div>
   );
