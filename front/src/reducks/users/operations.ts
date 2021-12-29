@@ -51,7 +51,7 @@ export const deleteUser = (id: string | number) => {
         })
         .then(() => {
           const prevUsers = getUsers().users.list;
-          const nextUsers = prevUsers.filter((user: User) => user.uid !== uid);
+          const nextUsers = prevUsers.filter((user: User) => user.id !== id);
           dispatch(deleteUserAction(nextUsers));
           dispatch(showLoadingAction("Delete User..."));
           
