@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   container: {
     margin: "25px auto",
     width: "calc(100% - 20rem)",
-    maxWidth: 900,
+    maxWidth: 910,
   },
   headline: {
     color: "#4dd0e1",

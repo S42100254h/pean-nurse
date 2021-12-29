@@ -86,11 +86,6 @@ const Header = () => {
       id: "userlist",
       value: "/user/list",
     },
-    {
-      label: "ユーザー詳細",
-      id: "userdetail",
-      value: "/user/detail",
-    },
   ];
   
   const quizMenu: Menu[] = [
