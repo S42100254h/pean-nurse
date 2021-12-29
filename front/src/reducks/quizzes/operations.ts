@@ -40,7 +40,7 @@ export const deleteQuiz = (id: string | number) => {
         })
         .then(() => {
           const prevQuizzes = getQuizzes().quizzes.list;
-          const nextQuizzes = prevQuizzes.filter((quiz: Quiz) => quiz.id !== id);
+          const nextQuizzes = prevQuizzes.filter((quiz: Quiz) => quiz.id !== Number(id));
           dispatch(deleteQuizAction(nextQuizzes));
           dispatch(showLoadingAction("Delete quiz..."));
 
