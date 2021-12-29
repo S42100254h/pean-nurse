@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for "Admin", at: "admin"
       get "users/currentuser"
       get "admins/currentadmin"
-      resources :users, only: [:show, :index, :destroy]
+      resources :users, only: [:show, :index, :update, :destroy]
       resources :quizzes
       resources :categories
       resources :choices, only: [:show, :create, :update, :destroy]

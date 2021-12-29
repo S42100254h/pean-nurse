@@ -51,7 +51,22 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
-  describe "DELET /api/v1/users/:id" do
+  describe "PATCH /api/v1/users/:id" do
+    subject { patch(api_v1_user_path(user_id), params: params, headers: headers) }
+
+    let(:current_admin) { create(:admin) }
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:params) { { user: { name: Faker::Name.name } } }
+    let(:user_id) { user.id }
+    let!(:user) { create(:user) }
+
+    it "user is updated" do
+      expect { subject }.to change { user.reload.name }.from(user.name).to(params[:user][:name])
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe "DELETE /api/v1/users/:id" do
     subject { delete(api_v1_user_path(user_id), headers: headers) }
 
     let(:current_admin) { create(:admin) }
