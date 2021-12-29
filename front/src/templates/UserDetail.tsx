@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import { TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { deleteUser } from "../reducks/users/operations";
 import { DeleteDialog } from "../components/DeleteDialog";
+import { push } from "connected-react-router";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -117,6 +118,7 @@ const UserDetail = () => {
         onClickProceed={() => {
           dispatch(deleteUser(match.params.id));
           setOpen(false);
+          dispatch(push("/user/list"));
         }}
       />
     </div>
