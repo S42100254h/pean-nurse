@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import { TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { deleteUser } from "../reducks/users/operations";
 import { DeleteDialog } from "../components/DeleteDialog";
+import { editUserInfoByAdmin } from "../function/user";
 import { push } from "connected-react-router";
 import axios from "axios";
 
@@ -103,7 +104,7 @@ const UserDetail = () => {
         label={"ユーザー情報を更新する"}
         fullWidth={true}
         disabled={!name || !email}
-        onClick={() => console.log("update!")}
+        onClick={() => dispatch(editUserInfoByAdmin(match.params.id, name, email))}
       />
       <div className="module-spacer--extra-small" />
       <SecondaryButton
