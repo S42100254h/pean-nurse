@@ -199,14 +199,12 @@ const ClosableDialog = (props: Props) => {
                 onChange={inputSelect}
                 fullWidth={true}
               >
-                <div>
-                  <MenuItem value="">- 選択してください -</MenuItem>
-                  {menus.map((menu) => (
-                    <MenuItem value={menu.value} key={menu.id} >
-                      {menu.label}
-                    </MenuItem>
-                  ))}
-                </div>
+                <MenuItem value="">- 選択してください -</MenuItem>
+                {menus.map((menu) => (
+                  <MenuItem value={menu.value} key={menu.id} >
+                    {menu.label}
+                  </MenuItem>
+                ))}
               </SelectBox>
               <div className="module-spacer--extra-extra-small" />
               <TextField
