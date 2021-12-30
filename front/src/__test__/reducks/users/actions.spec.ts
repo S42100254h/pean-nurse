@@ -37,7 +37,7 @@ describe ("actions.tsのテスト", () => {
     
     expect(action).toStrictEqual(
       {
-        type: "DELETE_USERS",
+        type: "DELETE_USER",
         payload: dummy,
       }
     );
