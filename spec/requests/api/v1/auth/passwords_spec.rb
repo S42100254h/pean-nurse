@@ -53,9 +53,8 @@ RSpec.describe "Api::V1::Auth::Passwords", type: :request do
 
       it "reset password" do
         subject
-        # http status 200 だが、パスワードの変更ができない。修正が必要。
-        # expect { subject }.to change { user.reload.password }.from(user.password).to(params[:password]) &
-        # change { user.reload.password_confirmation }.from(user.password_confirmation).to(params[:password_confirmation])
+        expect(user.valid_password?(user.password)).to eq(true)
+        expect(user.reload.valid_password?("dummypassword")).to eq(true)
         expect(response).to have_http_status(200)
       end
     end
