@@ -10,19 +10,13 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 0 1px grey",
     position: "relative",
   },
-  textleftContainer: {
-    padding: "50px 40px",
-  },
-  textRightContainer: {
-    padding: "50px 40px",
-    marginRight: 250,
-  },
   heading: {
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
     width: "fit-content",
     marginBottom: 5,
+    marginTop: 50,
   },
   text: {
     color: "#fff",
@@ -47,21 +41,17 @@ const Footer = () => {
         justifyContent="flex-end"
         className={classes.root}
       >
-        <Grid item>
-          <div className={classes.textleftContainer}>
-            <div className={classes.heading}>PeAN</div>
-            <div className={classes.text}>About</div>
-            <div className={classes.text}>利用規約</div>
-            <div className={classes.text}>プライバシー</div>
-          </div>
+        <Grid item sm={2}>
+          <div className={classes.heading}>PeAN</div>
+          <div className={classes.text}>About</div>
+          <div className={classes.text}>利用規約</div>
+          <div className={classes.text}>プライバシー</div>
         </Grid>
-        <Grid item>
-          <div className={classes.textRightContainer}>
-            <div className={classes.heading}>サービス</div>
-            <div className={classes.text}>コース一覧</div>
-            <div className={classes.text}>利用者の声</div>
-            <div className={classes.text}>ヘルプ</div>
-          </div>
+        <Grid item sm={2}>
+          <div className={classes.heading}>サービス</div>
+          <div className={classes.text}>コース一覧</div>
+          <div className={classes.text}>利用者の声</div>
+          <div className={classes.text}>ヘルプ</div>
         </Grid>
       </Grid>
     </div>
