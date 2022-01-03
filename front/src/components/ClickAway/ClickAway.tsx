@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   onClickAway: (event: React.MouseEvent<Document>) => void;
-  onChange: Function;
-  onClick: Function;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
 };
 
 const ClickAway = (props: Props) => {
