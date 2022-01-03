@@ -30,7 +30,7 @@ type Props = {
   choice4: string;
   select4: string;
   open: boolean;
-  onClose: Function;
+  onClose: () => void;
 };
 
 const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }: Props) => {
@@ -41,7 +41,7 @@ const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
     <div>
       <Dialog
         open={open}
-        onClose={(e) => onClose(e)}
+        onClose={() => onClose()}
         fullWidth={false}
         maxWidth={"md"}
       >

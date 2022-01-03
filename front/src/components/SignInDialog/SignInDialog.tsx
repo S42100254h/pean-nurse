@@ -34,8 +34,8 @@ const useStyles = makeStyles({
 
 type Props = {
   open: boolean;
-  onClose: Function;
-  onClick: Function;
+  onClose: () => void;
+  onClick: () => void;
 };
 
 const SignInDialog = (props: Props) => {
@@ -64,7 +64,7 @@ const SignInDialog = (props: Props) => {
     <div>
       <Dialog
         open={props.open}
-        onClose={(e) => props.onClose(e)}
+        onClose={() => props.onClose()}
         fullWidth={true}
         maxWidth={"sm"}
       >

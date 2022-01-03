@@ -23,9 +23,9 @@ const useStyles = makeStyles({
 
 type Props = {
   isOpen: boolean;
-  onClose: Function;
-  onClickStop: Function;
-  onClickProceed: Function;
+  onClose: () => void;
+  onClickStop: () => void;
+  onClickProceed: () => void;
   
 };
 
@@ -36,7 +36,7 @@ const Confirmation = (props: Props) => {
     <>
       <Dialog
         open={props.isOpen}
-        onClose={(e) => props.onClose(e)}
+        onClose={() => props.onClose()}
         fullWidth={true}
         maxWidth={"sm"}
       >

@@ -60,7 +60,7 @@ const useStyles = makeStyles({
 
 type Props = {
   open: boolean;
-  onClose: Function;
+  onClose: () => void;
 };
 
 const ClosableDialog = (props: Props) => {
@@ -151,7 +151,7 @@ const ClosableDialog = (props: Props) => {
       <Dialog
         open={props.open}
         onClose={(e) => {
-          props.onClose(e);
+          props.onClose();
           setTimeout(() => {
             setEmail("");
             setSelect("");

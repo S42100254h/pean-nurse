@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
 
 type Props = {
   open: boolean;
-  onClose: Function;
+  onClose: () => void;
 };
 
 const ClosableDrawer = (props: Props) => {
@@ -33,19 +33,19 @@ const ClosableDrawer = (props: Props) => {
   const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
   
-  const selectMenu = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, path: string) => {
+  const selectMenu = (path: string) => {
     dispatch(push(path));
-    props.onClose(event);
+    props.onClose();
   };
   
-  const handleSignOut = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleSignOut = () => {
     dispatch(signOut());
-    props.onClose(event);
+    props.onClose();
   };
   
-  const handleSignIn = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleSignIn = () => {
     dispatch(push("/signin"));
-    props.onClose(event);
+    props.onClose();
   };
 
   const menus = [
@@ -78,21 +78,21 @@ const ClosableDrawer = (props: Props) => {
         variant="temporary"
         anchor="right"
         open={props.open}
-        onClose={(e) => props.onClose(e)}
+        onClose={(e) => props.onClose()}
         classes={{ paper: classes.drawerPaper }}
         ModalProps={{ keepMounted: true }}
       >
         <div>
           <List>
             {menus.map((menu) => (
-              <ListItem button key={menu.id} onClick={(e) => menu.func(e, menu.value)}>
+              <ListItem button key={menu.id} onClick={() => menu.func(menu.value)}>
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.label} />
               </ListItem>
             ))}
             {isSignedIn ? (
               <div>
-                <ListItem button key="signout" onClick={(e) => handleSignOut(e)}>
+                <ListItem button key="signout" onClick={() => handleSignOut()}>
                   <ListItemIcon>
                     <ExitToAppIcon />
                   </ListItemIcon>
@@ -101,7 +101,7 @@ const ClosableDrawer = (props: Props) => {
               </div>
             ) : (
               <div>
-                <ListItem button key="signin" onClick={(e) => handleSignIn(e)}>
+                <ListItem button key="signin" onClick={() => handleSignIn()}>
                   <ListItemIcon>
                     <PermIdentityIcon />
                   </ListItemIcon>

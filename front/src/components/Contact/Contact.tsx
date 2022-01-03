@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
@@ -30,14 +30,7 @@ const Contact = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   
-  const handleDialogToggle = useCallback((event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setOpen(!open);
-  },
-  [setOpen, open]
-  );
+  const handleDialogToggle = () => setOpen(!open);
 
   return (
     <>
@@ -46,7 +39,7 @@ const Contact = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        onClick={(event) => handleDialogToggle(event)}
+        onClick={() => handleDialogToggle()}
       >
         <MailOutline fontSize="small" style={{ color: "white" }} />
         <p className={classes.main}>ご意見箱</p>
