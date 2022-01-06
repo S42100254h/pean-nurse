@@ -4,4 +4,11 @@ class Quiz < ApplicationRecord
   has_many :choices, dependent: :destroy
   validates :title, presence: true
   validates :title, uniqueness: true
+
+  def create_choices(choices)
+    choices.each do |choice_item|
+      choice = self.choices.new(choice_item.permit!)
+      choice.save!
+    end
+  end
 end
