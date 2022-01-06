@@ -13,8 +13,17 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   def create
-    quiz = Quiz.create!(quiz_params)
-    render json: quiz
+    if params[:choices]
+      ActiveRecord::Base.transaction do
+        quiz = Quiz.create!(quiz_params)
+        choices = quiz.create_choices(params[:choices])
+        render json: { quiz: quiz, choices: choices }
+      end
+    else
+      # enable to create Only quiz without choices
+      quiz = Quiz.create!(quiz_params)
+      render json: quiz
+    end
   end
 
   def update
