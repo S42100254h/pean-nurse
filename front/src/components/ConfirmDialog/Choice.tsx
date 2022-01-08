@@ -29,7 +29,7 @@ const Choice = (props: Props) => {
         <div className={classes.textContainer}>
           <p className={classes.caption}>{props.label}</p>
           <div>{props.choice}</div>
-          {props.select ? (
+          {props.select == "true" ? (
             <div>- right -</div>
           ) : (
             <div>- wrong -</div>
