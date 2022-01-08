@@ -7,8 +7,8 @@ import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
-import moment from "moment";
 import { RootState } from "../types/entity/rootState";
+import moment from "moment";
 
 const useStyles = makeStyles({
   container: {
@@ -69,7 +69,12 @@ const QuizList = () => {
     },
   ];
 
-  const rows = quizzes.map((quiz) => {
+  const sortedQuizzes = quizzes.sort((a, b) => {
+    // ascending order by updated_at
+    return (a.updated_at > b.updated_at) ? -1 : 1;
+  });
+
+  const rows = sortedQuizzes.map((quiz) => {
     return (
       {
         id: quiz.id,
@@ -80,17 +85,12 @@ const QuizList = () => {
     );
   });
 
-  const sortedRows = rows.sort((a, b) => {
-    // ascending order by updated_at
-    return (a.updated_at < b.updated_at) ? -1 : 1;
-  });
-
   return (
     <div className={classes.container}>
       <h2 className={classes.headline}>クイズ一覧</h2>
       <div style={{ width: "100%", backgroundColor: "#fff" }}>
         <DataGrid
-          rows={sortedRows}
+          rows={rows}
           columns={columns}
           autoHeight
           pageSize={10}
