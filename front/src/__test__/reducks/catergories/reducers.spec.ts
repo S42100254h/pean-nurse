@@ -12,8 +12,8 @@ describe ("CategoriesReducerのテスト", () => {
 
     expect(newState.list).toStrictEqual(
       [
-        { id: 1, name: "neko"},
-        { id: 2, name: "cat"},
+        { id: 1, name: "neko", created_at: "2021-01-01", updated_at: "2021-02-01"},
+        { id: 2, name: "cat", created_at: "2021-01-01", updated_at: "2021-02-01"},
       ]
     );
   });
@@ -26,7 +26,7 @@ describe ("CategoriesReducerのテスト", () => {
 
     expect(newState.list).toStrictEqual(
       [
-        { id: 1, name: "neko" }
+        { id: 1, name: "neko", created_at: "2021-01-01", updated_at: "2021-02-01" }
       ]
     );
   });
