@@ -5,7 +5,7 @@ import {
 
 describe ("atcions.tsのテスト", () => {
   it ("fetchCategoriesActionのテスト", () => {
-    const dummy = [{ id: 1, name: "neko"}, { id: 2, name: "cat" }];
+    const dummy = [{ id: 1, name: "neko", created_at: "2021-01-01", updated_at: "2021-02-01"}, { id: 2, name: "cat", created_at: "2021-01-01", updated_at: "2021-02-01" }];
     const action = fetchCategoriesAction(dummy);
 
     expect(action).toStrictEqual(
@@ -17,7 +17,7 @@ describe ("atcions.tsのテスト", () => {
   });
   
   it ("deleteCategoryActionのテスト", () => {
-    const dummy = [{ id: 1, name: "neko" }];
+    const dummy = [{ id: 1, name: "neko", created_at: "2021-01-01", updated_at: "2021-02-01" }];
     const action = deleteCategoryAction(dummy);
 
     expect(action).toStrictEqual(
