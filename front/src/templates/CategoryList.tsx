@@ -54,7 +54,12 @@ const CategoryList = () => {
     },
   ];
 
-  const rows = categories;
+  const sortedCategories = categories.sort((a, b) => {
+    // ascending order by updated_at
+    return (a.created_at > b.created_at) ? -1 : 1;
+  });
+
+  const rows = sortedCategories.map((category) => ({ id: category.id, name: category.name }));
   
   return (
     <div className={classes.container}>
