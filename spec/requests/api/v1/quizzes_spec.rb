@@ -18,6 +18,21 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       end
     end
 
+    context "send correct quiz information with choices" do
+      let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: attributes_for_list(:choice, 4) } }
+      let(:current_admin) { create(:admin) }
+      let(:headers) { current_admin.create_new_auth_token }
+      let!(:category_ids) { category.id }
+      let!(:category) { create(:category) }
+
+      it "Quiz, CategoryQuizRelation and choices are created" do
+        expect { subject }.to change { Quiz.count }.by(1) &
+                              change { CategoryQuizRelation.count }.by(1) &
+                              change { Choice.count }.by(4)
+        expect(response).to have_http_status(200)
+      end
+    end
+
     context "send correct quiz information without category_ids" do
       let(:params) { { quiz: attributes_for(:quiz) } }
       let(:current_admin) { create(:admin) }
