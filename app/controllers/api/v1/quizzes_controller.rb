@@ -1,5 +1,6 @@
 class Api::V1::QuizzesController < Api::V1::ApiController
   before_action :set_quiz, only: [:update, :destroy]
+  before_action :set_choices, only: [:update]
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
@@ -27,8 +28,20 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   def update
-    @quiz.update!(quiz_params)
-    render json: @quiz
+    if params[:choices]
+      ActiveRecord::Base.transaction do
+        @quiz.update!(quiz_params)
+
+        @choices.zip(params[:choices]).each do |choice, choice_item|
+          choice.update!(choice_item.permit!)
+        end
+
+        render json: { quiz: @quiz, choices: @choices }
+      end
+    else
+      @quiz.update!(quiz_params)
+      render json: @quiz
+    end
   end
 
   def destroy
@@ -40,6 +53,10 @@ class Api::V1::QuizzesController < Api::V1::ApiController
 
     def set_quiz
       @quiz = Quiz.find(params[:id])
+    end
+
+    def set_choices
+      @choices = Choice.where(quiz_id: params[:id])
     end
 
     def quiz_params
