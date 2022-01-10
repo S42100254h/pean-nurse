@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
@@ -9,31 +8,30 @@ import { DeleteDialog } from "../components/DeleteDialog";
 import { deleteQuiz } from "../reducks/quizzes/operations";
 import { push } from "connected-react-router";
 import axios from "axios";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "30px auto",
-    maxWidth: 800,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 800px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
 
 type MatchParams = {
   id: string;
 };
 
 const QuizDetail = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
 
@@ -152,8 +150,8 @@ const QuizDetail = () => {
   ];
 
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>クイズ詳細</h2>
+    <Container>
+      <Heading>クイズ詳細</Heading>
       <div className="module-spacer--extra-small" />
       <TextInput
         fullWidth={true}
@@ -293,7 +291,7 @@ const QuizDetail = () => {
           }, 100);
         }}
       />
-    </div>
+    </Container>
   );
 };
 

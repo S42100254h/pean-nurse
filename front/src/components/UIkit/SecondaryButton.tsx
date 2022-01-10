@@ -1,20 +1,18 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyeles = makeStyles((theme) => ({
-  "button": {
-    backgroundColor: theme.palette.basic.light,
-    color: theme.palette.secondary.dark,
-    fontSize: 16,
-    height: 48,
-    "&:hover": {
-      color: theme.palette.basic.light,
-      backgroundColor: theme.palette.secondary.dark,
-      transitionDuration: "0.5s",
-    },
-  },
-}));
+const StyledButton = styled(Button)`
+  background-color: ${props => props.theme.palette.basic.light};
+  color: ${props => props.theme.palette.secondary.dark};
+  font-size: 16px;
+  height: 48px;
+  &:hover {
+    color: ${props => props.theme.palette.basic.light};
+    background-color: ${props => props.theme.palette.secondary.dark};
+    transition-duration: 0.5s;
+  };
+`;
 
 type Props = {
   fullWidth?: boolean;
@@ -25,18 +23,15 @@ type Props = {
 };
 
 const SecondaryButton = (props: Props) => {
-  const classes = useStyeles();
-
   return (
-    <Button
-      className={classes.button}
+    <StyledButton
       variant="outlined"
       fullWidth={props.fullWidth}
       disabled={props.disabled}
       onClick={() => props.onClick()}
     >
       {props.label}
-    </Button>
+    </StyledButton>
   );
 };
 

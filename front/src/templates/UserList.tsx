@@ -1,31 +1,29 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { deleteUser, fetchUsers } from "../reducks/users/operations";
 import { getUsers } from "../reducks/users/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
-import moment from "moment";
 import { RootState } from "../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "25px auto",
-    width: "calc(100% - 20rem)",
-    maxWidth: 910,
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  margin: 25px auto;
+  width: calc(100% - 20rem);
+  max-width: 910px;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+  
+`;
 
 const UserList = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const users = getUsers(selector);
@@ -84,8 +82,8 @@ const UserList = () => {
   });
   
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>ユーザー一覧</h2>
+    <Container>
+      <Heading>ユーザー一覧</Heading>
       <div style={{ width: "100%", backgroundColor: "#fff" }}>
         <DataGrid
           rows={rows}
@@ -107,7 +105,7 @@ const UserList = () => {
           setOpen(false);
         }}
       />
-    </div>
+    </Container>
   ); 
 };
 

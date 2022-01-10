@@ -1,40 +1,40 @@
 import React, { useCallback, useState } from "react";
-import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
 import { signIn } from "../reducks/user/operations";
 import { push } from "connected-react-router";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "30px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-  text: {
-    textAlign: "center",
-  },
-  link: {
-    color: "#4dd0e1",
-    "&:hover": {
-      textDecoration: "underline",
-      cursor: "pointer",
-    }
-  },
-});
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const TextWrapper = styled.div`
+  text-align: center;
+`;
+
+const Link = styled.span`
+  color: #4dd0e1;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  };
+`;
 
 const SignIn = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [ email, setEmail ] = useState(""),
@@ -55,8 +55,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>サインイン</h2>
+    <Container>
+      <Heading>サインイン</Heading>
       <div className="module-spacer--extra-small" />
       <TextInput
         fullWidth={true}
@@ -90,16 +90,15 @@ const SignIn = () => {
         }}
       />
       <div className="module-spacer--extra-small" />
-      <div className={classes.text}>
+      <TextWrapper>
         パスワードを忘れた場合は
-        <span
-          className={classes.link}
+        <Link
           onClick={() => dispatch(push("/forgetpassword"))}
         >
           こちら
-        </span>
-      </div>
-    </div>
+        </Link>
+      </TextWrapper>
+    </Container>
   );
 };
 

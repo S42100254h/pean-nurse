@@ -1,39 +1,37 @@
 import React from "react";
 import { Profile } from "../components/Profile";
-import { makeStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  courseContainer: {
-    width: "calc(100% - 5rem)",
-    maxWidth: 1080,
-    height: "auto",
-    minHeight: 250,
-    margin: "0 auto",
-  },
-  headline: {
-    fontSize: 18,
-  },
-  none: {
-    fontSize: 14,
-    marginTop: 5,
-  },
-});
+const Container = styled.div`
+  width: calc(100% - 5rem);
+  max-width: 1080px;
+  height: auto;
+  min-height: 250px;
+  margin: 0 auto;
+`;
+
+const Heading = styled.h2`
+  font-size: 18px;
+`;
+
+const Text = styled.p`
+  font-size: 14px;
+  margin-top: 5px;
+`;
 
 const DashBoard = () => {
-  const classes = useStyles();
-
   return (
     <div>
       <Profile />
       <div className="module-spacer--medium" />
-      <div className={classes.courseContainer}>
-        <div className={classes.headline}>学習中のコース</div>
-        <p className={classes.none}>学習中のコースはありません。</p>
-      </div>
-      <div className={classes.courseContainer}>
-        <div className={classes.headline}>修了コース</div>
-        <p className={classes.none}>修了したコースはありません。</p>
-      </div>
+      <Container>
+        <Heading>学習中のコース</Heading>
+        <Text>学習中のコースはありません。</Text>
+      </Container>
+      <Container>
+        <Heading>修了コース</Heading>
+        <Text>修了したコースはありません。</Text>
+      </Container>
     </div>
   );
 };

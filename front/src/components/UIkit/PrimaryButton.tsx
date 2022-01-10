@@ -1,19 +1,17 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 
-const useStyles = makeStyles((theme) => ({
-  "button": {
-    backgroundColor: theme.palette.primary.main,
-    color: "#fff",
-    fontSize: 16,
-    height: 48,
-    "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
-      transitionDuration: "0.5s",
-    },
-  },
-}));
+const StyledButton = styled(Button)`
+  background-color: ${props => props.theme.palette.primary.main};
+  color: #fff;
+  font-size: 16px;
+  height: 48px;
+  &:hover {
+    background-color: ${props => props.theme.palette.primary.dark};
+    transition-duration: 0.5s;
+  };
+`;
 
 type Props = {
   id?: string;
@@ -25,18 +23,15 @@ type Props = {
 };
 
 const PrimaryButton = (props: Props) => {
-  const classes = useStyles();
-  
   return (
-    <Button
-      className={classes.button}
+    <StyledButton
       variant="contained"
       fullWidth={props.fullWidth}
       disabled={props.disabled}
       onClick={() => props.onClick()}
     >
       {props.label}
-    </Button>
+    </StyledButton>
   );
 };
 

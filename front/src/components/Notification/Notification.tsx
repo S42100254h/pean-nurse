@@ -1,21 +1,18 @@
 import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
-import { makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { closeNotificationAction } from "../../reducks/notification/actions";
 import { getNotificationIsOpen, getNotificationVariant, getNotificationMessage } from "../../reducks/notification/selectors";
 import { NotificationSnackbar } from "./index";
 import { RootState } from "../../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  Snackbar: {
-    height: 80,
-    paddingTop: 70,
-  },
-});
+const StyledSnackbar = styled(Snackbar)`
+  height: 80px;
+  padding-top: 70px;
+`;
 
 const Notification = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const isOpen = getNotificationIsOpen(selector);
@@ -23,7 +20,7 @@ const Notification = () => {
   const message = getNotificationMessage(selector);
   
   return (
-    <Snackbar
+    <StyledSnackbar
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
@@ -31,10 +28,9 @@ const Notification = () => {
       open={isOpen}
       autoHideDuration={3000}
       onClose={() => dispatch(closeNotificationAction())}
-      className={classes.Snackbar}
     >
       <NotificationSnackbar onClose={() => dispatch(closeNotificationAction())} variant={variant} message={message} />
-    </Snackbar>
+    </StyledSnackbar>
   );
 };
 

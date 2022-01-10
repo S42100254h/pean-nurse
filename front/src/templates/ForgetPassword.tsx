@@ -1,35 +1,34 @@
 import React, { useCallback, useState } from "react";
-import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { TextInput, PrimaryButton } from "../components/UIkit";
 import { forgetPassword } from "../reducks/user/operations";
+import styled from "styled-components";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    margin: "30px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  headline: {
-    color: theme.palette.primary.main,
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-  textContainer: {
-    padding: "10px",
-    border: "1px solid #b0c4de",
-    borderRadius: "4px",
-    backgroundColor: theme.palette.primary.light,
-  },
-}));
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: ${props => props.theme.palette.primary.main};
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const TextContainer = styled.div`
+  padding: 10px;
+  border: 1px solid #b0c4de;
+  border-radius: 4px;
+  background-color: ${props => props.theme.palette.primary.light};
+`;
 
 const ForgetPassword = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -45,13 +44,13 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className={classes.container} >
-      <h2 className={classes.headline}>パスワードを忘れた場合</h2>
+    <Container>
+      <Heading>パスワードを忘れた場合</Heading>
       <div className="module-spacer--extra-small" />
-      <div className={classes.textContainer}>
+      <TextContainer>
         <p>ご登録いただいたメールアドレスを入力してください。</p>
         <p>パスワード変更ページのURLが記載されたメールを送信します。</p>
-      </div>
+      </TextContainer>
       <div className="module-spacer--extra-small" />
       <TextInput
         fullWidth={true}
@@ -73,7 +72,7 @@ const ForgetPassword = () => {
           dispatch(forgetPassword(email))
         }
       />
-    </div>
+    </Container>
   );
 };
 

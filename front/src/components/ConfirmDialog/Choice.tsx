@@ -1,18 +1,17 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  textContainer: {
-    width: 700,
-    padding: 10,
-    marginBottom: 15,
-    border: "1px solid rgba(0,0,0,0.1)",
-    borderRadius: "4px",
-  },
-  caption: {
-    fontWeight: "bold",
-  },
-});
+const Container = styled.div`
+  width: 700px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+`;
+
+const Caption = styled.p`
+  font-weight: bold;
+`;
 
 type Props = {
   choice: string;
@@ -21,20 +20,18 @@ type Props = {
 };
 
 const Choice = (props: Props) => {
-  const classes = useStyles();
-
   return (
     <>
       {props.choice && (
-        <div className={classes.textContainer}>
-          <p className={classes.caption}>{props.label}</p>
+        <Container>
+          <Caption>{props.label}</Caption>
           <div>{props.choice}</div>
           {props.select == "true" ? (
             <div>- right -</div>
           ) : (
             <div>- wrong -</div>
           )}
-        </div>
+        </Container>
       )}
     </>
   );

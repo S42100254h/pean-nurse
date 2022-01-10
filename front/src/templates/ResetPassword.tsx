@@ -1,35 +1,34 @@
 import React, { useCallback, useState }  from "react";
-import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { PasswordInput, PrimaryButton } from "../components/UIkit";
 import { resetPassword } from "../reducks/user/operations";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "30px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-  textContainer: {
-    padding: "10px",
-    border: "1px solid #b0c4de",
-    borderRadius: "4px",
-    backgroundColor: "#f0f8ff",
-  },
-});
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const TextContainer = styled.div`
+  padding: 10px;
+  border: 1px solid #b0c4de;
+  border-radius: 4px;
+  background-color: #f0f8ff;
+`;
 
 const ResetPassword = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   
   const [password, setPassword] = useState(""),
@@ -50,12 +49,12 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>パスワード再設定</h2>
+    <Container>
+      <Heading>パスワード再設定</Heading>
       <div className="module-spacer--extra-small" />
-      <div className={classes.textContainer}>
+      <TextContainer>
         <p>新しいパスワードを入力してください。</p>
-      </div>
+      </TextContainer>
       <div className="module-spacer--extra-small" />
       <PasswordInput
         fullWidth={true}
@@ -85,7 +84,7 @@ const ResetPassword = () => {
           dispatch(resetPassword(password, password_confirmation));
         }}
       />
-    </div>
+    </Container>
   );
 };
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
 import pean from "../../assets/img/pean.png";
@@ -13,54 +12,59 @@ import { getSignedIn } from "../../reducks/user/selectors";
 import { getAdminSignedIn } from "../../reducks/admin/selectors";
 import { adminSignOut } from "../../reducks/admin/operations";
 import { RootState } from "../../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    zIndex: 9999,
-  },
-  menuBar: {
-    backgroundColor: "#fff",
-    height: "60px",
-  },
-  headerLogo: {
-    maxHeight: "50px",
-    cursor: "pointer",
-    "&:hover": {
-      opacity: 0.7,
-    },
-  },
-  toolBar: {
-    width: "100%",
-  },
-  iconButtons: {
-    margin: "0 0 0 auto",
-  },
-  headerItem: {
-    color: "#696969",
-    cursor: "pointer",
-    fontSize: "14px",
-    margin: "0 0 0 15px",
-    lineHeight: "60px",
-    height: "100%",
-    float: "left",
-    "&:hover": {
-      borderBottom: "5px solid #55AFD6",
-      transition: "0.075s",
-    },
-  },
-  leftToolbar: {
-    height: "98%",
-    marginRight: "auto",
-  },
-  rightToolbar: {
-    height: "98%",
-    marginLeft: "auto",
-  },
-});
+const Root = styled(Box)`
+  flex-grow: 1;
+  z-index: 9999;
+`;
+
+const Left = styled.div`
+  height: 98%;
+  margin-right: auto;
+`;
+
+const Right = styled.div`
+  height: 98%;
+  margin-left: auto;
+`;
+
+const StyledAppBar = styled(AppBar)`
+    background-color: #fff;
+    height: 60px;
+`;
+
+const StyledToolbar = styled(Toolbar)`
+  width: 100%;
+`
+
+const Image = styled.img`
+  max-height: 50px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  };
+`;
+
+const HeaderItem = styled.p`
+  color: #696969;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 0 0 15px;
+  line-height: 60px;
+  height: 100%;
+  float: left;
+  &:hover {
+    border-bottom: 5px solid #55AFD6;
+    transition: 0.075s;
+  };
+`;
+
+const ButtonWrapper = styled(Box)`
+  margin: 0 0 0 auto;
+`;
 
 const Header = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
@@ -126,63 +130,63 @@ const Header = () => {
   const handleSignUpDialogToggle = () => setIsSignUpOpen(!isSignUpOpen);
 
   return (
-    <Box className={classes.root}>
+    <Root>
       {isAdminSignedIn ? (
         <Box>
-          <AppBar position="fixed" className={classes.menuBar}>
-            <Toolbar className={classes.toolBar}>
-              <img src={pean} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/management"))} />
-              <div className={classes.leftToolbar}>
-                <div className={classes.headerItem} onClick={() => dispatch(push("/management"))}>ホーム</div>
-                <div className={classes.headerItem} onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</div>
-                <div className={classes.headerItem} onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</div>
-                <div className={classes.headerItem} onClick={(event) => handleClick(event, categoryMenu)}>カテゴリー管理</div>
-              </div>
-              <div className={classes.rightToolbar}>
-                <div className={classes.headerItem} onClick={() => dispatch(adminSignOut())}>サインアウト</div>
-              </div>
-            </Toolbar>
+          <StyledAppBar position="fixed">
+            <StyledToolbar>
+              <Image src={pean} alt="logo" onClick={() => dispatch(push("/management"))} />
+              <Left>
+                <HeaderItem onClick={() => dispatch(push("/management"))}>ホーム</HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, categoryMenu)}>カテゴリー管理</HeaderItem>
+              </Left>
+              <Right>
+                <HeaderItem onClick={() => dispatch(adminSignOut())}>サインアウト</HeaderItem>
+              </Right>
+            </StyledToolbar>
             <DropDown
               anchorEl={anchorEl}
               open={dropDownOpen}
               onClose={() => handleClose()}
               menus={menus}
             />
-          </AppBar>
+          </StyledAppBar>
         </Box>
       ) : (
         <Box>
-          <AppBar position="fixed" className={classes.menuBar}>
+          <StyledAppBar position="fixed">
             {isSignedIn ? (
-              <Toolbar className={classes.toolBar}>
-                <img src={pean} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/dashboard"))} />
-                <div className={classes.leftToolbar}>
-                  <p className={classes.headerItem} onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</p>
-                  <p className={classes.headerItem} onClick={() => dispatch(push("/courselist"))}>コース一覧</p>
-                  <p className={classes.headerItem} onClick={() => dispatch(push("/help"))}>ヘルプ</p>
-                </div>
-                <Box className={classes.iconButtons}>
+              <StyledToolbar>
+                <Image src={pean} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
+                <Left>
+                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/courselist"))}>コース一覧</HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/help"))}>ヘルプ</HeaderItem>
+                </Left>
+                <ButtonWrapper>
                   <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
                     <MenuIcon />
                   </IconButton>
-                </Box>
-              </Toolbar>
+                </ButtonWrapper>
+              </StyledToolbar>
             ) : (
-              <Toolbar className={classes.toolBar}>
-                <img src={pean} alt="logo" className={classes.headerLogo} onClick={() => dispatch(push("/"))} />
-                <div className={classes.rightToolbar}>
-                  <p className={classes.headerItem} onClick={handleSignInDialogToggle}>サインイン</p>
-                  <p className={classes.headerItem} onClick={handleSignUpDialogToggle}>無料会員登録</p>
-                </div>
-              </Toolbar>
+              <StyledToolbar>
+                <Image src={pean} alt="logo" onClick={() => dispatch(push("/"))} />
+                <Right>
+                  <HeaderItem onClick={handleSignInDialogToggle}>サインイン</HeaderItem>
+                  <HeaderItem onClick={handleSignUpDialogToggle}>無料会員登録</HeaderItem>
+                </Right>
+              </StyledToolbar>
             )}
-          </AppBar>
+          </StyledAppBar>
           <ClosableDrawer open={open} onClose={handleDrawerToggle} />
           <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
           <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
         </Box>
       )}
-    </Box>
+    </Root>
   );
 };
 
