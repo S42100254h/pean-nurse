@@ -36,7 +36,7 @@ const StyledAppBar = styled(AppBar)`
 
 const StyledToolbar = styled(Toolbar)`
   width: 100%;
-`
+`;
 
 const Image = styled.img`
   max-height: 50px;

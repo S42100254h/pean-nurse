@@ -22,7 +22,7 @@ const Heading = styled.h2`
 const SubHeading = styled.h3`
   font-size: 1rem;
   text-align: center;
-`
+`;
 
 const courseCards = [
   { id: 1, label: "神経内科Ⅰ"},
