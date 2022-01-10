@@ -1,60 +1,56 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    bottom: 0,
-    height: 300,
-    backgroundColor: theme.palette.basic.dark,
-    boxShadow: "0 0 1px grey",
-    position: "relative",
-  },
-  heading: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
-    width: "fit-content",
-    marginBottom: 5,
-    marginTop: 50,
-  },
-  text: {
-    color: "#fff",
-    marginBottom: 3,
-    width: "fit-content",
-    "&:hover": {
-      cursor: "pointer",
-      color: theme.palette.primary.main,
-    },
-  },
-}));
+const Root = styled.div`
+  bottom: 0;
+  height: 300px;
+  background-color: ${props => props.theme.palette.basic.dark};
+  box-shadow: 0 0 1px grey;
+  position: relative;
+`;
 
+const Heading = styled.h2`
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+  margin-bottom: 5px;
+  margin-top: 50px;
+`;
+
+const Text = styled.div`
+  color: #fff;
+  margin-bottom: 3px;
+  width: fit-content;
+  &:hover {
+    cursor: pointer;
+    color: ${props => props.theme.palette.primary.main};
+  };
+`;
 const Footer = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root>
       <Grid
         container
         spacing={2}
         direction="row"
         justifyContent="flex-end"
-        className={classes.root}
       >
         <Grid item sm={2}>
-          <div className={classes.heading}>PeAN</div>
-          <div className={classes.text}>About</div>
-          <div className={classes.text}>利用規約</div>
-          <div className={classes.text}>プライバシー</div>
+          <Heading>PeAN</Heading>
+          <Text>About</Text>
+          <Text>利用規約</Text>
+          <Text>プライバシー</Text>
         </Grid>
         <Grid item sm={2}>
-          <div className={classes.heading}>サービス</div>
-          <div className={classes.text}>コース一覧</div>
-          <div className={classes.text}>利用者の声</div>
-          <div className={classes.text}>ヘルプ</div>
+          <Heading>サービス</Heading>
+          <Text>コース一覧</Text>
+          <Text>利用者の声</Text>
+          <Text>ヘルプ</Text>
         </Grid>
       </Grid>
-    </div>
+    </Root>
   );
 };
 

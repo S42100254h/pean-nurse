@@ -1,21 +1,20 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, SecondaryButton } from "../UIkit";
 import cat from "../../assets/img/cat.png";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  heading: {
-    fontSize: 24,
-    textAlign: "center",
-    paddingBottom: 4,
-    borderBottom: "1.3px solid",
-  },
-  image: {
-    display: "block",
-    margin: "auto",
-  },
-});
+const Heading = styled.h2`
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 4px;
+  border-bottom: 1.3px solid;
+`;
+
+const Image = styled.img`
+  display: block;
+  margin: auto;
+`;
 
 type Props = {
   open: boolean;
@@ -25,8 +24,6 @@ type Props = {
 };
 
 const DeleteDialog = (props: Props) => {
-  const classes = useStyles();
-
   return (
     <>
       <Dialog
@@ -37,11 +34,11 @@ const DeleteDialog = (props: Props) => {
       >
         <DialogContent>
           <div>
-            <h1 className={classes.heading}>削除する</h1>
+            <Heading>削除する</Heading>
             <div className="module-spacer--extra-small" />
             <h2>本当に削除してもよろしいですか？</h2>
             <div className="module-spacer--extra-extra-small" />
-            <img src={cat} alt="ねこ" width="180px" height="180px" className={classes.image} />
+            <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
           <div className="module-spacer--extra-small" />
           <PrimaryButton

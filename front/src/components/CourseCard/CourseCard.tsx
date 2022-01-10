@@ -1,25 +1,24 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 15,
-    boxShadow: "0 0 1px grey",
-    borderRadius: "4px",
-    transitionDuration: "0.3s",
-    "&:hover": {
-      transitionDuration: "0.5s",
-      boxShadow: "0 0 8px grey",
-      opacity: 0.75,
-      cursor: "pointer",
-    },
-  },
-  label: {
-    fontSize: 18,
-  },
-});
+const Container = styled.div`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 1px grey;
+  border-radius: 4px;
+  transition-duration: 0.3s;
+  &:hover {
+    transition-duration: 0.5s;
+    box-shadow: 0 0 8px grey;
+    opacity: 0.75;
+    cursor: pointer;
+    };
+`;
+
+const Label = styled.div`
+  font-size: 18px;
+`;
 
 type Props = {
   key: number;
@@ -27,12 +26,10 @@ type Props = {
 };
 
 const CourseCard = (props: Props) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.container}>
-      <div className={classes.label}>{props.label}</div>
-    </div>
+    <Container>
+      <Label>{props.label}</Label>
+    </Container>
   );
 };
 

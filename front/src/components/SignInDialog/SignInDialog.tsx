@@ -1,36 +1,37 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PasswordInput, PrimaryButton, TextInput } from "../UIkit";
 import { signIn } from "../../reducks/user/operations";
 import { push } from "connected-react-router";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "10px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-  text: {
-    textAlign: "center",
-  },
-  link: {
-    color: "#4dd0e1",
-    "&:hover": {
-      textDecoration: "underline",
-      cursor: "pointer",
-    }
-  },
-});
+const Container = styled.div`
+  margin: 10px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const TextWrapper = styled.div`
+  text-align: center;
+`;
+
+const Link = styled.span`
+  color: #4dd0e1;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  };
+`;
 
 type Props = {
   open: boolean;
@@ -39,7 +40,6 @@ type Props = {
 };
 
 const SignInDialog = (props: Props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState(""),
@@ -69,8 +69,8 @@ const SignInDialog = (props: Props) => {
         maxWidth={"sm"}
       >
         <DialogContent>
-          <div className={classes.container}>
-            <h2 className={classes.headline}>サインイン</h2>
+          <Container>
+            <Heading>サインイン</Heading>
             <div className="module-spacer--extra-small" />
             <TextInput
               fullWidth={true}
@@ -105,19 +105,18 @@ const SignInDialog = (props: Props) => {
               }}
             />
             <div className="module-spacer--extra-small" />
-            <div className={classes.text}>
+            <TextWrapper>
               パスワードを忘れた場合は
-              <span
-                className={classes.link}
+              <Link
                 onClick={() => {
                   dispatch(push("/forgetpassword"));
                   props.onClick();
                 }}
               >
                 こちら
-              </span>
-            </div>
-          </div>
+              </Link>
+            </TextWrapper>
+          </Container>
         </DialogContent>
       </Dialog>
     </div>

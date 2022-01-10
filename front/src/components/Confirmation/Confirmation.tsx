@@ -1,25 +1,25 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, SecondaryButton } from "../UIkit";
 import cat from "../../assets/img/cat.png";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  heading: {
-    fontSize: 24,
-    textAlign: "center",
-    paddingBottom: 4,
-    borderBottom: "1.3px solid",
-  },
-  span: {
-    color: "#cf222e",
-    fontWeight: "bold",
-  },
-  image: {
-    display: "block",
-    margin: "auto",
-  },
-});
+const Heading = styled.h1`
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 4px;
+  border-bottom: 1.3px solid;
+`;
+
+const Red = styled.span`
+  color: #cf222e;
+  font-weight: bold;
+`;
+
+const Image = styled.img`
+  display: block;
+  margin: auto;
+`;
 
 type Props = {
   isOpen: boolean;
@@ -30,8 +30,6 @@ type Props = {
 };
 
 const Confirmation = (props: Props) => {
-  const classes = useStyles();
-
   return (
     <>
       <Dialog
@@ -42,12 +40,12 @@ const Confirmation = (props: Props) => {
       >
         <DialogContent>
           <div>
-            <h1 className={classes.heading}>退会</h1>
+            <Heading>退会</Heading>
             <div className="module-spacer--extra-small" />
             <h2>退会手続きの前にご確認ください</h2>
             <div className="module-spacer--extra-extra-small" />
-            <p>アカウントを削除すると、これまでのデータが<span className={classes.span}>すべて削除されます</span></p>
-            <img src={cat} alt="ねこ" width="180px" height="180px" className={classes.image} />
+            <p>アカウントを削除すると、これまでのデータが<Red>すべて削除されます</Red></p>
+            <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
           <div className="module-spacer--extra-small" />
           <PrimaryButton

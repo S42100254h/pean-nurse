@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { Tabs, Tab } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { TabPanel, TextInput, PasswordInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
@@ -13,70 +12,74 @@ import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
 import { RootState } from "../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  root: {
-    marginTop: "40px",
-    display: "block",
-  },
-  container: {
-    maxWidth: "1020px",
-    margin: "0 auto",
-    padding: "0 30px",
-  },
-  tabList: {
-    maxWidth: 600,
-    borderRadius: "4px",
-    backgroundColor: "#fff",
-    border: "1px solid rgba(0,0,0,0.1)",
-    padding: "16px 0",
-    margin: "0 auto",
-    "& .Mui-selected": {
-      backgroundColor: "#F6F8FA",
-    },
-  },
-  tabListItem: {
-    "&:hover": {
-      backgroundColor: "#F6F8FA",
-      transition: "0.05s",
-    },
-  },
-  tabMenu: {
-    maxWidth: "800px",
-    height: "100%",
-    borderRadius: "4px",
-    backgroundColor: "#fff",
-    border: "1px solid rgba(0,0,0,0.1)",
-    textAlign: "center",
-    padding: "45px 70px",
-  },
-  imageContainer: {
-    position: "relative",
-    minwidth: "100%",
-    minheight: "100%",
-    margin: "0 auto",
-    background: "none",
-    border: "none",
-  },
-  avatar: {
-    width: "100px",
-    height: "100px",
-  },
-  upload: {
-    position: "absolute",
-    top: "75px",
-    left: "75px",
-    zIndex: 1,
-  },
-  headline: {
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Root = styled.div`
+  margin-top: 40px;
+  display: block;
+`;
+
+const Container = styled.div`
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 30px;
+`;
+
+const StyledTabs = styled(Tabs)`
+  max-width: 600px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 16px 0;
+  margin: 0 auto;
+  & .Mui-selected {
+    background-color: #F6F8FA;
+  };
+`;
+
+const StyledTab = styled(Tab)`
+  &:hover {
+    background-color: #F6F8FA;
+    transition: 0.05s;
+  };
+`;
+
+const MenuContainer = styled.div`
+  max-width: 800px;
+  height: 100%;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 45px 70px;
+`;
+
+const Heading = styled.h2`
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const Image = styled.button`
+  position: relative;
+  background: none;
+  border: none;
+`;
+
+const StyledAvatar = styled(Avatar)`
+  width: 100px;
+  height: 100px;
+`;
+
+const StyledPhotoCameraIcon = styled(PhotoCameraIcon)`
+  position: absolute;
+  top: 75px;
+  left: 75px;
+  z-index: 1;
+  font-size: 30px;
+`;
 
 const Setting = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const userImage = getUserImage(selector);
@@ -147,37 +150,36 @@ const Setting = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
+    <Root>
+      <Container>
         <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} sm={3}>
             <div>
-              <Tabs
+              <StyledTabs
                 orientation="vertical"
                 indicatorColor="primary"
                 value={value}
                 variant="fullWidth"
                 onChange={handleChange}
-                className={classes.tabList}
               >
-                <Tab className={classes.tabListItem} label="プロフィール" />
-                <Tab className={classes.tabListItem} label="パスワード" />
-                <Tab className={classes.tabListItem} label="お知らせ" />
-                <Tab className={classes.tabListItem} label="お支払情報" />
-              </Tabs>
+                <StyledTab label="プロフィール" />
+                <StyledTab label="パスワード" />
+                <StyledTab label="お知らせ" />
+                <StyledTab label="お支払情報" />
+              </StyledTabs>
             </div>
           </Grid>
           <Grid item xs={12} sm={9}>
-            <div className={classes.tabMenu}>
+            <MenuContainer>
               <TabPanel value={value} index={0}>
-                <button type="button" className={classes.imageContainer} onClick={(e) => handleModalToggle(e)}>
+                <Image type="button" onClick={(e) => handleModalToggle(e)}>
                   {userImage ? (
-                    <Avatar src={userImage.url} className={classes.avatar} />
+                    <StyledAvatar src={userImage.url} />
                   ) : (
-                    <Avatar src="/broken-image.jpg" className={classes.avatar} />
+                    <StyledAvatar src="/broken-image.jpg" />
                   )}
-                  <PhotoCameraIcon style={{ fontSize: 30 }} className={classes.upload} />
-                </button>
+                  <StyledPhotoCameraIcon />
+                </Image>
                 <div className="module-spacer--extra-small" />
                 <TextInput
                   fullWidth={true}
@@ -214,7 +216,7 @@ const Setting = () => {
                 />
               </TabPanel>
               <TabPanel value={value} index={1}>
-                <h2 className={classes.headline}>パスワード更新</h2>
+                <Heading>パスワード更新</Heading>
                 <PasswordInput
                   fullWidth={true}
                   label={"現在のパスワード"}
@@ -261,7 +263,7 @@ const Setting = () => {
               <TabPanel value={value} index={3}>
                 現在は無料コースのみです。
               </TabPanel>
-            </div>
+            </MenuContainer>
           </Grid>
           {open && (
             <ClickAway onClickAway={handleModalToggle} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpload(e)} onClick={() => dispatch(deleteImage())} />
@@ -273,8 +275,8 @@ const Setting = () => {
             onClickProceed={() => dispatch(push("/deactivate"))}
           />
         </Grid>
-      </div>
-    </div>
+      </Container>
+    </Root>
   );
 };
 

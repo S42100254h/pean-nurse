@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { deleteQuiz, fetchQuizzes } from "../reducks/quizzes/operations";
 import { getQuizzes } from "../reducks/quizzes/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
@@ -9,23 +8,22 @@ import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
 import { RootState } from "../types/entity/rootState";
 import moment from "moment";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "25px auto",
-    width: "calc(100% - 20rem)",
-    maxWidth: 1080,
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  margin: 25px auto;
+  width: calc(100% - 20rem);
+  max-width: 1080px;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
 
 const QuizList = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const quizzes = getQuizzes(selector);
@@ -86,8 +84,8 @@ const QuizList = () => {
   });
 
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>クイズ一覧</h2>
+    <Container>
+      <Heading>クイズ一覧</Heading>
       <div style={{ width: "100%", backgroundColor: "#fff" }}>
         <DataGrid
           rows={rows}
@@ -109,7 +107,7 @@ const QuizList = () => {
           setOpen(false);
         }}
       />
-    </div>
+    </Container>
   ); 
 };
 

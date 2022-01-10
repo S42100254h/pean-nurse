@@ -5,22 +5,21 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import { HelpOutline } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedIn } from "../../reducks/user/selectors";
 import { signOut } from "../../reducks/user/operations";
 import { RootState } from "../../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles(() => ({
-  drawer: {
-    flexShrink: 0,
-    width: 256,
-  },
-  drawerPaper: {
-    width: 256,
-  },
-}));
+const Container = styled.nav`
+  flex-shrink: 0;
+  width: 256px;
+`;
+
+const DrawerPaper = styled.div`
+  width: 256px;
+`;
 
 type Props = {
   open: boolean;
@@ -28,7 +27,6 @@ type Props = {
 };
 
 const ClosableDrawer = (props: Props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
@@ -73,13 +71,13 @@ const ClosableDrawer = (props: Props) => {
   ];
   
   return (
-    <nav className={classes.drawer}>
+    <Container>
       <Drawer
         variant="temporary"
         anchor="right"
         open={props.open}
-        onClose={(e) => props.onClose()}
-        classes={{ paper: classes.drawerPaper }}
+        onClose={() => props.onClose()}
+        PaperProps={{ component: DrawerPaper }}
         ModalProps={{ keepMounted: true }}
       >
         <div>
@@ -112,7 +110,7 @@ const ClosableDrawer = (props: Props) => {
           </List>
         </div>
       </Drawer>
-    </nav>
+    </Container>
   );
 };
 

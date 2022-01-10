@@ -1,33 +1,32 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { PrimaryButton } from "../components/UIkit";
 import { push } from "connected-react-router";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  root: {
-    marginTop: 30,
-  },
-  courseContainer: {
-    width: "calc(100% - 5rem)",
-    maxWidth: 1080,
-    height: "auto",
-    minHeight: 250,
-    margin: " auto",
-  },
-  headline: {
-    fontSize: 18,
-  },
-});
+const Root = styled.div`
+  margin-top: 30px;
+`;
+
+const Container = styled.div`
+  width: calc(100% - 5rem);
+  max-width: 1080px;
+  height: auto;
+  min-height: 250px;
+  margin: auto;
+`;
+
+const Heading = styled.h2`
+  font-size: 18px;
+`;
 
 const Management = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   return (
-    <div className={classes.root}>
-      <div className={classes.courseContainer}>
-        <div className={classes.headline}>クイズ</div>
+    <Root>
+      <Container>
+        <Heading>クイズ</Heading>
         <div className="module-spacer--extra-small" />
         <PrimaryButton
           id={"quizList"}
@@ -40,9 +39,9 @@ const Management = () => {
           label={"クイズ作成"}
           onClick={() => dispatch(push("/quiz/create"))}
         />
-      </div>
-      <div className={classes.courseContainer}>
-        <div className={classes.headline}>ユーザー</div>
+      </Container>
+      <Container>
+        <Heading>ユーザー</Heading>
         <div className="module-spacer--extra-small" />
         <PrimaryButton
           id={"userList"}
@@ -55,8 +54,8 @@ const Management = () => {
           label={"ユーザー作成"}
           onClick={() => dispatch(push("/user/create"))}
         />
-      </div>
-    </div>
+      </Container>
+    </Root>
   );
 };
 

@@ -4,39 +4,29 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CloseIcon from "@material-ui/icons/Close";
 import ErrorIcon from "@material-ui/icons/Error";
-import { makeStyles } from "@material-ui/styles";
+import styled from "styled-components";
 
-const variantIcon = {
-  success: CheckCircleIcon,
-  error: ErrorIcon,
-};
+const Message = styled.span`
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+`;
 
-const useStyles = makeStyles({
-  success: {
-    backgroundColor: "#43A047",
-    padding: "0 8px 0 8px",
-  },
-  error: {
-    backgroundColor: "#D32F2F",
-    padding: "0 8px 0 8px",
-  },
-  icon: {
-    fontSize: "1rem",
-    fontWeight: "bold",
-    opacity: 0.9,
-    marginRight: 1,
-  },
-  closeIcon: {
-    opacity: 0.9,
-    marginRight: 1,
-  },
-  message: {
-    display: "flex",
-    alignItems: "center",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-  },
-});
+const StyledSnackbarContent = styled(SnackbarContent)<{ state: "success" | "error"}>`
+  background-color: ${props => props.state == "success" ? "#43A047" : "#D32F2F" };
+  padding: 0 8px 0 8px;
+`;
+
+const StyledCheckCircleIcon = styled(CheckCircleIcon)`
+  font-size: 1rem;
+  margin-right: 3px;
+`;
+
+const StyledErrorIcon = styled(ErrorIcon)`
+  font-size: 1rem;
+  margin-right: 3px;
+`;
 
 type Props = {
   onClose: React.MouseEventHandler<HTMLButtonElement>;
@@ -45,22 +35,18 @@ type Props = {
 };
 
 const NotificationSnackbar = (props: Props) => {
-  const classes = useStyles();
-  const Icon = variantIcon[props.variant];
-
   return (
-    <SnackbarContent
-      className={classes[props.variant]}
+    <StyledSnackbarContent state={props.variant}
       aria-describedby="client-snackbar"
       message={
-        <span className={classes.message}>
-          <Icon className={classes.icon} />
+        <Message>
+          {props.variant == "success" ? <StyledCheckCircleIcon /> : <StyledErrorIcon />}
           {props.message}
-        </span>
+        </Message>
       }
       action={[
         <IconButton key="close" aria-label="Close" color="inherit" onClick={props.onClose}>
-          <CloseIcon className={classes.closeIcon} />
+          <CloseIcon />
         </IconButton>
       ]}
     />

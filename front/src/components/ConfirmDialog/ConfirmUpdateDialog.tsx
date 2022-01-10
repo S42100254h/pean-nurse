@@ -1,23 +1,22 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton } from "../UIkit";
 import { Choice, Quiz } from "./index";
 import { editQuiz } from "../../function/quiz";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    width: "100%",
-    padding: "30px 50px",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  width: 100%;
+  padding: 30px 50px;
+`;
+
+const Headline = styled.div`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
 
 type Props = {
   quiz: string;
@@ -39,7 +38,6 @@ type Props = {
 };
 
 const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, id }: Props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   
   return (
@@ -51,8 +49,8 @@ const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
         maxWidth={"md"}
       >
         <DialogContent>
-          <div className={classes.container}>
-            <div className={classes.headline}>以下の内容でクイズを更新してもよろしいですか？</div>
+          <Container>
+            <Headline>以下の内容でクイズを更新してもよろしいですか？</Headline>
             <div className="module-spacer--extra-small" />
             <Quiz quiz={quiz} label={"問題"} />
             <Choice choice={choice1} select={select1} label={"選択肢１"} />
@@ -65,7 +63,7 @@ const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
               fullWidth={true}
               onClick={() => dispatch(editQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id))}
             />
-          </div>
+          </Container>
         </DialogContent>
       </Dialog>
     </div>

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
@@ -9,54 +8,55 @@ import { useSelector } from "react-redux";
 import cat from "../../assets/img/cat.png";
 import axios from "axios";
 import { RootState } from "../../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    width: 1200,
-  },
-  textArea: {
-    float: "left",
-    width: "55%",
-    padding: "10px 30px 10px 20px",
-    boxSizing: "border-box",
-  },
-  inputArea: {
-    float: "right",
-    width: "45%",
-  },
-  label: {
-    display: "flex",
-    justifyContent: "center",
-    width: "130px",
-    padding: "8px",
-    borderRadius: "20px",
-    backgroundColor: "#4dd0e1",
-    cursor: "pointer",
-    fontSize: "12px",
-    "&:hover": {
-      opacity: 0.7,
-    },
-  },
-  input: {
-    display: "none",
-  },
-  image: {
-    padding: "5px 8px 5px 5px",
-    margin: "5px 0",
-    fontSize: "11px",
-    display: "inline-block",
-    backgroundColor: "#dcdcdc",
-    borderRadius: "3px",
-    justifyContent: "center",
-  },
-  close: {
-    float: "left",
-    marginRight: "3px",
-    color: "#f5f5f5",
-    fontSize: "14px",
-    cursor: "pointer",
-  },
-});
+const TextArea = styled.div`
+  float: left;
+  width: 55%;
+  padding: 10px 30px 10px 20px;
+  box-sizing: border-box;
+`;
+
+const InputArea = styled.div`
+  float: right;
+  width: 45%;
+`;
+
+const Label =styled.label`
+  display: flex;
+  justify-content: center;
+  width: 130px;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: #4dd0e1;
+  cursor: pointer;
+  font-size: 12px;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const ImageLabel = styled.label`
+  padding: 5px 8px 5px 5px;
+  margin: 5px 0;
+  font-size: 11px;
+  display: inline-block;
+  background-color: #dcdcdc;
+  border-radius: 3px;
+  justify-content: center;
+`;
+
+const StyledClose = styled(Close)`
+  float: left;
+  margin-right: 3px;
+  color: #f5f5f5;
+  font-size: 14px;
+  cursor: pointer;
+`;
+
+const StyledInput = styled.input`
+  display: none;
+`;
 
 type Props = {
   open: boolean;
@@ -64,7 +64,6 @@ type Props = {
 };
 
 const ClosableDialog = (props: Props) => {
-  const classes = useStyles();
   const selector = useSelector((state: RootState) => state);
   const userEmail = getUserEmail(selector);
   const userName = getUserName(selector);
@@ -150,7 +149,7 @@ const ClosableDialog = (props: Props) => {
     <div>
       <Dialog
         open={props.open}
-        onClose={(e) => {
+        onClose={() => {
           props.onClose();
           setTimeout(() => {
             setEmail("");
@@ -172,15 +171,15 @@ const ClosableDialog = (props: Props) => {
           </DialogContent>
         ) : (
           <DialogContent>
-            <div className={classes.textArea}>
+            <TextArea>
               <p>PeANをご利用いただきありがとうございます。</p>
               <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
               <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
 
               <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
               <img src={cat} alt="ねこ" width="180px" height="180px" />
-            </div>
-            <div className={classes.inputArea}>
+            </TextArea>
+            <InputArea>
               <TextInput
                 fullWidth={true}
                 label={"メールアドレス"}
@@ -218,16 +217,16 @@ const ClosableDialog = (props: Props) => {
                 onChange={inputText}
               />
               <div className="module-spacer--extra-extra-small" />
-              <label className={classes.label}>
+              <Label>
                 <AttachFile style={{ fontSize: "16px" }} />
                 画像を添付する
-                <input type="file" className={classes.input} accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
-              </label>
+                <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
+              </Label>
               {image && (
-                <label className={classes.image}>
-                  <Close className={classes.close} onClick={() => setImage(null)} />
+                <ImageLabel>
+                  <StyledClose onClick={() => setImage(null)} />
                   {image.name}
-                </label>
+                </ImageLabel>
               )}
               <div className="module-spacer--extra-extra-small" />
               <PrimaryButton
@@ -237,7 +236,7 @@ const ClosableDialog = (props: Props) => {
                 disabled={!email || !select || !text}
                 onClick={() => handleSendMail(email, select, text, image, name)}
               />
-            </div>
+            </InputArea>
           </DialogContent>
         )}
         <div className="module-spacer--extra-extra-small" />

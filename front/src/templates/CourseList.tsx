@@ -1,22 +1,21 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import Course from "../components/Course/Course";
 import { Grid } from "@material-ui/core";
 import { push } from "connected-react-router";
 import cat from "../assets/img/cat.png";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    maxWidth: 1080,
-    margin: "0 auto",
-    padding: "0 30px",
-  },
-  headline: {
-    fontSize: 18,
-    margin: "20px 0",
-  },
-});
+const Container = styled.div`
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 30px;
+`;
+
+const Heading = styled.h2`
+  font-size: 18px;
+  margin: 20px 0;
+`;
 
 const courses = [
   {
@@ -64,12 +63,11 @@ const courses = [
 ];
 
 const CourseList = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   return (
-    <div className={classes.container}>
-      <div className={classes.headline}>コース一覧</div>
+    <Container>
+      <Heading>コース一覧</Heading>
       <Grid container
         spacing={2}
         alignItems="center"
@@ -87,7 +85,7 @@ const CourseList = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Container>
   );
 };
 

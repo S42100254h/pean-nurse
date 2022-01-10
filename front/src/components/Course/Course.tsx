@@ -1,35 +1,32 @@
 import React, { MouseEventHandler } from "react";
-import { makeStyles } from "@material-ui/core";
 import { Box } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    maxWidth: 600,
-    height: 280,
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-    textAlign: "center",
-    transitionDuration: "0.3s",
-    "&:hover": {
-      transitionDuration: "0.5s",
-      boxShadow: "0 0 8px grey",
-      opacity: 0.75,
-      cursor: "pointer",
-    },
-  },
-  title: {
-    fontSize: 20,
-    height: "auto",
-    padding: "10px 0px",
-  },
-  caption: {
-    padding: "10px 0px",
-    fontSize: 12,
-  },
-  number: {
-    padding: "10px 0px",
-  },
-});
+const Container = styled(Box)`
+    max-width: 600px;
+    height: 280px;
+    background-color: #fff;
+    box-shadow: 0 0 1px grey;
+    text-align: center;
+    transition-duration: 0.3s;
+    &:hover {
+      transition-duration: 0.5s;
+      box-shadow: 0 0 8px grey;
+      opacity: 0.75;
+      cursor: pointer;
+    };
+`;
+
+const Title = styled.h2`
+  font-size: 20px;
+  height: auto;
+  padding: 10px 0;
+`;
+
+const Caption = styled.p`
+  padding: 10px 0;
+  font-size: 12px;
+`;
 
 type Props = {
   title: string;
@@ -40,18 +37,15 @@ type Props = {
 };
 
 const Course = (props: Props) => {
-  const classes = useStyles();
-
   return (
-    <Box
+    <Container
       onClick={props.onClick}
-      className={classes.container}
     >
-      <div className={classes.title}>{props.title}</div>
+      <Title>{props.title}</Title>
       <img src={props.image} width="120px" height="120px" />
-      <div className={classes.caption}>{props.caption}</div>
+      <Caption>{props.caption}</Caption>
       <div>全{props.number}コース</div>
-    </Box>
+    </Container>
   );
 };
 

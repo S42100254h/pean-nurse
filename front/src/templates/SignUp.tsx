@@ -1,38 +1,40 @@
 import React, { useCallback, useState} from "react";
-import { makeStyles } from "@material-ui/core";
 import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { signUp } from "../reducks/user/operations";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  "container": {
-    margin: "30px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  "headline": {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-  "link": {
-    color: "#4dd0e1",
-    textAlign: "center",
-    textDecoration: "underline #4dd0e1",
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-});
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const TextWrapper = styled.div`
+  text-align: center;
+`;
+
+const Link = styled.span`
+  color: #4dd0e1;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  };
+`;
 
 const SignUp = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [ name, setName ] = useState(""),
@@ -63,8 +65,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>アカウント登録</h2>
+    <Container>
+      <Heading>アカウント登録</Heading>
       <div className="module-spacer--extra-small" />
       <TextInput
         fullWidth={true}
@@ -121,8 +123,15 @@ const SignUp = () => {
         }}
       />
       <div className="module-spacer--small" />
-      <p className={classes.link} onClick={() => dispatch(push("/signin"))}>アカウントをお持ちの方はこちら</p>
-    </div>
+      <TextWrapper>
+        アカウントをお持ちの場合は
+        <Link
+          onClick={() => dispatch(push("/signin"))}
+        >
+          こちら
+        </Link>
+      </TextWrapper>
+    </Container>
   );
 };
 

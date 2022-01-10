@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
 import Select from "react-select";
 import { ConfirmCreateDialog } from "../components/ConfirmDialog";
@@ -8,27 +7,26 @@ import { MenuItem } from "@material-ui/core";
 import { fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { RootState } from "../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "30px auto",
-    maxWidth: 800,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 800px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
 
 const CreateQuiz = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
@@ -113,8 +111,8 @@ const CreateQuiz = () => {
   ));
 
   return (
-    <div className={classes.container}>
-      <h2 className={classes.headline}>クイズ作成</h2>
+    <Container>
+      <Heading>クイズ作成</Heading>
       <div className="module-spacer--extra-small" />
       <TextInput
         fullWidth={true}
@@ -240,7 +238,7 @@ const CreateQuiz = () => {
         open={open}
         onClose={handleDialogClose}
       />
-    </div>
+    </Container>
   );
 };
 

@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { deleteCategory, fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { RootState } from "../types/entity/rootState";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "25px auto",
-    width: "calc(100% - 20rem)",
-    maxWidth: 600,
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1.5rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  margin: 25px auto;
+  width: calc(100% - 20rem);
+  max-width: 600px;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1.5rem auto;
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  background-color: #fff;
+`;
 
 const CategoryList = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
@@ -62,9 +65,9 @@ const CategoryList = () => {
   const rows = sortedCategories.map((category) => ({ id: category.id, name: category.name }));
   
   return (
-    <div className={classes.container}>
-      <div className={classes.headline}>カテゴリー一覧</div>
-      <div style={{ width: "100%", backgroundColor: "#fff" }}>
+    <Container>
+      <Heading>カテゴリー一覧</Heading>
+      <Wrapper>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -72,7 +75,7 @@ const CategoryList = () => {
           pageSize={10}
           rowsPerPageOptions={[10]}
         />
-      </div>
+      </Wrapper>
       <DeleteDialog
         open={open}
         onClose={() => {
@@ -85,7 +88,7 @@ const CategoryList = () => {
           setOpen(false);
         }}
       />
-    </div>
+    </Container>
   );
 };
 

@@ -1,29 +1,27 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { TextInput, PrimaryButton } from "../components/UIkit";
 import { createCategory } from "../function/category";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "30px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-    backgroundColor: "#fff",
-    boxShadow: "0 0 1px grey",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-});
+const Container = styled.div`
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 0 1px grey;
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
 
 const CreateCategory = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState("");
@@ -33,8 +31,8 @@ const CreateCategory = () => {
   }, [setCategory]);
 
   return (
-    <div className={classes.container}>
-      <div className={classes.headline}>カテゴリー作成</div>
+    <Container>
+      <Heading>カテゴリー作成</Heading>
       <div className="module-spacer--medium" />
       <TextInput
         fullWidth={true}
@@ -51,7 +49,7 @@ const CreateCategory = () => {
         disabled={!category}
         onClick={() => dispatch(createCategory(category))}
       />
-    </div>
+    </Container>
   );
 };
 

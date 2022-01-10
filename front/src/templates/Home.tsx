@@ -1,126 +1,138 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
 import { PrimaryButton } from "../components/UIkit";
 import { SignUpDialog } from "../components/SignUpDialog";
+import styled from "styled-components";
 
-const useStyles = makeStyles((theme) => ({
-  topContainer: {
-    height: 320,
-    textAlign: "center",
-  },
-  topHeading: {
-    fontSize: 50,
-    fontWeight: "bold",
-    padding: "50px 0 10px 0",
-  },
-  topSubHeading: {
-    fontSize: 40,
-    padding: "10px 0 30px 0",
-  },
-  middleContainer: {
-    height: 400,
-    textAlign: "center",
-    backgroundColor: theme.palette.primary.light,
-  },
-  middleHeading: {
-    fontSize: 40,
-    padding: "40px 0 30px 0",
-  },
-  reviewContainer: {
-    backgroundColor: "#fff",
-    height: 600,
-    textAlign: "center",
-  },
-  reviewSubHeading: {
-    fontSize: 20,
-    padding: "40px 0 10px 0",
-  },
-  reviewHeading: {
-    fontSize: 36,
-    padding: "0px 0 30px 0",
-  },
-  bottomContainer: {
-    height: 430,
-    textAlign: "center",
-    backgroundColor: "#2B546A",
-    color: "#fff",
-  },
-  bottomHeading: {
-    fontSize: 30,
-    color: "#fff",
-    padding: "30px 0 30px 0",
-  },
-  voice: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#000",
-    padding: "5px 0",
-  },
-  message: {
-    padding: "3px 0",
-  },
-  registerContainer: {
-    height: 280,
-    textAlign: "center",
-  },
-  registerSubHeading: {
-    fontSize: 20,
-    padding: "40px 0 10px 0",
-  },
-  registerHeading: {
-    fontSize: 30,
-    padding: "0 0 30px 0",
-  },
-}));
+const TopContainer = styled.div`
+  height: 320px;
+  text-align: center;
+`;
+
+const TopHeading = styled.h2`
+  font-size: 50px;
+  font-weight: bold;
+  padding: 50px 0 10px 0;
+`;
+
+const TopSubHeading = styled.h3`
+  font-size: 40px;
+  padding: 10px 0 30px 0;
+`;
+
+const MiddleContainer = styled.div`
+  height: 400px;
+  text-align: center;
+  background-color: ${props => props.theme.palette.primary.light};
+`;
+
+const MiddleHeading = styled.h2`
+  font-size: 40px;
+  padding: 40px 0 30px 0;
+`;
+
+const ReviewContainer = styled.div`
+  background-color: #fff;
+  height: 600px;
+  text-align: center;
+`;
+
+const ReviewSubHeading = styled.h3`
+  font-size: 20px;
+  padding: 40px 0 10px 0;
+`;
+
+const ReviewHeading = styled.h2`
+  font-size: 36px;
+  padding: 0 0 30px 0;
+`;
+
+const BottomContainer = styled.div`
+  height: 430px;
+  text-align: center;
+  background-color: #2B546A;
+  color: #fff;
+`;
+
+const BottomHeading = styled.h2`
+  font-size: 30px;
+  color: #fff;
+  padding: 30px 0 30px 0;
+`;
+
+const Voice = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  padding-bottom: 10px;
+  line-height: 20px;
+`;
+
+const Message = styled.p`
+  line-height: 18px;
+`;
+
+const RegisterContainer = styled.div`
+  height: 280px;
+  text-align: center;
+`;
+
+const RegisterSubHeading = styled.h3`
+  font-size: 20px;
+  padding: 40px 0 10px 0;
+`;
+
+const RegisterHeading = styled.h2`
+  font-size: 30px;
+  padding: 0 0 30px 0;
+`;
 
 const Home = () => {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   const handleDialogToggle = () => setOpen(!open);
 
   return (
     <div>
-      <div className={classes.topContainer}>
-        <div className={classes.topHeading}>看護師 国家試験</div>
-        <div className={classes.topSubHeading}>WEB問題集で学習しよう</div>
+      <TopContainer>
+        <TopHeading>看護師 国家試験</TopHeading>
+        <TopSubHeading>WEB問題集で学習しよう</TopSubHeading>
         <PrimaryButton
           id={"button"}
           label={"今すぐ始める"}
           onClick={handleDialogToggle}
         />
-      </div>   
-      <div className={classes.middleContainer}>
-        <div className={classes.middleHeading}>看護学生から、看護師へ</div>
+      </TopContainer>
+      <MiddleContainer>
+        <MiddleHeading>看護学生から、看護師へ</MiddleHeading>
         <div>※ここに問題の画面を入れ込む※</div>
-      </div>
-      <div className={classes.reviewContainer}>
-        <div className={classes.reviewSubHeading}>看護師 国家試験WEB問題集の</div>
-        <div className={classes.reviewHeading}>利用者レビュー</div>
+      </MiddleContainer>
+      <ReviewContainer>
+        <ReviewSubHeading>看護師 国家試験WEB問題集の</ReviewSubHeading>
+        <ReviewHeading>利用者レビュー</ReviewHeading>
         <div>※ここにレビューを２件埋め込む※</div>
-      </div>
-      <div className={classes.bottomContainer}>
-        <div className={classes.bottomHeading}>看護学生から、看護師になろう</div>
-        <div className={classes.voice}>「国家試験に合格できるか心配...」</div>
-        <div className={classes.voice}>「参考書を読むと眠くなって、勉強が進まない...」</div>
+      </ReviewContainer>
+      <BottomContainer>
+        <BottomHeading>看護学生から、看護師になろう</BottomHeading>
+        <Voice>「国家試験に合格できるか心配...」</Voice>
+        <Voice>「参考書を読むと眠くなって、勉強が進まない...」</Voice>
         <div className="module-spacer--extra-extra-small" />
-        <div className={classes.message}>そんなあなたが医療の世界に飛び込むお手伝いをしたい！</div>
-        <div>私たちはこんな思いで、PeANを運営しています。</div>
+        <Message>そんなあなたが医療の世界に飛び込むお手伝いをしたい！</Message>
+        <Message>私たちはこんな思いで、PeANを運営しています。</Message>
         <div className="module-spacer--small" />
-        <div className={classes.message}>看護学生にとって、国家試験は大きな壁です。</div>
-        <div>国家試験の合否によっては、今後の１年が決まります。</div>
+        <Message>看護学生にとって、国家試験は大きな壁です。</Message>
+        <Message>国家試験の合否によっては、今後の１年が決まります。</Message>
         <div className="module-spacer--small" />
-        <div>私たちと一緒に医療の世界へ飛び込みましょう！</div>
-      </div>
-      <div className={classes.registerContainer}>
-        <div className={classes.registerSubHeading}>無料会員登録をして、</div>
-        <div className={classes.registerHeading}>さっそく始めよう！</div>
+        <Message>私たちと一緒に医療の世界へ飛び込みましょう！</Message>
+      </BottomContainer>
+      <RegisterContainer>
+        <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
+        <RegisterHeading>さっそく始めよう！</RegisterHeading>
         <PrimaryButton
           id={"button"}
           label={"無料会員登録"}
           onClick={handleDialogToggle}
         />
-      </div>
+      </RegisterContainer>
       <SignUpDialog open={open} onClose={handleDialogToggle} onClick={handleDialogToggle} />
     </div>
   );

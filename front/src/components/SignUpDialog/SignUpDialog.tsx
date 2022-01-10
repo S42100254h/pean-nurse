@@ -1,34 +1,37 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PasswordInput, PrimaryButton, TextInput } from "../UIkit";
 import { signUp } from "../../reducks/user/operations";
 import { push } from "connected-react-router";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  container: {
-    margin: "10px auto",
-    maxWidth: 600,
-    padding: "35px 70px",
-    height: "auto",
-    width: "calc(100% - 2rem)",
-  },
-  headline: {
-    color: "#4dd0e1",
-    fontSize: "1.563rem",
-    margin: "0 auto 1rem auto",
-    textAlign: "center",
-  },
-  link: {
-    textAlign: "center",
-    color: "#4dd0e1",
-    "&:hover": {
-      textDecoration: "underline #4dd0e1",
-      cursor: "pointer",
-    }
-  },
-});
+const Container = styled.div`
+  margin: 10px auto;
+  max-width: 600px;
+  padding: 35px 70px;
+  height: auto;
+  width: calc(100% - 2rem);
+`;
+
+const Heading = styled.h2`
+  color: #4dd0e1;
+  font-size: 1.563rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+`;
+
+const TextWrapper = styled.div`
+  text-align: center;
+`;
+
+const Link = styled.span`
+  color: #4dd0e1;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  };
+`;
 
 type Props = {
   open: boolean;
@@ -37,7 +40,6 @@ type Props = {
 };
 
 const SignUpDialog = (props: Props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [ name, setName ] = useState(""),
@@ -77,8 +79,8 @@ const SignUpDialog = (props: Props) => {
         maxWidth={"sm"}
       >
         <DialogContent>
-          <div className={classes.container}>
-            <h2 className={classes.headline}>アカウント登録</h2>
+          <Container>
+            <Heading>アカウント登録</Heading>
             <div className="module-spacer--extra-small" />
             <TextInput
               fullWidth={true}
@@ -136,15 +138,18 @@ const SignUpDialog = (props: Props) => {
               }}
             />
             <div className="module-spacer--extra-small" />
-            <p
-              className={classes.link}
-              onClick={() => {
-                dispatch(push("/signin"));
-                props.onClick();
-              }}>
-                アカウントをお持ちの方はこちら
-            </p>
-          </div>
+            <TextWrapper>
+              アカウントをお持ちの場合は
+              <Link
+                onClick={() => {
+                  dispatch(push("/signin"));
+                  props.onClick();
+                }}
+              >
+                こちら
+              </Link>
+            </TextWrapper>
+          </Container>
         </DialogContent>
       </Dialog>
     </div>

@@ -1,49 +1,42 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
 import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { ClosableDialog } from "./index";
+import styled from "styled-components";
 
-const useStyles = makeStyles({
-  root: {
-    position: "fixed",
-    bottom: "0",
-    right: "10px",
-    padding: "8px 20px",
-    backgroundColor: "#F08080",
-    borderRadius: "2px",
-    cursor: "pointer",
-    zIndex: 999,
-  },
-  icon: {
-    float: "left",
-  },
-  main: {
-    float: "right",
-    color: "white",
-    fontSize: "0.8rem",
-    marginLeft: "8px",
-  },
-});
+const Root = styled(Box)`
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    padding: 8px 20px;
+    background-color: #F08080;
+    border-radius: 2px;
+    cursor: pointer;
+    z-index: 999;
+`;
+
+const Heading = styled.p`
+  float: right;
+  color: #fff;
+  font-size: 0.8rem;
+  margin-left: 8px;
+`;
 
 const Contact = () => {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
-  
   const handleDialogToggle = () => setOpen(!open);
 
   return (
     <>
-      <Box
-        className={classes.root}
+      <Root
         display="flex"
         alignItems="center"
         justifyContent="center"
         onClick={() => handleDialogToggle()}
       >
         <MailOutline fontSize="small" style={{ color: "white" }} />
-        <p className={classes.main}>ご意見箱</p>
-      </Box>
+        <Heading>ご意見箱</Heading>
+      </Root>
       <ClosableDialog open={open} onClose={handleDialogToggle} />
     </>
   );
