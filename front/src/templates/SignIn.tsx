@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
+import { TextInput, PasswordInput, PrimaryButton, Spacer } from "../components/UIkit";
 import { signIn } from "../reducks/user/operations";
 import { push } from "connected-react-router";
 import styled from "styled-components";
@@ -57,7 +57,7 @@ const SignIn = () => {
   return (
     <Container>
       <Heading>サインイン</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -68,7 +68,7 @@ const SignIn = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード"}
@@ -79,7 +79,7 @@ const SignIn = () => {
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         id={"button"}
         label={"サインイン"}
@@ -89,7 +89,7 @@ const SignIn = () => {
           dispatch(signIn(email, password));
         }}
       />
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextWrapper>
         パスワードを忘れた場合は
         <Link
