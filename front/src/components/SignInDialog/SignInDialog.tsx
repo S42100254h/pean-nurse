@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { PasswordInput, PrimaryButton, TextInput } from "../UIkit";
+import { PasswordInput, PrimaryButton, Spacer, TextInput } from "../UIkit";
 import { signIn } from "../../reducks/user/operations";
 import { push } from "connected-react-router";
 import styled from "styled-components";
@@ -71,7 +71,7 @@ const SignInDialog = (props: Props) => {
         <DialogContent>
           <Container>
             <Heading>サインイン</Heading>
-            <div className="module-spacer--extra-small" />
+            <Spacer size="xs" />
             <TextInput
               fullWidth={true}
               label={"メールアドレス"}
@@ -82,7 +82,7 @@ const SignInDialog = (props: Props) => {
               onChange={inputEmail}
               onKeyDown={handleOnKeyDown}
             />
-            <div className="module-spacer--extra-extra-small" />
+            <Spacer size="xxs" />
             <PasswordInput
               fullWidth={true}
               label={"パスワード"}
@@ -93,7 +93,7 @@ const SignInDialog = (props: Props) => {
               onChange={inputPassword}
               onKeyDown={handleOnKeyDown}
             />
-            <div className="module-spacer--medium" />
+            <Spacer size="sm" />
             <PrimaryButton
               id={"button"}
               label={"サインイン"}
@@ -104,7 +104,7 @@ const SignInDialog = (props: Props) => {
                 props.onClick();
               }}
             />
-            <div className="module-spacer--extra-small" />
+            <Spacer size="xs" />
             <TextWrapper>
               パスワードを忘れた場合は
               <Link
