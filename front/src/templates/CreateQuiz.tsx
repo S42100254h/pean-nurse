@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SelectBox, TextInput, PrimaryButton } from "../components/UIkit";
+import { PrimaryButton, SelectBox, Spacer, TextInput,  } from "../components/UIkit";
 import Select from "react-select";
 import { ConfirmCreateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
@@ -113,7 +113,7 @@ const CreateQuiz = () => {
   return (
     <Container>
       <Heading>クイズ作成</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"問題文"}
@@ -124,13 +124,13 @@ const CreateQuiz = () => {
         type={"text"}
         onChange={inputQuiz}
       />
-      <div className="module-spacer--small" />
+      <Spacer size="sm" />
       <Select
         isMulti
         options={options}
         placeholder={"カテゴリーを選択してください"}
       />
-      <div className="module-spacer--small" />
+      <Spacer size="sm" />
       <TextInput
         fullWidth={true}
         label={"選択肢１"}
@@ -154,7 +154,7 @@ const CreateQuiz = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"選択肢２"}
@@ -178,7 +178,7 @@ const CreateQuiz = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"選択肢３"}
@@ -201,7 +201,7 @@ const CreateQuiz = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"選択肢４"}
@@ -224,7 +224,7 @@ const CreateQuiz = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         label={"クイズを作成する"}
         fullWidth={true}
