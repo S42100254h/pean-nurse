@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { SelectBox, TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { PrimaryButton, SelectBox, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { MenuItem } from "@material-ui/core";
 import { DeleteDialog } from "../components/DeleteDialog";
@@ -152,7 +152,7 @@ const QuizDetail = () => {
   return (
     <Container>
       <Heading>クイズ詳細</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"問題文"}
@@ -163,7 +163,7 @@ const QuizDetail = () => {
         type={"text"}
         onChange={inputQuiz}
       />
-      <div className="module-spacer--small" />
+      <Spacer size="sm" />
       <TextInput
         fullWidth={true}
         label={"選択肢１"}
@@ -187,7 +187,7 @@ const QuizDetail = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"選択肢２"}
@@ -211,7 +211,7 @@ const QuizDetail = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"選択肢３"}
@@ -234,7 +234,7 @@ const QuizDetail = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"選択肢４"}
@@ -257,14 +257,14 @@ const QuizDetail = () => {
           </MenuItem>
         ))}
       </SelectBox>
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         label={"クイズを更新する"}
         fullWidth={true}
         disabled={!quiz || !choice1 || !choice2}
         onClick={() => handleDialogOpen()}
       />
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <SecondaryButton
         label={"クイズを削除する"}
         fullWidth={true}
