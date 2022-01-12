@@ -1,6 +1,6 @@
 import React, { useCallback, useState }  from "react";
 import { useDispatch } from "react-redux";
-import { PasswordInput, PrimaryButton } from "../components/UIkit";
+import { PasswordInput, PrimaryButton, Spacer } from "../components/UIkit";
 import { resetPassword } from "../reducks/user/operations";
 import styled from "styled-components";
 
@@ -51,11 +51,11 @@ const ResetPassword = () => {
   return (
     <Container>
       <Heading>パスワード再設定</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextContainer>
         <p>新しいパスワードを入力してください。</p>
       </TextContainer>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード（６文字以上）"}
@@ -75,7 +75,7 @@ const ResetPassword = () => {
         onChange={inputPasswordConfirmation}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <PrimaryButton
         label={"パスワード再設定"}
         fullWidth={true}
