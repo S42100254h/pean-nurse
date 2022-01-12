@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { getSignedIn } from "../reducks/user/selectors";
 import { RootState } from "../types/entity/rootState";
+import { Spacer } from "../components/UIkit";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -35,7 +36,7 @@ const PageNotFound = () => {
       <p style={{ fontSize: "48px" }}>404</p>
       <p style={{ fontSize: "28px" }}>Page Not Found</p>
       <p style={{ fontSize: "22px" }}>指定されたページが存在しません。</p>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <Link onClick={() => handlePush()} >ホームへ戻る</Link>
     </Container>
   );
