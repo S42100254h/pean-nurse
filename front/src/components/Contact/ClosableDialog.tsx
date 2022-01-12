@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
-import { PrimaryButton, SelectBox, TextInput } from "../UIkit";
+import { PrimaryButton, SelectBox, Spacer, TextInput } from "../UIkit";
 import { getUserEmail, getUserName } from "../../reducks/user/selectors";
 import { useSelector } from "react-redux";
 import cat from "../../assets/img/cat.png";
@@ -190,7 +190,7 @@ const ClosableDialog = (props: Props) => {
                 variant="outlined"
                 onChange={inputEmail}
               />
-              <div className="module-spacer--extra-extra-small" />
+              <Spacer size="xxs" />
               <SelectBox
                 displayEmpty={true}
                 value={select}
@@ -205,7 +205,7 @@ const ClosableDialog = (props: Props) => {
                   </MenuItem>
                 ))}
               </SelectBox>
-              <div className="module-spacer--extra-extra-small" />
+              <Spacer size="xxs" />
               <TextField
                 fullWidth={true}
                 label="メッセージ"
@@ -216,7 +216,7 @@ const ClosableDialog = (props: Props) => {
                 variant="outlined"
                 onChange={inputText}
               />
-              <div className="module-spacer--extra-extra-small" />
+              <Spacer size="xxs" />
               <Label>
                 <AttachFile style={{ fontSize: "16px" }} />
                 画像を添付する
@@ -228,7 +228,7 @@ const ClosableDialog = (props: Props) => {
                   {image.name}
                 </ImageLabel>
               )}
-              <div className="module-spacer--extra-extra-small" />
+              <Spacer size="xxs" />
               <PrimaryButton
                 id={"button"}
                 label={"送信"}
@@ -239,7 +239,7 @@ const ClosableDialog = (props: Props) => {
             </InputArea>
           </DialogContent>
         )}
-        <div className="module-spacer--extra-extra-small" />
+        <Spacer size="xxs" />
       </Dialog>
     </div>
   );
