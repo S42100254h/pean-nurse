@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { PasswordInput, PrimaryButton, TextInput } from "../UIkit";
+import { PasswordInput, PrimaryButton, Spacer, TextInput } from "../UIkit";
 import { signUp } from "../../reducks/user/operations";
 import { push } from "connected-react-router";
 import styled from "styled-components";
@@ -81,7 +81,7 @@ const SignUpDialog = (props: Props) => {
         <DialogContent>
           <Container>
             <Heading>アカウント登録</Heading>
-            <div className="module-spacer--extra-small" />
+            <Spacer size="xs" />
             <TextInput
               fullWidth={true}
               label={"ユーザー名"}
@@ -93,7 +93,7 @@ const SignUpDialog = (props: Props) => {
               onChange={inputName}
               onKeyDown={handleOnKeyDown}
             />
-            <div className="module-spacer--extra-extra-small" />
+            <Spacer size="xxs" />
             <TextInput
               fullWidth={true}
               label={"メールアドレス"}
@@ -105,7 +105,7 @@ const SignUpDialog = (props: Props) => {
               onChange={inputEmail}
               onKeyDown={handleOnKeyDown}
             />
-            <div className="module-spacer--extra-extra-small" />
+            <Spacer size="xxs" />
             <PasswordInput
               fullWidth={true}
               label={"パスワード"}
@@ -116,7 +116,7 @@ const SignUpDialog = (props: Props) => {
               onChange={inputPassword}
               onKeyDown={handleOnKeyDown}
             />
-            <div className="module-spacer--extra-extra-small" />
+            <Spacer size="xxs" />
             <PasswordInput
               fullWidth={true}
               label={"パスワード（確認用）"}
@@ -127,7 +127,7 @@ const SignUpDialog = (props: Props) => {
               onChange={inputConfirmPassword}
               onKeyDown={handleOnKeyDown}
             />
-            <div className="module-spacer--medium" />
+            <Spacer size="sm" />
             <PrimaryButton
               label={"アカウントを登録する"}
               fullWidth={true}
@@ -137,7 +137,7 @@ const SignUpDialog = (props: Props) => {
                 props.onClick();
               }}
             />
-            <div className="module-spacer--extra-small" />
+            <Spacer size="xs" />
             <TextWrapper>
               アカウントをお持ちの場合は
               <Link

@@ -1,6 +1,7 @@
 import React from "react";
 import { Profile } from "../components/Profile";
 import styled from "styled-components";
+import { Spacer } from "../components/UIkit";
 
 const Container = styled.div`
   width: calc(100% - 5rem);
@@ -23,7 +24,7 @@ const DashBoard = () => {
   return (
     <div>
       <Profile />
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <Container>
         <Heading>学習中のコース</Heading>
         <Text>学習中のコースはありません。</Text>

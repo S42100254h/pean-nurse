@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { PrimaryButton } from "../components/UIkit";
+import { PrimaryButton, Spacer } from "../components/UIkit";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 
@@ -27,13 +27,13 @@ const Management = () => {
     <Root>
       <Container>
         <Heading>クイズ</Heading>
-        <div className="module-spacer--extra-small" />
+        <Spacer size="xs" />
         <PrimaryButton
           id={"quizList"}
           label={"クイズ一覧"}
           onClick={() => dispatch(push("/quiz/list"))}
         />
-        <div className="module-spacer--extra-small" />
+        <Spacer size="xs" />
         <PrimaryButton
           id={"createQuiz"}
           label={"クイズ作成"}
@@ -42,13 +42,13 @@ const Management = () => {
       </Container>
       <Container>
         <Heading>ユーザー</Heading>
-        <div className="module-spacer--extra-small" />
+        <Spacer size="xs" />
         <PrimaryButton
           id={"userList"}
           label={"ユーザ一覧"}
           onClick={() => dispatch(push("/user/list"))}
         />
-        <div className="module-spacer--extra-small" />
+        <Spacer size="xs" />
         <PrimaryButton
           id={"createUser"}
           label={"ユーザー作成"}

@@ -1,6 +1,7 @@
 import React from "react";
 import { CourseCard } from "../components/CourseCard";
 import styled from "styled-components";
+import { Spacer } from "../components/UIkit";
 
 const Container = styled.div`
   margin: 30px auto;
@@ -36,7 +37,7 @@ const CourseOverview = () => {
     <Container>
       <Heading>神経内科</Heading>
       <SubHeading>ALS, パーキンソン病 ...</SubHeading>
-      <div className="module-spacer--small" />
+      <Spacer size="sm" />
       {courseCards.map((card) => (
         <CourseCard key={card.id} label={card.label} />
       ))}

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Tabs, Tab } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
-import { TabPanel, TextInput, PasswordInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { PasswordInput, PrimaryButton, SecondaryButton, Spacer, TabPanel, TextInput } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/user/selectors";
 import Avatar from "@material-ui/core/Avatar";
@@ -180,7 +180,7 @@ const Setting = () => {
                   )}
                   <StyledPhotoCameraIcon />
                 </Image>
-                <div className="module-spacer--extra-small" />
+                <Spacer size="xs" />
                 <TextInput
                   fullWidth={true}
                   label={"ユーザー名"}
@@ -190,7 +190,7 @@ const Setting = () => {
                   value={name}
                   onChange={inputName}
                 />
-                <div className="module-spacer--extra-extra-small" />
+                <Spacer size="xxs" />
                 <TextInput
                   fullWidth={true}
                   label={"メールアドレス"}
@@ -200,7 +200,7 @@ const Setting = () => {
                   value={email}
                   onChange={inputEmail}
                 />
-                <div className="module-spacer--medium" />
+                <Spacer size="sm" />
                 <PrimaryButton
                   label={"更新"}
                   fullWidth={true}
@@ -208,7 +208,7 @@ const Setting = () => {
                     dispatch(editUserInfo(name, email));
                   }}
                 />
-                <div className="module-spacer--large" />
+                <Spacer size="md" />
                 <SecondaryButton
                   label={"アカウントを削除される場合はこちら"}
                   fullWidth={true}
@@ -226,7 +226,7 @@ const Setting = () => {
                   value={current_password}
                   onChange={inputCurrentPassword}
                 />
-                <div className="module-spacer--extra-extra-small" />
+                <Spacer size="xxs" />
                 <PasswordInput
                   fullWidth={true}
                   label={"新しいパスワード"}
@@ -236,7 +236,7 @@ const Setting = () => {
                   value={password}
                   onChange={inputPassword}
                 />
-                <div className="module-spacer--extra-extra-small" />
+                <Spacer size="xxs" />
                 <PasswordInput
                   fullWidth={true}
                   label={"新しいパスワード（確認用）"}
@@ -247,7 +247,7 @@ const Setting = () => {
                   onChange={inputPasswordConfirmation}
                   onKeyDown={handleOnKeyDown}
                 />
-                <div className="module-spacer--medium" />
+                <Spacer size="sm" />
                 <PrimaryButton
                   label={"更新"}
                   fullWidth={true}

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
+import { TextInput, PasswordInput, PrimaryButton, Spacer } from "../components/UIkit";
 import { adminSignIn } from "../reducks/admin/operations";
 import styled from "styled-components";
 
@@ -43,7 +43,7 @@ const AdminSignIn = () => {
   return (
     <Container>
       <Heading>管理者サインイン</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -54,7 +54,7 @@ const AdminSignIn = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード"}
@@ -65,7 +65,7 @@ const AdminSignIn = () => {
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         id={"button"}
         label={"サインイン"}

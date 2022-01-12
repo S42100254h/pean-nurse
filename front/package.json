@@ -27,6 +27,7 @@
     "redux-thunk": "^2.4.1",
     "reselect": "^4.1.5",
     "styled-components": "^5.3.3",
+    "styled-media-query": "^2.1.2",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
     "web-vitals": "^2.1.2"

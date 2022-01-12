@@ -1,5 +1,5 @@
 import React, { useCallback, useState} from "react";
-import { TextInput, PasswordInput, PrimaryButton } from "../components/UIkit";
+import { PasswordInput, PrimaryButton, Spacer, TextInput } from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { signUp } from "../reducks/user/operations";
@@ -67,7 +67,7 @@ const SignUp = () => {
   return (
     <Container>
       <Heading>アカウント登録</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" /> 
       <TextInput
         fullWidth={true}
         label={"ユーザー名"}
@@ -79,7 +79,7 @@ const SignUp = () => {
         onChange={inputName}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -91,7 +91,7 @@ const SignUp = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード"}
@@ -102,7 +102,7 @@ const SignUp = () => {
         onChange={inputPassword}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <PasswordInput
         fullWidth={true}
         label={"パスワード（確認用）"}
@@ -113,7 +113,7 @@ const SignUp = () => {
         onChange={inputConfirmPassword}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         label={"アカウントを登録する"}
         fullWidth={true}
@@ -122,7 +122,7 @@ const SignUp = () => {
           dispatch(signUp(name, email, password, confirmPassword));
         }}
       />
-      <div className="module-spacer--small" />
+      <Spacer size="sm" />
       <TextWrapper>
         アカウントをお持ちの場合は
         <Link

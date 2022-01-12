@@ -1,6 +1,6 @@
 import React from "react";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { PrimaryButton, SecondaryButton } from "../UIkit";
+import { PrimaryButton, SecondaryButton, Spacer } from "../UIkit";
 import cat from "../../assets/img/cat.png";
 import styled from "styled-components";
 
@@ -35,24 +35,24 @@ const DeleteDialog = (props: Props) => {
         <DialogContent>
           <div>
             <Heading>削除する</Heading>
-            <div className="module-spacer--extra-small" />
+            <Spacer size="xs" />
             <h2>本当に削除してもよろしいですか？</h2>
-            <div className="module-spacer--extra-extra-small" />
+            <Spacer size="xxs" />
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
-          <div className="module-spacer--extra-small" />
+          <Spacer size="xs" />
           <PrimaryButton
             label={"キャンセル"}
             fullWidth={true}
             onClick={props.onClickStop} 
           />
-          <div className="module-spacer--extra-small" />
+          <Spacer size="xs" />
           <SecondaryButton
             label={"削除する"}
             fullWidth={true}
             onClick={props.onClickProceed}
           />
-          <div className="module-spacer--extra-small" />
+          <Spacer size="xs" />
         </DialogContent>
       </Dialog>
     </>

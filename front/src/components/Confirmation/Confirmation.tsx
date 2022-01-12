@@ -1,6 +1,6 @@
 import React from "react";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { PrimaryButton, SecondaryButton } from "../UIkit";
+import { PrimaryButton, SecondaryButton, Spacer } from "../UIkit";
 import cat from "../../assets/img/cat.png";
 import styled from "styled-components";
 
@@ -41,25 +41,25 @@ const Confirmation = (props: Props) => {
         <DialogContent>
           <div>
             <Heading>退会</Heading>
-            <div className="module-spacer--extra-small" />
+            <Spacer size="xs" />
             <h2>退会手続きの前にご確認ください</h2>
-            <div className="module-spacer--extra-extra-small" />
+            <Spacer size="xxs" />
             <p>アカウントを削除すると、これまでのデータが<Red>すべて削除されます</Red></p>
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
-          <div className="module-spacer--extra-small" />
+          <Spacer size="xs" />
           <PrimaryButton
             label={"退会をやめる"}
             fullWidth={true}
             onClick={props.onClickStop} 
           />
-          <div className="module-spacer--extra-small" />
+          <Spacer size="xs" />
           <SecondaryButton
             label={"退会手続きを進める"}
             fullWidth={true}
             onClick={props.onClickProceed}
           />
-          <div className="module-spacer--extra-small" />
+          <Spacer size="xs" />
         </DialogContent>
       </Dialog>
     </>

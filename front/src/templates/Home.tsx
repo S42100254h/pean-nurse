@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PrimaryButton } from "../components/UIkit";
+import { PrimaryButton, Spacer } from "../components/UIkit";
 import { SignUpDialog } from "../components/SignUpDialog";
 import styled from "styled-components";
 
@@ -115,13 +115,13 @@ const Home = () => {
         <BottomHeading>看護学生から、看護師になろう</BottomHeading>
         <Voice>「国家試験に合格できるか心配...」</Voice>
         <Voice>「参考書を読むと眠くなって、勉強が進まない...」</Voice>
-        <div className="module-spacer--extra-extra-small" />
+        <Spacer size="xxs" />
         <Message>そんなあなたが医療の世界に飛び込むお手伝いをしたい！</Message>
         <Message>私たちはこんな思いで、PeANを運営しています。</Message>
-        <div className="module-spacer--small" />
+        <Spacer size="sm" />
         <Message>看護学生にとって、国家試験は大きな壁です。</Message>
         <Message>国家試験の合否によっては、今後の１年が決まります。</Message>
-        <div className="module-spacer--small" />
+        <Spacer size="sm" />
         <Message>私たちと一緒に医療の世界へ飛び込みましょう！</Message>
       </BottomContainer>
       <RegisterContainer>

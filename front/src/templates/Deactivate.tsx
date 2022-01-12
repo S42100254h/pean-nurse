@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { SecondaryButton, TextInput } from "../components/UIkit";
+import { SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../reducks/user/operations";
 import styled from "styled-components";
@@ -43,13 +43,13 @@ const Deactivate = () => {
   return (
     <Container>
       <Heading>退会手続き（最終確認）</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextContainer>
         <h2>退会手続きの前にご確認ください</h2>
-        <div className="module-spacer--extra-extra-small" />
+        <Spacer size="xxs" />
         <p>アカウントを削除すると、これまでのデータが<Red>すべて削除されます</Red></p>
       </TextContainer>
-      <div className="module-spacer--extra-extra-small" />
+      <Spacer size="xxs" />
       <p>よろしければ、退会理由を教えてください。（任意：255文字以内）</p>
       <TextInput
         fullWidth={true}
@@ -60,7 +60,7 @@ const Deactivate = () => {
         variant="outlined"
         onChange={inputText}
       />
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <SecondaryButton
         label={"退会する"}
         fullWidth={true}
