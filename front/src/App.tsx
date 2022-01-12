@@ -7,7 +7,6 @@ import { Contact } from "./components/Contact";
 import { Notification } from "./components/Notification";
 import { Loading } from "./components/UIkit";
 import styled from "styled-components";
-import "./assets/style.css";
 import "./assets/reset.css";
 
 const Main = styled.main`
