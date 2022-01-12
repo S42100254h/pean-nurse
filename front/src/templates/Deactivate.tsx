@@ -49,7 +49,7 @@ const Deactivate = () => {
         <Spacer size="xxs" />
         <p>アカウントを削除すると、これまでのデータが<Red>すべて削除されます</Red></p>
       </TextContainer>
-        <Spacer size="xxs" />
+      <Spacer size="xxs" />
       <p>よろしければ、退会理由を教えてください。（任意：255文字以内）</p>
       <TextInput
         fullWidth={true}
