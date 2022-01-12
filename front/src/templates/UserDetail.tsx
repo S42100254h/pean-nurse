@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { TextInput, PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { TextInput, PrimaryButton, SecondaryButton, Spacer } from "../components/UIkit";
 import { deleteUser } from "../reducks/users/operations";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { editUserInfoByAdmin } from "../function/user";
@@ -76,7 +76,7 @@ const UserDetail = () => {
   return (
     <Container>
       <Heading>ユーザー詳細</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"ユーザー名"}
@@ -97,14 +97,14 @@ const UserDetail = () => {
         type={"text"}
         onChange={inputMail}
       />
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         label={"ユーザー情報を更新する"}
         fullWidth={true}
         disabled={!name || !email}
         onClick={() => dispatch(editUserInfoByAdmin(match.params.id, name, email))}
       />
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <SecondaryButton
         label={"アカウントを削除する"}
         fullWidth={true}
