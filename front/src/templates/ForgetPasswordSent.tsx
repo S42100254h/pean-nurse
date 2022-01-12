@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Spacer } from "../components/UIkit";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -27,7 +28,7 @@ const ForgetPasswordSent = () => {
   return (
     <Container>
       <Heading>メール送信完了</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextContainer>
         <p>パスワード再設定用のURLを送信しました。</p>
         <p>記載された内容に従って、パスワードの再設定を行ってください。</p>
