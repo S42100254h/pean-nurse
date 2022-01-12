@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { TextInput, PrimaryButton } from "../components/UIkit";
+import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
 import { forgetPassword } from "../reducks/user/operations";
 import styled from "styled-components";
 
@@ -46,12 +46,12 @@ const ForgetPassword = () => {
   return (
     <Container>
       <Heading>パスワードを忘れた場合</Heading>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextContainer>
         <p>ご登録いただいたメールアドレスを入力してください。</p>
         <p>パスワード変更ページのURLが記載されたメールを送信します。</p>
       </TextContainer>
-      <div className="module-spacer--extra-small" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -62,7 +62,7 @@ const ForgetPassword = () => {
         onChange={inputEmail}
         onKeyDown={handleOnKeyDown}
       />
-      <div className="module-spacer--medium" />
+      <Spacer size="sm" />
       <PrimaryButton
         id={"button"}
         label={"送信"}
