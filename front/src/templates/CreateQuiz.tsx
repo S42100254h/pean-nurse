@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PrimaryButton, SelectBox, Spacer, TextInput,  } from "../components/UIkit";
+import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import { SetChoicesArea } from "../components/SetChoicesArea.tsx";
 import Select from "react-select";
 import { ConfirmCreateDialog } from "../components/ConfirmDialog";
-import { MenuItem } from "@material-ui/core";
 import { fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { RootState } from "../types/entity/rootState";
@@ -35,6 +35,11 @@ const CreateQuiz = () => {
     dispatch(fetchCategories());
   }, []);
 
+  type Choice = {
+    choice: string;
+    isRight: string;
+  };
+
   const [quiz, setQuiz] = useState(""),
     [choice1, setChoice1] = useState(""),
     [choice2, setChoice2] = useState(""),
@@ -44,6 +49,7 @@ const CreateQuiz = () => {
     [select2, setSelect2] = useState(""),
     [select3, setSelect3] = useState(""),
     [select4, setSelect4] = useState(""),
+    [choices, setChoices] = useState<Choice[]>([{choice: "", isRight: ""}, {choice: "", isRight: ""}]),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
@@ -131,99 +137,7 @@ const CreateQuiz = () => {
         placeholder={"カテゴリーを選択してください"}
       />
       <Spacer size="sm" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢１"}
-        multiline={true}
-        required={true}
-        rows={1}
-        value={choice1}
-        type={"text"}
-        onChange={inputChoice1}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select1}
-        variant="standard"
-        onChange={inputSelect1}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
-      <Spacer size="xxs" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢２"}
-        multiline={true}
-        required={true}
-        rows={1}
-        value={choice2}
-        type={"text"}
-        onChange={inputChoice2}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select2}
-        variant="standard"
-        onChange={inputSelect2}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
-      <Spacer size="xxs" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢３"}
-        multiline={true}
-        rows={1}
-        value={choice3}
-        type={"text"}
-        onChange={inputChoice3}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select3}
-        variant="standard"
-        onChange={inputSelect3}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
-      <Spacer size="xxs" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢４"}
-        multiline={true}
-        rows={1}
-        value={choice4}
-        type={"text"}
-        onChange={inputChoice4}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select4}
-        variant="standard"
-        onChange={inputSelect4}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
+      <SetChoicesArea choices={choices} setChoices={setChoices} />
       <Spacer size="sm" />
       <PrimaryButton
         label={"クイズを作成する"}
