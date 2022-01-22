@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PrimaryButton, SecondaryButton, SelectBox, Spacer, TextInput } from "../../components/UIkit";
 import { MenuItem } from "@material-ui/core";
 import styled from "styled-components";
@@ -23,33 +23,35 @@ const ButtonWrapper = styled.div`
   float: right;
 `;
 
-const SetChoicesArea = (props: Choices) => {
-  const [index, setIndex] = useState(0),
-    [choice, setChoice] = useState(""),
-    [isRight, setIsRight] = useState("");
+const SetChoicesArea = ({choices, setChoices}: Choices) => {
+  const [index, setIndex] = useState(0);
 
-  const inputChoice = useCallback((event) => {
-    setChoice(event.target.value);
-  }, [setChoice]);
+  const inputChoice = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
+    const newChoices = [...choices];
+    newChoices[index] = { choice: event.target.value, isRight: newChoices[index].isRight };
+    setChoices(newChoices);
+  };
 
-  const inputIsRight = useCallback((event) => {
-    setIsRight(event.target.value);
-  }, [setIsRight]);
+  const inputIsRight = (event: React.ChangeEvent<{ value: unknown }>, index: number) => {
+    const newChoices = [...choices];
+    newChoices[index] = { choice: newChoices[index].choice, isRight: event.target.value as string };
+    setChoices(newChoices);
+  };
 
   const addChoice = () => {
-    if (props.choices.slice(-1)[0].choice === "" || props.choices.slice(-1)[0].isRight === "") {
+    if (choices.slice(-1)[0].choice === "" || choices.slice(-1)[0].isRight === "") {
       return false;
     } else {
-      const newChoices = props.choices;
+      const newChoices = choices;
       newChoices[index] = { choice: "", isRight: "" };
-      props.setChoices(newChoices);
+      setChoices(newChoices);
       setIndex(newChoices.length);
     }
   };
   
   const deleteChoice = (deleteIndex: number) => {
-    const newChoices = props.choices.filter((item, index) => index !== deleteIndex);
-    props.setChoices(newChoices);
+    const newChoices = choices.filter((_, index) => index !== deleteIndex);
+    setChoices(newChoices);
   };
 
   const menus = [
@@ -58,14 +60,14 @@ const SetChoicesArea = (props: Choices) => {
   ];
 
   useEffect(() => {
-    setIndex(props.choices.length)
-  }, [props.choices.length]);
+    setIndex(choices.length);
+  }, [choices.length]);
 
   return (
     <div>
       <div>
-        {props.choices.length > 0 && (
-          props.choices.map((choice, index) => (
+        {choices.length > 0 && (
+          choices.map((choice, index) => (
             <div key={index}>
               <TextInput
                 fullWidth={true}
@@ -75,13 +77,13 @@ const SetChoicesArea = (props: Choices) => {
                 rows={1}
                 value={choice.choice}
                 type={"text"}
-                onChange={inputChoice}
+                onChange={(event) => inputChoice(event, index)}
               />
               <SelectBox
                 displayEmpty={true}
                 value={choice.isRight}
                 variant="standard"
-                onChange={inputIsRight}
+                onChange={(event) => inputIsRight(event, index)}
               >
                 <MenuItem value="">- 選択してください -</MenuItem>
                 {menus.map((menu) => (
