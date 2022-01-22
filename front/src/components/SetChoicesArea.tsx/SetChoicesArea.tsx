@@ -39,14 +39,10 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
   };
 
   const addChoice = () => {
-    if (choices.slice(-1)[0].choice === "" || choices.slice(-1)[0].isRight === "") {
-      return false;
-    } else {
-      const newChoices = choices;
-      newChoices[index] = { choice: "", isRight: "" };
-      setChoices(newChoices);
-      setIndex(newChoices.length);
-    }
+    const newChoices = choices;
+    newChoices[index] = { choice: "", isRight: "" };
+    setChoices(newChoices);
+    setIndex(newChoices.length);
   };
   
   const deleteChoice = (deleteIndex: number) => {
