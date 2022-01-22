@@ -7,7 +7,7 @@ type Props = {
   value: string | boolean;
   variant: "filled" | "outlined" | "standard" | undefined;
   displayEmpty: boolean;
-  onChange: (event: object) => void;
+  onChange: ((event: React.ChangeEvent<{ value: unknown }>) => void) | undefined
   onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement>;
 };
 
