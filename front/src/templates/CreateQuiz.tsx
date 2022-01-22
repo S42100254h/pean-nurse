@@ -41,53 +41,12 @@ const CreateQuiz = () => {
   };
 
   const [quiz, setQuiz] = useState(""),
-    [choice1, setChoice1] = useState(""),
-    [choice2, setChoice2] = useState(""),
-    [choice3, setChoice3] = useState(""),
-    [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(""),
-    [select2, setSelect2] = useState(""),
-    [select3, setSelect3] = useState(""),
-    [select4, setSelect4] = useState(""),
     [choices, setChoices] = useState<Choice[]>([{choice: "", isRight: ""}, {choice: "", isRight: ""}]),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
     setQuiz(event.target.value);
   }, [setQuiz]);
-
-  const inputChoice1 = useCallback((event) => {
-    setChoice1(event.target.value);
-  }, [setChoice1]);
-
-  const inputChoice2 = useCallback((event) => {
-    setChoice2(event.target.value);
-  }, [setChoice2]);
-  
-
-  const inputChoice3 = useCallback((event) => {
-    setChoice3(event.target.value);
-  }, [setChoice3]);
-
-  const inputChoice4 = useCallback((event) => {
-    setChoice4(event.target.value);
-  }, [setChoice4]);
-  
-  const inputSelect1 = useCallback((event) => {
-    setSelect1(event.target.value);
-  }, [setSelect1]);
-
-  const inputSelect2 = useCallback((event) => {
-    setSelect2(event.target.value);
-  }, [setSelect2]);
-
-  const inputSelect3 = useCallback((event) => {
-    setSelect3(event.target.value);
-  }, [setSelect3]);
-
-  const inputSelect4 = useCallback((event) => {
-    setSelect4(event.target.value);
-  }, [setSelect4]);
 
   const handleDialogClose = () => setOpen(false);
   
