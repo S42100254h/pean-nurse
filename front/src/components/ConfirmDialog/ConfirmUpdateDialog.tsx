@@ -18,26 +18,20 @@ const Headline = styled.div`
   text-align: center;
 `;
 
+type Choice = {
+  choice: string;
+  is_right: string;
+};
+
 type Props = {
   quiz: string;
-  choice1: string;
-  select1: string;
-  choice2: string;
-  select2: string;
-  choice3: string;
-  select3: string;
-  choice4: string;
-  select4: string;
-  id1: number | null;
-  id2: number | null;
-  id3: number | null;
-  id4: number | null;
+  choices: Choice[];
   open: boolean;
   onClose: () => void;
   id: string;
 };
 
-const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, open, onClose, id }: Props) => {
+const ConfirmUpdateDialog = ({ quiz, choices, open, onClose, id }: Props) => {
   const dispatch = useDispatch();
   
   return (
@@ -53,15 +47,14 @@ const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
             <Headline>以下の内容でクイズを更新してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
-            <ChoiceCard choice={choice1} select={select1} label={"選択肢１"} />
-            <ChoiceCard choice={choice2} select={select2} label={"選択肢２"} />
-            <ChoiceCard choice={choice3} select={select3} label={"選択肢３"} />
-            <ChoiceCard choice={choice4} select={select4} label={"選択肢４"} />
+            {choices.map((choice, index) => (
+              <ChoiceCard choice={choice.choice} select={choice.is_right} label={"選択肢" + (index + 1)} key={index} />
+            ))}
             <Spacer size="xxs" />
             <PrimaryButton
               label={"クイズを更新する"}
               fullWidth={true}
-              onClick={() => dispatch(editQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, id1, id2, id3, id4, id))}
+              onClick={() => dispatch(editQuiz(quiz, choices, id))}
             />
           </Container>
         </DialogContent>
