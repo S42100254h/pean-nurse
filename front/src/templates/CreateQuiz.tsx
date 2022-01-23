@@ -33,11 +33,11 @@ const CreateQuiz = () => {
   
   type Choice = {
     choice: string;
-    isRight: string;
+    is_right: string;
   };
 
   const [quiz, setQuiz] = useState(""),
-    [choices, setChoices] = useState<Choice[]>([{choice: "", isRight: ""}, {choice: "", isRight: ""}]),
+    [choices, setChoices] = useState<Choice[]>([{choice: "", is_right: ""}, {choice: "", is_right: ""}]),
     [open, setOpen] = useState(false);
 
   const inputQuiz = useCallback((event) => {
@@ -47,7 +47,7 @@ const CreateQuiz = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    const isRightList = choices.map((choice) => choice.isRight);
+    const isRightList = choices.map((choice) => choice.is_right);
     if (![...isRightList].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
@@ -62,7 +62,7 @@ const CreateQuiz = () => {
   const isDisabled = (args: Choice[]) => {
     let disabled = true;
     for (let i = 0; i < args.length; i=(i+1)|0) {
-      if (args[i].choice === "" || args[i].isRight === "") {
+      if (args[i].choice === "" || args[i].is_right === "") {
         disabled = false;
       }
     }

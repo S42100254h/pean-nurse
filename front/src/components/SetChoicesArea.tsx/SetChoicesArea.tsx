@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import { PrimaryButton, SecondaryButton, SelectBox, Spacer, TextInput } from "../../components/UIkit";
 import { MenuItem } from "@material-ui/core";
 import styled from "styled-components";
-import { Choice } from "../ConfirmDialog";
 
 type Choice = {
   choice: string;
-  isRight: string;
+  is_right: string;
 };
 
 type Choices = {
   choices: Choice[];
   setChoices: React.Dispatch<React.SetStateAction<{
     choice: string;
-    isRight: string;
+    is_right: string;
   }[]>>;
 };
 
@@ -28,19 +27,19 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
 
   const inputChoice = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     const newChoices = [...choices];
-    newChoices[index] = { choice: event.target.value, isRight: newChoices[index].isRight };
+    newChoices[index] = { choice: event.target.value, is_right: newChoices[index].is_right };
     setChoices(newChoices);
   };
 
   const inputIsRight = (event: React.ChangeEvent<{ value: unknown }>, index: number) => {
     const newChoices = [...choices];
-    newChoices[index] = { choice: newChoices[index].choice, isRight: event.target.value as string };
+    newChoices[index] = { choice: newChoices[index].choice, is_right: event.target.value as string };
     setChoices(newChoices);
   };
 
   const addChoice = () => {
     const newChoices = choices;
-    newChoices[index] = { choice: "", isRight: "" };
+    newChoices[index] = { choice: "", is_right: "" };
     setChoices(newChoices);
     setIndex(newChoices.length);
   };
@@ -77,7 +76,7 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
               />
               <SelectBox
                 displayEmpty={true}
-                value={choice.isRight}
+                value={choice.is_right}
                 variant="standard"
                 onChange={(event) => inputIsRight(event, index)}
               >
@@ -104,7 +103,7 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
         onClick={() => addChoice()}
       />
     </div>
-  )
+  );
 };
 
 export default SetChoicesArea;
