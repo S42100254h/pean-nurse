@@ -32,6 +32,7 @@ type MatchParams = {
 };
 
 type Choice = {
+  id?: number;
   choice: string;
   is_right: string;
 };
@@ -76,7 +77,7 @@ const QuizDetail = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    const isRightList = choices.map((choice) => choice.is_right);
+    const isRightList = choices.map((choice) => choice.is_right.toString());
     if (![...isRightList].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;

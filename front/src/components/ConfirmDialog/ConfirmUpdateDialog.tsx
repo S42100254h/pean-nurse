@@ -48,7 +48,7 @@ const ConfirmUpdateDialog = ({ quiz, choices, open, onClose, id }: Props) => {
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
             {choices.map((choice, index) => (
-              <ChoiceCard choice={choice.choice} select={choice.is_right} label={"選択肢" + (index + 1)} key={index} />
+              <ChoiceCard choice={choice.choice} select={choice.is_right.toString()} label={"選択肢" + (index + 1)} key={index} />
             ))}
             <Spacer size="xxs" />
             <PrimaryButton
