@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { PrimaryButton, SelectBox, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
+import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
-import { MenuItem } from "@material-ui/core";
+import { SetChoicesArea } from "../components/SetChoicesArea.tsx";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { deleteQuiz } from "../reducks/quizzes/operations";
 import { push } from "connected-react-router";
@@ -31,23 +31,17 @@ type MatchParams = {
   id: string;
 };
 
+type Choice = {
+  choice: string;
+  is_right: string;
+};
+
 const QuizDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
 
   const [quiz, setQuiz] = useState(""),
-    [choice1, setChoice1] = useState(""),
-    [choice2, setChoice2] = useState(""),
-    [choice3, setChoice3] = useState(""),
-    [choice4, setChoice4] = useState(""),
-    [select1, setSelect1] = useState(""),
-    [select2, setSelect2] = useState(""),
-    [select3, setSelect3] = useState(""),
-    [select4, setSelect4] = useState(""),
-    [id1, setId1] = useState<number | null>(null),
-    [id2, setId2] = useState<number | null>(null),
-    [id3, setId3] = useState<number | null>(null),
-    [id4, setId4] = useState<number | null>(null),
+    [choices, setChoices] = useState<Choice[]>([]),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
@@ -68,26 +62,7 @@ const QuizDetail = () => {
       .get(choiceApiEndpoint)
       .then((resp) => {
         if (isMounted) {
-          if (resp.data[0]) {
-            setSelect1(resp.data[0].is_right);
-            setChoice1(resp.data[0].choice);
-            setId1(resp.data[0].id);
-          }
-          if (resp.data[1]) {
-            setSelect2(resp.data[1].is_right);
-            setChoice2(resp.data[1].choice);
-            setId2(resp.data[1].id);
-          }
-          if (resp.data[2]) {
-            setChoice3(resp.data[2].choice);
-            setSelect3(resp.data[2].is_right);
-            setId3(resp.data[2].id);
-          }
-          if (resp.data[3]) {
-            setChoice4(resp.data[3].choice);
-            setSelect4(resp.data[3].is_right);
-            setId4(resp.data[3].id);
-          }
+          setChoices(resp.data);
         }
       });
 
@@ -98,50 +73,28 @@ const QuizDetail = () => {
     setQuiz(event.target.value);
   }, [setQuiz]);
 
-  const inputChoice1 = useCallback((event) => {
-    setChoice1(event.target.value);
-  }, [setChoice1]);
-
-  const inputChoice2 = useCallback((event) => {
-    setChoice2(event.target.value);
-  }, [setChoice2]);
-
-  const inputChoice3 = useCallback((event) => {
-    setChoice3(event.target.value);
-  }, [setChoice3]);
-
-  const inputChoice4 = useCallback((event) => {
-    setChoice4(event.target.value);
-  }, [setChoice4]);
-  
-  const inputSelect1 = useCallback((event) => {
-    setSelect1(event.target.value);
-  }, [setSelect1]);
-
-  const inputSelect2 = useCallback((event) => {
-    setSelect2(event.target.value);
-  }, [setSelect2]);
-
-  const inputSelect3 = useCallback((event) => {
-    setSelect3(event.target.value);
-  }, [setSelect3]);
-
-  const inputSelect4 = useCallback((event) => {
-    setSelect4(event.target.value);
-  }, [setSelect4]);
-
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (select1 == "false" && select2 == "false" && select3 == "false" && select4 == "false" ) {
+    const isRightList = choices.map((choice) => choice.is_right);
+    if (![...isRightList].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (select1 == "true" && select2 == "true" && select3 == "true" && select4 == "true" ) {
+    if (![...isRightList].includes("false")) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
     setOpen(true);
+  };
+  const isDisabled = (args: Choice[]) => {
+    let disabled = true;
+    for (let i = 0; i < args.length; i=(i+1)|0) {
+      if (args[i].choice === "" || args[i].is_right === "") {
+        disabled = false;
+      }
+    }
+    return disabled;
   };
 
   const menus = [
@@ -164,104 +117,12 @@ const QuizDetail = () => {
         onChange={inputQuiz}
       />
       <Spacer size="sm" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢１"}
-        multiline={true}
-        required={true}
-        rows={1}
-        value={choice1}
-        type={"text"}
-        onChange={inputChoice1}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select1}
-        variant="standard"
-        onChange={inputSelect1}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
-      <Spacer size="xxs" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢２"}
-        multiline={true}
-        required={true}
-        rows={1}
-        value={choice2}
-        type={"text"}
-        onChange={inputChoice2}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select2}
-        variant="standard"
-        onChange={inputSelect2}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
-      <Spacer size="xxs" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢３"}
-        multiline={true}
-        rows={1}
-        value={choice3}
-        type={"text"}
-        onChange={inputChoice3}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select3}
-        variant="standard"
-        onChange={inputSelect3}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
-      <Spacer size="xxs" />
-      <TextInput
-        fullWidth={true}
-        label={"選択肢４"}
-        multiline={true}
-        rows={1}
-        value={choice4}
-        type={"text"}
-        onChange={inputChoice4}
-      />
-      <SelectBox
-        displayEmpty={true}
-        value={select4}
-        variant="standard"
-        onChange={inputSelect4}
-      >
-        <MenuItem value="">- 選択してください -</MenuItem>
-        {menus.map((menu) => (
-          <MenuItem value={menu.value} key={menu.id} >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </SelectBox>
+      <SetChoicesArea choices={choices} setChoices={setChoices} />
       <Spacer size="sm" />
       <PrimaryButton
         label={"クイズを更新する"}
         fullWidth={true}
-        disabled={!quiz || !choice1 || !choice2}
+        disabled={!quiz || !isDisabled(choices)}
         onClick={() => handleDialogOpen()}
       />
       <Spacer size="xs" />
@@ -273,9 +134,7 @@ const QuizDetail = () => {
       <ConfirmUpdateDialog
         id={match.params.id}
         quiz={quiz}
-        choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
-        select1={select1} select2={select2} select3={select3} select4={select4}
-        id1={id1} id2={id2} id3={id3} id4={id4}
+        choices={choices}
         open={open}
         onClose={handleDialogClose}
       />
