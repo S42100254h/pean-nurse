@@ -31,10 +31,6 @@ const CreateQuiz = () => {
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
   
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, []);
-
   type Choice = {
     choice: string;
     isRight: string;
@@ -51,15 +47,26 @@ const CreateQuiz = () => {
   const handleDialogClose = () => setOpen(false);
   
   const handleDialogOpen = () => {
-    if (![select1, select2, select3, select4].includes("true")) {
+    const isRightList = choices.map((choice) => choice.isRight);
+    if (![...isRightList].includes("true")) {
       alert("少なくとも１つは正しい選択肢が必要です。");
       return;
     }
-    if (![select1, select2, select3, select4].includes("false")) {
+    if (![...isRightList].includes("false")) {
       alert("少なくとも１つは誤った選択肢が必要です。");
       return;
     }
     setOpen(true);
+  };
+
+  const isDisabled = (args: Choice[]) => {
+    let disabled = true;
+    for (let i = 0; i < args.length; i=(i+1)|0) {
+      if (args[i].choice === "" || args[i].isRight === "") {
+        disabled = false;
+      }
+    }
+    return disabled;
   };
 
   const menus = [
@@ -74,6 +81,10 @@ const CreateQuiz = () => {
       label: category.name,
     }
   ));
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   return (
     <Container>
@@ -101,13 +112,12 @@ const CreateQuiz = () => {
       <PrimaryButton
         label={"クイズを作成する"}
         fullWidth={true}
-        disabled={!quiz || !choice1 || !choice2}
+        disabled={!quiz || !isDisabled(choices)}
         onClick={() => handleDialogOpen()}
       />
       <ConfirmCreateDialog
         quiz={quiz}
-        choice1={choice1} choice2={choice2} choice3={choice3} choice4={choice4}
-        select1={select1} select2={select2} select3={select3} select4={select4}
+        choices={choices}
         open={open}
         onClose={handleDialogClose}
       />
