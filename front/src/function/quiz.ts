@@ -5,6 +5,7 @@ import { push } from "connected-react-router";
 import { Dispatch } from "redux";
 
 type Choice = {
+  id?: number;
   choice: string;
   is_right: string;
 };
@@ -40,7 +41,7 @@ export const createQuiz = (quiz: string, choices: Choice[]) => {
   };
 };
 
-export const editQuiz = (quiz: string, choice1: string, select1: string, choice2: string, select2: string, choice3: string, select3: string, choice4: string, select4: string, id1: number | null, id2: number | null, id3: number | null, id4: number | null, id: string) => {
+export const editQuiz = (quiz: string, choices: Choice[], id: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -53,20 +54,12 @@ export const editQuiz = (quiz: string, choice1: string, select1: string, choice2
       axios
         .patch(quizApiEndpoint, quizBody, { headers: headers })
         .then(() => {
-
-          const choiceBodyList: object[] =  [];
-          if (choice1) choiceBodyList.push({ choice: { choice: choice1, is_right: select1, quiz_id: id }});
-          if (choice2) choiceBodyList.push({ choice: { choice: choice2, is_right: select2, quiz_id: id }});
-          if (choice3) choiceBodyList.push({ choice: { choice: choice3, is_right: select3, quiz_id: id }});
-          if (choice4) choiceBodyList.push({ choice: { choice: choice4, is_right: select4, quiz_id: id }});
-
-          const idList = [id1, id2, id3, id4];
-
-          for ( let i = 0; i < choiceBodyList.length; i++) {
-            const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/" + idList[i];
+          for ( let i = 0; i < choices.length; i++) {
+            const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/" + choices[i].id;
+            console.log(choices);
 
             axios
-              .patch(choiceApiEndpoint, choiceBodyList[i], { headers: headers })
+              .patch(choiceApiEndpoint, { choice: choices[i] }, { headers: headers })
               .then(() => {
                 dispatch(showLoadingAction("Update quiz..."));
                 dispatch(push("/quiz/detail/" + id));

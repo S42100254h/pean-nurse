@@ -11,6 +11,7 @@ type Choice = {
 type Choices = {
   choices: Choice[];
   setChoices: React.Dispatch<React.SetStateAction<{
+    id?: number;
     choice: string;
     is_right: string;
   }[]>>;
@@ -27,13 +28,13 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
 
   const inputChoice = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     const newChoices = [...choices];
-    newChoices[index] = { choice: event.target.value, is_right: newChoices[index].is_right };
+    newChoices[index] = { ...newChoices[index], choice: event.target.value };
     setChoices(newChoices);
   };
 
   const inputIsRight = (event: React.ChangeEvent<{ value: unknown }>, index: number) => {
     const newChoices = [...choices];
-    newChoices[index] = { choice: newChoices[index].choice, is_right: event.target.value as string };
+    newChoices[index] = { ...newChoices[index], is_right: event.target.value as string };
     setChoices(newChoices);
   };
 
