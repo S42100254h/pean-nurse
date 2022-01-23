@@ -4,7 +4,12 @@ import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
 
-export const createQuiz = (quiz: string, choice1: string, select1: string, choice2: string, select2: string, choice3: string, select3: string, choice4: string, select4: string) => {
+type Choice = {
+  choice: string;
+  is_right: string;
+};
+
+export const createQuiz = (quiz: string, choices: Choice[]) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -13,13 +18,7 @@ export const createQuiz = (quiz: string, choice1: string, select1: string, choic
       const headers = { "access-token": auth_token, client: client, uid: uid };
       const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes";
 
-      const choicesList: object[] = [];
-      if (choice1) choicesList.push({ choice: choice1, is_right: select1 });
-      if (choice2) choicesList.push({ choice: choice2, is_right: select2 });
-      if (choice3) choicesList.push({ choice: choice3, is_right: select3 });
-      if (choice4) choicesList.push({ choice: choice4, is_right: select4 });
-
-      const body = { title: quiz, choices: choicesList };
+      const body = { title: quiz, choices: choices };
 
       axios
         .post(apiEndpoint, body, { headers: headers })
