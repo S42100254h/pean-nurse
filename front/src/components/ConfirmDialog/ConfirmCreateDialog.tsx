@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
-import { Choice, Quiz } from "./index";
+import { ChoiceCard, Quiz } from "./index";
 import { createQuiz } from "../../function/quiz";
 import styled from "styled-components";
 
@@ -18,21 +18,19 @@ const Headline = styled.div`
   text-align: center;
 `;
 
+type Choice = {
+  choice: string;
+  is_right: string;
+};
+
 type Props = {
   quiz: string;
-  choice1: string;
-  select1: string;
-  choice2: string;
-  select2: string;
-  choice3: string;
-  select3: string;
-  choice4: string;
-  select4: string;
+  choices: Choice[];
   open: boolean;
   onClose: () => void;
 };
 
-const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4, open, onClose }: Props) => {
+const ConfirmCreateDialog = ({ quiz, choices, open, onClose }: Props) => {
   const dispatch = useDispatch();
   
   return (
@@ -48,15 +46,14 @@ const ConfirmCreateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
             <Headline>以下の内容でクイズを作成してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
-            <Choice choice={choice1} select={select1} label={"選択肢１"} />
-            <Choice choice={choice2} select={select2} label={"選択肢２"} />
-            <Choice choice={choice3} select={select3} label={"選択肢３"} />
-            <Choice choice={choice4} select={select4} label={"選択肢４"} />
+            {choices.map((choice, index) => (
+              <ChoiceCard choice={choice.choice} select={choice.is_right} label={"選択肢" + (index + 1)} key={index} />
+            ))}
             <Spacer size="xxs" />
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(quiz, choice1, select1, choice2, select2, choice3, select3, choice4, select4))}
+              onClick={() => dispatch(createQuiz(quiz, choices))}
             />
           </Container>
         </DialogContent>

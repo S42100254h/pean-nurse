@@ -19,7 +19,7 @@ type Props = {
   label: string;
 };
 
-const Choice = (props: Props) => {
+const ChoiceCard = (props: Props) => {
   return (
     <>
       {props.choice && (
@@ -37,4 +37,4 @@ const Choice = (props: Props) => {
   );
 };
 
-export default Choice;
+export default ChoiceCard;

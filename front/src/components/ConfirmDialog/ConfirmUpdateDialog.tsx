@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
-import { Choice, Quiz } from "./index";
+import { ChoiceCard, Quiz } from "./index";
 import { editQuiz } from "../../function/quiz";
 import styled from "styled-components";
 
@@ -53,10 +53,10 @@ const ConfirmUpdateDialog = ({ quiz, choice1, select1, choice2, select2, choice3
             <Headline>以下の内容でクイズを更新してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
-            <Choice choice={choice1} select={select1} label={"選択肢１"} />
-            <Choice choice={choice2} select={select2} label={"選択肢２"} />
-            <Choice choice={choice3} select={select3} label={"選択肢３"} />
-            <Choice choice={choice4} select={select4} label={"選択肢４"} />
+            <ChoiceCard choice={choice1} select={select1} label={"選択肢１"} />
+            <ChoiceCard choice={choice2} select={select2} label={"選択肢２"} />
+            <ChoiceCard choice={choice3} select={select3} label={"選択肢３"} />
+            <ChoiceCard choice={choice4} select={select4} label={"選択肢４"} />
             <Spacer size="xxs" />
             <PrimaryButton
               label={"クイズを更新する"}
