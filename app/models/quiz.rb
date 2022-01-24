@@ -13,8 +13,8 @@ class Quiz < ApplicationRecord
   end
 
   def update_choices(choices)
-    choices.each_with_index do |choice_item, index|
-      self.choices[index].update(choice_item.permit!)
+    choices.each do |choice_item|
+      self.choices.find(choice_item["id"]).update(choice_item.permit!)
     end
   end
 end
