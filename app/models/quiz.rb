@@ -11,4 +11,10 @@ class Quiz < ApplicationRecord
       choice.save!
     end
   end
+
+  def update_choices(choices)
+    choices.each_with_index do |choice_item, index|
+      self.choices[index].update(choice_item.permit!)
+    end
+  end
 end
