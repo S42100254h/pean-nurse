@@ -13,7 +13,7 @@ class Quiz < ApplicationRecord
   end
 
   def update_choices(choices)
-    choices_with_id = choices.select {|choice| choice["id"] != nil }
+    choices_with_id = choices.reject {|choice| choice["id"].nil? }
     choices_with_id.each do |choice_item|
       self.choices.find(choice_item["id"]).update(choice_item.permit!)
     end
@@ -28,6 +28,16 @@ class Quiz < ApplicationRecord
       delete_choice_ids.each do |delete_choice_id|
         choice = Choice.find(delete_choice_id)
         choice.destroy!
+      end
+    end
+  end
+
+  def add_choices(choices)
+    choices_without_id = choices.select {|choice| choice["id"].nil? }
+    if choices_without_id != []
+      choices_without_id.each do |choice_without_id|
+        choice = self.choices.new(choice_without_id.permit!)
+        choice.save!
       end
     end
   end
