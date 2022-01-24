@@ -17,4 +17,17 @@ class Quiz < ApplicationRecord
       self.choices.find(choice_item["id"]).update(choice_item.permit!)
     end
   end
+
+  def delete_choices(choices)
+    prev_choice_ids = self.choices.map {|prev_choice| prev_choice["id"] }
+    new_choice_ids = choices.map {|new_choice| new_choice["id"] }
+    delete_choice_ids = prev_choice_ids - new_choice_ids
+
+    if delete_choice_ids != []
+      delete_choice_ids.each do |delete_choice_id|
+        choice = Choice.find(delete_choice_id)
+        choice.destroy!
+      end
+    end
+  end
 end
