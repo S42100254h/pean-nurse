@@ -31,7 +31,10 @@ class Api::V1::QuizzesController < Api::V1::ApiController
       ActiveRecord::Base.transaction do
         @quiz.update!(quiz_params)
         choices = @quiz.update_choices(params[:choices])
-        render json: { quiz: @quiz, choices: choices }
+
+        delete_choices = @quiz.delete_choices(params[:choices])
+
+        render json: { quiz: @quiz, choices: choices, delete_choices: delete_choices }
       end
     else
       @quiz.update!(quiz_params)
