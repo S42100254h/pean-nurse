@@ -27,8 +27,16 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   def update
-    @quiz.update!(quiz_params)
-    render json: @quiz
+    if params[:choices]
+      ActiveRecord::Base.transaction do
+        @quiz.update!(quiz_params)
+        choices = @quiz.update_choices(params[:choices])
+        render json: { quiz: @quiz, choices: choices }
+      end
+    else
+      @quiz.update!(quiz_params)
+      render json: @quiz
+    end
   end
 
   def destroy
