@@ -48,33 +48,19 @@ export const editQuiz = (quiz: string, choices: Choice[], id: string) => {
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
       const headers = { "access-token": auth_token, client: client, uid: uid };
-      const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
-      const quizBody = { title: quiz };
+      const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
+      const body = { title: quiz, choices: choices };
 
       axios
-        .patch(quizApiEndpoint, quizBody, { headers: headers })
+        .patch(apiEndpoint, body, { headers: headers })
         .then(() => {
-          for ( let i = 0; i < choices.length; i++) {
-            const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/" + choices[i].id;
-            console.log(choices);
+          dispatch(showLoadingAction("Update quiz..."));
+          dispatch(push("/quiz/detail/" + id));
 
-            axios
-              .patch(choiceApiEndpoint, { choice: choices[i] }, { headers: headers })
-              .then(() => {
-                dispatch(showLoadingAction("Update quiz..."));
-                dispatch(push("/quiz/detail/" + id));
-
-                setTimeout(() => {
-                  dispatch(hideLoadingAction());
-                  dispatch(setNotificationAction({ variant: "success", message: "クイズの更新に成功しました。" }));
-                }, 1000);
-              })
-              .catch(() => {
-                setTimeout(() => {
-                  dispatch(setNotificationAction({ variant: "error", message: "問題の更新に成功しましたが、選択肢の更新に失敗しました。" }));
-                }, 400);
-              });
-          }
+          setTimeout(() => {
+            dispatch(hideLoadingAction());
+            dispatch(setNotificationAction({ variant: "success", message: "クイズの更新に成功しました。" }));
+          }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
