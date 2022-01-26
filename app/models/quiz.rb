@@ -20,8 +20,8 @@ class Quiz < ApplicationRecord
   end
 
   def delete_choices(choices)
-    prev_choice_ids = self.choices.map {|prev_choice| prev_choice["id"] }
-    new_choice_ids = choices.map {|new_choice| new_choice["id"] }
+    prev_choice_ids = self.choices.map {|prev_choice| prev_choice["id"].to_i }
+    new_choice_ids = choices.map {|new_choice| new_choice["id"].to_i }
     delete_choice_ids = prev_choice_ids - new_choice_ids
 
     if delete_choice_ids != []
