@@ -111,17 +111,37 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
 
   describe "PATCH /api/v1/quizzes/:id" do
     subject { patch(api_v1_quiz_path(quiz_id), params: params, headers: headers) }
+  
+    describe "normal scenario" do
+      context "update quiz without choices" do
+        let(:headers) { current_admin.create_new_auth_token }
+        let(:current_admin) { create(:admin) }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current } } }
+        let(:quiz_id) { quiz.id }
+        let(:quiz) { create(:quiz) }
+      
+        it "quiz is updated" do
+          expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
+                                not_change { quiz.reload.created_at }
+          expect(response).to have_http_status(200)
+        end
+      end
 
-    let(:headers) { current_admin.create_new_auth_token }
-    let(:current_admin) { create(:admin) }
-    let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current } } }
-    let(:quiz_id) { quiz.id }
-    let(:quiz) { create(:quiz) }
+      context "update quiz with choice" do
+        let(:headers) { current_admin.create_new_auth_token }
+        let(:current_admin) { create(:admin) }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id)] } }
+        let(:quiz_id) { quiz.id }
+        let(:quiz) { create(:quiz) }
+        let!(:choice) { create(:choice, quiz_id: quiz_id) }
 
-    it "quiz is updated" do
-      expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
-                            not_change { quiz.reload.created_at }
-      expect(response).to have_http_status(200)
+        it "quiz and choice is updated" do
+          expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
+                                change { choice.reload.choice }.from(choice.choice).to(params[:choices][0][:choice]) &
+                                not_change { quiz.reload.created_at }
+          expect(response).to have_http_status(200)
+        end
+      end
     end
   end
 
