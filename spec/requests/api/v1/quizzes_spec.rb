@@ -157,6 +157,21 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
           expect(response).to have_http_status(200)
         end
       end
+
+      context "update quiz without existing chioce" do
+        let(:headers) { current_admin.create_new_auth_token }
+        let(:current_admin) { create(:admin) }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choices[0].id)] } }
+        let(:quiz_id) { quiz.id }
+        let(:quiz) { create(:quiz) }
+        let!(:choices) { create_list(:choice, 2, quiz_id: quiz_id) }
+        
+        it " quiz is updated and existing choice is deleted" do
+          expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
+                                change { Choice.count }.by(-1)
+          expect(response).to have_http_status(200)
+        end
+      end
     end
   end
 
