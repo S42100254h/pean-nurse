@@ -142,6 +142,21 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
           expect(response).to have_http_status(200)
         end
       end
+
+      context "update quiz with new choices" do
+        let(:headers) { current_admin.create_new_auth_token }
+        let(:current_admin) { create(:admin) }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id), attributes_for_list(:choice, 2)] } }
+        let(:quiz_id) { quiz.id }
+        let(:quiz) { create(:quiz) }
+        let!(:choice) { create(:choice, quiz_id: quiz_id) }
+
+        it " quiz is updated and new choices are created" do
+          expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
+                                change { Choice.count }.by(2)
+          expect(response).to have_http_status(200)
+        end
+      end
     end
   end
 
