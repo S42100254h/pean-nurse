@@ -51,12 +51,12 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
 
     describe "exception scenario" do
       context "send correct quiz information with incorrect choices" do
-        let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: [attributes_for_list(:choice, 2), attributes_for(:choice, id: choice.id) ] } }
+        let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: [attributes_for_list(:choice, 2), attributes_for(:choice, id: choice.id)] } }
         let(:current_admin) { create(:admin) }
         let(:headers) { current_admin.create_new_auth_token }
         let!(:category_ids) { category.id }
         let!(:category) { create(:category) }
-        let!(:choice) { create(:choice)}
+        let!(:choice) { create(:choice) }
 
         it "Quiz, CategoryQuizRelation and choices are not created (rollback works)" do
           expect { subject }.to raise_error(ActiveRecord::RecordNotUnique) &
@@ -111,7 +111,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
 
   describe "PATCH /api/v1/quizzes/:id" do
     subject { patch(api_v1_quiz_path(quiz_id), params: params, headers: headers) }
-  
+
     describe "normal scenario" do
       context "update quiz without choices" do
         let(:headers) { current_admin.create_new_auth_token }
@@ -119,7 +119,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
         let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current } } }
         let(:quiz_id) { quiz.id }
         let(:quiz) { create(:quiz) }
-      
+
         it "quiz is updated" do
           expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
                                 not_change { quiz.reload.created_at }
@@ -165,7 +165,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
         let(:quiz_id) { quiz.id }
         let(:quiz) { create(:quiz) }
         let!(:choices) { create_list(:choice, 2, quiz_id: quiz_id) }
-        
+
         it " quiz is updated and existing choice is deleted" do
           expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
                                 change { Choice.count }.by(-1)

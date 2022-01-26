@@ -426,3 +426,5 @@ Rails/BulkChangeTable:
 Rails/ReversibleMigration:
   Enabled: false
   
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
