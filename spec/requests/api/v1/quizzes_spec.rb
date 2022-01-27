@@ -161,7 +161,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
         let(:quiz) { create(:quiz) }
         let!(:choices) { create_list(:choice, 2, quiz_id: quiz.id) }
 
-        it " quiz is updated and existing choice is deleted" do
+        it "quiz is updated and existing choice is deleted" do
           expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
                                 change { Choice.count }.by(-1)
           expect(response).to have_http_status(200)
