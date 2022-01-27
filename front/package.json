@@ -38,6 +38,7 @@
     "test": "jest",
     "lint": "eslint --ext .ts,.js,.tsx .",
     "fix": "eslint --ext .ts,.js,.tsx . --fix",
+    "format": "prettier --write .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
