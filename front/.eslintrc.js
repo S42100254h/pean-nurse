@@ -6,6 +6,7 @@ module.exports = {
     "es6": true,
     "jest/globals": true,
   },
+  "extends": ["eslint:recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
