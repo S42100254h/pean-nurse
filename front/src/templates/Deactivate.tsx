@@ -16,7 +16,7 @@ const TextContainer = styled.div`
   padding: 10px;
   border: 1px solid #b0c4de;
   border-radius: 4px;
-  background-color: ${props => props.theme.palette.primary.light};
+  background-color: ${(props) => props.theme.palette.primary.light};
 `;
 
 const Heading = styled.h2`
@@ -36,9 +36,12 @@ const Deactivate = () => {
 
   const [text, setText] = useState("");
 
-  const inputText = useCallback((event) => {
-    setText(event.target.value);
-  }, [setText]);
+  const inputText = useCallback(
+    (event) => {
+      setText(event.target.value);
+    },
+    [setText]
+  );
 
   return (
     <Container>
@@ -47,7 +50,10 @@ const Deactivate = () => {
       <TextContainer>
         <h2>退会手続きの前にご確認ください</h2>
         <Spacer size="xxs" />
-        <p>アカウントを削除すると、これまでのデータが<Red>すべて削除されます</Red></p>
+        <p>
+          アカウントを削除すると、これまでのデータが
+          <Red>すべて削除されます</Red>
+        </p>
       </TextContainer>
       <Spacer size="xxs" />
       <p>よろしければ、退会理由を教えてください。（任意：255文字以内）</p>

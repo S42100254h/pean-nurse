@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { TextInput, PrimaryButton, SecondaryButton, Spacer } from "../components/UIkit";
+import {
+  TextInput,
+  PrimaryButton,
+  SecondaryButton,
+  Spacer,
+} from "../components/UIkit";
 import { deleteUser } from "../reducks/users/operations";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { editUserInfoByAdmin } from "../function/user";
@@ -33,17 +38,18 @@ type MatchParams = {
 const UserDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
-  
+
   const [name, setName] = useState(""),
     [email, setEmail] = useState(""),
     [open, setOpen] = useState(false);
-  
+
   useEffect(() => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
-      const apiEndpoint = process.env.REACT_APP_API_URL + "users/" + match.params.id;
+      const apiEndpoint =
+        process.env.REACT_APP_API_URL + "users/" + match.params.id;
       let isMounted = true;
 
       axios
@@ -61,17 +67,25 @@ const UserDetail = () => {
           }
         });
 
-      return () => { isMounted = false; };
+      return () => {
+        isMounted = false;
+      };
     }
   }, []);
-  
-  const inputName = useCallback((event) => {
-    setName(event.target.value);
-  }, [setName]);
-  
-  const inputMail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+
+  const inputName = useCallback(
+    (event) => {
+      setName(event.target.value);
+    },
+    [setName]
+  );
+
+  const inputMail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
 
   return (
     <Container>
@@ -102,7 +116,9 @@ const UserDetail = () => {
         label={"ユーザー情報を更新する"}
         fullWidth={true}
         disabled={!name || !email}
-        onClick={() => dispatch(editUserInfoByAdmin(match.params.id, name, email))}
+        onClick={() =>
+          dispatch(editUserInfoByAdmin(match.params.id, name, email))
+        }
       />
       <Spacer size="xs" />
       <SecondaryButton

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Root = styled.div`
   bottom: 0;
   height: 300px;
-  background-color: ${props => props.theme.palette.basic.dark};
+  background-color: ${(props) => props.theme.palette.basic.dark};
   box-shadow: 0 0 1px grey;
   position: relative;
 `;
@@ -25,18 +25,13 @@ const Text = styled.div`
   width: fit-content;
   &:hover {
     cursor: pointer;
-    color: ${props => props.theme.palette.primary.main};
-  };
+    color: ${(props) => props.theme.palette.primary.main};
+  }
 `;
 const Footer = () => {
   return (
     <Root>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justifyContent="flex-end"
-      >
+      <Grid container spacing={2} direction="row" justifyContent="flex-end">
         <Grid item sm={2}>
           <Heading>PeAN</Heading>
           <Text>About</Text>

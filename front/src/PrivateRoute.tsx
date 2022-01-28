@@ -20,7 +20,7 @@ const PrivateRoute = ({ ...props }) => {
   if (!isSignedIn) {
     return <></>;
   } else {
-    return  <Route { ...props } />; 
+    return <Route {...props} />;
   }
 };
 

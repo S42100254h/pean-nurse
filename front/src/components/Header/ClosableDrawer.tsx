@@ -1,5 +1,11 @@
 import React from "react";
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core";
 import AppsIcon from "@material-ui/icons/Apps";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -30,17 +36,17 @@ const ClosableDrawer = (props: Props) => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const isSignedIn = getSignedIn(selector);
-  
+
   const selectMenu = (path: string) => {
     dispatch(push(path));
     props.onClose();
   };
-  
+
   const handleSignOut = () => {
     dispatch(signOut());
     props.onClose();
   };
-  
+
   const handleSignIn = () => {
     dispatch(push("/signin"));
     props.onClose();
@@ -69,7 +75,7 @@ const ClosableDrawer = (props: Props) => {
       value: "/help",
     },
   ];
-  
+
   return (
     <Container>
       <Drawer
@@ -83,7 +89,11 @@ const ClosableDrawer = (props: Props) => {
         <div>
           <List>
             {menus.map((menu) => (
-              <ListItem button key={menu.id} onClick={() => menu.func(menu.value)}>
+              <ListItem
+                button
+                key={menu.id}
+                onClick={() => menu.func(menu.value)}
+              >
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.label} />
               </ListItem>

@@ -1,19 +1,35 @@
-import { deleteUserImageAction, editUserInfoAction, editUserImageAction, signUpAction, signInAction, signOutAction } from "./actions";
-import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
+import {
+  deleteUserImageAction,
+  editUserInfoAction,
+  editUserImageAction,
+  signUpAction,
+  signInAction,
+  signOutAction,
+} from "./actions";
+import {
+  isValidEmailFormat,
+  isValidRequiredInput,
+  isValidPassword,
+} from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
 
-export const signUp = (name: string, email: string, password: string, password_confirmation: string) => {
+export const signUp = (
+  name: string,
+  email: string,
+  password: string,
+  password_confirmation: string
+) => {
   return async (dispatch: Dispatch) => {
-    if(!isValidEmailFormat(email)) {
+    if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
-    } 
+    }
 
-    if(!isValidRequiredInput(name, email, password)) {
+    if (!isValidRequiredInput(name, email, password)) {
       alert("ユーザー名かメールアドレス、パスワードが未入力です");
       return false;
     }
@@ -22,14 +38,19 @@ export const signUp = (name: string, email: string, password: string, password_c
       alert("パスワードは６文字以上で入力してください");
       return false;
     }
-    
+
     if (!isValidPassword(password, password_confirmation)) {
       alert("パスワードとパスワード（確認用）が一致しません");
       return false;
     }
 
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
-    const body = { name: name, email: email, password: password, password_confirmation: password_confirmation };
+    const body = {
+      name: name,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    };
 
     axios
       .post(apiEndpoint, body)
@@ -44,12 +65,22 @@ export const signUp = (name: string, email: string, password: string, password_c
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(setNotificationAction({ variant: "success", message: "ユーザー登録に成功しました。"}));
+          dispatch(
+            setNotificationAction({
+              variant: "success",
+              message: "ユーザー登録に成功しました。",
+            })
+          );
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "ユーザー登録に失敗しました。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "error",
+              message: "ユーザー登録に失敗しました。",
+            })
+          );
         }, 400);
       });
   };
@@ -57,17 +88,17 @@ export const signUp = (name: string, email: string, password: string, password_c
 
 export const signIn = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
-    if(!isValidEmailFormat(email)) {
+    if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
     }
 
-    if(!isValidRequiredInput(email, password)) {
+    if (!isValidRequiredInput(email, password)) {
       alert("メールアドレスかパスワードが未入力です");
       return false;
     }
 
-    if(password.length < 6) {
+    if (password.length < 6) {
       alert("パスワードは６文字以上で入力してください");
       return false;
     }
@@ -81,19 +112,29 @@ export const signIn = (email: string, password: string) => {
         localStorage.setItem("access-token", resp.headers["access-token"]);
         localStorage.setItem("client", resp.headers["client"]);
         localStorage.setItem("uid", resp.headers["uid"]);
-        
+
         dispatch(signInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/dashboard"));
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(setNotificationAction({ variant: "success", message: "サインインしました。"}));
+          dispatch(
+            setNotificationAction({
+              variant: "success",
+              message: "サインインしました。",
+            })
+          );
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "サインインに失敗しました。入力内容をご確認ください。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "error",
+              message: "サインインに失敗しました。入力内容をご確認ください。",
+            })
+          );
         }, 400);
       });
   };
@@ -120,21 +161,31 @@ export const signOut = () => {
           dispatch(showLoadingAction("Sign out..."));
           localStorage.clear();
           dispatch(push("/"));
-          
+
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "サインアウトしました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "サインアウトに失敗しました。",
+              })
+            );
           }, 400);
         });
     } else {
       dispatch(push("/signin"));
     }
-  }; 
+  };
 };
 
 export const deleteUser = () => {
@@ -144,7 +195,7 @@ export const deleteUser = () => {
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
- 
+
       axios
         .delete(apiEndpoint, {
           headers: {
@@ -158,15 +209,25 @@ export const deleteUser = () => {
           dispatch(showLoadingAction("Delete user..."));
           dispatch(push("/"));
           localStorage.clear();
-          
+
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を削除しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "ユーザー情報を削除しました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の削除に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "ユーザー情報の削除に失敗しました。",
+              })
+            );
           }, 400);
         });
     } else {
@@ -201,15 +262,25 @@ export const editUserInfo = (name: string, email: string) => {
           dispatch(editUserInfoAction(resp.data.data));
           dispatch(showLoadingAction("Update ..."));
           dispatch(push("/dashboard"));
-          
+
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を更新しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "ユーザー情報を更新しました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の更新に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "ユーザー情報の更新に失敗しました。",
+              })
+            );
           }, 400);
         });
     } else {
@@ -242,12 +313,22 @@ export const editImage = (image: File) => {
           dispatch(editUserImageAction(resp.data.data));
 
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "success", message: "画像を更新しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "画像を更新しました。",
+              })
+            );
           }, 0);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "画像の更新に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "画像の更新に失敗しました。",
+              })
+            );
           }, 400);
         });
     } else {
@@ -265,7 +346,7 @@ export const deleteImage = () => {
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { image: "" };
-      
+
       axios
         .patch(apiEndpoint, body, {
           headers: {
@@ -276,14 +357,24 @@ export const deleteImage = () => {
         })
         .then(() => {
           dispatch(deleteUserImageAction());
-          
+
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "success", message: "画像をデフォルトに変更しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "画像をデフォルトに変更しました。",
+              })
+            );
           }, 0);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "画像の更新に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "画像の更新に失敗しました。",
+              })
+            );
           }, 400);
         });
     } else {
@@ -292,31 +383,41 @@ export const deleteImage = () => {
   };
 };
 
-export const editPassword = (current_password: string, password: string, password_confirmation: string) => {
+export const editPassword = (
+  current_password: string,
+  password: string,
+  password_confirmation: string
+) => {
   return async (dispatch: Dispatch) => {
-    if(!isValidRequiredInput(current_password, password, password_confirmation)) {
+    if (
+      !isValidRequiredInput(current_password, password, password_confirmation)
+    ) {
       alert("未入力の項目があります");
       return false;
     }
-    
+
     if (!isValidPassword(password, password_confirmation)) {
       alert("新しいパスワードと新しいパスワード（確認用）が一致しません");
       return false;
     }
 
-    if(password.length < 6) {
+    if (password.length < 6) {
       alert("パスワードは６文字以上で入力してください");
       return false;
     }
-    
+
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
 
-      const body = { current_password: current_password, password: password, password_confirmation: password_confirmation };
-      
+      const body = {
+        current_password: current_password,
+        password: password,
+        password_confirmation: password_confirmation,
+      };
+
       axios
         .put(apiEndpoint, body, {
           headers: {
@@ -331,12 +432,23 @@ export const editPassword = (current_password: string, password: string, passwor
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "パスワードを更新しました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "パスワードの更新に失敗しました。入力内容をご確認ください。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message:
+                  "パスワードの更新に失敗しました。入力内容をご確認ください。",
+              })
+            );
           }, 400);
         });
     } else {
@@ -358,22 +470,39 @@ export const forgetPassword = (email: string) => {
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(setNotificationAction({ variant: "success", message: "メールを送信しました。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "success",
+              message: "メールを送信しました。",
+            })
+          );
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "メールの送信に失敗しました。メールアドレスをご確認ください。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "error",
+              message:
+                "メールの送信に失敗しました。メールアドレスをご確認ください。",
+            })
+          );
         }, 400);
       });
   };
 };
 
-export const resetPassword = (password: string, password_confirmation: string) => {
+export const resetPassword = (
+  password: string,
+  password_confirmation: string
+) => {
   return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
-    const body = { password: password, password_confirmation: password_confirmation };
-    
+    const body = {
+      password: password,
+      password_confirmation: password_confirmation,
+    };
+
     const params = new URLSearchParams(window.location.search);
     const auth_token = params.get("access-token") || "";
     const client = params.get("client") || "";
@@ -393,12 +522,23 @@ export const resetPassword = (password: string, password_confirmation: string) =
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(setNotificationAction({ variant: "success", message: "パスワードを再設定しました。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "success",
+              message: "パスワードを再設定しました。",
+            })
+          );
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "error",
+              message:
+                "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。",
+            })
+          );
         }, 400);
       });
   };
@@ -423,14 +563,16 @@ export const listenAuthState = () => {
         .then((response) => {
           const userData = response.data;
 
-          dispatch(signInAction({
-            id: userData.id,
-            isSignedIn: true,
-            uid: userData.uid,
-            name: userData.name,
-            image: userData.image,
-            email: userData.email,
-          }));
+          dispatch(
+            signInAction({
+              id: userData.id,
+              isSignedIn: true,
+              uid: userData.uid,
+              name: userData.name,
+              image: userData.image,
+              email: userData.email,
+            })
+          );
         })
         .catch((error) => {
           alert("サインインに失敗しました。");
@@ -460,15 +602,17 @@ export const redirectToDashboard = () => {
         .then((response) => {
           const userData = response.data;
 
-          dispatch(signInAction({
-            id: userData.id,
-            isSignedIn: true,
-            uid: userData.uid,
-            name: userData.name,
-            image: userData.image,
-            email: userData.email,
-          }));
-          
+          dispatch(
+            signInAction({
+              id: userData.id,
+              isSignedIn: true,
+              uid: userData.uid,
+              name: userData.name,
+              image: userData.image,
+              email: userData.email,
+            })
+          );
+
           dispatch(push("/dashboard"));
         });
     }

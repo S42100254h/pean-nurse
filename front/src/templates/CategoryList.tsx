@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, fetchCategories } from "../reducks/categories/operations";
+import {
+  deleteCategory,
+  fetchCategories,
+} from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { SecondaryButton } from "../components/UIkit";
@@ -30,14 +33,14 @@ const CategoryList = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
-  
+
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
 
   const [open, setOpen] = useState(false),
     [selectedId, setSelectedId] = useState<string | number>("");
-  
+
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
     { field: "name", headerName: "カテゴリー名", width: 400 },
@@ -45,7 +48,7 @@ const CategoryList = () => {
       field: "delete",
       headerName: "削除",
       width: 120,
-      renderCell: (params: GridCellParams) =>
+      renderCell: (params: GridCellParams) => (
         <SecondaryButton
           label={"削除"}
           rowId={params.id}
@@ -54,16 +57,20 @@ const CategoryList = () => {
             setOpen(true);
           }}
         />
+      ),
     },
   ];
 
   const sortedCategories = categories.sort((a, b) => {
     // ascending order by updated_at
-    return (a.created_at > b.created_at) ? -1 : 1;
+    return a.created_at > b.created_at ? -1 : 1;
   });
 
-  const rows = sortedCategories.map((category) => ({ id: category.id, name: category.name }));
-  
+  const rows = sortedCategories.map((category) => ({
+    id: category.id,
+    name: category.name,
+  }));
+
   return (
     <Container>
       <Heading>カテゴリー一覧</Heading>

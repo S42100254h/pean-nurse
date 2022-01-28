@@ -30,22 +30,28 @@ const CreateQuiz = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
-  
+
   type Choice = {
     choice: string;
     is_right: string;
   };
 
   const [quiz, setQuiz] = useState(""),
-    [choices, setChoices] = useState<Choice[]>([{choice: "", is_right: ""}, {choice: "", is_right: ""}]),
+    [choices, setChoices] = useState<Choice[]>([
+      { choice: "", is_right: "" },
+      { choice: "", is_right: "" },
+    ]),
     [open, setOpen] = useState(false);
 
-  const inputQuiz = useCallback((event) => {
-    setQuiz(event.target.value);
-  }, [setQuiz]);
+  const inputQuiz = useCallback(
+    (event) => {
+      setQuiz(event.target.value);
+    },
+    [setQuiz]
+  );
 
   const handleDialogClose = () => setOpen(false);
-  
+
   const handleDialogOpen = () => {
     const isRightList = choices.map((choice) => choice.is_right);
     if (![...isRightList].includes("true")) {
@@ -61,7 +67,7 @@ const CreateQuiz = () => {
 
   const isDisabled = (args: Choice[]) => {
     let disabled = true;
-    for (let i = 0; i < args.length; i=(i+1)|0) {
+    for (let i = 0; i < args.length; i = (i + 1) | 0) {
       if (args[i].choice === "" || args[i].is_right === "") {
         disabled = false;
       }
@@ -74,13 +80,11 @@ const CreateQuiz = () => {
     { label: "right", value: "true", id: "right" },
   ];
 
-  const options = categories.map((category) => (
-    {
-      id: category.id,
-      value: category.id,
-      label: category.name,
-    }
-  ));
+  const options = categories.map((category) => ({
+    id: category.id,
+    value: category.id,
+    label: category.name,
+  }));
 
   useEffect(() => {
     dispatch(fetchCategories());

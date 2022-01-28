@@ -2,7 +2,11 @@ import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import { useDispatch, useSelector } from "react-redux";
 import { closeNotificationAction } from "../../reducks/notification/actions";
-import { getNotificationIsOpen, getNotificationVariant, getNotificationMessage } from "../../reducks/notification/selectors";
+import {
+  getNotificationIsOpen,
+  getNotificationVariant,
+  getNotificationMessage,
+} from "../../reducks/notification/selectors";
 import { NotificationSnackbar } from "./index";
 import { RootState } from "../../types/entity/rootState";
 import styled from "styled-components";
@@ -18,7 +22,7 @@ const Notification = () => {
   const isOpen = getNotificationIsOpen(selector);
   const variant = getNotificationVariant(selector);
   const message = getNotificationMessage(selector);
-  
+
   return (
     <StyledSnackbar
       anchorOrigin={{
@@ -29,7 +33,11 @@ const Notification = () => {
       autoHideDuration={3000}
       onClose={() => dispatch(closeNotificationAction())}
     >
-      <NotificationSnackbar onClose={() => dispatch(closeNotificationAction())} variant={variant} message={message} />
+      <NotificationSnackbar
+        onClose={() => dispatch(closeNotificationAction())}
+        variant={variant}
+        message={message}
+      />
     </StyledSnackbar>
   );
 };

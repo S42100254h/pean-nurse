@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { PrimaryButton, SecondaryButton, SelectBox, Spacer, TextInput } from "../../components/UIkit";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  SelectBox,
+  Spacer,
+  TextInput,
+} from "../../components/UIkit";
 import { MenuItem } from "@material-ui/core";
 import styled from "styled-components";
 
@@ -10,11 +16,15 @@ type Choice = {
 
 type Choices = {
   choices: Choice[];
-  setChoices: React.Dispatch<React.SetStateAction<{
-    id?: number;
-    choice: string;
-    is_right: string;
-  }[]>>;
+  setChoices: React.Dispatch<
+    React.SetStateAction<
+      {
+        id?: number;
+        choice: string;
+        is_right: string;
+      }[]
+    >
+  >;
 };
 
 const ButtonWrapper = styled.div`
@@ -23,18 +33,27 @@ const ButtonWrapper = styled.div`
   float: right;
 `;
 
-const SetChoicesArea = ({choices, setChoices}: Choices) => {
+const SetChoicesArea = ({ choices, setChoices }: Choices) => {
   const [index, setIndex] = useState(0);
 
-  const inputChoice = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
+  const inputChoice = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    index: number
+  ) => {
     const newChoices = [...choices];
     newChoices[index] = { ...newChoices[index], choice: event.target.value };
     setChoices(newChoices);
   };
 
-  const inputIsRight = (event: React.ChangeEvent<{ value: unknown }>, index: number) => {
+  const inputIsRight = (
+    event: React.ChangeEvent<{ value: unknown }>,
+    index: number
+  ) => {
     const newChoices = [...choices];
-    newChoices[index] = { ...newChoices[index], is_right: event.target.value as string };
+    newChoices[index] = {
+      ...newChoices[index],
+      is_right: event.target.value as string,
+    };
     setChoices(newChoices);
   };
 
@@ -44,7 +63,7 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
     setChoices(newChoices);
     setIndex(newChoices.length);
   };
-  
+
   const deleteChoice = (deleteIndex: number) => {
     const newChoices = choices.filter((_, index) => index !== deleteIndex);
     setChoices(newChoices);
@@ -62,7 +81,7 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
   return (
     <div>
       <div>
-        {choices.length > 0 && (
+        {choices.length > 0 &&
           choices.map((choice, index) => (
             <div key={index}>
               <TextInput
@@ -96,13 +115,9 @@ const SetChoicesArea = ({choices, setChoices}: Choices) => {
               </ButtonWrapper>
               <Spacer size="xs" />
             </div>
-          ))
-        )}
+          ))}
       </div>
-      <PrimaryButton
-        label="追加"
-        onClick={() => addChoice()}
-      />
+      <PrimaryButton label="追加" onClick={() => addChoice()} />
     </div>
   );
 };

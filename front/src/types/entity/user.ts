@@ -1,7 +1,7 @@
 import { Image } from "../entity/image";
 
 export type User = {
-  id: string | number
+  id: string | number;
   isSignedIn: boolean;
   uid: string;
   name: string;

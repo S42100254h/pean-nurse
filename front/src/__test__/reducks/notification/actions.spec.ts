@@ -1,21 +1,19 @@
 import {
   closeNotificationAction,
   setNotificationAction,
-} from "../../../reducks/notification/actions"; 
+} from "../../../reducks/notification/actions";
 
-describe ("actions.tsのテスト", () => {
-  it ("closeNotificationActionのテスト", () => {
+describe("actions.tsのテスト", () => {
+  it("closeNotificationActionのテスト", () => {
     const action = closeNotificationAction();
 
-    expect(action).toStrictEqual(
-      {
-        type: "CLOSE_NOTIFICATION",
-        payload: undefined,
-      }
-    );
+    expect(action).toStrictEqual({
+      type: "CLOSE_NOTIFICATION",
+      payload: undefined,
+    });
   });
 
-  it ("setNotificationActionのテスト", () => {
+  it("setNotificationActionのテスト", () => {
     type Notification = {
       variant: "success" | "error";
       message: string | undefined;
@@ -24,11 +22,9 @@ describe ("actions.tsのテスト", () => {
     const dummy: Notification = { variant: "success", message: "test" };
     const action = setNotificationAction(dummy);
 
-    expect(action).toStrictEqual(
-      {
-        type: "SET_NOTIFICATION",
-        payload: dummy,
-      }
-    );
+    expect(action).toStrictEqual({
+      type: "SET_NOTIFICATION",
+      payload: dummy,
+    });
   });
 });

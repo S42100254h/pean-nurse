@@ -26,7 +26,6 @@ type Props = {
   onClose: () => void;
   onClickStop: () => void;
   onClickProceed: () => void;
-  
 };
 
 const Confirmation = (props: Props) => {
@@ -44,14 +43,17 @@ const Confirmation = (props: Props) => {
             <Spacer size="xs" />
             <h2>退会手続きの前にご確認ください</h2>
             <Spacer size="xxs" />
-            <p>アカウントを削除すると、これまでのデータが<Red>すべて削除されます</Red></p>
+            <p>
+              アカウントを削除すると、これまでのデータが
+              <Red>すべて削除されます</Red>
+            </p>
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
           <Spacer size="xs" />
           <PrimaryButton
             label={"退会をやめる"}
             fullWidth={true}
-            onClick={props.onClickStop} 
+            onClick={props.onClickStop}
           />
           <Spacer size="xs" />
           <SecondaryButton

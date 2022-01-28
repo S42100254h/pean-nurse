@@ -18,7 +18,7 @@ type Props = {
 };
 
 const PasswordInput = (props: Partial<Props>) => {
-  const [showPassword, setShowPassword] = useState(false);  
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPasswordToggle = () => {
     setShowPassword(!showPassword);
@@ -38,7 +38,7 @@ const PasswordInput = (props: Partial<Props>) => {
       onChange={props.onChange}
       onKeyDown={props.onKeyDown}
       InputProps={{
-        endAdornment:
+        endAdornment: (
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
@@ -48,6 +48,7 @@ const PasswordInput = (props: Partial<Props>) => {
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
+        ),
       }}
     />
   );

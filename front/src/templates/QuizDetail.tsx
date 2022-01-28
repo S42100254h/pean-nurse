@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  Spacer,
+  TextInput,
+} from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { SetChoicesArea } from "../components/SetChoicesArea.tsx";
 import { DeleteDialog } from "../components/DeleteDialog";
@@ -47,35 +52,38 @@ const QuizDetail = () => {
     [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
-    const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
+    const quizApiEndpoint =
+      process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
+    const choiceApiEndpoint =
+      process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
     let isMounted = true;
-    
-    axios
-      .get(quizApiEndpoint)
-      .then((resp) => {
-        if (isMounted) {
-          setQuiz(resp.data.title);
-        }
-      });
-    
-    axios
-      .get(choiceApiEndpoint)
-      .then((resp) => {
-        if (isMounted) {
-          setChoices(resp.data);
-        }
-      });
 
-    return () => { isMounted = false; };
+    axios.get(quizApiEndpoint).then((resp) => {
+      if (isMounted) {
+        setQuiz(resp.data.title);
+      }
+    });
+
+    axios.get(choiceApiEndpoint).then((resp) => {
+      if (isMounted) {
+        setChoices(resp.data);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  const inputQuiz = useCallback((event) => {
-    setQuiz(event.target.value);
-  }, [setQuiz]);
+  const inputQuiz = useCallback(
+    (event) => {
+      setQuiz(event.target.value);
+    },
+    [setQuiz]
+  );
 
   const handleDialogClose = () => setOpen(false);
-  
+
   const handleDialogOpen = () => {
     const isRightList = choices.map((choice) => choice.is_right.toString());
     if (![...isRightList].includes("true")) {
@@ -90,7 +98,7 @@ const QuizDetail = () => {
   };
   const isDisabled = (args: Choice[]) => {
     let disabled = true;
-    for (let i = 0; i < args.length; i=(i+1)|0) {
+    for (let i = 0; i < args.length; i = (i + 1) | 0) {
       if (args[i].choice === "" || args[i].is_right === "") {
         disabled = false;
       }

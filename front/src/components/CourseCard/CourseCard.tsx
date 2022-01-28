@@ -13,7 +13,7 @@ const Container = styled.div`
     box-shadow: 0 0 8px grey;
     opacity: 0.75;
     cursor: pointer;
-    };
+  }
 `;
 
 const Label = styled.div`

@@ -28,10 +28,6 @@ export const createStore = (history: History) => {
       user: UserReducer,
       users: UsersReducer,
     }),
-    composeWithDevTools(
-      applyMiddleware(
-        routerMiddleware(history),
-        thunk
-      ))
+    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
   );
 };

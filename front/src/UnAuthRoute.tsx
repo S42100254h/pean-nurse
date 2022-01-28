@@ -22,9 +22,9 @@ const UnAuthRoute = ({ ...props }) => {
       dispatch(redirectToManagement());
     }
   }, []);
- 
+
   if (!isSignedIn && !isAdminSignedIn) {
-    return <Route { ...props } />;
+    return <Route {...props} />;
   } else {
     return <></>;
   }

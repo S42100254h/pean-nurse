@@ -30,8 +30,8 @@ const Right = styled.div`
 `;
 
 const StyledAppBar = styled(AppBar)`
-    background-color: #fff;
-    height: 60px;
+  background-color: #fff;
+  height: 60px;
 `;
 
 const StyledToolbar = styled(Toolbar)`
@@ -43,7 +43,7 @@ const Image = styled.img`
   cursor: pointer;
   &:hover {
     opacity: 0.7;
-  };
+  }
 `;
 
 const HeaderItem = styled.p`
@@ -55,9 +55,9 @@ const HeaderItem = styled.p`
   height: 100%;
   float: left;
   &:hover {
-    border-bottom: 5px solid #55AFD6;
+    border-bottom: 5px solid #55afd6;
     transition: 0.075s;
-  };
+  }
 `;
 
 const ButtonWrapper = styled(Box)`
@@ -81,9 +81,9 @@ const Header = () => {
     [isSignUpOpen, setIsSignUpOpen] = useState(false),
     [anchorEl, setAnchorEl] = useState<Element | null>(null),
     [menus, setMenus] = useState<Menu[]>([]);
-  
+
   const dropDownOpen = Boolean(anchorEl);
-  
+
   const userMenu: Menu[] = [
     {
       label: "ユーザー一覧",
@@ -91,12 +91,12 @@ const Header = () => {
       value: "/user/list",
     },
   ];
-  
+
   const quizMenu: Menu[] = [
     {
       label: "クイズ一覧",
       id: "quizlist",
-      value: "/quiz/list"
+      value: "/quiz/list",
     },
     {
       label: "クイズ作成",
@@ -104,7 +104,7 @@ const Header = () => {
       value: "/quiz/create",
     },
   ];
-  
+
   const categoryMenu: Menu[] = [
     {
       label: "カテゴリー一覧",
@@ -117,8 +117,11 @@ const Header = () => {
       value: "/category/create",
     },
   ];
-  
-  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, menus: Menu[]) => {
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    menus: Menu[]
+  ) => {
     setAnchorEl(event.currentTarget);
     setMenus(menus);
   };
@@ -135,15 +138,31 @@ const Header = () => {
         <Box>
           <StyledAppBar position="fixed">
             <StyledToolbar>
-              <Image src={pean} alt="logo" onClick={() => dispatch(push("/management"))} />
+              <Image
+                src={pean}
+                alt="logo"
+                onClick={() => dispatch(push("/management"))}
+              />
               <Left>
-                <HeaderItem onClick={() => dispatch(push("/management"))}>ホーム</HeaderItem>
-                <HeaderItem onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</HeaderItem>
-                <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</HeaderItem>
-                <HeaderItem onClick={(event) => handleClick(event, categoryMenu)}>カテゴリー管理</HeaderItem>
+                <HeaderItem onClick={() => dispatch(push("/management"))}>
+                  ホーム
+                </HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, userMenu)}>
+                  ユーザー管理
+                </HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>
+                  クイズ管理
+                </HeaderItem>
+                <HeaderItem
+                  onClick={(event) => handleClick(event, categoryMenu)}
+                >
+                  カテゴリー管理
+                </HeaderItem>
               </Left>
               <Right>
-                <HeaderItem onClick={() => dispatch(adminSignOut())}>サインアウト</HeaderItem>
+                <HeaderItem onClick={() => dispatch(adminSignOut())}>
+                  サインアウト
+                </HeaderItem>
               </Right>
             </StyledToolbar>
             <DropDown
@@ -159,31 +178,60 @@ const Header = () => {
           <StyledAppBar position="fixed">
             {isSignedIn ? (
               <StyledToolbar>
-                <Image src={pean} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
+                <Image
+                  src={pean}
+                  alt="logo"
+                  onClick={() => dispatch(push("/dashboard"))}
+                />
                 <Left>
-                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</HeaderItem>
-                  <HeaderItem onClick={() => dispatch(push("/courselist"))}>コース一覧</HeaderItem>
-                  <HeaderItem onClick={() => dispatch(push("/help"))}>ヘルプ</HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>
+                    ダッシュボード
+                  </HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/courselist"))}>
+                    コース一覧
+                  </HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/help"))}>
+                    ヘルプ
+                  </HeaderItem>
                 </Left>
                 <ButtonWrapper>
-                  <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
+                  <IconButton
+                    style={{ padding: "8px" }}
+                    onClick={handleDrawerToggle}
+                  >
                     <MenuIcon />
                   </IconButton>
                 </ButtonWrapper>
               </StyledToolbar>
             ) : (
               <StyledToolbar>
-                <Image src={pean} alt="logo" onClick={() => dispatch(push("/"))} />
+                <Image
+                  src={pean}
+                  alt="logo"
+                  onClick={() => dispatch(push("/"))}
+                />
                 <Right>
-                  <HeaderItem onClick={handleSignInDialogToggle}>サインイン</HeaderItem>
-                  <HeaderItem onClick={handleSignUpDialogToggle}>無料会員登録</HeaderItem>
+                  <HeaderItem onClick={handleSignInDialogToggle}>
+                    サインイン
+                  </HeaderItem>
+                  <HeaderItem onClick={handleSignUpDialogToggle}>
+                    無料会員登録
+                  </HeaderItem>
                 </Right>
               </StyledToolbar>
             )}
           </StyledAppBar>
           <ClosableDrawer open={open} onClose={handleDrawerToggle} />
-          <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
-          <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
+          <SignInDialog
+            open={isSignInOpen}
+            onClose={handleSignInDialogToggle}
+            onClick={handleSignInDialogToggle}
+          />
+          <SignUpDialog
+            open={isSignUpOpen}
+            onClose={handleSignUpDialogToggle}
+            onClick={handleSignUpDialogToggle}
+          />
         </Box>
       )}
     </Root>

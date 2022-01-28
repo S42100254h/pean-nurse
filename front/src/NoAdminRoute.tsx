@@ -8,17 +8,17 @@ import { RootState } from "./types/entity/rootState";
 const NoAdminRoute = ({ ...props }) => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
-  
+
   const isAdminSignedIn = getAdminSignedIn(selector);
-  
+
   useEffect(() => {
     if (!isAdminSignedIn) {
       dispatch(redirectToManagement());
     }
   }, []);
-  
+
   if (!isAdminSignedIn) {
-    return <Route { ...props } />;
+    return <Route {...props} />;
   } else {
     return <></>;
   }

@@ -61,5 +61,5 @@ type Props = {
 const Spacer = (props: Props) => {
   return sizes[props.size];
 };
- 
+
 export default Spacer;

@@ -68,11 +68,7 @@ const CourseList = () => {
   return (
     <Container>
       <Heading>コース一覧</Heading>
-      <Grid container
-        spacing={2}
-        alignItems="center"
-        direction="row"
-      >
+      <Grid container spacing={2} alignItems="center" direction="row">
         {courses.map((course) => (
           <Grid item xs={12} sm={4} md={3} key={course.id}>
             <Course

@@ -37,7 +37,7 @@ const PageNotFound = () => {
       <p style={{ fontSize: "28px" }}>Page Not Found</p>
       <p style={{ fontSize: "22px" }}>指定されたページが存在しません。</p>
       <Spacer size="xxs" />
-      <Link onClick={() => handlePush()} >ホームへ戻る</Link>
+      <Link onClick={() => handlePush()}>ホームへ戻る</Link>
     </Container>
   );
 };

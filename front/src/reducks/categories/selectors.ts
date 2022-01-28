@@ -5,5 +5,5 @@ const categoriesSelector = (state: RootState) => state.categories;
 
 export const getCategories = createSelector(
   [categoriesSelector],
-  state => state.list
+  (state) => state.list
 );

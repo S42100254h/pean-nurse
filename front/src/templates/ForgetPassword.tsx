@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h2`
-  color: ${props => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.primary.main};
   font-size: 1.563rem;
   margin: 0 auto 1rem auto;
   text-align: center;
@@ -25,7 +25,7 @@ const TextContainer = styled.div`
   padding: 10px;
   border: 1px solid #b0c4de;
   border-radius: 4px;
-  background-color: ${props => props.theme.palette.primary.light};
+  background-color: ${(props) => props.theme.palette.primary.light};
 `;
 
 const ForgetPassword = () => {
@@ -33,9 +33,12 @@ const ForgetPassword = () => {
 
   const [email, setEmail] = useState("");
 
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
@@ -68,9 +71,7 @@ const ForgetPassword = () => {
         label={"送信"}
         fullWidth={true}
         disabled={!email}
-        onClick={() =>
-          dispatch(forgetPassword(email))
-        }
+        onClick={() => dispatch(forgetPassword(email))}
       />
     </Container>
   );

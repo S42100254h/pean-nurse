@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, fetchUsers } from "../reducks/users/operations";
 import { getUsers } from "../reducks/users/selectors";
@@ -20,18 +20,17 @@ const Heading = styled.h2`
   font-size: 1.563rem;
   margin: 0 auto 1rem auto;
   text-align: center;
-  
 `;
 
 const UserList = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const users = getUsers(selector);
-  
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
-  
+
   const [open, setOpen] = useState(false),
     [selectedId, setSelectedId] = useState<string | number>("");
 
@@ -43,18 +42,19 @@ const UserList = () => {
       field: "detail",
       headerName: "詳細",
       width: 100,
-      renderCell: (params: GridCellParams) =>
+      renderCell: (params: GridCellParams) => (
         <PrimaryButton
           label={"詳細"}
           rowId={params.id}
           onClick={() => dispatch(push("/user/detail/" + params.id))}
         />
+      ),
     },
     {
       field: "delete",
       headerName: "削除",
       width: 100,
-      renderCell: (params: GridCellParams) =>
+      renderCell: (params: GridCellParams) => (
         <SecondaryButton
           label={"削除"}
           rowId={params.id}
@@ -63,24 +63,23 @@ const UserList = () => {
             setOpen(true);
           }}
         />
+      ),
     },
   ];
-  
+
   const rows = users.map((user) => {
-    return (
-      {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-      }
-    );
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    };
   });
-  
+
   const sortedRows = rows.sort((a, b) => {
     // descending order by id
-    return (a.id > b.id) ? -1 : 1;
+    return a.id > b.id ? -1 : 1;
   });
-  
+
   return (
     <Container>
       <Heading>ユーザー一覧</Heading>
@@ -106,7 +105,7 @@ const UserList = () => {
         }}
       />
     </Container>
-  ); 
+  );
 };
 
 export default UserList;

@@ -26,10 +26,10 @@ const SubHeading = styled.h3`
 `;
 
 const courseCards = [
-  { id: 1, label: "神経内科Ⅰ"},
-  { id: 2, label: "神経内科Ⅱ"},
-  { id: 3, label: "神経内科Ⅲ"},
-  { id: 4, label: "神経内科Ⅳ"},
+  { id: 1, label: "神経内科Ⅰ" },
+  { id: 2, label: "神経内科Ⅱ" },
+  { id: 3, label: "神経内科Ⅲ" },
+  { id: 4, label: "神経内科Ⅳ" },
 ];
 
 const CourseOverview = () => {

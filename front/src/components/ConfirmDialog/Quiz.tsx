@@ -5,7 +5,7 @@ const Container = styled.div`
   width: 700px;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 `;
 
