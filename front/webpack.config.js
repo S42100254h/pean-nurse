@@ -19,7 +19,7 @@ module.exports = {
       favicons: "./src/assets/img/favicon.ico",
     }),
     new InterpolateHtmlPlugin({
-      "PUBLIC_URL": "http://localhost:3000",
+      PUBLIC_URL: "http://localhost:3000",
     }),
     new Dotenv(),
   ],
