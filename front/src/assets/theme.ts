@@ -19,7 +19,7 @@ export const theme = createTheme({
       dark: "#3E3E3E",
     },
     background: {
-      default: "#F9FBFE"
-    }
+      default: "#F9FBFE",
+    },
   },
 });

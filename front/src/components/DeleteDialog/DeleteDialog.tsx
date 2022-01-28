@@ -44,7 +44,7 @@ const DeleteDialog = (props: Props) => {
           <PrimaryButton
             label={"キャンセル"}
             fullWidth={true}
-            onClick={props.onClickStop} 
+            onClick={props.onClickStop}
           />
           <Spacer size="xs" />
           <SecondaryButton

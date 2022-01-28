@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
+import {
+  isValidEmailFormat,
+  isValidRequiredInput,
+} from "../../function/common";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, Spacer, TextInput } from "../UIkit";
@@ -22,7 +25,7 @@ const InputArea = styled.div`
   width: 45%;
 `;
 
-const Label =styled.label`
+const Label = styled.label`
   display: flex;
   justify-content: center;
   width: 130px;
@@ -75,31 +78,47 @@ const ClosableDialog = (props: Props) => {
     [name, setName] = useState(""),
     [isSubmitted, setIsSubmitted] = useState(false);
 
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
 
-  const inputSelect = useCallback((event) => {
-    setSelect(event.target.value);
-  }, [setSelect]);
+  const inputSelect = useCallback(
+    (event) => {
+      setSelect(event.target.value);
+    },
+    [setSelect]
+  );
 
-  const inputText = useCallback((event) => {
-    setText(event.target.value);
-  }, [setText]);
+  const inputText = useCallback(
+    (event) => {
+      setText(event.target.value);
+    },
+    [setText]
+  );
 
-  const inputImage = useCallback((event) => {
-    setImage(event.target.files[0]);
-    // enable to attach same file
-    event.target.value = "";
-  }, [setImage]);
+  const inputImage = useCallback(
+    (event) => {
+      setImage(event.target.files[0]);
+      // enable to attach same file
+      event.target.value = "";
+    },
+    [setImage]
+  );
 
   const handleIsSubmittedToggle = useCallback(() => {
     setIsSubmitted(!isSubmitted);
-  },
-  [setIsSubmitted, isSubmitted]
-  );
+  }, [setIsSubmitted, isSubmitted]);
 
-  const handleSendMail = (email: string, select: string, text: string, image: File | null, name: string) => {
+  const handleSendMail = (
+    email: string,
+    select: string,
+    text: string,
+    image: File | null,
+    name: string
+  ) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
 
     if (!isValidEmailFormat(email)) {
@@ -113,7 +132,11 @@ const ClosableDialog = (props: Props) => {
     }
 
     interface CostomFormData extends FormData {
-      append(name: string, value: string | Blob | null, fileName?: string): void;
+      append(
+        name: string,
+        value: string | Blob | null,
+        fileName?: string
+      ): void;
     }
 
     let form: CostomFormData = new FormData();
@@ -122,7 +145,7 @@ const ClosableDialog = (props: Props) => {
     form.append("text", text);
     form.append("image", image);
     form.append("name", name);
-    
+
     axios
       .post(apiEndpoint, form)
       .then(() => {
@@ -173,10 +196,17 @@ const ClosableDialog = (props: Props) => {
           <DialogContent>
             <TextArea>
               <p>PeANをご利用いただきありがとうございます。</p>
-              <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
-              <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
+              <p>
+                ご不明点やご意見等ございましたら、フォームよりご連絡ください。
+              </p>
+              <p>
+                また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。
+              </p>
 
-              <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
+              <p>
+                ※
+                いただきましたご意見は、メールにて順次ご返信させていただきます。
+              </p>
               <img src={cat} alt="ねこ" width="180px" height="180px" />
             </TextArea>
             <InputArea>
@@ -200,7 +230,7 @@ const ClosableDialog = (props: Props) => {
               >
                 <MenuItem value="">- 選択してください -</MenuItem>
                 {menus.map((menu) => (
-                  <MenuItem value={menu.value} key={menu.id} >
+                  <MenuItem value={menu.value} key={menu.id}>
                     {menu.label}
                   </MenuItem>
                 ))}
@@ -220,7 +250,11 @@ const ClosableDialog = (props: Props) => {
               <Label>
                 <AttachFile style={{ fontSize: "16px" }} />
                 画像を添付する
-                <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
+                <StyledInput
+                  type="file"
+                  accept="image/jpeg, image/png"
+                  onChange={(e) => inputImage(e)}
+                />
               </Label>
               {image && (
                 <ImageLabel>

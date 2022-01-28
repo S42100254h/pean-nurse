@@ -38,6 +38,7 @@
     "test": "jest",
     "lint": "eslint --ext .ts,.js,.tsx .",
     "fix": "eslint --ext .ts,.js,.tsx . --fix",
+    "format": "prettier --write .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -80,6 +81,7 @@
     "dotenv-webpack": "^7.0.3",
     "eslint": "^8.4.1",
     "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^25.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
@@ -91,6 +93,7 @@
     "html-webpack-plugin": "^5.5.0",
     "interpolate-html-plugin": "^4.0.0",
     "jest": "^27.4.5",
+    "prettier": "^2.5.1",
     "react-router": "^5.0.0",
     "react-scripts": "^5.0.0",
     "style-loader": "^3.3.1",

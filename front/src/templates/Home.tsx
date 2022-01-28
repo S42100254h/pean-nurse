@@ -22,7 +22,7 @@ const TopSubHeading = styled.h3`
 const MiddleContainer = styled.div`
   height: 400px;
   text-align: center;
-  background-color: ${props => props.theme.palette.primary.light};
+  background-color: ${(props) => props.theme.palette.primary.light};
 `;
 
 const MiddleHeading = styled.h2`
@@ -49,7 +49,7 @@ const ReviewHeading = styled.h2`
 const BottomContainer = styled.div`
   height: 430px;
   text-align: center;
-  background-color: #2B546A;
+  background-color: #2b546a;
   color: #fff;
 `;
 
@@ -133,7 +133,11 @@ const Home = () => {
           onClick={handleDialogToggle}
         />
       </RegisterContainer>
-      <SignUpDialog open={open} onClose={handleDialogToggle} onClick={handleDialogToggle} />
+      <SignUpDialog
+        open={open}
+        onClose={handleDialogToggle}
+        onClick={handleDialogToggle}
+      />
     </div>
   );
 };

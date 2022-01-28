@@ -1,11 +1,14 @@
 import initialState from "../../../reducks/store/initialState";
 import { LoadingReducer } from "../../../reducks/loading/reducers";
-import { hideLoadingAction, showLoadingAction } from "../../../reducks/loading/actions";
+import {
+  hideLoadingAction,
+  showLoadingAction,
+} from "../../../reducks/loading/actions";
 
-describe ("LoadingReducerのテスト", () => {
+describe("LoadingReducerのテスト", () => {
   const init = initialState.loading;
 
-  it ("action.type === HIDE_LOADINGのときのテスト", () => {
+  it("action.type === HIDE_LOADINGのときのテスト", () => {
     const action = hideLoadingAction();
     const newState = LoadingReducer(init, action);
 
@@ -13,7 +16,7 @@ describe ("LoadingReducerのテスト", () => {
     expect(newState.text).toStrictEqual("");
   });
 
-  it ("action.type === SHOW_LOADINGのときのテスト", () => {
+  it("action.type === SHOW_LOADINGのときのテスト", () => {
     const dummy = "test";
     const action = showLoadingAction(dummy);
     const newState = LoadingReducer(init, action);

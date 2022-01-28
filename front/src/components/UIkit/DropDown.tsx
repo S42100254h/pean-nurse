@@ -14,16 +14,16 @@ type MenuProps = {
   id: string;
   value: string;
   label: string;
-}
+};
 
 const DropDown = (props: Props) => {
   const dispatch = useDispatch();
-  
+
   const selectMenu = (path: string) => {
     dispatch(push(path));
     props.onClose();
   };
-  
+
   return (
     <div>
       <Menu

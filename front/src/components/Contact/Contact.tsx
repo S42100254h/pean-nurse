@@ -5,14 +5,14 @@ import { ClosableDialog } from "./index";
 import styled from "styled-components";
 
 const Root = styled(Box)`
-    position: fixed;
-    bottom: 0;
-    right: 10px;
-    padding: 8px 20px;
-    background-color: #F08080;
-    border-radius: 2px;
-    cursor: pointer;
-    z-index: 999;
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  padding: 8px 20px;
+  background-color: #f08080;
+  border-radius: 2px;
+  cursor: pointer;
+  z-index: 999;
 `;
 
 const Heading = styled.p`

@@ -30,7 +30,7 @@ const Link = styled.span`
   &:hover {
     text-decoration: underline;
     cursor: pointer;
-  };
+  }
 `;
 
 type Props = {
@@ -42,26 +42,38 @@ type Props = {
 const SignUpDialog = (props: Props) => {
   const dispatch = useDispatch();
 
-  const [ name, setName ] = useState(""),
-    [ email, setEmail] = useState(""),
-    [ password, setPassword ] = useState(""),
-    [ confirmPassword, setConfirmPassword ] = useState("");
+  const [name, setName] = useState(""),
+    [email, setEmail] = useState(""),
+    [password, setPassword] = useState(""),
+    [confirmPassword, setConfirmPassword] = useState("");
 
-  const inputName = useCallback((event) => {
-    setName(event.target.value);
-  }, [setName]);
+  const inputName = useCallback(
+    (event) => {
+      setName(event.target.value);
+    },
+    [setName]
+  );
 
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
 
-  const inputPassword = useCallback((event) => {
-    setPassword(event.target.value);
-  }, [setPassword]);
+  const inputPassword = useCallback(
+    (event) => {
+      setPassword(event.target.value);
+    },
+    [setPassword]
+  );
 
-  const inputConfirmPassword = useCallback((event) => {
-    setConfirmPassword(event.target.value);
-  }, [setConfirmPassword]);
+  const inputConfirmPassword = useCallback(
+    (event) => {
+      setConfirmPassword(event.target.value);
+    },
+    [setConfirmPassword]
+  );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {

@@ -27,8 +27,8 @@ const PopContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   &:hover {
-    background-color: ${props => props.theme.palette.basic.light};
-  };
+    background-color: ${(props) => props.theme.palette.basic.light};
+  }
 `;
 
 const Label = styled.label`
@@ -56,18 +56,20 @@ const ClickAway = (props: Props) => {
           <PopContainer>
             <Label>
               画像をアップロード
-              <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => props.onChange(e)} />
+              <StyledInput
+                type="file"
+                accept="image/jpeg, image/png"
+                onChange={(e) => props.onChange(e)}
+              />
             </Label>
           </PopContainer>
           <PopContainer>
-            <Label onClick={() => props.onClick()}>
-              デフォルト画像に設定
-            </Label>
+            <Label onClick={() => props.onClick()}>デフォルト画像に設定</Label>
           </PopContainer>
         </Modal>
       </ClickAwayListener>
     </Container>
-  ); 
+  );
 };
 
 export default ClickAway;

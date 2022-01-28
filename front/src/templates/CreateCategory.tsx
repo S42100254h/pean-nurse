@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { PrimaryButton, TextInput, Spacer} from "../components/UIkit";
+import { PrimaryButton, TextInput, Spacer } from "../components/UIkit";
 import { createCategory } from "../function/category";
 import styled from "styled-components";
 
@@ -26,9 +26,12 @@ const CreateCategory = () => {
 
   const [category, setCategory] = useState("");
 
-  const inputCategory = useCallback((event) => {
-    setCategory(event.target.value);
-  }, [setCategory]);
+  const inputCategory = useCallback(
+    (event) => {
+      setCategory(event.target.value);
+    },
+    [setCategory]
+  );
 
   return (
     <Container>

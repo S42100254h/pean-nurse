@@ -11,5 +11,5 @@ export const AdminsReducer = reducerWithInitialState(initialState.admin)
     email: payload.email,
   }))
   .case(Actions.adminSignOutAction, () => ({
-    ...initialState.admin
+    ...initialState.admin,
   }));

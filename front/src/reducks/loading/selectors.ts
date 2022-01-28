@@ -5,10 +5,10 @@ const loadingSelector = (state: RootState) => state.loading;
 
 export const getLoadingState = createSelector(
   [loadingSelector],
-  state => state.state
+  (state) => state.state
 );
 
 export const getLoadingText = createSelector(
   [loadingSelector],
-  state => state.text
+  (state) => state.text
 );

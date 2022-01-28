@@ -8,7 +8,7 @@ import { Category } from "../../types/entity/category";
 export const fetchCategories = () => {
   return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "categories";
-    
+
     axios
       .get(apiEndpoint)
       .then((resp) => {
@@ -16,7 +16,12 @@ export const fetchCategories = () => {
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "カテゴリー一覧の取得に失敗しました。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "error",
+              message: "カテゴリー一覧の取得に失敗しました。",
+            })
+          );
         }, 400);
       });
   };
@@ -40,18 +45,30 @@ export const deleteCategory = (id: string | number) => {
         })
         .then(() => {
           const prevCategories: Category[] = getCategories().categories.list;
-          const nextCategories: Category[] = prevCategories.filter((category) => category.id !== id);
+          const nextCategories: Category[] = prevCategories.filter(
+            (category) => category.id !== id
+          );
           dispatch(deleteCategoryAction(nextCategories));
           dispatch(showLoadingAction("Delete category..."));
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "カテゴリーを削除しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "カテゴリーを削除しました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "カテゴリーの削除に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "カテゴリーの削除に失敗しました。",
+              })
+            );
           }, 400);
         });
     }

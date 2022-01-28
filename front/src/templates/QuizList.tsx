@@ -44,18 +44,19 @@ const QuizList = () => {
       field: "detail",
       headerName: "詳細",
       width: 100,
-      renderCell: (params: GridCellParams) =>
+      renderCell: (params: GridCellParams) => (
         <PrimaryButton
           label={"詳細"}
           rowId={params.id}
           onClick={() => dispatch(push("/quiz/detail/" + params.id))}
         />
+      ),
     },
     {
       field: "delete",
       headerName: "削除",
       width: 100,
-      renderCell: (params: GridCellParams) =>
+      renderCell: (params: GridCellParams) => (
         <SecondaryButton
           label={"削除"}
           rowId={params.id}
@@ -64,23 +65,22 @@ const QuizList = () => {
             setOpen(true);
           }}
         />
+      ),
     },
   ];
 
   const sortedQuizzes = quizzes.sort((a, b) => {
     // ascending order by updated_at
-    return (a.updated_at > b.updated_at) ? -1 : 1;
+    return a.updated_at > b.updated_at ? -1 : 1;
   });
 
   const rows = sortedQuizzes.map((quiz) => {
-    return (
-      {
-        id: quiz.id,
-        title: quiz.title,
-        created_at: moment(quiz.created_at).fromNow(),
-        updated_at: moment(quiz.updated_at).fromNow(),
-      }
-    );
+    return {
+      id: quiz.id,
+      title: quiz.title,
+      created_at: moment(quiz.created_at).fromNow(),
+      updated_at: moment(quiz.updated_at).fromNow(),
+    };
   });
 
   return (
@@ -108,7 +108,7 @@ const QuizList = () => {
         }}
       />
     </Container>
-  ); 
+  );
 };
 
 export default QuizList;

@@ -1,5 +1,8 @@
 import { adminSignInAction, adminSignOutAction } from "./actions";
-import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
+import {
+  isValidEmailFormat,
+  isValidRequiredInput,
+} from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
@@ -8,24 +11,24 @@ import { Dispatch } from "redux";
 
 export const adminSignIn = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
-    if(!isValidEmailFormat(email)) {
+    if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
       return false;
     }
 
-    if(!isValidRequiredInput(email, password)) {
+    if (!isValidRequiredInput(email, password)) {
       alert("メールアドレスかパスワードが未入力です");
       return false;
     }
 
-    if(password.length < 6) {
+    if (password.length < 6) {
       alert("パスワードは６文字以上で入力してください");
       return false;
     }
-    
+
     const apiEndpoint = process.env.REACT_APP_API_URL + "admin/sign_in";
     const body = { email: email, password: password };
-    
+
     axios
       .post(apiEndpoint, body)
       .then((resp) => {
@@ -36,15 +39,25 @@ export const adminSignIn = (email: string, password: string) => {
         dispatch(adminSignInAction(resp.data.data));
         dispatch(showLoadingAction("Sign in..."));
         dispatch(push("/management"));
-        
+
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(setNotificationAction({ variant: "success", message: "サインインしました。"}));
+          dispatch(
+            setNotificationAction({
+              variant: "success",
+              message: "サインインしました。",
+            })
+          );
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(setNotificationAction({ variant: "error", message: "サインインに失敗しました。入力内容をご確認ください。" }));
+          dispatch(
+            setNotificationAction({
+              variant: "error",
+              message: "サインインに失敗しました。入力内容をご確認ください。",
+            })
+          );
         }, 400);
       });
   };
@@ -71,21 +84,31 @@ export const adminSignOut = () => {
           dispatch(showLoadingAction("Sign out..."));
           localStorage.clear();
           dispatch(push("/"));
-          
+
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "サインアウトしました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "サインアウトに失敗しました。",
+              })
+            );
           }, 400);
         });
     } else {
       dispatch(push("/"));
     }
-  }; 
+  };
 };
 
 export const listenAdminState = () => {
@@ -107,12 +130,14 @@ export const listenAdminState = () => {
         .then((response) => {
           const adminData = response.data;
 
-          dispatch(adminSignInAction({
-            isAdminSignedIn: true,
-            uid: adminData.uid,
-            name: adminData.name,
-            email: adminData.email,
-          }));
+          dispatch(
+            adminSignInAction({
+              isAdminSignedIn: true,
+              uid: adminData.uid,
+              name: adminData.name,
+              email: adminData.email,
+            })
+          );
         })
         .catch(() => {
           alert("サインインに失敗しました。");
@@ -142,13 +167,15 @@ export const redirectToManagement = () => {
         .then((response) => {
           const adminData = response.data;
 
-          dispatch(adminSignInAction({
-            isAdminSignedIn: true,
-            uid: adminData.uid,
-            name: adminData.name,
-            email: adminData.email,
-          }));
-          
+          dispatch(
+            adminSignInAction({
+              isAdminSignedIn: true,
+              uid: adminData.uid,
+              name: adminData.name,
+              email: adminData.email,
+            })
+          );
+
           dispatch(push("/management"));
         });
     }

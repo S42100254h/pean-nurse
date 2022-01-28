@@ -6,7 +6,7 @@ import { ChoiceCard, Quiz } from "./index";
 import { createQuiz } from "../../function/quiz";
 import styled from "styled-components";
 
-const Container =styled.div`
+const Container = styled.div`
   width: 100%;
   padding: 30px 50px;
 `;
@@ -32,7 +32,7 @@ type Props = {
 
 const ConfirmCreateDialog = ({ quiz, choices, open, onClose }: Props) => {
   const dispatch = useDispatch();
-  
+
   return (
     <div>
       <Dialog
@@ -47,7 +47,12 @@ const ConfirmCreateDialog = ({ quiz, choices, open, onClose }: Props) => {
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
             {choices.map((choice, index) => (
-              <ChoiceCard choice={choice.choice} select={choice.is_right} label={"選択肢" + (index + 1)} key={index} />
+              <ChoiceCard
+                choice={choice.choice}
+                select={choice.is_right}
+                label={"選択肢" + (index + 1)}
+                key={index}
+              />
             ))}
             <Spacer size="xxs" />
             <PrimaryButton

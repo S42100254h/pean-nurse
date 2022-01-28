@@ -30,7 +30,7 @@ const Link = styled.span`
   &:hover {
     text-decoration: underline;
     cursor: pointer;
-  };
+  }
 `;
 
 type Props = {
@@ -45,13 +45,19 @@ const SignInDialog = (props: Props) => {
   const [email, setEmail] = useState(""),
     [password, setPassword] = useState("");
 
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
 
-  const inputPassword = useCallback((event) => {
-    setPassword(event.target.value);
-  }, [setPassword]);
+  const inputPassword = useCallback(
+    (event) => {
+      setPassword(event.target.value);
+    },
+    [setPassword]
+  );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {

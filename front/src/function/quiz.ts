@@ -1,5 +1,8 @@
 import axios from "axios";
-import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
+import {
+  hideLoadingAction,
+  showLoadingAction,
+} from "../reducks/loading/actions";
 import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
@@ -29,12 +32,22 @@ export const createQuiz = (quiz: string, choices: Choice[]) => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "クイズの作成に成功しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "クイズの作成に成功しました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "クイズの作成に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "クイズの作成に失敗しました。",
+              })
+            );
           }, 400);
         });
     }
@@ -59,12 +72,22 @@ export const editQuiz = (quiz: string, choices: Choice[], id: string) => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(setNotificationAction({ variant: "success", message: "クイズの更新に成功しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "success",
+                message: "クイズの更新に成功しました。",
+              })
+            );
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(setNotificationAction({ variant: "error", message: "クイズの更新に失敗しました。" }));
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "クイズの更新に失敗しました。",
+              })
+            );
           }, 400);
         });
     }

@@ -5,7 +5,7 @@ export const isValidEmailFormat = (email: string) => {
 
 export const isValidRequiredInput = (...args: any) => {
   let validator = true;
-  for (let i = 0; i < args.length; i=(i+1)|0) {
+  for (let i = 0; i < args.length; i = (i + 1) | 0) {
     if (args[i] === "") {
       validator = false;
     }

@@ -2,12 +2,28 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Tabs, Tab } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
-import { PasswordInput, PrimaryButton, SecondaryButton, Spacer, TabPanel, TextInput } from "../components/UIkit";
+import {
+  PasswordInput,
+  PrimaryButton,
+  SecondaryButton,
+  Spacer,
+  TabPanel,
+  TextInput,
+} from "../components/UIkit";
 import { useSelector } from "react-redux";
-import { getUserEmail, getUserImage, getUserName } from "../reducks/user/selectors";
+import {
+  getUserEmail,
+  getUserImage,
+  getUserName,
+} from "../reducks/user/selectors";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-import { deleteImage, editImage, editPassword, editUserInfo } from "../reducks/user/operations";
+import {
+  deleteImage,
+  editImage,
+  editPassword,
+  editUserInfo,
+} from "../reducks/user/operations";
 import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
@@ -29,19 +45,19 @@ const StyledTabs = styled(Tabs)`
   max-width: 600px;
   border-radius: 4px;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 16px 0;
   margin: 0 auto;
   & .Mui-selected {
-    background-color: #F6F8FA;
-  };
+    background-color: #f6f8fa;
+  }
 `;
 
 const StyledTab = styled(Tab)`
   &:hover {
-    background-color: #F6F8FA;
+    background-color: #f6f8fa;
     transition: 0.05s;
-  };
+  }
 `;
 
 const MenuContainer = styled.div`
@@ -49,7 +65,7 @@ const MenuContainer = styled.div`
   height: 100%;
   border-radius: 4px;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   padding: 45px 70px;
 `;
@@ -99,38 +115,57 @@ const Setting = () => {
     setValue(newValue);
   };
 
-  const inputName = useCallback((event) => {
-    setName(event.target.value);
-  }, [setName]);
+  const inputName = useCallback(
+    (event) => {
+      setName(event.target.value);
+    },
+    [setName]
+  );
 
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setPassword]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setPassword]
+  );
 
-  const inputPassword = useCallback((event) => {
-    setPassword(event.target.value);
-  }, [setPassword]);
+  const inputPassword = useCallback(
+    (event) => {
+      setPassword(event.target.value);
+    },
+    [setPassword]
+  );
 
-  const inputCurrentPassword = useCallback((event) => {
-    setCurrentPassword(event.target.value);
-  }, [setCurrentPassword]);
+  const inputCurrentPassword = useCallback(
+    (event) => {
+      setCurrentPassword(event.target.value);
+    },
+    [setCurrentPassword]
+  );
 
-  const inputPasswordConfirmation = useCallback((event) => {
-    setPasswordConfirmation(event.target.value);
-  }, [setPasswordConfirmation]);
+  const inputPasswordConfirmation = useCallback(
+    (event) => {
+      setPasswordConfirmation(event.target.value);
+    },
+    [setPasswordConfirmation]
+  );
 
   useEffect(() => {
     setName(userName);
     setEmail(userEmail);
   }, []);
 
-  const handleModalToggle = useCallback((event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setOpen(!open);
-  },
-  [setOpen, open]
+  const handleModalToggle = useCallback(
+    (event) => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+      setOpen(!open);
+    },
+    [setOpen, open]
   );
 
   const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,7 +179,7 @@ const Setting = () => {
   };
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.keyCode== 13) {
+    if (event.keyCode == 13) {
       dispatch(editPassword(current_password, password, password_confirmation));
     }
   };
@@ -251,9 +286,17 @@ const Setting = () => {
                 <PrimaryButton
                   label={"更新"}
                   fullWidth={true}
-                  disabled={!current_password || !password || !password_confirmation}
+                  disabled={
+                    !current_password || !password || !password_confirmation
+                  }
                   onClick={() => {
-                    dispatch(editPassword(current_password, password, password_confirmation));
+                    dispatch(
+                      editPassword(
+                        current_password,
+                        password,
+                        password_confirmation
+                      )
+                    );
                   }}
                 />
               </TabPanel>
@@ -266,7 +309,13 @@ const Setting = () => {
             </MenuContainer>
           </Grid>
           {open && (
-            <ClickAway onClickAway={handleModalToggle} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpload(e)} onClick={() => dispatch(deleteImage())} />
+            <ClickAway
+              onClickAway={handleModalToggle}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleUpload(e)
+              }
+              onClick={() => dispatch(deleteImage())}
+            />
           )}
           <Confirmation
             isOpen={isOpen}

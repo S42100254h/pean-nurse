@@ -1,4 +1,4 @@
-import React, { useCallback, useState }  from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { PasswordInput, PrimaryButton, Spacer } from "../components/UIkit";
 import { resetPassword } from "../reducks/user/operations";
@@ -30,18 +30,24 @@ const TextContainer = styled.div`
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  
+
   const [password, setPassword] = useState(""),
     [password_confirmation, setPasswordConfirmation] = useState("");
 
-  const inputPassword = useCallback((event) => {
-    setPassword(event.target.value);
-  }, [setPassword]);
+  const inputPassword = useCallback(
+    (event) => {
+      setPassword(event.target.value);
+    },
+    [setPassword]
+  );
 
-  const inputPasswordConfirmation = useCallback((event) => {
-    setPasswordConfirmation(event.target.value);
-  }, [setPasswordConfirmation]);
-  
+  const inputPasswordConfirmation = useCallback(
+    (event) => {
+      setPasswordConfirmation(event.target.value);
+    },
+    [setPasswordConfirmation]
+  );
+
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       dispatch(resetPassword(password, password_confirmation));

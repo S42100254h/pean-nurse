@@ -20,7 +20,7 @@ const AdminRoute = ({ ...props }) => {
   if (!isAdminSignedIn) {
     return <></>;
   } else {
-    return <Route { ...props } />;
+    return <Route {...props} />;
   }
 };
 

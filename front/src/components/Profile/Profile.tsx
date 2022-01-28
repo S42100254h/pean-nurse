@@ -13,7 +13,7 @@ const GridContainer = styled(Grid)`
   height: auto;
   width: calc(100% - 2rem);
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 `;
 
@@ -47,14 +47,9 @@ const Profile = () => {
   const selector = useSelector((state: RootState) => state);
   const userName = getUserName(selector);
   const userImage = getUserImage(selector);
-  
+
   return (
-    <GridContainer
-      container
-      spacing={1}
-      direction="row"
-      alignItems="center"
-    >
+    <GridContainer container spacing={1} direction="row" alignItems="center">
       <Grid item xs={3}>
         {userImage ? (
           <StyledAvatar src={userImage.url} />

@@ -1,6 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { TextInput, PasswordInput, PrimaryButton, Spacer } from "../components/UIkit";
+import {
+  TextInput,
+  PasswordInput,
+  PrimaryButton,
+  Spacer,
+} from "../components/UIkit";
 import { signIn } from "../reducks/user/operations";
 import { push } from "connected-react-router";
 import styled from "styled-components";
@@ -31,22 +36,28 @@ const Link = styled.span`
   &:hover {
     text-decoration: underline;
     cursor: pointer;
-  };
+  }
 `;
 
 const SignIn = () => {
   const dispatch = useDispatch();
 
-  const [ email, setEmail ] = useState(""),
-    [ password, setPassword ] = useState("");
-  
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+  const [email, setEmail] = useState(""),
+    [password, setPassword] = useState("");
 
-  const inputPassword = useCallback((event) => {
-    setPassword(event.target.value);
-  }, [setPassword]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
+
+  const inputPassword = useCallback(
+    (event) => {
+      setPassword(event.target.value);
+    },
+    [setPassword]
+  );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
@@ -92,11 +103,7 @@ const SignIn = () => {
       <Spacer size="xs" />
       <TextWrapper>
         パスワードを忘れた場合は
-        <Link
-          onClick={() => dispatch(push("/forgetpassword"))}
-        >
-          こちら
-        </Link>
+        <Link onClick={() => dispatch(push("/forgetpassword"))}>こちら</Link>
       </TextWrapper>
     </Container>
   );

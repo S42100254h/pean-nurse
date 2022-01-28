@@ -1,5 +1,10 @@
-import React, { useCallback, useState} from "react";
-import { PasswordInput, PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import React, { useCallback, useState } from "react";
+import {
+  PasswordInput,
+  PrimaryButton,
+  Spacer,
+  TextInput,
+} from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { signUp } from "../reducks/user/operations";
@@ -31,32 +36,44 @@ const Link = styled.span`
   &:hover {
     text-decoration: underline;
     cursor: pointer;
-  };
+  }
 `;
 
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const [ name, setName ] = useState(""),
-    [ email, setEmail] = useState(""),
-    [ password, setPassword ] = useState(""),
-    [ confirmPassword, setConfirmPassword ] = useState("");
+  const [name, setName] = useState(""),
+    [email, setEmail] = useState(""),
+    [password, setPassword] = useState(""),
+    [confirmPassword, setConfirmPassword] = useState("");
 
-  const inputName = useCallback((event) => {
-    setName(event.target.value);
-  }, [setName]);
+  const inputName = useCallback(
+    (event) => {
+      setName(event.target.value);
+    },
+    [setName]
+  );
 
-  const inputEmail = useCallback((event) => {
-    setEmail(event.target.value);
-  }, [setEmail]);
+  const inputEmail = useCallback(
+    (event) => {
+      setEmail(event.target.value);
+    },
+    [setEmail]
+  );
 
-  const inputPassword = useCallback((event) => {
-    setPassword(event.target.value);
-  }, [setPassword]);
+  const inputPassword = useCallback(
+    (event) => {
+      setPassword(event.target.value);
+    },
+    [setPassword]
+  );
 
-  const inputConfirmPassword = useCallback((event) => {
-    setConfirmPassword(event.target.value);
-  }, [setConfirmPassword]);
+  const inputConfirmPassword = useCallback(
+    (event) => {
+      setConfirmPassword(event.target.value);
+    },
+    [setConfirmPassword]
+  );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
@@ -67,7 +84,7 @@ const SignUp = () => {
   return (
     <Container>
       <Heading>アカウント登録</Heading>
-      <Spacer size="xs" /> 
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"ユーザー名"}
@@ -125,11 +142,7 @@ const SignUp = () => {
       <Spacer size="sm" />
       <TextWrapper>
         アカウントをお持ちの場合は
-        <Link
-          onClick={() => dispatch(push("/signin"))}
-        >
-          こちら
-        </Link>
+        <Link onClick={() => dispatch(push("/signin"))}>こちら</Link>
       </TextWrapper>
     </Container>
   );

@@ -5,10 +5,7 @@ const adminsSelector = (state: RootState) => state.admin;
 
 export const getAdminSignedIn = createSelector(
   [adminsSelector],
-  state => state.isAdminSignedIn
+  (state) => state.isAdminSignedIn
 );
 
-export const getName = createSelector(
-  [adminsSelector],
-  state => state.name
-);
+export const getName = createSelector([adminsSelector], (state) => state.name);
