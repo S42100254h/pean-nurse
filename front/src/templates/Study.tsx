@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Spacer } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
@@ -18,6 +19,7 @@ import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
 import { Check } from "@material-ui/icons";
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   margin: 25px auto;
@@ -46,7 +48,9 @@ const SelectArea = styled.div`
   padding: 50px 70px;
 `;
 
-const QuizContainer = styled.div``;
+const QuizContainer = styled.div`
+  padding-top: 10px;
+`;
 
 const QuizText = styled.p``;
 
@@ -74,7 +78,14 @@ const Image = styled.img`
 
 const ChoicesContainer = styled.div``;
 
-const AnswerContainer = styled.div``;
+const AnswerContainer = styled.div`
+  background-color: ${(props) => props.theme.palette.primary.light};
+  min-height: 200px;
+  height: 100%;
+  padding: 20px 30px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+`;
 
 const CorrectAnserRate = styled.div`
   text-align: center;
@@ -90,7 +101,9 @@ type Choice = {
 };
 
 const Study = () => {
-  const [choices, setChoices] = useState<Choice[]>([]);
+  const [choices, setChoices] = useState<Choice[]>([]),
+    [quiz, setQuiz] = useState(""),
+    [open, setOpen] = useState(false);
 
   const handleIsClicked = (index: number) => {
     const newChoices = [...choices];
@@ -113,34 +126,35 @@ const Study = () => {
   ];
 
   useEffect(() => {
-    setChoices([
-      { id: 1, choice: "neko", is_right: "false", clicked: false },
-      { id: 2, choice: "cat", is_right: "false", clicked: false },
-      { id: 3, choice: "inu", is_right: "false", clicked: false },
-      { id: 4, choice: "dog", is_right: "true", clicked: false },
-    ]);
-  }, []);
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + 459;
+    axios.get(quizApiEndpoint).then((resp) => {
+      setQuiz(resp.data.title);
+    });
 
-  console.log(choices);
+    const choicesApiEndpoint =
+      process.env.REACT_APP_API_URL + "choices/index/" + 459;
+    axios.get(choicesApiEndpoint).then((resp) => {
+      setChoices(resp.data);
+    });
+  }, []);
 
   return (
     <Container>
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
-        <Caption>問題１</Caption>
-        <Spacer size="xs" />
+        <Caption>問題</Caption>
         <QuizContainer>
-          <QuizText>
-            クイズ本文クイズ本文クイズ本文クイズ本文クイズ本文 クイズ本文
-            クイズ本文 クイズ本文 クイズ本文 クイズ本文 クイズ本文 クイズ本文
-          </QuizText>
+          <QuizText>{quiz}</QuizText>
         </QuizContainer>
-        <Spacer size="sm" />
+        <Spacer size="xs" />
         <ChoicesContainer>
           {choices.map((choice, index) => (
             <ChoiceContainer
               key={choice.id}
-              onClick={() => handleIsClicked(index)}
+              onClick={() => {
+                handleIsClicked(index);
+                setOpen(true);
+              }}
             >
               <Image src={icons[index]} />
               <ChoiceText>{choice.choice}</ChoiceText>
@@ -148,8 +162,13 @@ const Study = () => {
           ))}
           <Spacer size="xs" />
         </ChoicesContainer>
-        <Spacer size="sm" />
-        <AnswerContainer>選択肢１</AnswerContainer>
+        {open && (
+          <TransitionGroup>
+            <CSSTransition in={open} timeout={1000} exit={false}>
+              <AnswerContainer>選択肢１</AnswerContainer>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
         <Spacer size="sm" />
         <CorrectAnserRate>
           <p>現在のあなたの成績は7/7問正解！！</p>
