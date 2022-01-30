@@ -17,7 +17,7 @@ import E_dark from "../assets/img/E_dark.png";
 import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
-import { Check } from "@material-ui/icons";
+import { Cancel, CheckCircle } from "@material-ui/icons";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -74,6 +74,24 @@ const Image = styled.img`
   width: 40px;
   float: left;
   margin: 0 20px 0 10px;
+  padding: 3px;
+  box-sizing: border-box;
+`;
+
+const StyledCheckCircle = styled(CheckCircle)`
+  height: 40px;
+  width: 40px;
+  float: left;
+  margin: 0 20px 0 10px;
+  color: #43a047;
+`;
+
+const StyledCancel = styled(Cancel)`
+  height: 40px;
+  width: 40px;
+  float: left;
+  margin: 0 20px 0 10px;
+  color: #d32f2f;
 `;
 
 const ChoicesContainer = styled.div``;
@@ -91,13 +109,11 @@ const CorrectAnserRate = styled.div`
   text-align: center;
 `;
 
-const checkAnswers = () => {};
-
 type Choice = {
   id: number;
   choice: string;
   is_right: string;
-  clicked: boolean;
+  clicked: "clicked" | "right" | "wrong";
 };
 
 const Study = () => {
@@ -105,13 +121,23 @@ const Study = () => {
     [quiz, setQuiz] = useState(""),
     [open, setOpen] = useState(false);
 
-  const handleIsClicked = (index: number) => {
-    const newChoices = [...choices];
-    newChoices[index] = {
-      ...newChoices[index],
-      clicked: true,
-    };
-    setChoices(newChoices);
+  const checkAnswers = (index: number) => {
+    const selectedChoices = [...choices];
+    if (selectedChoices[index].is_right.toString() === "true") {
+      selectedChoices[index] = {
+        ...selectedChoices[index],
+        clicked: "right",
+      };
+      setChoices(selectedChoices);
+      setOpen(true);
+    } else {
+      selectedChoices[index] = {
+        ...selectedChoices[index],
+        clicked: "wrong",
+      };
+      setChoices(selectedChoices);
+      setOpen(true);
+    }
   };
 
   const icons = [
@@ -152,11 +178,18 @@ const Study = () => {
             <ChoiceContainer
               key={choice.id}
               onClick={() => {
-                handleIsClicked(index);
-                setOpen(true);
+                checkAnswers(index);
               }}
             >
-              <Image src={icons[index]} />
+              {choices === [] ? (
+                <></>
+              ) : choices[index].clicked === "right" ? (
+                <StyledCheckCircle />
+              ) : choices[index].clicked === "wrong" ? (
+                <StyledCancel />
+              ) : (
+                <Image src={icons[index]} />
+              )}
               <ChoiceText>{choice.choice}</ChoiceText>
             </ChoiceContainer>
           ))}
