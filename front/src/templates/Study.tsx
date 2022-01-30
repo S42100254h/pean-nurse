@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import { Spacer } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
@@ -162,13 +162,14 @@ const Study = () => {
           ))}
           <Spacer size="xs" />
         </ChoicesContainer>
-        {open && (
-          <TransitionGroup>
-            <CSSTransition in={open} timeout={1000} exit={false}>
-              <AnswerContainer>選択肢１</AnswerContainer>
-            </CSSTransition>
-          </TransitionGroup>
-        )}
+        <CSSTransition
+          classNames="answer"
+          in={open}
+          timeout={1000}
+          exit={false}
+        >
+          {open ? <AnswerContainer>選択肢１</AnswerContainer> : <></>}
+        </CSSTransition>
         <Spacer size="sm" />
         <CorrectAnserRate>
           <p>現在のあなたの成績は7/7問正解！！</p>
