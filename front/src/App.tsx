@@ -8,6 +8,7 @@ import { Notification } from "./components/Notification";
 import { Loading } from "./components/UIkit";
 import styled from "styled-components";
 import "./assets/reset.css";
+import "./assets/style.css";
 
 const Main = styled.main`
   padding: 70px 0 60px 0;
