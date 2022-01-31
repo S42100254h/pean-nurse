@@ -22,5 +22,5 @@ ReactDOM.render(
       </MuiThemeProvider>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );

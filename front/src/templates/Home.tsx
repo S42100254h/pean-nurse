@@ -96,11 +96,7 @@ const Home = () => {
       <TopContainer>
         <TopHeading>看護師 国家試験</TopHeading>
         <TopSubHeading>WEB問題集で学習しよう</TopSubHeading>
-        <PrimaryButton
-          id={"button"}
-          label={"今すぐ始める"}
-          onClick={handleDialogToggle}
-        />
+        <PrimaryButton id={"button"} label={"今すぐ始める"} onClick={handleDialogToggle} />
       </TopContainer>
       <MiddleContainer>
         <MiddleHeading>看護学生から、看護師へ</MiddleHeading>
@@ -127,17 +123,9 @@ const Home = () => {
       <RegisterContainer>
         <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
         <RegisterHeading>さっそく始めよう！</RegisterHeading>
-        <PrimaryButton
-          id={"button"}
-          label={"無料会員登録"}
-          onClick={handleDialogToggle}
-        />
+        <PrimaryButton id={"button"} label={"無料会員登録"} onClick={handleDialogToggle} />
       </RegisterContainer>
-      <SignUpDialog
-        open={open}
-        onClose={handleDialogToggle}
-        onClick={handleDialogToggle}
-      />
+      <SignUpDialog open={open} onClose={handleDialogToggle} onClick={handleDialogToggle} />
     </div>
   );
 };

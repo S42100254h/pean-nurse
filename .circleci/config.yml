@@ -13,7 +13,7 @@ executors:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: "true"
     working_directory: ~/nurse-step
-  
+
   node:
     docker:
       - image: circleci/node:12
@@ -51,7 +51,7 @@ jobs:
             echo AWS_S3_ACCESS_KEY_ID=$AWS_S3_ACCESS_KEY_ID	> .env
             echo AWS_S3_SECRET_ACCESS_KEY=$AWS_S3_SECRET_ACCESS_KEY > .env
             echo RESET_PASSWORD_URL=RESET_PASSWORD_URL > .env
-            
+
   bundle_dependencies:
     executor:
       name: rails
@@ -131,10 +131,10 @@ jobs:
     executor:
       name: node
     steps:
-    - checkout
-    - save_cache:
-        key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
+      - checkout
+      - save_cache:
+          key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
             - ~/nurse-step
 
   npm_dependencies:
@@ -159,7 +159,7 @@ jobs:
       - restore_cache: # ソースコードの復元
           key: v8-nurse-step-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # node_modulesを復元
-          key: v7-dependencies-{{ checksum "front/package.json" }}            
+          key: v7-dependencies-{{ checksum "front/package.json" }}
       - run:
           name: execute test
           command: npm test --runInBand

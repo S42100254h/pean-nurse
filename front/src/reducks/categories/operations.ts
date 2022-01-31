@@ -20,7 +20,7 @@ export const fetchCategories = () => {
             setNotificationAction({
               variant: "error",
               message: "カテゴリー一覧の取得に失敗しました。",
-            })
+            }),
           );
         }, 400);
       });
@@ -46,7 +46,7 @@ export const deleteCategory = (id: string | number) => {
         .then(() => {
           const prevCategories: Category[] = getCategories().categories.list;
           const nextCategories: Category[] = prevCategories.filter(
-            (category) => category.id !== id
+            (category) => category.id !== id,
           );
           dispatch(deleteCategoryAction(nextCategories));
           dispatch(showLoadingAction("Delete category..."));
@@ -57,7 +57,7 @@ export const deleteCategory = (id: string | number) => {
               setNotificationAction({
                 variant: "success",
                 message: "カテゴリーを削除しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -67,7 +67,7 @@ export const deleteCategory = (id: string | number) => {
               setNotificationAction({
                 variant: "error",
                 message: "カテゴリーの削除に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });

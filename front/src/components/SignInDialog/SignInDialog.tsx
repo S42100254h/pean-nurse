@@ -49,14 +49,14 @@ const SignInDialog = (props: Props) => {
     (event) => {
       setEmail(event.target.value);
     },
-    [setEmail]
+    [setEmail],
   );
 
   const inputPassword = useCallback(
     (event) => {
       setPassword(event.target.value);
     },
-    [setPassword]
+    [setPassword],
   );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -68,12 +68,7 @@ const SignInDialog = (props: Props) => {
 
   return (
     <div>
-      <Dialog
-        open={props.open}
-        onClose={() => props.onClose()}
-        fullWidth={true}
-        maxWidth={"sm"}
-      >
+      <Dialog open={props.open} onClose={() => props.onClose()} fullWidth={true} maxWidth={"sm"}>
         <DialogContent>
           <Container>
             <Heading>サインイン</Heading>

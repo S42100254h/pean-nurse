@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  isValidEmailFormat,
-  isValidRequiredInput,
-} from "../../function/common";
+import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, Spacer, TextInput } from "../UIkit";
@@ -82,21 +79,21 @@ const ClosableDialog = (props: Props) => {
     (event) => {
       setEmail(event.target.value);
     },
-    [setEmail]
+    [setEmail],
   );
 
   const inputSelect = useCallback(
     (event) => {
       setSelect(event.target.value);
     },
-    [setSelect]
+    [setSelect],
   );
 
   const inputText = useCallback(
     (event) => {
       setText(event.target.value);
     },
-    [setText]
+    [setText],
   );
 
   const inputImage = useCallback(
@@ -105,7 +102,7 @@ const ClosableDialog = (props: Props) => {
       // enable to attach same file
       event.target.value = "";
     },
-    [setImage]
+    [setImage],
   );
 
   const handleIsSubmittedToggle = useCallback(() => {
@@ -117,7 +114,7 @@ const ClosableDialog = (props: Props) => {
     select: string,
     text: string,
     image: File | null,
-    name: string
+    name: string,
   ) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
 
@@ -132,11 +129,7 @@ const ClosableDialog = (props: Props) => {
     }
 
     interface CostomFormData extends FormData {
-      append(
-        name: string,
-        value: string | Blob | null,
-        fileName?: string
-      ): void;
+      append(name: string, value: string | Blob | null, fileName?: string): void;
     }
 
     let form: CostomFormData = new FormData();
@@ -196,17 +189,12 @@ const ClosableDialog = (props: Props) => {
           <DialogContent>
             <TextArea>
               <p>PeANをご利用いただきありがとうございます。</p>
-              <p>
-                ご不明点やご意見等ございましたら、フォームよりご連絡ください。
-              </p>
+              <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
               <p>
                 また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。
               </p>
 
-              <p>
-                ※
-                いただきましたご意見は、メールにて順次ご返信させていただきます。
-              </p>
+              <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
               <img src={cat} alt="ねこ" width="180px" height="180px" />
             </TextArea>
             <InputArea>

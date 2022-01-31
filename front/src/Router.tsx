@@ -32,18 +32,9 @@ import UnAuthRoute from "./UnAuthRoute";
 
 const Router = withRouter(({ location }) => (
   <TransitionGroup>
-    <CSSTransition
-      key={location.key}
-      classNames="item"
-      timeout={1000}
-      exit={false}
-    >
+    <CSSTransition key={location.key} classNames="item" timeout={1000} exit={false}>
       <Switch>
-        <AdminRoute
-          exact
-          path={"/category/create"}
-          component={CreateCategory}
-        />
+        <AdminRoute exact path={"/category/create"} component={CreateCategory} />
         <AdminRoute exact path={"/category/list"} component={CategoryList} />
         <AdminRoute exact path={"/management"} component={Management} />
         <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
@@ -53,25 +44,13 @@ const Router = withRouter(({ location }) => (
         <AdminRoute exact path={"/user/detail/:id"} component={UserDetail} />
         <NoAdminRoute exact path={"/adminsignin"} component={AdminSignIn} />
         <UnAuthRoute exact path={"(/)?"} component={Home} />
-        <UnAuthRoute
-          exact
-          path={"/forgetpassword"}
-          component={ForgetPassword}
-        />
-        <UnAuthRoute
-          exact
-          path={"/forgetpassword/sent"}
-          component={ForgetPasswordSent}
-        />
+        <UnAuthRoute exact path={"/forgetpassword"} component={ForgetPassword} />
+        <UnAuthRoute exact path={"/forgetpassword/sent"} component={ForgetPasswordSent} />
         <UnAuthRoute exact path={"/resetpassword"} component={ResetPassword} />
         <UnAuthRoute exact path={"/signup"} component={SignUp} />
         <UnAuthRoute exact path={"/signin"} component={SignIn} />
         <PrivateRoute exact path={"/courselist"} component={CourseList} />
-        <PrivateRoute
-          exact
-          path={"/courselist/:id"}
-          component={CourseOverview}
-        />
+        <PrivateRoute exact path={"/courselist/:id"} component={CourseOverview} />
         <PrivateRoute exact path={"/dashboard"} component={DashBoard} />
         <PrivateRoute exact path={"/setting"} component={Setting} />
         <PrivateRoute exact path={"/study"} component={Study} />

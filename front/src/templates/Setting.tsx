@@ -11,19 +11,10 @@ import {
   TextInput,
 } from "../components/UIkit";
 import { useSelector } from "react-redux";
-import {
-  getUserEmail,
-  getUserImage,
-  getUserName,
-} from "../reducks/user/selectors";
+import { getUserEmail, getUserImage, getUserName } from "../reducks/user/selectors";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-import {
-  deleteImage,
-  editImage,
-  editPassword,
-  editUserInfo,
-} from "../reducks/user/operations";
+import { deleteImage, editImage, editPassword, editUserInfo } from "../reducks/user/operations";
 import { ClickAway } from "../components/ClickAway";
 import { Confirmation } from "../components/Confirmation";
 import { push } from "connected-react-router";
@@ -119,35 +110,35 @@ const Setting = () => {
     (event) => {
       setName(event.target.value);
     },
-    [setName]
+    [setName],
   );
 
   const inputEmail = useCallback(
     (event) => {
       setEmail(event.target.value);
     },
-    [setPassword]
+    [setPassword],
   );
 
   const inputPassword = useCallback(
     (event) => {
       setPassword(event.target.value);
     },
-    [setPassword]
+    [setPassword],
   );
 
   const inputCurrentPassword = useCallback(
     (event) => {
       setCurrentPassword(event.target.value);
     },
-    [setCurrentPassword]
+    [setCurrentPassword],
   );
 
   const inputPasswordConfirmation = useCallback(
     (event) => {
       setPasswordConfirmation(event.target.value);
     },
-    [setPasswordConfirmation]
+    [setPasswordConfirmation],
   );
 
   useEffect(() => {
@@ -157,15 +148,12 @@ const Setting = () => {
 
   const handleModalToggle = useCallback(
     (event) => {
-      if (
-        event.type === "keydown" &&
-        (event.key === "Tab" || event.key === "Shift")
-      ) {
+      if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
         return;
       }
       setOpen(!open);
     },
-    [setOpen, open]
+    [setOpen, open],
   );
 
   const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -286,17 +274,9 @@ const Setting = () => {
                 <PrimaryButton
                   label={"更新"}
                   fullWidth={true}
-                  disabled={
-                    !current_password || !password || !password_confirmation
-                  }
+                  disabled={!current_password || !password || !password_confirmation}
                   onClick={() => {
-                    dispatch(
-                      editPassword(
-                        current_password,
-                        password,
-                        password_confirmation
-                      )
-                    );
+                    dispatch(editPassword(current_password, password, password_confirmation));
                   }}
                 />
               </TabPanel>
@@ -311,9 +291,7 @@ const Setting = () => {
           {open && (
             <ClickAway
               onClickAway={handleModalToggle}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleUpload(e)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpload(e)}
               onClick={() => dispatch(deleteImage())}
             />
           )}

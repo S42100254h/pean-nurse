@@ -51,28 +51,28 @@ const SignUpDialog = (props: Props) => {
     (event) => {
       setName(event.target.value);
     },
-    [setName]
+    [setName],
   );
 
   const inputEmail = useCallback(
     (event) => {
       setEmail(event.target.value);
     },
-    [setEmail]
+    [setEmail],
   );
 
   const inputPassword = useCallback(
     (event) => {
       setPassword(event.target.value);
     },
-    [setPassword]
+    [setPassword],
   );
 
   const inputConfirmPassword = useCallback(
     (event) => {
       setConfirmPassword(event.target.value);
     },
-    [setConfirmPassword]
+    [setConfirmPassword],
   );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -84,12 +84,7 @@ const SignUpDialog = (props: Props) => {
 
   return (
     <div>
-      <Dialog
-        open={props.open}
-        onClose={() => props.onClose()}
-        fullWidth={true}
-        maxWidth={"sm"}
-      >
+      <Dialog open={props.open} onClose={() => props.onClose()} fullWidth={true} maxWidth={"sm"}>
         <DialogContent>
           <Container>
             <Heading>アカウント登録</Heading>

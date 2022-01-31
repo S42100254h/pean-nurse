@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  hideLoadingAction,
-  showLoadingAction,
-} from "../reducks/loading/actions";
+import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
@@ -29,7 +26,7 @@ export const createCategory = (category: string) => {
               setNotificationAction({
                 variant: "success",
                 message: "カテゴリーの作成に成功しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -39,7 +36,7 @@ export const createCategory = (category: string) => {
               setNotificationAction({
                 variant: "error",
                 message: "カテゴリーの作成に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });

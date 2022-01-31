@@ -1,11 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  TextInput,
-  PasswordInput,
-  PrimaryButton,
-  Spacer,
-} from "../components/UIkit";
+import { TextInput, PasswordInput, PrimaryButton, Spacer } from "../components/UIkit";
 import { adminSignIn } from "../reducks/admin/operations";
 import styled from "styled-components";
 
@@ -36,14 +31,14 @@ const AdminSignIn = () => {
     (event) => {
       setEmail(event.target.value);
     },
-    [setEmail]
+    [setEmail],
   );
 
   const inputPassword = useCallback(
     (event) => {
       setPassword(event.target.value);
     },
-    [setPassword]
+    [setPassword],
   );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

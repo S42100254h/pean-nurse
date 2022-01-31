@@ -20,7 +20,7 @@ export const fetchQuizzes = () => {
             setNotificationAction({
               variant: "error",
               message: "クイズ一覧の取得に失敗しました。",
-            })
+            }),
           );
         }, 400);
       });
@@ -45,9 +45,7 @@ export const deleteQuiz = (id: string | number) => {
         })
         .then(() => {
           const prevQuizzes = getQuizzes().quizzes.list;
-          const nextQuizzes = prevQuizzes.filter(
-            (quiz: Quiz) => quiz.id !== Number(id)
-          );
+          const nextQuizzes = prevQuizzes.filter((quiz: Quiz) => quiz.id !== Number(id));
           dispatch(deleteQuizAction(nextQuizzes));
           dispatch(showLoadingAction("Delete quiz..."));
 
@@ -57,7 +55,7 @@ export const deleteQuiz = (id: string | number) => {
               setNotificationAction({
                 variant: "success",
                 message: "クイズを削除しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -67,7 +65,7 @@ export const deleteQuiz = (id: string | number) => {
               setNotificationAction({
                 variant: "error",
                 message: "クイズの削除に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });

@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import AppsIcon from "@material-ui/icons/Apps";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -89,11 +83,7 @@ const ClosableDrawer = (props: Props) => {
         <div>
           <List>
             {menus.map((menu) => (
-              <ListItem
-                button
-                key={menu.id}
-                onClick={() => menu.func(menu.value)}
-              >
+              <ListItem button key={menu.id} onClick={() => menu.func(menu.value)}>
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.label} />
               </ListItem>

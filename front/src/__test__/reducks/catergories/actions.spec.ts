@@ -1,7 +1,4 @@
-import {
-  fetchCategoriesAction,
-  deleteCategoryAction,
-} from "../../../reducks/categories/actions";
+import { fetchCategoriesAction, deleteCategoryAction } from "../../../reducks/categories/actions";
 
 describe("atcions.tsのテスト", () => {
   it("fetchCategoriesActionのテスト", () => {

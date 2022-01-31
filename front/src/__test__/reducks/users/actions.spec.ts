@@ -1,7 +1,4 @@
-import {
-  fetchUsersAction,
-  deleteUserAction,
-} from "../../../reducks/users/actions";
+import { fetchUsersAction, deleteUserAction } from "../../../reducks/users/actions";
 
 describe("actions.tsのテスト", () => {
   it("fetchUsersActionのテスト", () => {

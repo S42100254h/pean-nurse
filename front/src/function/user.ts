@@ -1,16 +1,9 @@
-import {
-  hideLoadingAction,
-  showLoadingAction,
-} from "../reducks/loading/actions";
+import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { setNotificationAction } from "../reducks/notification/actions";
 import axios from "axios";
 import { Dispatch } from "redux";
 
-export const editUserInfoByAdmin = (
-  id: string,
-  name: string,
-  email: string
-) => {
+export const editUserInfoByAdmin = (id: string, name: string, email: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -37,7 +30,7 @@ export const editUserInfoByAdmin = (
               setNotificationAction({
                 variant: "success",
                 message: "ユーザー情報を更新しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -47,7 +40,7 @@ export const editUserInfoByAdmin = (
               setNotificationAction({
                 variant: "error",
                 message: "ユーザー情報の更新に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });

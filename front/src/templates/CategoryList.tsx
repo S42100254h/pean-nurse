@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteCategory,
-  fetchCategories,
-} from "../reducks/categories/operations";
+import { deleteCategory, fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import { SecondaryButton } from "../components/UIkit";

@@ -1,7 +1,4 @@
-import {
-  fetchQuizzesAction,
-  deleteQuizAction,
-} from "../../../reducks/quizzes/actions";
+import { fetchQuizzesAction, deleteQuizAction } from "../../../reducks/quizzes/actions";
 
 describe("actions.tsのテスト", () => {
   it("fetchQuizzesActionのテスト", () => {

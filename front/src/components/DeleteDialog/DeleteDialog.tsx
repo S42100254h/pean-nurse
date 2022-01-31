@@ -26,12 +26,7 @@ type Props = {
 const DeleteDialog = (props: Props) => {
   return (
     <>
-      <Dialog
-        open={props.open}
-        onClose={(e) => props.onClose(e)}
-        fullWidth={true}
-        maxWidth={"sm"}
-      >
+      <Dialog open={props.open} onClose={(e) => props.onClose(e)} fullWidth={true} maxWidth={"sm"}>
         <DialogContent>
           <div>
             <Heading>削除する</Heading>
@@ -41,17 +36,9 @@ const DeleteDialog = (props: Props) => {
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
           <Spacer size="xs" />
-          <PrimaryButton
-            label={"キャンセル"}
-            fullWidth={true}
-            onClick={props.onClickStop}
-          />
+          <PrimaryButton label={"キャンセル"} fullWidth={true} onClick={props.onClickStop} />
           <Spacer size="xs" />
-          <SecondaryButton
-            label={"削除する"}
-            fullWidth={true}
-            onClick={props.onClickProceed}
-          />
+          <SecondaryButton label={"削除する"} fullWidth={true} onClick={props.onClickProceed} />
           <Spacer size="xs" />
         </DialogContent>
       </Dialog>

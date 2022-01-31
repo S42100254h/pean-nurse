@@ -1,9 +1,6 @@
 import initialState from "../../../reducks/store/initialState";
 import { QuizzesReducer } from "../../../reducks/quizzes/reducers";
-import {
-  fetchQuizzesAction,
-  deleteQuizAction,
-} from "../../../reducks/quizzes/actions";
+import { fetchQuizzesAction, deleteQuizAction } from "../../../reducks/quizzes/actions";
 
 describe("QuizzesReducerのテスト", () => {
   const init = initialState.quizzes;

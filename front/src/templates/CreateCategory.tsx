@@ -30,7 +30,7 @@ const CreateCategory = () => {
     (event) => {
       setCategory(event.target.value);
     },
-    [setCategory]
+    [setCategory],
   );
 
   return (

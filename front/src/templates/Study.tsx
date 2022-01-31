@@ -105,27 +105,8 @@ const CorrectAnserRate = styled.div`
   text-align: center;
 `;
 
-const lightIcons = [
-  A_light,
-  B_light,
-  C_light,
-  D_light,
-  E_light,
-  F_light,
-  G_light,
-  H_light,
-];
-
-const darkIcons = [
-  A_dark,
-  B_dark,
-  C_dark,
-  D_dark,
-  E_dark,
-  F_dark,
-  G_dark,
-  H_dark,
-];
+const lightIcons = [A_light, B_light, C_light, D_light, E_light, F_light, G_light, H_light];
+const darkIcons = [A_dark, B_dark, C_dark, D_dark, E_dark, F_dark, G_dark, H_dark];
 
 type Choice = {
   id: number;
@@ -164,8 +145,7 @@ const Study = () => {
       setQuiz(resp.data.title);
     });
 
-    const choicesApiEndpoint =
-      process.env.REACT_APP_API_URL + "choices/index/" + 459;
+    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 459;
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
@@ -204,12 +184,7 @@ const Study = () => {
           ))}
           <Spacer size="xs" />
         </ChoicesContainer>
-        <CSSTransition
-          classNames="answer"
-          in={open}
-          timeout={1000}
-          exit={false}
-        >
+        <CSSTransition classNames="answer" in={open} timeout={1000} exit={false}>
           {open ? <AnswerContainer>選択肢１</AnswerContainer> : <></>}
         </CSSTransition>
         <Spacer size="sm" />

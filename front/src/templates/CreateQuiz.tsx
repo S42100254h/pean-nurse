@@ -47,7 +47,7 @@ const CreateQuiz = () => {
     (event) => {
       setQuiz(event.target.value);
     },
-    [setQuiz]
+    [setQuiz],
   );
 
   const handleDialogClose = () => setOpen(false);
@@ -105,11 +105,7 @@ const CreateQuiz = () => {
         onChange={inputQuiz}
       />
       <Spacer size="sm" />
-      <Select
-        isMulti
-        options={options}
-        placeholder={"カテゴリーを選択してください"}
-      />
+      <Select isMulti options={options} placeholder={"カテゴリーを選択してください"} />
       <Spacer size="sm" />
       <SetChoicesArea choices={choices} setChoices={setChoices} />
       <Spacer size="sm" />
@@ -119,12 +115,7 @@ const CreateQuiz = () => {
         disabled={!quiz || !isDisabled(choices)}
         onClick={() => handleDialogOpen()}
       />
-      <ConfirmCreateDialog
-        quiz={quiz}
-        choices={choices}
-        open={open}
-        onClose={handleDialogClose}
-      />
+      <ConfirmCreateDialog quiz={quiz} choices={choices} open={open} onClose={handleDialogClose} />
     </Container>
   );
 };

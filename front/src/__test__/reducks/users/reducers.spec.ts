@@ -1,9 +1,6 @@
 import initialState from "../../../reducks/store/initialState";
 import { UsersReducer } from "../../../reducks/users/reducers";
-import {
-  fetchUsersAction,
-  deleteUserAction,
-} from "../../../reducks/users/actions";
+import { fetchUsersAction, deleteUserAction } from "../../../reducks/users/actions";
 
 describe("UsersReducerのテスト", () => {
   const init = initialState.users;

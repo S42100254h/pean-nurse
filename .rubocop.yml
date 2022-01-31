@@ -8,4 +8,4 @@ inherit_from:
   - config/rubocop/rspec.yml
 
 AllCops:
-    NewCops: enable
+  NewCops: enable

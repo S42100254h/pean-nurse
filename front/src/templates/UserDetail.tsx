@@ -1,12 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import {
-  TextInput,
-  PrimaryButton,
-  SecondaryButton,
-  Spacer,
-} from "../components/UIkit";
+import { TextInput, PrimaryButton, SecondaryButton, Spacer } from "../components/UIkit";
 import { deleteUser } from "../reducks/users/operations";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { editUserInfoByAdmin } from "../function/user";
@@ -48,8 +43,7 @@ const UserDetail = () => {
       const auth_token = localStorage.getItem("access-token") || "";
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
-      const apiEndpoint =
-        process.env.REACT_APP_API_URL + "users/" + match.params.id;
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/" + match.params.id;
       let isMounted = true;
 
       axios
@@ -77,14 +71,14 @@ const UserDetail = () => {
     (event) => {
       setName(event.target.value);
     },
-    [setName]
+    [setName],
   );
 
   const inputMail = useCallback(
     (event) => {
       setEmail(event.target.value);
     },
-    [setEmail]
+    [setEmail],
   );
 
   return (
@@ -116,9 +110,7 @@ const UserDetail = () => {
         label={"ユーザー情報を更新する"}
         fullWidth={true}
         disabled={!name || !email}
-        onClick={() =>
-          dispatch(editUserInfoByAdmin(match.params.id, name, email))
-        }
+        onClick={() => dispatch(editUserInfoByAdmin(match.params.id, name, email))}
       />
       <Spacer size="xs" />
       <SecondaryButton

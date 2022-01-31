@@ -1,7 +1,4 @@
-import {
-  hideLoadingAction,
-  showLoadingAction,
-} from "../../../reducks/loading/actions";
+import { hideLoadingAction, showLoadingAction } from "../../../reducks/loading/actions";
 
 describe("actions.tsのテスト", () => {
   it("hideLoadingActionのテスト", () => {

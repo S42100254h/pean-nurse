@@ -6,11 +6,7 @@ import {
   signInAction,
   signOutAction,
 } from "./actions";
-import {
-  isValidEmailFormat,
-  isValidRequiredInput,
-  isValidPassword,
-} from "../../function/common";
+import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
@@ -21,7 +17,7 @@ export const signUp = (
   name: string,
   email: string,
   password: string,
-  password_confirmation: string
+  password_confirmation: string,
 ) => {
   return async (dispatch: Dispatch) => {
     if (!isValidEmailFormat(email)) {
@@ -69,7 +65,7 @@ export const signUp = (
             setNotificationAction({
               variant: "success",
               message: "ユーザー登録に成功しました。",
-            })
+            }),
           );
         }, 1000);
       })
@@ -79,7 +75,7 @@ export const signUp = (
             setNotificationAction({
               variant: "error",
               message: "ユーザー登録に失敗しました。",
-            })
+            }),
           );
         }, 400);
       });
@@ -123,7 +119,7 @@ export const signIn = (email: string, password: string) => {
             setNotificationAction({
               variant: "success",
               message: "サインインしました。",
-            })
+            }),
           );
         }, 1000);
       })
@@ -133,7 +129,7 @@ export const signIn = (email: string, password: string) => {
             setNotificationAction({
               variant: "error",
               message: "サインインに失敗しました。入力内容をご確認ください。",
-            })
+            }),
           );
         }, 400);
       });
@@ -168,7 +164,7 @@ export const signOut = () => {
               setNotificationAction({
                 variant: "success",
                 message: "サインアウトしました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -178,7 +174,7 @@ export const signOut = () => {
               setNotificationAction({
                 variant: "error",
                 message: "サインアウトに失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -216,7 +212,7 @@ export const deleteUser = () => {
               setNotificationAction({
                 variant: "success",
                 message: "ユーザー情報を削除しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -226,7 +222,7 @@ export const deleteUser = () => {
               setNotificationAction({
                 variant: "error",
                 message: "ユーザー情報の削除に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -269,7 +265,7 @@ export const editUserInfo = (name: string, email: string) => {
               setNotificationAction({
                 variant: "success",
                 message: "ユーザー情報を更新しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -279,7 +275,7 @@ export const editUserInfo = (name: string, email: string) => {
               setNotificationAction({
                 variant: "error",
                 message: "ユーザー情報の更新に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -317,7 +313,7 @@ export const editImage = (image: File) => {
               setNotificationAction({
                 variant: "success",
                 message: "画像を更新しました。",
-              })
+              }),
             );
           }, 0);
         })
@@ -327,7 +323,7 @@ export const editImage = (image: File) => {
               setNotificationAction({
                 variant: "error",
                 message: "画像の更新に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -363,7 +359,7 @@ export const deleteImage = () => {
               setNotificationAction({
                 variant: "success",
                 message: "画像をデフォルトに変更しました。",
-              })
+              }),
             );
           }, 0);
         })
@@ -373,7 +369,7 @@ export const deleteImage = () => {
               setNotificationAction({
                 variant: "error",
                 message: "画像の更新に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -386,12 +382,10 @@ export const deleteImage = () => {
 export const editPassword = (
   current_password: string,
   password: string,
-  password_confirmation: string
+  password_confirmation: string,
 ) => {
   return async (dispatch: Dispatch) => {
-    if (
-      !isValidRequiredInput(current_password, password, password_confirmation)
-    ) {
+    if (!isValidRequiredInput(current_password, password, password_confirmation)) {
       alert("未入力の項目があります");
       return false;
     }
@@ -436,7 +430,7 @@ export const editPassword = (
               setNotificationAction({
                 variant: "success",
                 message: "パスワードを更新しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -445,9 +439,8 @@ export const editPassword = (
             dispatch(
               setNotificationAction({
                 variant: "error",
-                message:
-                  "パスワードの更新に失敗しました。入力内容をご確認ください。",
-              })
+                message: "パスワードの更新に失敗しました。入力内容をご確認ください。",
+              }),
             );
           }, 400);
         });
@@ -474,7 +467,7 @@ export const forgetPassword = (email: string) => {
             setNotificationAction({
               variant: "success",
               message: "メールを送信しました。",
-            })
+            }),
           );
         }, 1000);
       })
@@ -483,19 +476,15 @@ export const forgetPassword = (email: string) => {
           dispatch(
             setNotificationAction({
               variant: "error",
-              message:
-                "メールの送信に失敗しました。メールアドレスをご確認ください。",
-            })
+              message: "メールの送信に失敗しました。メールアドレスをご確認ください。",
+            }),
           );
         }, 400);
       });
   };
 };
 
-export const resetPassword = (
-  password: string,
-  password_confirmation: string
-) => {
+export const resetPassword = (password: string, password_confirmation: string) => {
   return async (dispatch: Dispatch) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
     const body = {
@@ -526,7 +515,7 @@ export const resetPassword = (
             setNotificationAction({
               variant: "success",
               message: "パスワードを再設定しました。",
-            })
+            }),
           );
         }, 1000);
       })
@@ -537,7 +526,7 @@ export const resetPassword = (
               variant: "error",
               message:
                 "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。",
-            })
+            }),
           );
         }, 400);
       });
@@ -571,7 +560,7 @@ export const listenAuthState = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
-            })
+            }),
           );
         })
         .catch((error) => {
@@ -610,7 +599,7 @@ export const redirectToDashboard = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
-            })
+            }),
           );
 
           dispatch(push("/dashboard"));
