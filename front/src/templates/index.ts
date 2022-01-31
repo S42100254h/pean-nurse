@@ -17,5 +17,6 @@ export { default as ResetPassword } from "./ResetPassword";
 export { default as Setting } from "./Setting";
 export { default as SignUp } from "./SignUp";
 export { default as SignIn } from "./SignIn";
+export { default as Study } from "./Study";
 export { default as UserDetail } from "./UserDetail";
 export { default as UserList } from "./UserList";

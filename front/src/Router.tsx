@@ -21,6 +21,7 @@ import {
   Setting,
   SignUp,
   SignIn,
+  Study,
   UserDetail,
   UserList,
 } from "./templates";
@@ -73,6 +74,7 @@ const Router = withRouter(({ location }) => (
         />
         <PrivateRoute exact path={"/dashboard"} component={DashBoard} />
         <PrivateRoute exact path={"/setting"} component={Setting} />
+        <PrivateRoute exact path={"/study"} component={Study} />
         <PrivateRoute exact path={"/deactivate"} component={Deactivate} />
         <Route component={PageNotFound} />
       </Switch>
