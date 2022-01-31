@@ -1,10 +1,7 @@
 import React, { ReactNode } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSelector } from "react-redux";
-import {
-  getLoadingState,
-  getLoadingText,
-} from "../../reducks/loading/selectors";
+import { getLoadingState, getLoadingText } from "../../reducks/loading/selectors";
 import { RootState } from "../../types/entity/rootState";
 import styled from "styled-components";
 

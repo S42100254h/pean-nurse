@@ -1,12 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import {
-  PrimaryButton,
-  SecondaryButton,
-  Spacer,
-  TextInput,
-} from "../components/UIkit";
+import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { SetChoicesArea } from "../components/SetChoicesArea.tsx";
 import { DeleteDialog } from "../components/DeleteDialog";
@@ -52,10 +47,8 @@ const QuizDetail = () => {
     [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const quizApiEndpoint =
-      process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
-    const choiceApiEndpoint =
-      process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
+    const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
     let isMounted = true;
 
     axios.get(quizApiEndpoint).then((resp) => {
@@ -79,7 +72,7 @@ const QuizDetail = () => {
     (event) => {
       setQuiz(event.target.value);
     },
-    [setQuiz]
+    [setQuiz],
   );
 
   const handleDialogClose = () => setOpen(false);

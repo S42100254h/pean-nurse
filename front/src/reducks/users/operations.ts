@@ -30,7 +30,7 @@ export const fetchUsers = () => {
               setNotificationAction({
                 variant: "error",
                 message: "ユーザー一覧の取得に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -56,9 +56,7 @@ export const deleteUser = (id: string | number) => {
         })
         .then(() => {
           const prevUsers = getUsers().users.list;
-          const nextUsers = prevUsers.filter(
-            (user: User) => user.id !== Number(id)
-          );
+          const nextUsers = prevUsers.filter((user: User) => user.id !== Number(id));
           dispatch(deleteUserAction(nextUsers));
           dispatch(showLoadingAction("Delete User..."));
 
@@ -68,7 +66,7 @@ export const deleteUser = (id: string | number) => {
               setNotificationAction({
                 variant: "success",
                 message: "ユーザーを削除しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -78,7 +76,7 @@ export const deleteUser = (id: string | number) => {
               setNotificationAction({
                 variant: "error",
                 message: "ユーザーの削除に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });

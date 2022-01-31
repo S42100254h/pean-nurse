@@ -118,10 +118,7 @@ const Header = () => {
     },
   ];
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    menus: Menu[]
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, menus: Menu[]) => {
     setAnchorEl(event.currentTarget);
     setMenus(menus);
   };
@@ -138,31 +135,21 @@ const Header = () => {
         <Box>
           <StyledAppBar position="fixed">
             <StyledToolbar>
-              <Image
-                src={pean}
-                alt="logo"
-                onClick={() => dispatch(push("/management"))}
-              />
+              <Image src={pean} alt="logo" onClick={() => dispatch(push("/management"))} />
               <Left>
-                <HeaderItem onClick={() => dispatch(push("/management"))}>
-                  ホーム
-                </HeaderItem>
+                <HeaderItem onClick={() => dispatch(push("/management"))}>ホーム</HeaderItem>
                 <HeaderItem onClick={(event) => handleClick(event, userMenu)}>
                   ユーザー管理
                 </HeaderItem>
                 <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>
                   クイズ管理
                 </HeaderItem>
-                <HeaderItem
-                  onClick={(event) => handleClick(event, categoryMenu)}
-                >
+                <HeaderItem onClick={(event) => handleClick(event, categoryMenu)}>
                   カテゴリー管理
                 </HeaderItem>
               </Left>
               <Right>
-                <HeaderItem onClick={() => dispatch(adminSignOut())}>
-                  サインアウト
-                </HeaderItem>
+                <HeaderItem onClick={() => dispatch(adminSignOut())}>サインアウト</HeaderItem>
               </Right>
             </StyledToolbar>
             <DropDown
@@ -178,45 +165,26 @@ const Header = () => {
           <StyledAppBar position="fixed">
             {isSignedIn ? (
               <StyledToolbar>
-                <Image
-                  src={pean}
-                  alt="logo"
-                  onClick={() => dispatch(push("/dashboard"))}
-                />
+                <Image src={pean} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
                 <Left>
                   <HeaderItem onClick={() => dispatch(push("/dashboard"))}>
                     ダッシュボード
                   </HeaderItem>
-                  <HeaderItem onClick={() => dispatch(push("/courselist"))}>
-                    コース一覧
-                  </HeaderItem>
-                  <HeaderItem onClick={() => dispatch(push("/help"))}>
-                    ヘルプ
-                  </HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/courselist"))}>コース一覧</HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/help"))}>ヘルプ</HeaderItem>
                 </Left>
                 <ButtonWrapper>
-                  <IconButton
-                    style={{ padding: "8px" }}
-                    onClick={handleDrawerToggle}
-                  >
+                  <IconButton style={{ padding: "8px" }} onClick={handleDrawerToggle}>
                     <MenuIcon />
                   </IconButton>
                 </ButtonWrapper>
               </StyledToolbar>
             ) : (
               <StyledToolbar>
-                <Image
-                  src={pean}
-                  alt="logo"
-                  onClick={() => dispatch(push("/"))}
-                />
+                <Image src={pean} alt="logo" onClick={() => dispatch(push("/"))} />
                 <Right>
-                  <HeaderItem onClick={handleSignInDialogToggle}>
-                    サインイン
-                  </HeaderItem>
-                  <HeaderItem onClick={handleSignUpDialogToggle}>
-                    無料会員登録
-                  </HeaderItem>
+                  <HeaderItem onClick={handleSignInDialogToggle}>サインイン</HeaderItem>
+                  <HeaderItem onClick={handleSignUpDialogToggle}>無料会員登録</HeaderItem>
                 </Right>
               </StyledToolbar>
             )}

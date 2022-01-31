@@ -1,9 +1,6 @@
 import initialState from "../../../reducks/store/initialState";
 import { CategoriesReducer } from "../../../reducks/categories/reducers";
-import {
-  fetchCategoriesAction,
-  deleteCategoryAction,
-} from "../../../reducks/categories/actions";
+import { fetchCategoriesAction, deleteCategoryAction } from "../../../reducks/categories/actions";
 
 describe("CategoriesReducerのテスト", () => {
   const init = initialState.categories;

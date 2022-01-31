@@ -36,12 +36,7 @@ const ConfirmUpdateDialog = ({ quiz, choices, open, onClose, id }: Props) => {
 
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={() => onClose()}
-        fullWidth={false}
-        maxWidth={"md"}
-      >
+      <Dialog open={open} onClose={() => onClose()} fullWidth={false} maxWidth={"md"}>
         <DialogContent>
           <Container>
             <Headline>以下の内容でクイズを更新してもよろしいですか？</Headline>

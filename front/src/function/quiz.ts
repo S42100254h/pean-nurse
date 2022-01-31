@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  hideLoadingAction,
-  showLoadingAction,
-} from "../reducks/loading/actions";
+import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
@@ -36,7 +33,7 @@ export const createQuiz = (quiz: string, choices: Choice[]) => {
               setNotificationAction({
                 variant: "success",
                 message: "クイズの作成に成功しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -46,7 +43,7 @@ export const createQuiz = (quiz: string, choices: Choice[]) => {
               setNotificationAction({
                 variant: "error",
                 message: "クイズの作成に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -76,7 +73,7 @@ export const editQuiz = (quiz: string, choices: Choice[], id: string) => {
               setNotificationAction({
                 variant: "success",
                 message: "クイズの更新に成功しました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -86,7 +83,7 @@ export const editQuiz = (quiz: string, choices: Choice[], id: string) => {
               setNotificationAction({
                 variant: "error",
                 message: "クイズの更新に失敗しました。",
-              })
+              }),
             );
           }, 400);
         });

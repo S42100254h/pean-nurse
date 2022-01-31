@@ -38,14 +38,14 @@ const ResetPassword = () => {
     (event) => {
       setPassword(event.target.value);
     },
-    [setPassword]
+    [setPassword],
   );
 
   const inputPasswordConfirmation = useCallback(
     (event) => {
       setPasswordConfirmation(event.target.value);
     },
-    [setPasswordConfirmation]
+    [setPasswordConfirmation],
   );
 
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

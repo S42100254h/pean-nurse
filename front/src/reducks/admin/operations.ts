@@ -1,8 +1,5 @@
 import { adminSignInAction, adminSignOutAction } from "./actions";
-import {
-  isValidEmailFormat,
-  isValidRequiredInput,
-} from "../../function/common";
+import { isValidEmailFormat, isValidRequiredInput } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
@@ -46,7 +43,7 @@ export const adminSignIn = (email: string, password: string) => {
             setNotificationAction({
               variant: "success",
               message: "サインインしました。",
-            })
+            }),
           );
         }, 1000);
       })
@@ -56,7 +53,7 @@ export const adminSignIn = (email: string, password: string) => {
             setNotificationAction({
               variant: "error",
               message: "サインインに失敗しました。入力内容をご確認ください。",
-            })
+            }),
           );
         }, 400);
       });
@@ -91,7 +88,7 @@ export const adminSignOut = () => {
               setNotificationAction({
                 variant: "success",
                 message: "サインアウトしました。",
-              })
+              }),
             );
           }, 1000);
         })
@@ -101,7 +98,7 @@ export const adminSignOut = () => {
               setNotificationAction({
                 variant: "error",
                 message: "サインアウトに失敗しました。",
-              })
+              }),
             );
           }, 400);
         });
@@ -136,7 +133,7 @@ export const listenAdminState = () => {
               uid: adminData.uid,
               name: adminData.name,
               email: adminData.email,
-            })
+            }),
           );
         })
         .catch(() => {
@@ -173,7 +170,7 @@ export const redirectToManagement = () => {
               uid: adminData.uid,
               name: adminData.name,
               email: adminData.email,
-            })
+            }),
           );
 
           dispatch(push("/management"));

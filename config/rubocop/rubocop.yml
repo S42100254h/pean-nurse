@@ -2,7 +2,7 @@
 AllCops:
   Exclude:
     - "node_modules/**/*" # rubocop config/default.yml
-    - "vendor/**/*"       # rubocop config/default.yml
+    - "vendor/**/*" # rubocop config/default.yml
     - "db/schema.rb"
 
 #################### Layout ################################
@@ -136,7 +136,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 8
 
-
 #################### Naming ################################
 
 # has_ から始まるメソッドは許可する
@@ -162,13 +161,11 @@ Naming/MethodParameterName:
 Performance/Casecmp:
   Enabled: false
 
-
 #################### Security ##############################
 
 # 毎回 YAML.safe_load(yaml_str, [Date, Time]) するのは面倒で。。
 Security/YAMLLoad:
   Enabled: false
-
 
 #################### Style #################################
 
@@ -425,4 +422,3 @@ Rails/BulkChangeTable:
 
 Rails/ReversibleMigration:
   Enabled: false
-  

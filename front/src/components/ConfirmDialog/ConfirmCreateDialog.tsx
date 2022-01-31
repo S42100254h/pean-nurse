@@ -35,12 +35,7 @@ const ConfirmCreateDialog = ({ quiz, choices, open, onClose }: Props) => {
 
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={() => onClose()}
-        fullWidth={false}
-        maxWidth={"md"}
-      >
+      <Dialog open={open} onClose={() => onClose()} fullWidth={false} maxWidth={"md"}>
         <DialogContent>
           <Container>
             <Headline>以下の内容でクイズを作成してもよろしいですか？</Headline>

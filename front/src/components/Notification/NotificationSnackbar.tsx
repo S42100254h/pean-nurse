@@ -16,8 +16,7 @@ const Message = styled.span`
 const StyledSnackbarContent = styled(SnackbarContent)<{
   state: "success" | "error";
 }>`
-  background-color: ${(props) =>
-    props.state == "success" ? "#43A047" : "#D32F2F"};
+  background-color: ${(props) => (props.state == "success" ? "#43A047" : "#D32F2F")};
   padding: 0 8px 0 8px;
 `;
 
@@ -44,21 +43,12 @@ const NotificationSnackbar = (props: Props) => {
       aria-describedby="client-snackbar"
       message={
         <Message>
-          {props.variant == "success" ? (
-            <StyledCheckCircleIcon />
-          ) : (
-            <StyledErrorIcon />
-          )}
+          {props.variant == "success" ? <StyledCheckCircleIcon /> : <StyledErrorIcon />}
           {props.message}
         </Message>
       }
       action={[
-        <IconButton
-          key="close"
-          aria-label="Close"
-          color="inherit"
-          onClick={props.onClose}
-        >
+        <IconButton key="close" aria-label="Close" color="inherit" onClick={props.onClose}>
           <CloseIcon />
         </IconButton>,
       ]}

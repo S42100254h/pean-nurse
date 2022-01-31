@@ -1,8 +1,4 @@
-import {
-  createStore as reduxCreateStore,
-  combineReducers,
-  applyMiddleware,
-} from "redux";
+import { createStore as reduxCreateStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { connectRouter, routerMiddleware } from "connected-react-router";
@@ -28,6 +24,6 @@ export const createStore = (history: History) => {
       user: UserReducer,
       users: UsersReducer,
     }),
-    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
+    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk)),
   );
 };

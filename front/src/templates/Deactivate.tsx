@@ -40,7 +40,7 @@ const Deactivate = () => {
     (event) => {
       setText(event.target.value);
     },
-    [setText]
+    [setText],
   );
 
   return (
@@ -67,11 +67,7 @@ const Deactivate = () => {
         onChange={inputText}
       />
       <Spacer size="xs" />
-      <SecondaryButton
-        label={"退会する"}
-        fullWidth={true}
-        onClick={() => dispatch(deleteUser())}
-      />
+      <SecondaryButton label={"退会する"} fullWidth={true} onClick={() => dispatch(deleteUser())} />
     </Container>
   );
 };

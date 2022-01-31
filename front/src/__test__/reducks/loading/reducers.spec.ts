@@ -1,9 +1,6 @@
 import initialState from "../../../reducks/store/initialState";
 import { LoadingReducer } from "../../../reducks/loading/reducers";
-import {
-  hideLoadingAction,
-  showLoadingAction,
-} from "../../../reducks/loading/actions";
+import { hideLoadingAction, showLoadingAction } from "../../../reducks/loading/actions";
 
 describe("LoadingReducerのテスト", () => {
   const init = initialState.loading;

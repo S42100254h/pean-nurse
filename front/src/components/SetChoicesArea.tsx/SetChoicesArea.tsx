@@ -38,17 +38,14 @@ const SetChoicesArea = ({ choices, setChoices }: Choices) => {
 
   const inputChoice = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number
+    index: number,
   ) => {
     const newChoices = [...choices];
     newChoices[index] = { ...newChoices[index], choice: event.target.value };
     setChoices(newChoices);
   };
 
-  const inputIsRight = (
-    event: React.ChangeEvent<{ value: unknown }>,
-    index: number
-  ) => {
+  const inputIsRight = (event: React.ChangeEvent<{ value: unknown }>, index: number) => {
     const newChoices = [...choices];
     newChoices[index] = {
       ...newChoices[index],
@@ -108,10 +105,7 @@ const SetChoicesArea = ({ choices, setChoices }: Choices) => {
                 ))}
               </SelectBox>
               <ButtonWrapper>
-                <SecondaryButton
-                  label="削除"
-                  onClick={() => deleteChoice(index)}
-                />
+                <SecondaryButton label="削除" onClick={() => deleteChoice(index)} />
               </ButtonWrapper>
               <Spacer size="xs" />
             </div>

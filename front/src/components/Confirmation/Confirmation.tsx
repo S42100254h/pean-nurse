@@ -31,12 +31,7 @@ type Props = {
 const Confirmation = (props: Props) => {
   return (
     <>
-      <Dialog
-        open={props.isOpen}
-        onClose={() => props.onClose()}
-        fullWidth={true}
-        maxWidth={"sm"}
-      >
+      <Dialog open={props.isOpen} onClose={() => props.onClose()} fullWidth={true} maxWidth={"sm"}>
         <DialogContent>
           <div>
             <Heading>退会</Heading>
@@ -50,11 +45,7 @@ const Confirmation = (props: Props) => {
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
           </div>
           <Spacer size="xs" />
-          <PrimaryButton
-            label={"退会をやめる"}
-            fullWidth={true}
-            onClick={props.onClickStop}
-          />
+          <PrimaryButton label={"退会をやめる"} fullWidth={true} onClick={props.onClickStop} />
           <Spacer size="xs" />
           <SecondaryButton
             label={"退会手続きを進める"}
