@@ -52,8 +52,6 @@ const QuizContainer = styled.div`
   padding-top: 10px;
 `;
 
-const QuizText = styled.p``;
-
 const ChoiceContainer = styled.div`
   height: 100%;
   min-height: 50px;
@@ -66,8 +64,6 @@ const ChoiceContainer = styled.div`
     background-color: #f6f8fa;
   }
 `;
-
-const ChoiceText = styled.p``;
 
 const Image = styled.img`
   height: 40px;
@@ -109,6 +105,28 @@ const CorrectAnserRate = styled.div`
   text-align: center;
 `;
 
+const lightIcons = [
+  A_light,
+  B_light,
+  C_light,
+  D_light,
+  E_light,
+  F_light,
+  G_light,
+  H_light,
+];
+
+const darkIcons = [
+  A_dark,
+  B_dark,
+  C_dark,
+  D_dark,
+  E_dark,
+  F_dark,
+  G_dark,
+  H_dark,
+];
+
 type Choice = {
   id: number;
   choice: string;
@@ -140,28 +158,6 @@ const Study = () => {
     }
   };
 
-  const lightIcons = [
-    A_light,
-    B_light,
-    C_light,
-    D_light,
-    E_light,
-    F_light,
-    G_light,
-    H_light,
-  ];
-
-  const darkIcons = [
-    A_dark,
-    B_dark,
-    C_dark,
-    D_dark,
-    E_dark,
-    F_dark,
-    G_dark,
-    H_dark,
-  ];
-
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + 459;
     axios.get(quizApiEndpoint).then((resp) => {
@@ -181,7 +177,7 @@ const Study = () => {
       <SelectArea>
         <Caption>問題</Caption>
         <QuizContainer>
-          <QuizText>{quiz}</QuizText>
+          <p>{quiz}</p>
         </QuizContainer>
         <Spacer size="xs" />
         <ChoicesContainer>
@@ -203,7 +199,7 @@ const Study = () => {
               ) : (
                 <Image src={lightIcons[index]} />
               )}
-              <ChoiceText>{choice.choice}</ChoiceText>
+              <p>{choice.choice}</p>
             </ChoiceContainer>
           ))}
           <Spacer size="xs" />
