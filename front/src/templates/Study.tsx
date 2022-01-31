@@ -140,7 +140,7 @@ const Study = () => {
     }
   };
 
-  const icons = [
+  const lightIcons = [
     A_light,
     B_light,
     C_light,
@@ -149,6 +149,17 @@ const Study = () => {
     F_light,
     G_light,
     H_light,
+  ];
+
+  const darkIcons = [
+    A_dark,
+    B_dark,
+    C_dark,
+    D_dark,
+    E_dark,
+    F_dark,
+    G_dark,
+    H_dark,
   ];
 
   useEffect(() => {
@@ -187,8 +198,10 @@ const Study = () => {
                 <StyledCheckCircle />
               ) : choices[index].clicked === "wrong" ? (
                 <StyledCancel />
+              ) : choices[index].clicked === "clicked" ? (
+                <Image src={darkIcons[index]} />
               ) : (
-                <Image src={icons[index]} />
+                <Image src={lightIcons[index]} />
               )}
               <ChoiceText>{choice.choice}</ChoiceText>
             </ChoiceContainer>
