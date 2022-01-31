@@ -118,25 +118,29 @@ type Choice = {
 const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
     [quiz, setQuiz] = useState(""),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [checked, setChecked] = useState(false);
 
   const checkAnswers = (index: number) => {
+    if (checked === true) return;
+
     const selectedChoices = [...choices];
     if (selectedChoices[index].is_right.toString() === "true") {
-      selectedChoices[index] = {
-        ...selectedChoices[index],
-        clicked: "right",
-      };
+      selectedChoices[index] = { ...selectedChoices[index], clicked: "right" };
       setChoices(selectedChoices);
-      setOpen(true);
     } else {
-      selectedChoices[index] = {
-        ...selectedChoices[index],
-        clicked: "wrong",
-      };
+      selectedChoices[index] = { ...selectedChoices[index], clicked: "wrong" };
       setChoices(selectedChoices);
-      setOpen(true);
+
+      choices.map((choice) => {
+        if (choice.is_right.toString() === "true") {
+          choice.clicked = "right";
+        }
+      });
     }
+
+    setChecked(true);
+    setOpen(true);
   };
 
   useEffect(() => {
@@ -162,12 +166,7 @@ const Study = () => {
         <Spacer size="xs" />
         <ChoicesContainer>
           {choices.map((choice, index) => (
-            <ChoiceContainer
-              key={choice.id}
-              onClick={() => {
-                checkAnswers(index);
-              }}
-            >
+            <ChoiceContainer key={choice.id} onClick={() => checkAnswers(index)}>
               {choices === [] ? (
                 <></>
               ) : choices[index].clicked === "right" ? (
