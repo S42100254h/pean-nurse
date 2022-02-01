@@ -121,7 +121,8 @@ const Study = () => {
     [open, setOpen] = useState(false),
     [count, setCount] = useState(1),
     [checked, setChecked] = useState(false),
-    [correct, setCorrect] = useState(false);
+    [correctQuiz, setCorrectQuiz] = useState(0),
+    [answeredQuiz, setAnsweredQuiz] = useState(0);
 
   const checkAnswers = (index: number) => {
     if (checked === true) return;
@@ -140,6 +141,13 @@ const Study = () => {
       selectedChoices[index] = { ...selectedChoices[index], clicked: "clicked" };
       setChoices(selectedChoices);
 
+      setChecked(true);
+      setOpen(true);
+
+      if (isCorrectChoices(selectedChoices)) {
+        setCorrectQuiz(correctQuiz + 1);
+      }
+
       selectedChoices.map((choice) => {
         if (choice.is_right.toString() === "true") {
           choice.clicked = "right";
@@ -149,9 +157,7 @@ const Study = () => {
         }
       });
 
-      setChecked(true);
-      setOpen(true);
-      setCorrect(isCorrectChoices(selectedChoices));
+      setAnsweredQuiz(answeredQuiz + 1);
     }
   };
 
@@ -213,7 +219,9 @@ const Study = () => {
         </CSSTransition>
         <Spacer size="sm" />
         <CorrectAnserRate>
-          <p>現在のあなたの成績は7/7問正解！！</p>
+          <p>
+            現在のあなたの成績は{correctQuiz}/{answeredQuiz}問正解！！
+          </p>
           <p>正答率 100%！！</p>
         </CorrectAnserRate>
       </SelectArea>
