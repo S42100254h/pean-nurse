@@ -119,28 +119,53 @@ const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
     [quiz, setQuiz] = useState(""),
     [open, setOpen] = useState(false),
-    [checked, setChecked] = useState(false);
+    [count, setCount] = useState(1),
+    [checked, setChecked] = useState(false),
+    [correct, setCorrect] = useState(false);
 
   const checkAnswers = (index: number) => {
     if (checked === true) return;
 
+    const rightChoices = choices.filter((choice) => choice.is_right);
     const selectedChoices = [...choices];
-    if (selectedChoices[index].is_right.toString() === "true") {
-      selectedChoices[index] = { ...selectedChoices[index], clicked: "right" };
+
+    if (rightChoices.length > count) {
+      selectedChoices[index] = { ...selectedChoices[index], clicked: "clicked" };
       setChoices(selectedChoices);
-    } else {
-      selectedChoices[index] = { ...selectedChoices[index], clicked: "wrong" };
+      setCount(count + 1);
+      return;
+    }
+
+    if (rightChoices.length === count) {
+      selectedChoices[index] = { ...selectedChoices[index], clicked: "clicked" };
       setChoices(selectedChoices);
 
-      choices.map((choice) => {
+      selectedChoices.map((choice) => {
         if (choice.is_right.toString() === "true") {
           choice.clicked = "right";
         }
+        if (choice.clicked === "clicked" && choice.is_right.toString() === "false") {
+          choice.clicked = "wrong";
+        }
       });
-    }
 
-    setChecked(true);
-    setOpen(true);
+      setChecked(true);
+      setOpen(true);
+      setCorrect(isCorrectChoices(selectedChoices));
+    }
+  };
+
+  const isCorrectChoices = (selectedChoices: Choice[]) => {
+    let isCorrect = true;
+    for (let i = 0; i < selectedChoices.length; i++) {
+      if (
+        selectedChoices[i].is_right.toString() === "false" &&
+        selectedChoices[i].clicked === "clicked"
+      ) {
+        isCorrect = false;
+      }
+    }
+    return isCorrect;
   };
 
   useEffect(() => {
