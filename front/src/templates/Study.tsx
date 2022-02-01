@@ -119,12 +119,22 @@ const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
     [quiz, setQuiz] = useState(""),
     [open, setOpen] = useState(false),
+    [count, setCount] = useState(1),
     [checked, setChecked] = useState(false);
 
   const checkAnswers = (index: number) => {
     if (checked === true) return;
 
+    const rightChoices = choices.filter((choice) => choice.is_right);
     const selectedChoices = [...choices];
+
+    if (rightChoices.length > count) {
+      selectedChoices[index] = { ...selectedChoices[index], clicked: "clicked" };
+      setChoices(selectedChoices);
+      setCount(count + 1);
+      return;
+    }
+
     if (selectedChoices[index].is_right.toString() === "true") {
       selectedChoices[index] = { ...selectedChoices[index], clicked: "right" };
       setChoices(selectedChoices);
