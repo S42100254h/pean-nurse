@@ -101,7 +101,7 @@ const AnswerContainer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
-const CorrectAnserRate = styled.div`
+const CorrectAnswerRate = styled.div`
   text-align: center;
 `;
 
@@ -218,12 +218,20 @@ const Study = () => {
           {open ? <AnswerContainer>選択肢１</AnswerContainer> : <></>}
         </CSSTransition>
         <Spacer size="sm" />
-        <CorrectAnserRate>
-          <p>
-            現在のあなたの成績は{correctQuiz}/{answeredQuiz}問正解！！
-          </p>
-          <p>正答率 100%！！</p>
-        </CorrectAnserRate>
+        <CorrectAnswerRate>
+          {answeredQuiz === 0 ? (
+            <div>
+              <p>無理せず頑張っていきましょう！！</p>
+            </div>
+          ) : (
+            <div>
+              <p>
+                現在のあなたの成績は{correctQuiz}/{answeredQuiz}問正解！！
+                <p>正答率 {(correctQuiz / answeredQuiz) * 100}%！</p>
+              </p>
+            </div>
+          )}
+        </CorrectAnswerRate>
       </SelectArea>
     </Container>
   );
