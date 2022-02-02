@@ -128,32 +128,32 @@ const Study = () => {
     if (checked === true) return;
 
     const rightChoices = choices.filter((choice) => choice.is_right);
-    const selectedChoices = [...choices];
+    const newChoices = [...choices];
 
     if (rightChoices.length > count) {
-      selectedChoices[index] = { ...selectedChoices[index], clicked: "clicked" };
-      setChoices(selectedChoices);
+      newChoices[index] = { ...newChoices[index], clicked: "clicked" };
+      setChoices(newChoices);
       setCount(count + 1);
       return;
     }
 
     if (rightChoices.length === count) {
-      selectedChoices[index] = { ...selectedChoices[index], clicked: "clicked" };
-      setChoices(selectedChoices);
+      newChoices[index] = { ...newChoices[index], clicked: "clicked" };
+      setChoices(newChoices);
 
       setChecked(true);
       setOpen(true);
 
-      if (isCorrectChoices(selectedChoices)) {
+      if (isCorrectChoices(newChoices)) {
         setCorrectQuiz(correctQuiz + 1);
       }
 
-      selectedChoices.map((choice) => {
-        if (choice.is_right.toString() === "true") {
-          choice.clicked = "right";
+      newChoices.map((newChoice) => {
+        if (newChoice.is_right.toString() === "true") {
+          newChoice.clicked = "right";
         }
-        if (choice.clicked === "clicked" && choice.is_right.toString() === "false") {
-          choice.clicked = "wrong";
+        if (newChoice.clicked === "clicked" && newChoice.is_right.toString() === "false") {
+          newChoice.clicked = "wrong";
         }
       });
 
@@ -161,13 +161,10 @@ const Study = () => {
     }
   };
 
-  const isCorrectChoices = (selectedChoices: Choice[]) => {
+  const isCorrectChoices = (newChoices: Choice[]) => {
     let isCorrect = true;
-    for (let i = 0; i < selectedChoices.length; i++) {
-      if (
-        selectedChoices[i].is_right.toString() === "false" &&
-        selectedChoices[i].clicked === "clicked"
-      ) {
+    for (let i = 0; i < newChoices.length; i++) {
+      if (newChoices[i].is_right.toString() === "false" && newChoices[i].clicked === "clicked") {
         isCorrect = false;
       }
     }
@@ -227,8 +224,8 @@ const Study = () => {
             <div>
               <p>
                 現在のあなたの成績は{correctQuiz}/{answeredQuiz}問正解！！
-                <p>正答率 {(correctQuiz / answeredQuiz) * 100}%！</p>
               </p>
+              <p>正答率 {(correctQuiz / answeredQuiz) * 100}%！</p>
             </div>
           )}
         </CorrectAnswerRate>
