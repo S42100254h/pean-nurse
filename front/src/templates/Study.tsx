@@ -124,7 +124,8 @@ const Study = () => {
     [count, setCount] = useState(1),
     [checked, setChecked] = useState(false),
     [correctQuiz, setCorrectQuiz] = useState(0),
-    [answeredQuiz, setAnsweredQuiz] = useState(0);
+    [answeredQuiz, setAnsweredQuiz] = useState(0),
+    [tabIndex, setTabIndex] = useState(0);
 
   const checkAnswers = (index: number) => {
     if (checked === true) return;
@@ -183,7 +184,7 @@ const Study = () => {
     <Container>
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
-        <Caption>問題</Caption>
+        <Caption>問題{tabIndex + 1}</Caption>
         <QuizContainer>
           <p>{quiz}</p>
         </QuizContainer>
