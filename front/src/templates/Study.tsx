@@ -137,12 +137,13 @@ const Study = () => {
       return;
     }
 
-    setChecked(true);
-    setOpen(true);
-
     if (isCorrectChoices(newChoices)) {
       setCorrectQuiz(correctQuiz + 1);
     }
+
+    setAnsweredQuiz(answeredQuiz + 1);
+    setChecked(true);
+    setOpen(true);
 
     newChoices.map((newChoice) => {
       if (newChoice.is_right.toString() === "true") {
@@ -152,8 +153,6 @@ const Study = () => {
         newChoice.clicked = "wrong";
       }
     });
-
-    setAnsweredQuiz(answeredQuiz + 1);
   };
 
   const isCorrectChoices = (newChoices: Choice[]) => {
