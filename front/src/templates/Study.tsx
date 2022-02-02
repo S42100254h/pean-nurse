@@ -150,9 +150,6 @@ const Study = () => {
     [choices6, setChoices6] = useState<Choice[]>([]),
     [choices7, setChoices7] = useState<Choice[]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
-    // [open, setOpen] = useState(false),
-    // [count, setCount] = useState(1),
-    // [checked, setChecked] = useState(false),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0),
     [tabIndex, setTabIndex] = useState(0);
@@ -172,7 +169,6 @@ const Study = () => {
     if (tabIndex === 6) setChoices7(newChoices);
 
     if (rightChoices.length > quizzes[tabIndex].count) {
-      // setCount(count + 1);
       const selectedQuizzes = [...quizzes];
       selectedQuizzes[tabIndex].count += 1;
       setQuizzes(selectedQuizzes);
@@ -189,8 +185,6 @@ const Study = () => {
     newQuizzes[tabIndex].checked = true;
     newQuizzes[tabIndex].open = true;
     setQuizzes(newQuizzes);
-
-    // setOpen(true);
 
     newChoices.map((newChoice) => {
       if (newChoice.is_right.toString() === "true") {
