@@ -137,6 +137,7 @@ type Choice = {
 type QuizType = {
   title: string;
   checked: boolean;
+  count: number;
 };
 
 const Study = () => {
@@ -149,7 +150,7 @@ const Study = () => {
     [choices7, setChoices7] = useState<Choice[]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [open, setOpen] = useState(false),
-    [count, setCount] = useState(1),
+    // [count, setCount] = useState(1),
     // [checked, setChecked] = useState(false),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0),
@@ -169,8 +170,11 @@ const Study = () => {
     if (tabIndex === 5) setChoices6(newChoices);
     if (tabIndex === 6) setChoices7(newChoices);
 
-    if (rightChoices.length > count) {
-      setCount(count + 1);
+    if (rightChoices.length > quizzes[tabIndex].count) {
+      // setCount(count + 1);
+      const selectedQuizzes = [...quizzes];
+      selectedQuizzes[tabIndex].count += 1;
+      setQuizzes(selectedQuizzes);
       return;
     }
 
@@ -211,6 +215,7 @@ const Study = () => {
       const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
         title: newQuiz.title,
         checked: false,
+        count: 1,
       }));
       setQuizzes(newQuizzes);
     });
