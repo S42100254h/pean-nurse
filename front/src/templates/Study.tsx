@@ -97,6 +97,7 @@ const StyledArrowLeft = styled.img`
   width: 80px;
   float: left;
   margin-left: 70px;
+  cursor: pointer;
 `;
 
 const StyledArrowRight = styled.img`
@@ -104,6 +105,7 @@ const StyledArrowRight = styled.img`
   width: 80px;
   float: right;
   margin-right: 70px;
+  cursor: pointer;
 `;
 
 const ChoicesContainer = styled.div``;
@@ -240,8 +242,8 @@ const Study = () => {
             </div>
           )}
         </CorrectAnswerRate>
-        <StyledArrowLeft src={arrowLeft} />
-        <StyledArrowRight src={arrowRight} />
+        <StyledArrowLeft src={arrowLeft} onClick={() => setTabIndex(tabIndex - 1)} />
+        <StyledArrowRight src={arrowRight} onClick={() => setTabIndex(tabIndex + 1)} />
       </SelectArea>
     </Container>
   );
