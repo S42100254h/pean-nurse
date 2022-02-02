@@ -17,6 +17,8 @@ import E_dark from "../assets/img/E_dark.png";
 import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
+import arrowLeft from "../assets/img/arrowLeft.png";
+import arrowRight from "../assets/img/arrowRight.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import styled from "styled-components";
 import axios from "axios";
