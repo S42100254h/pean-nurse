@@ -129,36 +129,31 @@ const Study = () => {
 
     const rightChoices = choices.filter((choice) => choice.is_right);
     const newChoices = [...choices];
+    newChoices[index] = { ...newChoices[index], clicked: "clicked" };
+    setChoices(newChoices);
 
     if (rightChoices.length > count) {
-      newChoices[index] = { ...newChoices[index], clicked: "clicked" };
-      setChoices(newChoices);
       setCount(count + 1);
       return;
     }
 
-    if (rightChoices.length === count) {
-      newChoices[index] = { ...newChoices[index], clicked: "clicked" };
-      setChoices(newChoices);
+    setChecked(true);
+    setOpen(true);
 
-      setChecked(true);
-      setOpen(true);
-
-      if (isCorrectChoices(newChoices)) {
-        setCorrectQuiz(correctQuiz + 1);
-      }
-
-      newChoices.map((newChoice) => {
-        if (newChoice.is_right.toString() === "true") {
-          newChoice.clicked = "right";
-        }
-        if (newChoice.clicked === "clicked" && newChoice.is_right.toString() === "false") {
-          newChoice.clicked = "wrong";
-        }
-      });
-
-      setAnsweredQuiz(answeredQuiz + 1);
+    if (isCorrectChoices(newChoices)) {
+      setCorrectQuiz(correctQuiz + 1);
     }
+
+    newChoices.map((newChoice) => {
+      if (newChoice.is_right.toString() === "true") {
+        newChoice.clicked = "right";
+      }
+      if (newChoice.clicked === "clicked" && newChoice.is_right.toString() === "false") {
+        newChoice.clicked = "wrong";
+      }
+    });
+
+    setAnsweredQuiz(answeredQuiz + 1);
   };
 
   const isCorrectChoices = (newChoices: Choice[]) => {
