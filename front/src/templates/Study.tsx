@@ -138,6 +138,7 @@ type QuizType = {
   title: string;
   checked: boolean;
   count: number;
+  open: boolean;
 };
 
 const Study = () => {
@@ -149,7 +150,7 @@ const Study = () => {
     [choices6, setChoices6] = useState<Choice[]>([]),
     [choices7, setChoices7] = useState<Choice[]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
-    [open, setOpen] = useState(false),
+    // [open, setOpen] = useState(false),
     // [count, setCount] = useState(1),
     // [checked, setChecked] = useState(false),
     [correctQuiz, setCorrectQuiz] = useState(0),
@@ -183,11 +184,13 @@ const Study = () => {
     }
 
     setAnsweredQuiz(answeredQuiz + 1);
+
     const newQuizzes = [...quizzes];
     newQuizzes[tabIndex].checked = true;
+    newQuizzes[tabIndex].open = true;
     setQuizzes(newQuizzes);
 
-    setOpen(true);
+    // setOpen(true);
 
     newChoices.map((newChoice) => {
       if (newChoice.is_right.toString() === "true") {
@@ -209,6 +212,11 @@ const Study = () => {
     return isCorrect;
   };
 
+  const isOpen = () => {
+    if (quizzes[tabIndex] === undefined) return false;
+    return quizzes[tabIndex].open;
+  };
+
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
@@ -216,6 +224,7 @@ const Study = () => {
         title: newQuiz.title,
         checked: false,
         count: 1,
+        open: false,
       }));
       setQuizzes(newQuizzes);
     });
@@ -287,8 +296,14 @@ const Study = () => {
           ))}
           <Spacer size="xs" />
         </ChoicesContainer>
-        <CSSTransition classNames="answer" in={open} timeout={1000} exit={false}>
-          {open ? <AnswerContainer>選択肢１</AnswerContainer> : <></>}
+        <CSSTransition classNames="answer" in={isOpen()} timeout={1000} exit={false}>
+          {quizzes[tabIndex] === undefined ? (
+            <></>
+          ) : quizzes[tabIndex].open ? (
+            <AnswerContainer>選択肢１</AnswerContainer>
+          ) : (
+            <></>
+          )}
         </CSSTransition>
         <Spacer size="sm" />
         <CorrectAnswerRate>
