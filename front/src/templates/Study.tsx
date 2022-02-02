@@ -92,6 +92,20 @@ const StyledCancel = styled(Cancel)`
   color: #d32f2f;
 `;
 
+const StyledArrowLeft = styled.img`
+  height: 40px;
+  width: 80px;
+  float: left;
+  margin-left: 70px;
+`;
+
+const StyledArrowRight = styled.img`
+  height: 40px;
+  width: 80px;
+  float: right;
+  margin-right: 70px;
+`;
+
 const ChoicesContainer = styled.div``;
 
 const AnswerContainer = styled.div`
@@ -226,6 +240,8 @@ const Study = () => {
             </div>
           )}
         </CorrectAnswerRate>
+        <StyledArrowLeft src={arrowLeft} />
+        <StyledArrowRight src={arrowRight} />
       </SelectArea>
     </Container>
   );
