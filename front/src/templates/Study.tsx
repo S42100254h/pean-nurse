@@ -262,7 +262,11 @@ const Study = () => {
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Caption>問題{tabIndex + 1}</Caption>
-        {/* <QuizContainer>{quizzes[tabIndex].title}</QuizContainer> */}
+        {quizzes[tabIndex] === undefined ? (
+          <></>
+        ) : (
+          <QuizContainer>{quizzes[tabIndex].title}</QuizContainer>
+        )}
         <Spacer size="xs" />
         <ChoicesContainer>
           {choicesList[tabIndex].map((choice, index) => (
