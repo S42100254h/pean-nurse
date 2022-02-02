@@ -135,7 +135,7 @@ type Choice = {
 
 const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
-    [quiz, setQuiz] = useState(""),
+    [quizzes, setQuizzes] = useState<string[]>([]),
     [open, setOpen] = useState(false),
     [count, setCount] = useState(1),
     [checked, setChecked] = useState(false),
@@ -185,9 +185,10 @@ const Study = () => {
   };
 
   useEffect(() => {
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + 468;
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
-      setQuiz(resp.data.title);
+      const newQuizzes = resp.data.map((newQuiz: any) => newQuiz.title);
+      setQuizzes(newQuizzes);
     });
 
     const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 468;
@@ -202,7 +203,7 @@ const Study = () => {
       <SelectArea>
         <Caption>問題{tabIndex + 1}</Caption>
         <QuizContainer>
-          <p>{quiz}</p>
+          <p>{quizzes[tabIndex]}</p>
         </QuizContainer>
         <Spacer size="xs" />
         <ChoicesContainer>
