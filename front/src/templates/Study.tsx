@@ -243,8 +243,12 @@ const Study = () => {
             </div>
           )}
         </CorrectAnswerRate>
-        <StyledArrowLeft src={arrowLeft} onClick={() => setTabIndex(tabIndex - 1)} />
-        <StyledArrowRight src={arrowRight} onClick={() => setTabIndex(tabIndex + 1)} />
+        {tabIndex > 0 && (
+          <StyledArrowLeft src={arrowLeft} onClick={() => setTabIndex(tabIndex - 1)} />
+        )}
+        {tabIndex < 6 && (
+          <StyledArrowRight src={arrowRight} onClick={() => setTabIndex(tabIndex + 1)} />
+        )}
       </SelectArea>
     </Container>
   );
