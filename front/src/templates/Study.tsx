@@ -20,6 +20,7 @@ import H_dark from "../assets/img/H_dark.png";
 import arrowLeft from "../assets/img/arrowLeft.png";
 import arrowRight from "../assets/img/arrowRight.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
+import { Quiz } from "../types/entity/quiz";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -187,7 +188,7 @@ const Study = () => {
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
-      const newQuizzes = resp.data.map((newQuiz: any) => newQuiz.title);
+      const newQuizzes = resp.data.map((newQuiz: Quiz) => newQuiz.title);
       setQuizzes(newQuizzes);
     });
 
