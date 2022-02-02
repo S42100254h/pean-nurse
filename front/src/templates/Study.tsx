@@ -17,7 +17,10 @@ import E_dark from "../assets/img/E_dark.png";
 import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
+import arrowLeft from "../assets/img/arrowLeft.png";
+import arrowRight from "../assets/img/arrowRight.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
+import { Quiz } from "../types/entity/quiz";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -45,7 +48,7 @@ const SelectArea = styled.div`
   border-radius: 4px;
   width: 85%;
   margin: 0 auto;
-  padding: 50px 70px;
+  padding: 50px 70px 80px 70px;
 `;
 
 const QuizContainer = styled.div`
@@ -90,6 +93,22 @@ const StyledCancel = styled(Cancel)`
   color: #d32f2f;
 `;
 
+const StyledArrowLeft = styled.img`
+  height: 40px;
+  width: 80px;
+  float: left;
+  margin-left: 70px;
+  cursor: pointer;
+`;
+
+const StyledArrowRight = styled.img`
+  height: 40px;
+  width: 80px;
+  float: right;
+  margin-right: 70px;
+  cursor: pointer;
+`;
+
 const ChoicesContainer = styled.div``;
 
 const AnswerContainer = styled.div`
@@ -117,12 +136,13 @@ type Choice = {
 
 const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
-    [quiz, setQuiz] = useState(""),
+    [quizzes, setQuizzes] = useState<string[]>([]),
     [open, setOpen] = useState(false),
     [count, setCount] = useState(1),
     [checked, setChecked] = useState(false),
     [correctQuiz, setCorrectQuiz] = useState(0),
-    [answeredQuiz, setAnsweredQuiz] = useState(0);
+    [answeredQuiz, setAnsweredQuiz] = useState(0),
+    [tabIndex, setTabIndex] = useState(0);
 
   const checkAnswers = (index: number) => {
     if (checked === true) return;
@@ -166,12 +186,13 @@ const Study = () => {
   };
 
   useEffect(() => {
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + 459;
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
-      setQuiz(resp.data.title);
+      const newQuizzes = resp.data.map((newQuiz: Quiz) => newQuiz.title);
+      setQuizzes(newQuizzes);
     });
 
-    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 459;
+    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 468;
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
@@ -181,9 +202,9 @@ const Study = () => {
     <Container>
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
-        <Caption>問題</Caption>
+        <Caption>問題{tabIndex + 1}</Caption>
         <QuizContainer>
-          <p>{quiz}</p>
+          <p>{quizzes[tabIndex]}</p>
         </QuizContainer>
         <Spacer size="xs" />
         <ChoicesContainer>
@@ -223,6 +244,12 @@ const Study = () => {
             </div>
           )}
         </CorrectAnswerRate>
+        {tabIndex > 0 && (
+          <StyledArrowLeft src={arrowLeft} onClick={() => setTabIndex(tabIndex - 1)} />
+        )}
+        {tabIndex < 6 && (
+          <StyledArrowRight src={arrowRight} onClick={() => setTabIndex(tabIndex + 1)} />
+        )}
       </SelectArea>
     </Container>
   );
