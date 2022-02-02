@@ -150,13 +150,19 @@ const Study = () => {
     [answeredQuiz, setAnsweredQuiz] = useState(0),
     [tabIndex, setTabIndex] = useState(0);
 
-  const checkAnswers = (index: number) => {
+  const checkAnswers = (tabIndex: number, index: number) => {
     if (checked === true) return;
 
-    const rightChoices = choices.filter((choice) => choice.is_right);
-    const newChoices = [...choices];
+    const rightChoices = choicesList[tabIndex].filter((choice) => choice.is_right);
+    const newChoices = [...choicesList[tabIndex]];
     newChoices[index] = { ...newChoices[index], clicked: "clicked" };
-    setChoices(newChoices);
+    if (tabIndex === 0) setChoices(newChoices);
+    if (tabIndex === 1) setChoices2(newChoices);
+    if (tabIndex === 2) setChoices3(newChoices);
+    if (tabIndex === 3) setChoices4(newChoices);
+    if (tabIndex === 4) setChoices5(newChoices);
+    if (tabIndex === 5) setChoices6(newChoices);
+    if (tabIndex === 6) setChoices7(newChoices);
 
     if (rightChoices.length > count) {
       setCount(count + 1);
@@ -246,7 +252,7 @@ const Study = () => {
         <Spacer size="xs" />
         <ChoicesContainer>
           {choicesList[tabIndex].map((choice, index) => (
-            <ChoiceContainer key={choice.id} onClick={() => checkAnswers(index)}>
+            <ChoiceContainer key={choice.id} onClick={() => checkAnswers(tabIndex, index)}>
               {choicesList[tabIndex] === [] ? (
                 <></>
               ) : choicesList[tabIndex][index].clicked === "right" ? (
