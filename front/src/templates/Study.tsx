@@ -166,12 +166,12 @@ const Study = () => {
   };
 
   useEffect(() => {
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + 459;
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + 468;
     axios.get(quizApiEndpoint).then((resp) => {
       setQuiz(resp.data.title);
     });
 
-    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 459;
+    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 468;
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
