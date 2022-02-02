@@ -47,7 +47,7 @@ const SelectArea = styled.div`
   border-radius: 4px;
   width: 85%;
   margin: 0 auto;
-  padding: 50px 70px;
+  padding: 50px 70px 80px 70px;
 `;
 
 const QuizContainer = styled.div`
