@@ -134,26 +134,44 @@ type Choice = {
   clicked: "clicked" | "right" | "wrong";
 };
 
+type QuizType = {
+  title: string;
+  checked: boolean;
+  count: number;
+  open: boolean;
+};
+
 const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
-    [quizzes, setQuizzes] = useState<string[]>([]),
-    [open, setOpen] = useState(false),
-    [count, setCount] = useState(1),
-    [checked, setChecked] = useState(false),
+    [choices2, setChoices2] = useState<Choice[]>([]),
+    [choices3, setChoices3] = useState<Choice[]>([]),
+    [choices4, setChoices4] = useState<Choice[]>([]),
+    [choices5, setChoices5] = useState<Choice[]>([]),
+    [choices6, setChoices6] = useState<Choice[]>([]),
+    [choices7, setChoices7] = useState<Choice[]>([]),
+    [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0),
     [tabIndex, setTabIndex] = useState(0);
 
-  const checkAnswers = (index: number) => {
-    if (checked === true) return;
+  const checkAnswers = (tabIndex: number, index: number) => {
+    if (quizzes[tabIndex].checked.toString() === "true") return;
 
-    const rightChoices = choices.filter((choice) => choice.is_right);
-    const newChoices = [...choices];
+    const rightChoices = choicesList[tabIndex].filter((choice) => choice.is_right);
+    const newChoices = [...choicesList[tabIndex]];
     newChoices[index] = { ...newChoices[index], clicked: "clicked" };
-    setChoices(newChoices);
+    if (tabIndex === 0) setChoices(newChoices);
+    if (tabIndex === 1) setChoices2(newChoices);
+    if (tabIndex === 2) setChoices3(newChoices);
+    if (tabIndex === 3) setChoices4(newChoices);
+    if (tabIndex === 4) setChoices5(newChoices);
+    if (tabIndex === 5) setChoices6(newChoices);
+    if (tabIndex === 6) setChoices7(newChoices);
 
-    if (rightChoices.length > count) {
-      setCount(count + 1);
+    if (rightChoices.length > quizzes[tabIndex].count) {
+      const selectedQuizzes = [...quizzes];
+      selectedQuizzes[tabIndex].count += 1;
+      setQuizzes(selectedQuizzes);
       return;
     }
 
@@ -162,8 +180,11 @@ const Study = () => {
     }
 
     setAnsweredQuiz(answeredQuiz + 1);
-    setChecked(true);
-    setOpen(true);
+
+    const newQuizzes = [...quizzes];
+    newQuizzes[tabIndex].checked = true;
+    newQuizzes[tabIndex].open = true;
+    setQuizzes(newQuizzes);
 
     newChoices.map((newChoice) => {
       if (newChoice.is_right.toString() === "true") {
@@ -185,38 +206,81 @@ const Study = () => {
     return isCorrect;
   };
 
+  const isOpen = () => {
+    if (quizzes[tabIndex] === undefined) return false;
+    return quizzes[tabIndex].open;
+  };
+
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
-      const newQuizzes = resp.data.map((newQuiz: Quiz) => newQuiz.title);
+      const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
+        title: newQuiz.title,
+        checked: false,
+        count: 1,
+        open: false,
+      }));
       setQuizzes(newQuizzes);
     });
 
-    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 468;
+    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 462;
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
+
+    const choicesApiEndpoint2 = process.env.REACT_APP_API_URL + "choices/index/" + 463;
+    axios.get(choicesApiEndpoint2).then((resp) => {
+      setChoices2(resp.data);
+    });
+
+    const choicesApiEndpoint3 = process.env.REACT_APP_API_URL + "choices/index/" + 464;
+    axios.get(choicesApiEndpoint3).then((resp) => {
+      setChoices3(resp.data);
+    });
+
+    const choicesApiEndpoint4 = process.env.REACT_APP_API_URL + "choices/index/" + 465;
+    axios.get(choicesApiEndpoint4).then((resp) => {
+      setChoices4(resp.data);
+    });
+
+    const choicesApiEndpoint5 = process.env.REACT_APP_API_URL + "choices/index/" + 466;
+    axios.get(choicesApiEndpoint5).then((resp) => {
+      setChoices5(resp.data);
+    });
+
+    const choicesApiEndpoint6 = process.env.REACT_APP_API_URL + "choices/index/" + 467;
+    axios.get(choicesApiEndpoint6).then((resp) => {
+      setChoices6(resp.data);
+    });
+
+    const choicesApiEndpoint7 = process.env.REACT_APP_API_URL + "choices/index/" + 468;
+    axios.get(choicesApiEndpoint7).then((resp) => {
+      setChoices7(resp.data);
+    });
   }, []);
+  const choicesList = [choices, choices2, choices3, choices4, choices5, choices6, choices7];
 
   return (
     <Container>
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Caption>問題{tabIndex + 1}</Caption>
-        <QuizContainer>
-          <p>{quizzes[tabIndex]}</p>
-        </QuizContainer>
+        {quizzes[tabIndex] === undefined ? (
+          <></>
+        ) : (
+          <QuizContainer>{quizzes[tabIndex].title}</QuizContainer>
+        )}
         <Spacer size="xs" />
         <ChoicesContainer>
-          {choices.map((choice, index) => (
-            <ChoiceContainer key={choice.id} onClick={() => checkAnswers(index)}>
-              {choices === [] ? (
+          {choicesList[tabIndex].map((choice, index) => (
+            <ChoiceContainer key={choice.id} onClick={() => checkAnswers(tabIndex, index)}>
+              {choicesList[tabIndex] === [] ? (
                 <></>
-              ) : choices[index].clicked === "right" ? (
+              ) : choicesList[tabIndex][index].clicked === "right" ? (
                 <StyledCheckCircle />
-              ) : choices[index].clicked === "wrong" ? (
+              ) : choicesList[tabIndex][index].clicked === "wrong" ? (
                 <StyledCancel />
-              ) : choices[index].clicked === "clicked" ? (
+              ) : choicesList[tabIndex][index].clicked === "clicked" ? (
                 <Image src={darkIcons[index]} />
               ) : (
                 <Image src={lightIcons[index]} />
@@ -226,8 +290,14 @@ const Study = () => {
           ))}
           <Spacer size="xs" />
         </ChoicesContainer>
-        <CSSTransition classNames="answer" in={open} timeout={1000} exit={false}>
-          {open ? <AnswerContainer>選択肢１</AnswerContainer> : <></>}
+        <CSSTransition classNames="answer" in={isOpen()} timeout={1000} exit={false}>
+          {quizzes[tabIndex] === undefined ? (
+            <></>
+          ) : quizzes[tabIndex].open ? (
+            <AnswerContainer>選択肢１</AnswerContainer>
+          ) : (
+            <></>
+          )}
         </CSSTransition>
         <Spacer size="sm" />
         <CorrectAnswerRate>
@@ -240,7 +310,7 @@ const Study = () => {
               <p>
                 現在のあなたの成績は{correctQuiz}/{answeredQuiz}問正解！！
               </p>
-              <p>正答率 {(correctQuiz / answeredQuiz) * 100}%！</p>
+              <p>正答率 {Math.round((correctQuiz / answeredQuiz) * 100)}%！</p>
             </div>
           )}
         </CorrectAnswerRate>
