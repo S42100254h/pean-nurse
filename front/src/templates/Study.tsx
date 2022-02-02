@@ -134,6 +134,11 @@ type Choice = {
   clicked: "clicked" | "right" | "wrong";
 };
 
+type QuizType = {
+  title: string;
+  checked: boolean;
+};
+
 const Study = () => {
   const [choices, setChoices] = useState<Choice[]>([]),
     [choices2, setChoices2] = useState<Choice[]>([]),
@@ -142,16 +147,16 @@ const Study = () => {
     [choices5, setChoices5] = useState<Choice[]>([]),
     [choices6, setChoices6] = useState<Choice[]>([]),
     [choices7, setChoices7] = useState<Choice[]>([]),
-    [quizzes, setQuizzes] = useState<string[]>([]),
+    [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [open, setOpen] = useState(false),
     [count, setCount] = useState(1),
-    [checked, setChecked] = useState(false),
+    // [checked, setChecked] = useState(false),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0),
     [tabIndex, setTabIndex] = useState(0);
 
   const checkAnswers = (tabIndex: number, index: number) => {
-    if (checked === true) return;
+    if (quizzes[tabIndex].checked.toString() === "true") return;
 
     const rightChoices = choicesList[tabIndex].filter((choice) => choice.is_right);
     const newChoices = [...choicesList[tabIndex]];
@@ -174,7 +179,10 @@ const Study = () => {
     }
 
     setAnsweredQuiz(answeredQuiz + 1);
-    setChecked(true);
+    const newQuizzes = [...quizzes];
+    newQuizzes[tabIndex].checked = true;
+    setQuizzes(newQuizzes);
+
     setOpen(true);
 
     newChoices.map((newChoice) => {
@@ -200,7 +208,10 @@ const Study = () => {
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
-      const newQuizzes = resp.data.map((newQuiz: Quiz) => newQuiz.title);
+      const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
+        title: newQuiz.title,
+        checked: false,
+      }));
       setQuizzes(newQuizzes);
     });
 
@@ -246,9 +257,7 @@ const Study = () => {
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Caption>問題{tabIndex + 1}</Caption>
-        <QuizContainer>
-          <p>{quizzes[tabIndex]}</p>
-        </QuizContainer>
+        {/* <QuizContainer>{quizzes[tabIndex].title}</QuizContainer> */}
         <Spacer size="xs" />
         <ChoicesContainer>
           {choicesList[tabIndex].map((choice, index) => (
