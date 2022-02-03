@@ -22,11 +22,13 @@ RSpec.describe "Api::V1::Choices", type: :request do
     before do
       create(:quiz, id: 1)
       create(:quiz, id: 2)
-      create_list(:choice, 4, quiz_id: 1)
-      create_list(:choice, 8, quiz_id: 2)
+      create(:quiz, id: 3)
+      create_list(:choice, 2, quiz_id: 1)
+      create_list(:choice, 4, quiz_id: 2)
+      create_list(:choice, 8, quiz_id: 3)
     end
 
-    context "with query patameters" do
+    context "with query parameter(string)" do
       subject { get(api_v1_choices_path, params: { quiz_id: quiz_id }) }
 
       let(:quiz_id) { 1 }
@@ -34,8 +36,25 @@ RSpec.describe "Api::V1::Choices", type: :request do
       it "get list of choices which is related to quiz_id" do
         subject
         res = JSON.parse(response.body)
-        expect(res.length).to eq 4
+        expect(res.length).to eq 2
         expect(res[0].keys).to eq ["id", "choice", "is_right", "quiz_id", "created_at", "updated_at"]
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "with query parameters(array)" do
+      subject { get(api_v1_choices_path, params: { quiz_id: [quiz_id, quiz_id2] }) }
+
+      let(:quiz_id) { 1 }
+      let(:quiz_id2) { 2 }
+
+      it "get list of choices which is related to quiz_id & quiz_id2" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res.length).to eq 2
+        expect(res[0].length).to eq 2
+        expect(res[1].length).to eq 4
+        expect(res[0][0].keys).to eq ["id", "choice", "is_right", "quiz_id", "created_at", "updated_at"]
         expect(response).to have_http_status(200)
       end
     end
@@ -46,7 +65,7 @@ RSpec.describe "Api::V1::Choices", type: :request do
       it "get list of all choices" do
         subject
         res = JSON.parse(response.body)
-        expect(res.length).to eq 12
+        expect(res.length).to eq 14
         expect(res[0].keys).to eq ["id", "choice", "is_right", "quiz_id", "created_at", "updated_at"]
         expect(response).to have_http_status(200)
       end

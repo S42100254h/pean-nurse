@@ -3,7 +3,12 @@ class Api::V1::ChoicesController < Api::V1::ApiController
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
-    if params[:quiz_id]
+    if params[:quiz_id].instance_of?(Array) == true
+      choices = []
+      params[:quiz_id].each do |id|
+        choices.push(Choice.where(quiz_id: id))
+      end
+    elsif params[:quiz_id]
       choices = Choice.where(quiz_id: params[:quiz_id])
     else
       choices = Choice.all
