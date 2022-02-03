@@ -28,6 +28,7 @@ RSpec.describe "Api::V1::Choices", type: :request do
 
     context "with query patameters" do
       subject { get(api_v1_choices_path, params: { quiz_id: quiz_id }) }
+
       let(:quiz_id) { 1 }
 
       it "get list of choices which is related to quiz_id" do
