@@ -18,8 +18,8 @@ RSpec.describe "Api::V1::Choices", type: :request do
     end
   end
 
-  describe "GET /api/v1/choices/index/:quiz_id" do
-    subject { get(api_v1_path(quiz_id)) }
+  describe "GET /api/v1/choices?quiz_id=number" do
+    subject { get(api_v1_choices_path, params: { quiz_id: quiz_id }) }
 
     before do
       create(:quiz, id: 1)
