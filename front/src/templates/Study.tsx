@@ -223,37 +223,37 @@ const Study = () => {
       setQuizzes(newQuizzes);
     });
 
-    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + 462;
+    const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices?quiz_id=462";
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
 
-    const choicesApiEndpoint2 = process.env.REACT_APP_API_URL + "choices/index/" + 463;
+    const choicesApiEndpoint2 = process.env.REACT_APP_API_URL + "choices?quiz_id=463";
     axios.get(choicesApiEndpoint2).then((resp) => {
       setChoices2(resp.data);
     });
 
-    const choicesApiEndpoint3 = process.env.REACT_APP_API_URL + "choices/index/" + 464;
+    const choicesApiEndpoint3 = process.env.REACT_APP_API_URL + "choices?quiz_id=464";
     axios.get(choicesApiEndpoint3).then((resp) => {
       setChoices3(resp.data);
     });
 
-    const choicesApiEndpoint4 = process.env.REACT_APP_API_URL + "choices/index/" + 465;
+    const choicesApiEndpoint4 = process.env.REACT_APP_API_URL + "choices?quiz_id=465";
     axios.get(choicesApiEndpoint4).then((resp) => {
       setChoices4(resp.data);
     });
 
-    const choicesApiEndpoint5 = process.env.REACT_APP_API_URL + "choices/index/" + 466;
+    const choicesApiEndpoint5 = process.env.REACT_APP_API_URL + "choices?quiz_id=466";
     axios.get(choicesApiEndpoint5).then((resp) => {
       setChoices5(resp.data);
     });
 
-    const choicesApiEndpoint6 = process.env.REACT_APP_API_URL + "choices/index/" + 467;
+    const choicesApiEndpoint6 = process.env.REACT_APP_API_URL + "choices?quiz_id=467";
     axios.get(choicesApiEndpoint6).then((resp) => {
       setChoices6(resp.data);
     });
 
-    const choicesApiEndpoint7 = process.env.REACT_APP_API_URL + "choices/index/" + 468;
+    const choicesApiEndpoint7 = process.env.REACT_APP_API_URL + "choices?quiz_id=468";
     axios.get(choicesApiEndpoint7).then((resp) => {
       setChoices7(resp.data);
     });
