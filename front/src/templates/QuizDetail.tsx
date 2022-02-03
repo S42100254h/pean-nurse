@@ -48,7 +48,7 @@ const QuizDetail = () => {
 
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
-    const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices/index/" + match.params.id;
+    const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices?quiz_id=" + match.params.id;
     let isMounted = true;
 
     axios.get(quizApiEndpoint).then((resp) => {
