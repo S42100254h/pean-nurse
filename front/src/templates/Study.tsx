@@ -169,7 +169,7 @@ const Study = () => {
 
     setAnsweredQuiz(answeredQuiz + 1);
 
-    const newQuizzes = [...quizzes];
+    const newQuizzes = quizzes;
     newQuizzes[tabIndex].checked = true;
     newQuizzes[tabIndex].open = true;
     setQuizzes(newQuizzes);
