@@ -130,7 +130,7 @@ const darkIcons = [A_dark, B_dark, C_dark, D_dark, E_dark, F_dark, G_dark, H_dar
 type Choice = {
   id: number;
   choice: string;
-  is_right: string;
+  is_right: boolean;
   clicked: "clicked" | "right" | "wrong";
 };
 
@@ -149,7 +149,7 @@ const Study = () => {
     [tabIndex, setTabIndex] = useState(0);
 
   const checkAnswers = (tabIndex: number, index: number) => {
-    if (quizzes[tabIndex].checked.toString() === "true") return;
+    if (quizzes[tabIndex].checked === true) return;
 
     const rightChoices = choices[tabIndex].filter((choice) => choice.is_right);
     const newChoices = choices;
@@ -158,7 +158,7 @@ const Study = () => {
 
     if (rightChoices.length > quizzes[tabIndex].count) {
       const selectedQuizzes = [...quizzes];
-      selectedQuizzes[tabIndex].count += 1;
+      selectedQuizzes[tabIndex].count++;
       setQuizzes(selectedQuizzes);
       return;
     }
