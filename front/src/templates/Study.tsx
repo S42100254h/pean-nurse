@@ -130,7 +130,7 @@ const darkIcons = [A_dark, B_dark, C_dark, D_dark, E_dark, F_dark, G_dark, H_dar
 type Choice = {
   id: number;
   choice: string;
-  is_right: string;
+  is_right: boolean;
   clicked: "clicked" | "right" | "wrong";
 };
 
@@ -149,7 +149,7 @@ const Study = () => {
     [tabIndex, setTabIndex] = useState(0);
 
   const checkAnswers = (tabIndex: number, index: number) => {
-    if (quizzes[tabIndex].checked.toString() === "true") return;
+    if (quizzes[tabIndex].checked === true) return;
 
     const rightChoices = choices[tabIndex].filter((choice) => choice.is_right);
     const newChoices = choices;
@@ -158,7 +158,7 @@ const Study = () => {
 
     if (rightChoices.length > quizzes[tabIndex].count) {
       const selectedQuizzes = [...quizzes];
-      selectedQuizzes[tabIndex].count += 1;
+      selectedQuizzes[tabIndex].count++;
       setQuizzes(selectedQuizzes);
       return;
     }
@@ -169,16 +169,16 @@ const Study = () => {
 
     setAnsweredQuiz(answeredQuiz + 1);
 
-    const newQuizzes = [...quizzes];
+    const newQuizzes = quizzes;
     newQuizzes[tabIndex].checked = true;
     newQuizzes[tabIndex].open = true;
     setQuizzes(newQuizzes);
 
     newChoices[tabIndex].map((newChoice) => {
-      if (newChoice.is_right.toString() === "true") {
+      if (newChoice.is_right === true) {
         newChoice.clicked = "right";
       }
-      if (newChoice.clicked === "clicked" && newChoice.is_right.toString() === "false") {
+      if (newChoice.clicked === "clicked" && newChoice.is_right === false) {
         newChoice.clicked = "wrong";
       }
     });
@@ -187,7 +187,7 @@ const Study = () => {
   const isCorrectChoices = (newChoices: Choice[]) => {
     let isCorrect = true;
     for (let i = 0; i < newChoices.length; i++) {
-      if (newChoices[i].is_right.toString() === "false" && newChoices[i].clicked === "clicked") {
+      if (newChoices[i].is_right === false && newChoices[i].clicked === "clicked") {
         isCorrect = false;
       }
     }
