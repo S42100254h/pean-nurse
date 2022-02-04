@@ -175,10 +175,10 @@ const Study = () => {
     setQuizzes(newQuizzes);
 
     newChoices[tabIndex].map((newChoice) => {
-      if (newChoice.is_right.toString() === "true") {
+      if (newChoice.is_right === true) {
         newChoice.clicked = "right";
       }
-      if (newChoice.clicked === "clicked" && newChoice.is_right.toString() === "false") {
+      if (newChoice.clicked === "clicked" && newChoice.is_right === false) {
         newChoice.clicked = "wrong";
       }
     });
@@ -187,7 +187,7 @@ const Study = () => {
   const isCorrectChoices = (newChoices: Choice[]) => {
     let isCorrect = true;
     for (let i = 0; i < newChoices.length; i++) {
-      if (newChoices[i].is_right.toString() === "false" && newChoices[i].clicked === "clicked") {
+      if (newChoices[i].is_right === false && newChoices[i].clicked === "clicked") {
         isCorrect = false;
       }
     }
