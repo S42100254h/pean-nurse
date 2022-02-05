@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { ClosableDialog } from "./index";
+import { getAdminSignedIn } from "../../reducks/admin/selectors";
 import styled from "styled-components";
+import { RootState } from "../../types/entity/rootState";
 
 const Root = styled(Box)`
   position: fixed;
@@ -23,21 +26,28 @@ const Heading = styled.p`
 `;
 
 const Contact = () => {
+  const selector = useSelector((state: RootState) => state);
   const [open, setOpen] = useState(false);
   const handleDialogToggle = () => setOpen(!open);
 
+  const isAdminSignedIn = getAdminSignedIn(selector);
+
   return (
     <>
-      <Root
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        onClick={() => handleDialogToggle()}
-      >
-        <MailOutline fontSize="small" style={{ color: "white" }} />
-        <Heading>ご意見箱</Heading>
-      </Root>
-      <ClosableDialog open={open} onClose={handleDialogToggle} />
+      {isAdminSignedIn !== true && (
+        <>
+          <Root
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            onClick={() => handleDialogToggle()}
+          >
+            <MailOutline fontSize="small" style={{ color: "white" }} />
+            <Heading>ご意見箱</Heading>
+          </Root>
+          <ClosableDialog open={open} onClose={handleDialogToggle} />
+        </>
+      )}
     </>
   );
 };
