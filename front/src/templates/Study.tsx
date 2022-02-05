@@ -17,8 +17,6 @@ import E_dark from "../assets/img/E_dark.png";
 import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
-import arrowLeft from "../assets/img/arrowLeft.png";
-import arrowRight from "../assets/img/arrowRight.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
 import { PassFail } from "../components/PassFail";
@@ -102,22 +100,6 @@ const StyledCancel = styled(Cancel)`
   float: left;
   margin: 0 20px 0 10px;
   color: #d32f2f;
-`;
-
-const StyledArrowLeft = styled.img`
-  height: 40px;
-  width: 80px;
-  float: left;
-  margin-left: 70px;
-  cursor: pointer;
-`;
-
-const StyledArrowRight = styled.img`
-  height: 40px;
-  width: 80px;
-  float: right;
-  margin-right: 70px;
-  cursor: pointer;
 `;
 
 const ChoicesContainer = styled.div``;
