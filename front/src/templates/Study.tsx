@@ -227,7 +227,7 @@ const Study = () => {
       <SelectArea>
         <Swiper>
           {quizzes.map((quiz, i) => (
-            <div>
+            <div key={i}>
               <QuizContainer>
                 <QuizTitle>問題{i + 1}</QuizTitle>
                 {quiz === undefined ? (
