@@ -157,44 +157,43 @@ const Study = () => {
   const [choices, setChoices] = useState<Choice[][]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
-    [answeredQuiz, setAnsweredQuiz] = useState(0),
-    [tabIndex, setTabIndex] = useState(0);
+    [answeredQuiz, setAnsweredQuiz] = useState(0);
 
-  const checkAnswers = (tabIndex: number, index: number) => {
-    if (quizzes[tabIndex].checked === true) return;
+  const checkAnswers = (i: number, index: number) => {
+    if (quizzes[i].checked === true) return;
 
-    const rightChoices = choices[tabIndex].filter((choice) => choice.is_right);
+    const rightChoices = choices[i].filter((choice) => choice.is_right);
     const newChoices = choices;
-    newChoices[tabIndex][index] = { ...newChoices[tabIndex][index], clicked: "clicked" };
+    newChoices[i][index] = { ...newChoices[i][index], clicked: "clicked" };
     setChoices(newChoices);
 
-    if (rightChoices.length > quizzes[tabIndex].count) {
+    if (rightChoices.length > quizzes[i].count) {
       const selectedQuizzes = [...quizzes];
-      selectedQuizzes[tabIndex].count++;
+      selectedQuizzes[i].count++;
       setQuizzes(selectedQuizzes);
       return;
     }
 
-    if (isCorrectChoices(newChoices[tabIndex])) {
+    if (isCorrectChoices(newChoices[i])) {
       const selectedQuizzes = [...quizzes];
-      selectedQuizzes[tabIndex].isCorrect = true;
+      selectedQuizzes[i].isCorrect = true;
       setQuizzes(selectedQuizzes);
 
       setCorrectQuiz(correctQuiz + 1);
     } else {
       const selectedQuizzes = [...quizzes];
-      selectedQuizzes[tabIndex].isCorrect = false;
+      selectedQuizzes[i].isCorrect = false;
       setQuizzes(selectedQuizzes);
     }
 
     setAnsweredQuiz(answeredQuiz + 1);
 
     const newQuizzes = quizzes;
-    newQuizzes[tabIndex].checked = true;
-    newQuizzes[tabIndex].open = true;
+    newQuizzes[i].checked = true;
+    newQuizzes[i].open = true;
     setQuizzes(newQuizzes);
 
-    newChoices[tabIndex].map((newChoice) => {
+    newChoices[i].map((newChoice) => {
       if (newChoice.is_right === true) {
         newChoice.clicked = "right";
       }
@@ -214,17 +213,9 @@ const Study = () => {
     return isCorrect;
   };
 
-  const isOpen = () => {
-    if (quizzes[tabIndex] === undefined) return false;
-    return quizzes[tabIndex].open;
-  };
-
-  const decreaseTabIndex = () => {
-    setTabIndex(tabIndex - 1);
-  };
-
-  const increaseTabIndex = () => {
-    setTabIndex(tabIndex + 1);
+  const isOpen = (i: number) => {
+    if (quizzes[i] === undefined) return false;
+    return quizzes[i].open;
   };
 
   useEffect(() => {
@@ -253,57 +244,52 @@ const Study = () => {
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Swiper>
-          <div>
-            <QuizContainer>
-              <QuizTitle>問題{tabIndex + 1}</QuizTitle>
-              {quizzes[tabIndex] === undefined ? (
-                <></>
-              ) : (
-                <PassFail
-                  checked={quizzes[tabIndex].checked}
-                  isCorrect={quizzes[tabIndex].isCorrect}
-                />
-              )}
-            </QuizContainer>
-            {quizzes[tabIndex] === undefined ? (
-              <></>
-            ) : (
-              <QuizText>{quizzes[tabIndex].title}</QuizText>
-            )}
-            <Spacer size="xs" />
-            <ChoicesContainer>
-              {choices[tabIndex] === undefined ? (
-                <></>
-              ) : (
-                choices[tabIndex].map((choice, index) => (
-                  <ChoiceContainer key={choice.id} onClick={() => checkAnswers(tabIndex, index)}>
-                    {choices[tabIndex] === [] ? (
-                      <></>
-                    ) : choice.clicked === "right" ? (
-                      <StyledCheckCircle />
-                    ) : choice.clicked === "wrong" ? (
-                      <StyledCancel />
-                    ) : choice.clicked === "clicked" ? (
-                      <Image src={darkIcons[index]} />
-                    ) : (
-                      <Image src={lightIcons[index]} />
-                    )}
-                    <p>{choice.choice}</p>
-                  </ChoiceContainer>
-                ))
-              )}
+          {quizzes.map((quiz, i) => (
+            <div>
+              <QuizContainer>
+                <QuizTitle>問題{i + 1}</QuizTitle>
+                {quiz === undefined ? (
+                  <></>
+                ) : (
+                  <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />
+                )}
+              </QuizContainer>
+              {quiz === undefined ? <></> : <QuizText>{quiz.title}</QuizText>}
               <Spacer size="xs" />
-            </ChoicesContainer>
-            <CSSTransition classNames="answer" in={isOpen()} timeout={1000} exit={false}>
-              {quizzes[tabIndex] === undefined ? (
-                <></>
-              ) : quizzes[tabIndex].open ? (
-                <AnswerContainer>選択肢１</AnswerContainer>
-              ) : (
-                <></>
-              )}
-            </CSSTransition>
-          </div>
+              <ChoicesContainer>
+                {choices[i] === undefined ? (
+                  <></>
+                ) : (
+                  choices[i].map((choice, index) => (
+                    <ChoiceContainer key={choice.id} onClick={() => checkAnswers(i, index)}>
+                      {choices[i] === [] ? (
+                        <></>
+                      ) : choice.clicked === "right" ? (
+                        <StyledCheckCircle />
+                      ) : choice.clicked === "wrong" ? (
+                        <StyledCancel />
+                      ) : choice.clicked === "clicked" ? (
+                        <Image src={darkIcons[index]} />
+                      ) : (
+                        <Image src={lightIcons[index]} />
+                      )}
+                      <p>{choice.choice}</p>
+                    </ChoiceContainer>
+                  ))
+                )}
+                <Spacer size="xs" />
+              </ChoicesContainer>
+              <CSSTransition classNames="answer" in={isOpen(i)} timeout={1000} exit={false}>
+                {quiz === undefined ? (
+                  <></>
+                ) : quiz.open ? (
+                  <AnswerContainer>選択肢１</AnswerContainer>
+                ) : (
+                  <></>
+                )}
+              </CSSTransition>
+            </div>
+          ))}
         </Swiper>
         <Spacer size="sm" />
         <CorrectAnswerRate>
@@ -320,8 +306,6 @@ const Study = () => {
             </div>
           )}
         </CorrectAnswerRate>
-        {tabIndex > 0 && <StyledArrowLeft src={arrowLeft} onClick={decreaseTabIndex} />}
-        {tabIndex < 6 && <StyledArrowRight src={arrowRight} onClick={increaseTabIndex} />}
       </SelectArea>
     </Container>
   );
