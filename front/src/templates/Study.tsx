@@ -219,6 +219,14 @@ const Study = () => {
     return quizzes[tabIndex].open;
   };
 
+  const decreaseTabIndex = () => {
+    setTabIndex(tabIndex - 1);
+  };
+
+  const increaseTabIndex = () => {
+    setTabIndex(tabIndex + 1);
+  };
+
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
@@ -301,12 +309,8 @@ const Study = () => {
             </div>
           )}
         </CorrectAnswerRate>
-        {tabIndex > 0 && (
-          <StyledArrowLeft src={arrowLeft} onClick={() => setTabIndex(tabIndex - 1)} />
-        )}
-        {tabIndex < 6 && (
-          <StyledArrowRight src={arrowRight} onClick={() => setTabIndex(tabIndex + 1)} />
-        )}
+        {tabIndex > 0 && <StyledArrowLeft src={arrowLeft} onClick={decreaseTabIndex} />}
+        {tabIndex < 6 && <StyledArrowRight src={arrowRight} onClick={increaseTabIndex} />}
       </SelectArea>
     </Container>
   );
