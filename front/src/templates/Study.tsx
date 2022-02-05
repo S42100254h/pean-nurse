@@ -146,8 +146,12 @@ const Study = () => {
 
     const rightChoices = choices[i].filter((choice) => choice.is_right);
     const newChoices = choices;
-    newChoices[i][index] = { ...newChoices[i][index], clicked: "clicked" };
-    setChoices(newChoices);
+    if (newChoices[i][index].clicked === "clicked") {
+      return;
+    } else {
+      newChoices[i][index] = { ...newChoices[i][index], clicked: "clicked" };
+      setChoices(newChoices);
+    }
 
     if (rightChoices.length > quizzes[i].count) {
       const selectedQuizzes = [...quizzes];
