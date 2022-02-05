@@ -21,6 +21,7 @@ import arrowLeft from "../assets/img/arrowLeft.png";
 import arrowRight from "../assets/img/arrowRight.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
+import { PassFail } from "../components/PassFail";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -37,11 +38,6 @@ const Heading = styled.h2`
   text-align: center;
 `;
 
-const Caption = styled.p`
-  border-bottom: 1px solid #000;
-  font-weight: bold;
-`;
-
 const SelectArea = styled.div`
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -51,8 +47,23 @@ const SelectArea = styled.div`
   padding: 50px 70px 80px 70px;
 `;
 
-const QuizContainer = styled.div`
+const QuizTitle = styled.p`
+  font-weight: bold;
+  display: inline-block;
+  padding: 2px 10px 2px 0;
+`;
+
+const QuizText = styled.div`
   padding-top: 10px;
+  clear: both;
+`;
+
+const QuizContainer = styled.div`
+  float: left;
+  width: 100%;
+  padding: 5px 0;
+  height: 40px;
+  border-bottom: 1px solid #000;
 `;
 
 const ChoiceContainer = styled.div`
@@ -138,6 +149,7 @@ type QuizType = {
   title: string;
   checked: boolean;
   count: number;
+  isCorrect: boolean | undefined;
   open: boolean;
 };
 
@@ -164,7 +176,15 @@ const Study = () => {
     }
 
     if (isCorrectChoices(newChoices[tabIndex])) {
+      const selectedQuizzes = [...quizzes];
+      selectedQuizzes[tabIndex].isCorrect = true;
+      setQuizzes(selectedQuizzes);
+
       setCorrectQuiz(correctQuiz + 1);
+    } else {
+      const selectedQuizzes = [...quizzes];
+      selectedQuizzes[tabIndex].isCorrect = false;
+      setQuizzes(selectedQuizzes);
     }
 
     setAnsweredQuiz(answeredQuiz + 1);
@@ -206,6 +226,7 @@ const Study = () => {
         title: newQuiz.title,
         checked: false,
         count: 1,
+        isCorrect: undefined,
         open: false,
       }));
       setQuizzes(newQuizzes);
@@ -223,12 +244,15 @@ const Study = () => {
     <Container>
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
-        <Caption>問題{tabIndex + 1}</Caption>
-        {quizzes[tabIndex] === undefined ? (
-          <></>
-        ) : (
-          <QuizContainer>{quizzes[tabIndex].title}</QuizContainer>
-        )}
+        <QuizContainer>
+          <QuizTitle>問題{tabIndex + 1}</QuizTitle>
+          {quizzes[tabIndex] === undefined ? (
+            <></>
+          ) : (
+            <PassFail checked={quizzes[tabIndex].checked} isCorrect={quizzes[tabIndex].isCorrect} />
+          )}
+        </QuizContainer>
+        {quizzes[tabIndex] === undefined ? <></> : <QuizText>{quizzes[tabIndex].title}</QuizText>}
         <Spacer size="xs" />
         <ChoicesContainer>
           {choices[tabIndex] === undefined ? (
