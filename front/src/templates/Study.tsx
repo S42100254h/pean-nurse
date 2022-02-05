@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { CSSTransition } from "react-transition-group";
 import { Spacer, Swiper } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
@@ -265,15 +264,13 @@ const Study = () => {
                 )}
                 <Spacer size="xs" />
               </ChoicesContainer>
-              <CSSTransition classNames="answer" in={isOpen(i)} timeout={1000} exit={false}>
-                {quiz === undefined ? (
-                  <></>
-                ) : quiz.open ? (
-                  <AnswerContainer>選択肢１</AnswerContainer>
-                ) : (
-                  <></>
-                )}
-              </CSSTransition>
+              {quiz === undefined ? (
+                <></>
+              ) : quiz.open ? (
+                <AnswerContainer>選択肢１</AnswerContainer>
+              ) : (
+                <></>
+              )}
             </div>
           ))}
         </Swiper>

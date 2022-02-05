@@ -8,12 +8,7 @@
   transition: opacity 330ms ease-in;
 }
 
-.answer-enter {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-.answer-enter-active {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: 330ms ease-in;
+/************** react-slick *****************/
+.slick-list {
+  -webkit-transition: height 250ms linear;
 }
