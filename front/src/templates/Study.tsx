@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import { Spacer } from "../components/UIkit";
+import { Spacer, Swiper } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
 import C_light from "../assets/img/C_light.png";
@@ -252,48 +252,59 @@ const Study = () => {
     <Container>
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
-        <QuizContainer>
-          <QuizTitle>問題{tabIndex + 1}</QuizTitle>
-          {quizzes[tabIndex] === undefined ? (
-            <></>
-          ) : (
-            <PassFail checked={quizzes[tabIndex].checked} isCorrect={quizzes[tabIndex].isCorrect} />
-          )}
-        </QuizContainer>
-        {quizzes[tabIndex] === undefined ? <></> : <QuizText>{quizzes[tabIndex].title}</QuizText>}
-        <Spacer size="xs" />
-        <ChoicesContainer>
-          {choices[tabIndex] === undefined ? (
-            <></>
-          ) : (
-            choices[tabIndex].map((choice, index) => (
-              <ChoiceContainer key={choice.id} onClick={() => checkAnswers(tabIndex, index)}>
-                {choices[tabIndex] === [] ? (
-                  <></>
-                ) : choice.clicked === "right" ? (
-                  <StyledCheckCircle />
-                ) : choice.clicked === "wrong" ? (
-                  <StyledCancel />
-                ) : choice.clicked === "clicked" ? (
-                  <Image src={darkIcons[index]} />
-                ) : (
-                  <Image src={lightIcons[index]} />
-                )}
-                <p>{choice.choice}</p>
-              </ChoiceContainer>
-            ))
-          )}
-          <Spacer size="xs" />
-        </ChoicesContainer>
-        <CSSTransition classNames="answer" in={isOpen()} timeout={1000} exit={false}>
-          {quizzes[tabIndex] === undefined ? (
-            <></>
-          ) : quizzes[tabIndex].open ? (
-            <AnswerContainer>選択肢１</AnswerContainer>
-          ) : (
-            <></>
-          )}
-        </CSSTransition>
+        <Swiper>
+          <div>
+            <QuizContainer>
+              <QuizTitle>問題{tabIndex + 1}</QuizTitle>
+              {quizzes[tabIndex] === undefined ? (
+                <></>
+              ) : (
+                <PassFail
+                  checked={quizzes[tabIndex].checked}
+                  isCorrect={quizzes[tabIndex].isCorrect}
+                />
+              )}
+            </QuizContainer>
+            {quizzes[tabIndex] === undefined ? (
+              <></>
+            ) : (
+              <QuizText>{quizzes[tabIndex].title}</QuizText>
+            )}
+            <Spacer size="xs" />
+            <ChoicesContainer>
+              {choices[tabIndex] === undefined ? (
+                <></>
+              ) : (
+                choices[tabIndex].map((choice, index) => (
+                  <ChoiceContainer key={choice.id} onClick={() => checkAnswers(tabIndex, index)}>
+                    {choices[tabIndex] === [] ? (
+                      <></>
+                    ) : choice.clicked === "right" ? (
+                      <StyledCheckCircle />
+                    ) : choice.clicked === "wrong" ? (
+                      <StyledCancel />
+                    ) : choice.clicked === "clicked" ? (
+                      <Image src={darkIcons[index]} />
+                    ) : (
+                      <Image src={lightIcons[index]} />
+                    )}
+                    <p>{choice.choice}</p>
+                  </ChoiceContainer>
+                ))
+              )}
+              <Spacer size="xs" />
+            </ChoicesContainer>
+            <CSSTransition classNames="answer" in={isOpen()} timeout={1000} exit={false}>
+              {quizzes[tabIndex] === undefined ? (
+                <></>
+              ) : quizzes[tabIndex].open ? (
+                <AnswerContainer>選択肢１</AnswerContainer>
+              ) : (
+                <></>
+              )}
+            </CSSTransition>
+          </div>
+        </Swiper>
         <Spacer size="sm" />
         <CorrectAnswerRate>
           {answeredQuiz === 0 ? (
