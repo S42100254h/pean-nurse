@@ -21,6 +21,7 @@ import arrowLeft from "../assets/img/arrowLeft.png";
 import arrowRight from "../assets/img/arrowRight.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
+import { PassFail } from "../components/PassFail";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -138,6 +139,7 @@ type QuizType = {
   title: string;
   checked: boolean;
   count: number;
+  isCorrect: boolean | undefined;
   open: boolean;
 };
 
@@ -164,7 +166,15 @@ const Study = () => {
     }
 
     if (isCorrectChoices(newChoices[tabIndex])) {
+      const selectedQuizzes = [...quizzes];
+      selectedQuizzes[tabIndex].isCorrect = true;
+      setQuizzes(selectedQuizzes);
+
       setCorrectQuiz(correctQuiz + 1);
+    } else {
+      const selectedQuizzes = [...quizzes];
+      selectedQuizzes[tabIndex].isCorrect = false;
+      setQuizzes(selectedQuizzes);
     }
 
     setAnsweredQuiz(answeredQuiz + 1);
@@ -206,6 +216,7 @@ const Study = () => {
         title: newQuiz.title,
         checked: false,
         count: 1,
+        isCorrect: undefined,
         open: false,
       }));
       setQuizzes(newQuizzes);
@@ -224,6 +235,11 @@ const Study = () => {
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Caption>問題{tabIndex + 1}</Caption>
+        {quizzes[tabIndex] === undefined ? (
+          <></>
+        ) : (
+          <PassFail checked={quizzes[tabIndex].checked} isCorrect={quizzes[tabIndex].isCorrect} />
+        )}
         {quizzes[tabIndex] === undefined ? (
           <></>
         ) : (
