@@ -10,5 +10,5 @@
 
 /************** react-slick *****************/
 .slick-list {
-  -webkit-transition: height 250ms linear;
+  transition: height 250ms linear;
 }
