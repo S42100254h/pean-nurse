@@ -16,6 +16,7 @@ import E_dark from "../assets/img/E_dark.png";
 import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
+import cat from "../assets/img/cat.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
 import { PassFail } from "../components/PassFail";
@@ -76,7 +77,7 @@ const ChoiceContainer = styled.div`
   }
 `;
 
-const Image = styled.img`
+const Icon = styled.img`
   height: 40px;
   width: 40px;
   float: left;
@@ -114,6 +115,21 @@ const AnswerContainer = styled.div`
 
 const CorrectAnswerRate = styled.div`
   text-align: center;
+`;
+
+const ResultTextArea = styled.div`
+  height: 200px;
+  background-color: ${(props) => props.theme.palette.primary.light};
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 20px;
+`;
+
+const Image = styled.img`
+  height: 180px;
+  width: 180px;
+  margin: 0 auto;
 `;
 
 const lightIcons = [A_light, B_light, C_light, D_light, E_light, F_light, G_light, H_light];
@@ -254,9 +270,9 @@ const Study = () => {
                       ) : choice.clicked === "wrong" ? (
                         <StyledCancel />
                       ) : choice.clicked === "clicked" ? (
-                        <Image src={darkIcons[index]} />
+                        <Icon src={darkIcons[index]} />
                       ) : (
-                        <Image src={lightIcons[index]} />
+                        <Icon src={lightIcons[index]} />
                       )}
                       <p>{choice.choice}</p>
                     </ChoiceContainer>
@@ -273,6 +289,12 @@ const Study = () => {
               )}
             </div>
           ))}
+          <div>
+            <Image src={cat} />
+            <ResultTextArea>
+              <p>お疲れ様でした！！</p>
+            </ResultTextArea>
+          </div>
         </Swiper>
         <Spacer size="sm" />
         <CorrectAnswerRate>
