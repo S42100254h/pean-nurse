@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :commentary do
-    text { "MyText" }
-    quiz { nil }
+    text { Faker::Lorem.sentence }
+    quiz
   end
 end
