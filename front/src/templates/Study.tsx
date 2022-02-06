@@ -219,6 +219,10 @@ const Study = () => {
     return quizzes[i].open;
   };
 
+  const calcCorrectAnswerRate = () => {
+    return Math.round((correctQuiz / answeredQuiz) * 100);
+  };
+
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
@@ -307,7 +311,7 @@ const Study = () => {
               <p>
                 現在のあなたの成績は{correctQuiz}/{answeredQuiz}問正解！！
               </p>
-              <p>正答率 {Math.round((correctQuiz / answeredQuiz) * 100)}%！</p>
+              <p>正答率 {calcCorrectAnswerRate()}%！</p>
             </div>
           )}
         </CorrectAnswerRate>
