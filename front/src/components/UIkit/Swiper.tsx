@@ -15,14 +15,14 @@ type ArrowProps = {
 };
 
 const LeftWrapper = styled.div`
-  display: block;
+  display: ${(props) => (props.onClick === null ? "none" : "block")};
   position: absolute;
   top: 110%;
   margin-left: 20px;
 `;
 
 const RightWrapper = styled.div`
-  display: block;
+  display: ${(props) => (props.onClick === null ? "none" : "block")};
   position: absolute;
   top: 110%;
   right: 0;
@@ -69,6 +69,7 @@ export const Swiper = (props: Props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
+    draggable: true,
     nextArrow: <NextArrow onClick={() => gotoNext()} />,
     prevArrow: <PrevArrow onClick={() => gotoPrev()} />,
   };
