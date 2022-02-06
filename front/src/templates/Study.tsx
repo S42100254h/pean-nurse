@@ -214,11 +214,6 @@ const Study = () => {
     return isCorrect;
   };
 
-  const isOpen = (i: number) => {
-    if (quizzes[i] === undefined) return false;
-    return quizzes[i].open;
-  };
-
   const calcCorrectAnswerRate = () => {
     return Math.round((correctQuiz / answeredQuiz) * 100);
   };
