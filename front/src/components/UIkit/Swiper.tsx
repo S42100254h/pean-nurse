@@ -69,6 +69,7 @@ export const Swiper = (props: Props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
+    draggable: true,
     nextArrow: <NextArrow onClick={() => gotoNext()} />,
     prevArrow: <PrevArrow onClick={() => gotoPrev()} />,
   };
