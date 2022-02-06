@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_104927) do
+ActiveRecord::Schema.define(version: 2022_02_06_194627) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(version: 2021_11_15_104927) do
     t.index ["quiz_id"], name: "index_choices_on_quiz_id"
   end
 
+  create_table "commentaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "text"
+    t.bigint "quiz_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quiz_id"], name: "index_commentaries_on_quiz_id"
+  end
+
   create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email"
     t.string "select"
@@ -107,4 +115,5 @@ ActiveRecord::Schema.define(version: 2021_11_15_104927) do
   add_foreign_key "category_quiz_relations", "categories"
   add_foreign_key "category_quiz_relations", "quizzes"
   add_foreign_key "choices", "quizzes"
+  add_foreign_key "commentaries", "quizzes"
 end
