@@ -297,6 +297,13 @@ const Study = () => {
             <Image src={cat} />
             <ResultTextArea>
               <p>お疲れ様でした！！</p>
+              {calcCorrectAnswerRate() === 100 ? (
+                <p>完璧です！！この調子で学習を進めましょう！！</p>
+              ) : calcCorrectAnswerRate() > 80 ? (
+                <p>おしい！！この調子で学習を進めましょう！！</p>
+              ) : (
+                <p>分からないところは復習しながら学習を進めましょう！！</p>
+              )}
             </ResultTextArea>
           </div>
         </Swiper>
