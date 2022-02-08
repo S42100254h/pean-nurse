@@ -2,6 +2,7 @@ class Quiz < ApplicationRecord
   has_many :category_quiz_relations, dependent: :destroy
   has_many :categories, through: :category_quiz_relations
   has_many :choices, dependent: :destroy
+  has_one :Commentary, dependent: :destroy
   validates :title, presence: true
   validates :title, uniqueness: true
 
