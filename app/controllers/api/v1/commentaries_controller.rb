@@ -34,6 +34,6 @@ class Api::V1::CommentariesController < Api::V1::ApiController
   end
 
   def commentary_params
-    params.require(:commentary).permit(:text)
+    params.require(:commentary).permit(:text, :quiz_id)
   end
 end
