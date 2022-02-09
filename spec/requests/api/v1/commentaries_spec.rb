@@ -48,4 +48,29 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET api/v1/commentaries/:id" do
+    subject { get(api_v1_commentary_path(commentary_id)) }
+
+    context "specified id exists" do
+      let(:commentary) { create(:commentary) }
+      let(:commentary_id) { commentary.id }
+
+      it "get detail of commentary" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res["id"]).to eq commentary.id
+        expect(res["text"]).to eq commentary.text
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "specified id does not exist" do
+      let(:commentary_id) { 999999 }
+
+      it "can't get detail of commentary" do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end
