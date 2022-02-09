@@ -32,4 +32,20 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
       end
     end
   end
+
+  describe "GET /api/v1/commentaries" do
+    subject { get(api_v1_commentaries_path) }
+
+    before do
+      create_list(:commentary, 8)
+    end
+
+    it "get list of commentaries" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.length).to eq 8
+      expect(res[0].keys).to eq ["id", "text", "quiz_id", "created_at", "updated_at"]
+      expect(response).to have_http_status(200)
+    end
+  end
 end
