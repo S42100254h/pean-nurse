@@ -73,4 +73,34 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
       end
     end
   end
+
+  describe "PATCH /api/v1/commentaries/:id" do
+    subject { patch(api_v1_commentary_path(commentary_id), params: params, headers: headers) }
+
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:current_admin) { create(:admin) }
+    let(:params) { { commentary: { text: Faker::Lorem.sentence, created_at: Time.current } } }
+    let(:commentary_id) { commentary.id }
+    let(:commentary) { create(:commentary) }
+
+    it "commentary is updated" do
+      expect { subject }.to change { commentary.reload.text }.from(commentary.text).to(params[:commentary][:text]) &
+                            not_change { commentary.reload.created_at }
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe "DELETE /api/v1/commentaries/:id" do
+    subject { delete(api_v1_commentary_path(commentary_id), headers: headers) }
+  
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:current_admin) { create(:admin) }
+    let(:commentary_id) { commentary.id }
+    let!(:commentary) { create(:commentary) }
+
+    it "commentary is deleted" do
+      expect { subject }.to change { Commentary.count }.by(-1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end
