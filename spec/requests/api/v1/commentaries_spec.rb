@@ -27,7 +27,7 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
         let(:quiz_id) { 999999 }
 
         it "Commentary is not created" do
-          expect { subject }.to raise_error ActiveRecord::RecordInvalid
+          expect { subject }.to raise_error ActiveRecord::RecordNotFound
         end
       end
     end
