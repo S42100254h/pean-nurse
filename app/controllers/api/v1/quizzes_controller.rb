@@ -34,7 +34,8 @@ class Api::V1::QuizzesController < Api::V1::ApiController
         updated_choices = @quiz.update_choices(params[:choices])
         deleted_choices = @quiz.delete_choices(params[:choices])
         added_choices = @quiz.add_choices(params[:choices])
-        render json: { quiz: @quiz, updated_choices: updated_choices, deleted_choices: deleted_choices, added_choices: added_choices }
+        updated_commentary = @quiz.Commentary.update!(params[:commentary].permit!)
+        render json: { quiz: @quiz, updated_choices: updated_choices, deleted_choices: deleted_choices, added_choices: added_choices, updated_commentary: updated_commentary }
       end
     else
       @quiz.update!(quiz_params)
