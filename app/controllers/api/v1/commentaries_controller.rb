@@ -29,11 +29,11 @@ class Api::V1::CommentariesController < Api::V1::ApiController
 
   private
 
-  def set_commentary
-    @commentary = Commentary.find(params[:id])
-  end
+    def set_commentary
+      @commentary = Commentary.find(params[:id])
+    end
 
-  def commentary_params
-    params.require(:commentary).permit(:text, :quiz_id)
-  end
+    def commentary_params
+      params.require(:commentary).permit(:text, :quiz_id)
+    end
 end

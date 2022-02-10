@@ -18,7 +18,7 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
         end
       end
     end
-  
+
     describe "exception scenario" do
       context "send commentary information with noexistent quiz id" do
         let(:params) { { commentary: attributes_for(:commentary, quiz_id: quiz_id) } }
@@ -92,7 +92,7 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
 
   describe "DELETE /api/v1/commentaries/:id" do
     subject { delete(api_v1_commentary_path(commentary_id), headers: headers) }
-  
+
     let(:headers) { current_admin.create_new_auth_token }
     let(:current_admin) { create(:admin) }
     let(:commentary_id) { commentary.id }
