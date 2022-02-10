@@ -13,7 +13,8 @@ class Api::V1::CommentariesController < Api::V1::ApiController
   end
 
   def create
-    commentary = Commentary.create!(commentary_params)
+    quiz = Quiz.find(params[:commentary][:quiz_id])
+    commentary = quiz.create_Commentary!(commentary_params)
     render json: commentary
   end
 
