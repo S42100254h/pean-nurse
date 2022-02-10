@@ -44,7 +44,12 @@ class Quiz < ApplicationRecord
   end
 
   def create_commentary(commentary)
-    commentary = self.build_Commentary(commentary.permit!)
-    commentary.save!
+    new_commentary = self.build_Commentary(commentary.permit!)
+    new_commentary.save!
+  end
+
+  def update_commentary(commentary)
+    new_commentary = self.Commentary
+    new_commentary.update!(commentary.permit!)
   end
 end
