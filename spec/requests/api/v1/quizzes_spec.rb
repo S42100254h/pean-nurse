@@ -19,8 +19,8 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
         end
       end
 
-      context "send correct quiz information with choices" do
-        let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: attributes_for_list(:choice, 4) } }
+      context "send correct quiz information with choices and commentary" do
+        let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: attributes_for_list(:choice, 4), commentary: attributes_for(:commentary) } }
         let(:current_admin) { create(:admin) }
         let(:headers) { current_admin.create_new_auth_token }
         let!(:category_ids) { category.id }
@@ -29,7 +29,8 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
         it "Quiz, CategoryQuizRelation and choices are created" do
           expect { subject }.to change { Quiz.count }.by(1) &
                                 change { CategoryQuizRelation.count }.by(1) &
-                                change { Choice.count }.by(4)
+                                change { Choice.count }.by(4) &
+                                change { Commentary.count }.by(1)
           expect(response).to have_http_status(200)
         end
       end
@@ -50,18 +51,19 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
 
     describe "exception scenario" do
-      context "send correct quiz information with incorrect choices" do
-        let(:params) { { quiz: attributes_for(:quiz), category_ids: category.id, choices: [attributes_for_list(:choice, 2), attributes_for(:choice, id: choice.id)] } }
+      context "send correct quiz and commentary information with incorrect choices" do
+        let(:params) { { quiz: attributes_for(:quiz), category_ids: category.id, choices: [attributes_for_list(:choice, 2), attributes_for(:choice, id: choice.id)], commentary: attributes_for(:commentary) } }
         let(:current_admin) { create(:admin) }
         let(:headers) { current_admin.create_new_auth_token }
         let!(:category) { create(:category) }
         let!(:choice) { create(:choice) }
 
-        it "Quiz, CategoryQuizRelation and choices are not created (rollback works)" do
+        it "Quiz, CategoryQuizRelation, choices and commentary are not created (rollback works)" do
           expect { subject }.to raise_error(ActiveRecord::RecordNotUnique) &
                                 change { Quiz.count }.by(0) &
                                 change { CategoryQuizRelation.count }.by(0) &
-                                change { Choice.count }.by(0)
+                                change { Choice.count }.by(0) &
+                                change { Commentary.count }.by(0)
         end
       end
     end
