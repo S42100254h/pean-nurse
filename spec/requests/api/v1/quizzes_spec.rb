@@ -114,7 +114,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     subject { patch(api_v1_quiz_path(quiz.id), params: params, headers: headers) }
 
     describe "normal scenario" do
-      context "update quiz without choices" do
+      context "update quiz without choices and commentary" do
         let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
         let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current } } }
@@ -127,16 +127,18 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
         end
       end
 
-      context "update quiz with choice" do
+      context "update quiz with choice and commentary" do
         let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
-        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id)] } }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id)], commentary: { text: Faker::Lorem.sentence } } }
         let(:quiz) { create(:quiz) }
         let!(:choice) { create(:choice, quiz_id: quiz.id) }
+        let!(:commentary) { create(:commentary, quiz_id: quiz.id) }
 
         it "quiz and choice is updated" do
           expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
                                 change { choice.reload.choice }.from(choice.choice).to(params[:choices][0][:choice]) &
+                                change { commentary.reload.text }.from(commentary.text).to(params[:commentary][:text]) &
                                 not_change { quiz.reload.created_at }
           expect(response).to have_http_status(200)
         end
@@ -145,9 +147,10 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       context "update quiz with new choices" do
         let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
-        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id), attributes_for_list(:choice, 2)] } }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id), attributes_for_list(:choice, 2)], commentary: { text: commentary.text } } }
         let(:quiz) { create(:quiz) }
         let!(:choice) { create(:choice, quiz_id: quiz.id) }
+        let!(:commentary) { create(:commentary, quiz_id: quiz.id) }
 
         it " quiz is updated and new choices are created" do
           expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
@@ -159,9 +162,10 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       context "update quiz without existing chioce" do
         let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
-        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choices[0].id)] } }
+        let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choices[0].id)], commentary: { text: commentary.text } } }
         let(:quiz) { create(:quiz) }
         let!(:choices) { create_list(:choice, 2, quiz_id: quiz.id) }
+        let!(:commentary) { create(:commentary, quiz_id: quiz.id) }
 
         it "quiz is updated and existing choice is deleted" do
           expect { subject }.to change { quiz.reload.title }.from(quiz.title).to(params[:quiz][:title]) &
