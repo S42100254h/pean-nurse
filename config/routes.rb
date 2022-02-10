@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :quizzes
       resources :categories
       resources :choices
+      resources :commentaries
       post "inquiries/create"
     end
   end
