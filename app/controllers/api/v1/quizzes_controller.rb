@@ -17,7 +17,8 @@ class Api::V1::QuizzesController < Api::V1::ApiController
       ActiveRecord::Base.transaction do
         quiz = Quiz.create!(quiz_params)
         choices = quiz.create_choices(params[:choices])
-        render json: { quiz: quiz, choices: choices }
+        commentary = quiz.create_commentary(params[:commentary])
+        render json: { quiz: quiz, choices: choices, commentary: commentary }
       end
     else
       # enable to create Only quiz without choices
