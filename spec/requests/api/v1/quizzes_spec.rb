@@ -2,13 +2,12 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::Quizzes", type: :request do
   describe "POST /api/v1/quizzes" do
-    subject { post(api_v1_quizzes_path, params: params, headers: headers) }
+    subject { post(api_v1_quizzes_path, params: params, headers: current_admin.create_new_auth_token) }
 
     describe "normal senario" do
       context "send correct quiz information" do
         let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids } }
         let(:current_admin) { create(:admin) }
-        let(:headers) { current_admin.create_new_auth_token }
         let!(:category_ids) { category.id }
         let!(:category) { create(:category) }
 
@@ -22,7 +21,6 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       context "send correct quiz information with choices and commentary" do
         let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: attributes_for_list(:choice, 4), commentary: attributes_for(:commentary) } }
         let(:current_admin) { create(:admin) }
-        let(:headers) { current_admin.create_new_auth_token }
         let!(:category_ids) { category.id }
         let!(:category) { create(:category) }
 
@@ -38,7 +36,6 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       context "send correct quiz information without category_ids" do
         let(:params) { { quiz: attributes_for(:quiz) } }
         let(:current_admin) { create(:admin) }
-        let(:headers) { current_admin.create_new_auth_token }
         let!(:category_ids) { category.id }
         let!(:category) { create(:category) }
 
@@ -54,7 +51,6 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       context "send correct quiz and commentary information with incorrect choices" do
         let(:params) { { quiz: attributes_for(:quiz), category_ids: category.id, choices: [attributes_for_list(:choice, 2), attributes_for(:choice, id: choice.id)], commentary: attributes_for(:commentary) } }
         let(:current_admin) { create(:admin) }
-        let(:headers) { current_admin.create_new_auth_token }
         let!(:category) { create(:category) }
         let!(:choice) { create(:choice) }
 
@@ -111,11 +107,10 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
   end
 
   describe "PATCH /api/v1/quizzes/:id" do
-    subject { patch(api_v1_quiz_path(quiz.id), params: params, headers: headers) }
+    subject { patch(api_v1_quiz_path(quiz.id), params: params, headers: current_admin.create_new_auth_token) }
 
     describe "normal scenario" do
       context "update quiz without choices and commentary" do
-        let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
         let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current } } }
         let(:quiz) { create(:quiz) }
@@ -128,7 +123,6 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       end
 
       context "update quiz with choice and commentary" do
-        let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
         let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id)], commentary: { text: Faker::Lorem.sentence } } }
         let(:quiz) { create(:quiz) }
@@ -145,7 +139,6 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       end
 
       context "update quiz with new choices" do
-        let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
         let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choice.id), attributes_for_list(:choice, 2)], commentary: { text: commentary.text } } }
         let(:quiz) { create(:quiz) }
@@ -160,7 +153,6 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       end
 
       context "update quiz without existing chioce" do
-        let(:headers) { current_admin.create_new_auth_token }
         let(:current_admin) { create(:admin) }
         let(:params) { { quiz: { title: Faker::Lorem.question, created_at: Time.current }, choices: [attributes_for(:choice, id: choices[0].id)], commentary: { text: commentary.text } } }
         let(:quiz) { create(:quiz) }
@@ -177,11 +169,9 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
   end
 
   describe "DELETE /api/v1/quizzes/:id" do
-    subject { delete(api_v1_quiz_path(quiz_id), headers: headers) }
+    subject { delete(api_v1_quiz_path(quiz.id), headers: current_admin.create_new_auth_token) }
 
-    let(:headers) { current_admin.create_new_auth_token }
     let(:current_admin) { create(:admin) }
-    let(:quiz_id) { quiz.id }
     let!(:quiz) { create(:quiz) }
 
     it "quiz is deleted" do
