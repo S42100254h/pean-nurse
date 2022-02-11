@@ -17,13 +17,7 @@ type Choice = {
 type Choices = {
   choices: Choice[];
   setChoices: React.Dispatch<
-    React.SetStateAction<
-      {
-        id?: number;
-        choice: string;
-        is_right: string;
-      }[]
-    >
+    React.SetStateAction<{ id?: number; choice: string; is_right: string }[]>
   >;
 };
 

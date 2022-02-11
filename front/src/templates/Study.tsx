@@ -233,7 +233,7 @@ const Study = () => {
 
     const choicesApiEndpoint =
       process.env.REACT_APP_API_URL +
-      "choices?quiz_id[]=462&quiz_id[]=463&quiz_id[]=464&quiz_id[]=465&quiz_id[]=466&quiz_id[]=467&quiz_id[]=468";
+      "choices?quiz_id[]=1&quiz_id[]=2&quiz_id[]=3&quiz_id[]=4&quiz_id[]=5&quiz_id[]=6&quiz_id[]=7";
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
