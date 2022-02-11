@@ -43,6 +43,7 @@ const QuizDetail = () => {
 
   const [quiz, setQuiz] = useState(""),
     [choices, setChoices] = useState<Choice[]>([]),
+    [commentary, setCommentary] = useState(""),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
@@ -73,6 +74,13 @@ const QuizDetail = () => {
       setQuiz(event.target.value);
     },
     [setQuiz],
+  );
+
+  const inputCommentary = useCallback(
+    (event) => {
+      setCommentary(event.target.value);
+    },
+    [setCommentary],
   );
 
   const handleDialogClose = () => setOpen(false);
@@ -121,6 +129,17 @@ const QuizDetail = () => {
       <Spacer size="sm" />
       <SetChoicesArea choices={choices} setChoices={setChoices} />
       <Spacer size="sm" />
+      <TextInput
+        fullWidth={true}
+        label={"解説文"}
+        multiline={true}
+        required={true}
+        rows={3}
+        value={commentary}
+        type={"text"}
+        onChange={inputCommentary}
+      />
+      <Spacer size="xs" />
       <PrimaryButton
         label={"クイズを更新する"}
         fullWidth={true}
@@ -137,6 +156,7 @@ const QuizDetail = () => {
         id={match.params.id}
         quiz={quiz}
         choices={choices}
+        commentary={commentary}
         open={open}
         onClose={handleDialogClose}
       />

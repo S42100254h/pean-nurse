@@ -116,7 +116,7 @@ const CreateQuiz = () => {
       <Select isMulti options={options} placeholder={"カテゴリーを選択してください"} />
       <Spacer size="sm" />
       <SetChoicesArea choices={choices} setChoices={setChoices} />
-      <Spacer size="sm" />
+      <Spacer size="xs" />
       <TextInput
         fullWidth={true}
         label={"解説文"}
