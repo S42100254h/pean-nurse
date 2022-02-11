@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
-import { ChoiceCard, Quiz } from "./index";
+import { Commentary, ChoiceCard, Quiz } from "./index";
 import { editQuiz } from "../../function/quiz";
 import styled from "styled-components";
 
@@ -26,12 +26,13 @@ type Choice = {
 type Props = {
   quiz: string;
   choices: Choice[];
+  commentary: string;
   open: boolean;
   onClose: () => void;
   id: string;
 };
 
-const ConfirmUpdateDialog = ({ quiz, choices, open, onClose, id }: Props) => {
+const ConfirmUpdateDialog = ({ quiz, choices, commentary, open, onClose, id }: Props) => {
   const dispatch = useDispatch();
 
   return (
@@ -51,10 +52,12 @@ const ConfirmUpdateDialog = ({ quiz, choices, open, onClose, id }: Props) => {
               />
             ))}
             <Spacer size="xxs" />
+            <Commentary commentary={commentary} label={"解説文"} />
+            <Spacer size="xxs" />
             <PrimaryButton
               label={"クイズを更新する"}
               fullWidth={true}
-              onClick={() => dispatch(editQuiz(quiz, choices, id))}
+              onClick={() => dispatch(editQuiz(quiz, choices, commentary, id))}
             />
           </Container>
         </DialogContent>
