@@ -10,12 +10,7 @@ type Choice = {
   is_right: string;
 };
 
-type Commentary = {
-  id?: number;
-  text: string;
-};
-
-export const createQuiz = (quiz: string, choices: Choice[], commentary: Commentary) => {
+export const createQuiz = (quiz: string, choices: Choice[], commentary: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
