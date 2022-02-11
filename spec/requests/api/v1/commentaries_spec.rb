@@ -49,6 +49,22 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
     end
   end
 
+  describe "GET /api/v1/commentaries?quiz_id=number" do
+    subject { get(api_v1_commentaries_path, params: { quiz_id: quiz_id }) }
+
+    let(:quiz_id) { quiz.id }
+    let(:quiz) { create(:quiz) }
+    let!(:commentary) { create(:commentary, quiz_id: quiz_id) }
+
+    it "get commentary which is related to quiz_id" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.keys).to eq ["id", "text", "quiz_id", "created_at", "updated_at"]
+      expect(res["quiz_id"]).to eq quiz_id
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "GET api/v1/commentaries/:id" do
     subject { get(api_v1_commentary_path(commentary_id)) }
 

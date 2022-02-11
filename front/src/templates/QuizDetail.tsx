@@ -50,6 +50,8 @@ const QuizDetail = () => {
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
     const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices?quiz_id=" + match.params.id;
+    const commentaryApiEndpoint =
+      process.env.REACT_APP_API_URL + "commentaries?quiz_id=" + match.params.id;
     let isMounted = true;
 
     axios.get(quizApiEndpoint).then((resp) => {
@@ -61,6 +63,12 @@ const QuizDetail = () => {
     axios.get(choiceApiEndpoint).then((resp) => {
       if (isMounted) {
         setChoices(resp.data);
+      }
+    });
+
+    axios.get(commentaryApiEndpoint).then((resp) => {
+      if (isMounted) {
+        setCommentary(resp.data.text);
       }
     });
 
