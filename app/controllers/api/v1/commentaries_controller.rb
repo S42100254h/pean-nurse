@@ -3,8 +3,13 @@ class Api::V1::CommentariesController < Api::V1::ApiController
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
-    commentaries = Commentary.all
-    render json: commentaries
+    if params[:quiz_id]
+      commentary = Commentary.find_by(quiz_id: params[:quiz_id])
+      render json: commentary
+    else
+      commentaries = Commentary.all
+      render json: commentaries
+    end
   end
 
   def show
