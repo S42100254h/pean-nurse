@@ -10,7 +10,7 @@ type Choice = {
   is_right: string;
 };
 
-export const createQuiz = (quiz: string, choices: Choice[]) => {
+export const createQuiz = (quiz: string, choices: Choice[], commentary: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -19,7 +19,7 @@ export const createQuiz = (quiz: string, choices: Choice[]) => {
       const headers = { "access-token": auth_token, client: client, uid: uid };
       const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes";
 
-      const body = { title: quiz, choices: choices };
+      const body = { quiz: { title: quiz }, choices: choices, commentary: { text: commentary } };
 
       axios
         .post(apiEndpoint, body, { headers: headers })
