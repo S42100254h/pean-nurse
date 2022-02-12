@@ -179,4 +179,22 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET /api/v1/quizzes/exam/:id" do
+    subject { get(api_v1_exam_quizzes_path(exam_id)) }
+
+    before do
+      create_list(:quiz, 10)
+    end
+
+    let(:exam_id) { 1 }
+
+    it "gets seven quizzes" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.length).to eq 7
+      expect(res[0].keys).to eq ["id", "title", "created_at", "updated_at"]
+      expect(response).to have_http_status(200)
+    end
+  end
 end

@@ -48,6 +48,13 @@ class Api::V1::QuizzesController < Api::V1::ApiController
     render json: @quiz
   end
 
+  def exam_index
+    from = params[:exam_id].to_i - 1
+    to = params[:exam_id].to_i + 5
+    quizzes = Quiz.all[from..to]
+    render json: quizzes
+  end
+
   private
 
     def set_quiz
