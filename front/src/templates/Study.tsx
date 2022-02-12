@@ -225,9 +225,10 @@ const Study = () => {
   };
 
   useEffect(() => {
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
+    // [Need modify!!]: enable dynamic parameter below to be gotten when selecting course
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/1";
     axios.get(quizApiEndpoint).then((resp) => {
-      const newQuizzes = resp.data.slice(0, 7).map((newQuiz: Quiz) => ({
+      const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
         id: newQuiz.id,
         title: newQuiz.title,
         checked: false,
