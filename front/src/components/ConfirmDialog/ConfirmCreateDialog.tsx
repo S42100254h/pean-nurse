@@ -2,8 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
-import { Commentary, ChoiceCard, Quiz } from "./index";
+import { CategoryCard, Commentary, ChoiceCard, Quiz } from "./index";
 import { createQuiz } from "../../function/quiz";
+import { MultiValue } from "react-select";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -18,21 +19,34 @@ const Headline = styled.div`
   text-align: center;
 `;
 
+const Caption = styled.p`
+  font-weight: bold;
+  margin-left: 10px;
+`;
+
 type Choice = {
   choice: string;
   is_right: string;
 };
 
+type OptionType = {
+  id: number;
+  value: number;
+  label: string;
+};
+
 type Props = {
   quiz: string;
+  categories: MultiValue<OptionType>;
   choices: Choice[];
   commentary: string;
   open: boolean;
   onClose: () => void;
 };
 
-const ConfirmCreateDialog = ({ quiz, choices, commentary, open, onClose }: Props) => {
+const ConfirmCreateDialog = ({ quiz, categories, choices, commentary, open, onClose }: Props) => {
   const dispatch = useDispatch();
+  const categoryIds = categories.map((category) => category.id);
 
   return (
     <div>
@@ -42,6 +56,11 @@ const ConfirmCreateDialog = ({ quiz, choices, commentary, open, onClose }: Props
             <Headline>以下の内容でクイズを作成してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
+            <Caption>カテゴリー</Caption>
+            {categories.map((category) => (
+              <CategoryCard key={category.id}>{category.label}</CategoryCard>
+            ))}
+            <Spacer size="xs" />
             {choices.map((choice, index) => (
               <ChoiceCard
                 choice={choice.choice}
@@ -56,7 +75,7 @@ const ConfirmCreateDialog = ({ quiz, choices, commentary, open, onClose }: Props
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(quiz, choices, commentary))}
+              onClick={() => dispatch(createQuiz(quiz, categoryIds, choices, commentary))}
             />
           </Container>
         </DialogContent>
