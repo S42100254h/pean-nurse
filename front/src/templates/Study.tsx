@@ -150,9 +150,14 @@ type QuizType = {
   open: boolean;
 };
 
+type Commentary = {
+  text: string;
+};
+
 const Study = () => {
   const [choices, setChoices] = useState<Choice[][]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
+    [commentaries, setCommentaries] = useState<Commentary[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0);
 
@@ -237,6 +242,13 @@ const Study = () => {
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
+
+    const commentariesApiEndpoint =
+      process.env.REACT_APP_API_URL +
+      "commentaries?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
+    axios.get(commentariesApiEndpoint).then((resp) => {
+      setCommentaries(resp.data);
+    });
   }, []);
 
   return (
@@ -282,7 +294,9 @@ const Study = () => {
               {quiz === undefined ? (
                 <></>
               ) : quiz.open ? (
-                <AnswerContainer>選択肢１</AnswerContainer>
+                <AnswerContainer>
+                  {commentaries[i] === undefined ? <></> : commentaries[i].text}
+                </AnswerContainer>
               ) : (
                 <></>
               )}
