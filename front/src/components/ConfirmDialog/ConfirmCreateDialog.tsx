@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
-import { Commentary, ChoiceCard, Quiz } from "./index";
+import { CategoryCard, Commentary, ChoiceCard, Quiz } from "./index";
 import { createQuiz } from "../../function/quiz";
 import { MultiValue } from "react-select";
 import styled from "styled-components";
@@ -17,6 +17,11 @@ const Headline = styled.div`
   font-size: 1.563rem;
   margin: 0 auto 1rem auto;
   text-align: center;
+`;
+
+const Caption = styled.p`
+  font-weight: bold;
+  margin-left: 10px;
 `;
 
 type Choice = {
@@ -50,9 +55,11 @@ const ConfirmCreateDialog = ({ quiz, categories, choices, commentary, open, onCl
             <Headline>以下の内容でクイズを作成してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
+            <Caption>カテゴリー</Caption>
             {categories.map((category) => (
-              <div key={category.id}>{category.label}</div>
+              <CategoryCard key={category.id}>{category.label}</CategoryCard>
             ))}
+            <Spacer size="xs" />
             {choices.map((choice, index) => (
               <ChoiceCard
                 choice={choice.choice}
