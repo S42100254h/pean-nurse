@@ -221,7 +221,7 @@ const Study = () => {
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
-      const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
+      const newQuizzes = resp.data.slice(0, 7).map((newQuiz: Quiz) => ({
         title: newQuiz.title,
         checked: false,
         count: 1,
@@ -233,7 +233,7 @@ const Study = () => {
 
     const choicesApiEndpoint =
       process.env.REACT_APP_API_URL +
-      "choices?quiz_id[]=1&quiz_id[]=2&quiz_id[]=3&quiz_id[]=4&quiz_id[]=5&quiz_id[]=6&quiz_id[]=7";
+      "choices?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
     axios.get(choicesApiEndpoint).then((resp) => {
       setChoices(resp.data);
     });
