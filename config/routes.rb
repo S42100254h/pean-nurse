@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :choices
       resources :commentaries
       post "inquiries/create"
+      get "quizzes/exam/:id", to: "quizzes#exam_index", as: "exam_quizzes"
     end
   end
 
