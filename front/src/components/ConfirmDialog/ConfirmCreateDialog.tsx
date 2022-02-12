@@ -4,6 +4,7 @@ import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
 import { Commentary, ChoiceCard, Quiz } from "./index";
 import { createQuiz } from "../../function/quiz";
+import { MultiValue } from "react-select";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -23,15 +24,22 @@ type Choice = {
   is_right: string;
 };
 
+type OptionType = {
+  id: number;
+  value: number;
+  label: string;
+};
+
 type Props = {
   quiz: string;
+  categories: MultiValue<OptionType>;
   choices: Choice[];
   commentary: string;
   open: boolean;
   onClose: () => void;
 };
 
-const ConfirmCreateDialog = ({ quiz, choices, commentary, open, onClose }: Props) => {
+const ConfirmCreateDialog = ({ quiz, categories, choices, commentary, open, onClose }: Props) => {
   const dispatch = useDispatch();
 
   return (
@@ -42,6 +50,9 @@ const ConfirmCreateDialog = ({ quiz, choices, commentary, open, onClose }: Props
             <Headline>以下の内容でクイズを作成してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Quiz quiz={quiz} label={"問題"} />
+            {categories.map((category) => (
+              <div key={category.id}>{category.label}</div>
+            ))}
             {choices.map((choice, index) => (
               <ChoiceCard
                 choice={choice.choice}

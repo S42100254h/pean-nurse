@@ -153,6 +153,7 @@ const CreateQuiz = () => {
       />
       <ConfirmCreateDialog
         quiz={quiz}
+        categories={selectedCategories}
         choices={choices}
         commentary={commentary}
         open={open}
