@@ -46,6 +46,7 @@ type Props = {
 
 const ConfirmCreateDialog = ({ quiz, categories, choices, commentary, open, onClose }: Props) => {
   const dispatch = useDispatch();
+  const categoryIds = categories.map((category) => category.id);
 
   return (
     <div>
@@ -74,7 +75,7 @@ const ConfirmCreateDialog = ({ quiz, categories, choices, commentary, open, onCl
             <PrimaryButton
               label={"クイズを作成する"}
               fullWidth={true}
-              onClick={() => dispatch(createQuiz(quiz, choices, commentary))}
+              onClick={() => dispatch(createQuiz(quiz, categoryIds, choices, commentary))}
             />
           </Container>
         </DialogContent>
