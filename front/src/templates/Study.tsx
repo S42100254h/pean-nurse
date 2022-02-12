@@ -143,6 +143,7 @@ type Choice = {
 };
 
 type QuizType = {
+  id: number;
   title: string;
   checked: boolean;
   count: number;
@@ -227,6 +228,7 @@ const Study = () => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/";
     axios.get(quizApiEndpoint).then((resp) => {
       const newQuizzes = resp.data.slice(0, 7).map((newQuiz: Quiz) => ({
+        id: newQuiz.id,
         title: newQuiz.title,
         checked: false,
         count: 1,
