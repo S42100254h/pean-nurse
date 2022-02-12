@@ -1,3 +1,4 @@
+export { default as CategoryCard } from "./CategoryCard";
 export { default as ChoiceCard } from "./ChoiceCard";
 export { default as Commentary } from "./Commentary";
 export { default as ConfirmCreateDialog } from "./ConfirmCreateDialog";
