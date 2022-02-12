@@ -50,18 +50,45 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
   end
 
   describe "GET /api/v1/commentaries?quiz_id=number" do
-    subject { get(api_v1_commentaries_path, params: { quiz_id: quiz_id }) }
+    before do
+      create(:quiz, id: 1)
+      create(:quiz, id: 2)
+      create(:quiz, id: 3)
+      create(:commentary, quiz_id: 1)
+      create(:commentary, quiz_id: 2)
+      create(:commentary, quiz_id: 3)
+    end
 
-    let(:quiz_id) { quiz.id }
-    let(:quiz) { create(:quiz) }
-    let!(:commentary) { create(:commentary, quiz_id: quiz_id) }
+    context "with query parameter(string)" do
+      subject { get(api_v1_commentaries_path, params: { quiz_id: quiz_id }) }
 
-    it "get commentary which is related to quiz_id" do
-      subject
-      res = JSON.parse(response.body)
-      expect(res.keys).to eq ["id", "text", "quiz_id", "created_at", "updated_at"]
-      expect(res["quiz_id"]).to eq quiz_id
-      expect(response).to have_http_status(200)
+      let(:quiz_id) { 1 }
+      let!(:commentary) { create(:commentary, quiz_id: quiz_id) }
+
+      it "get commentary which is related to quiz_id" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res.keys).to eq ["id", "text", "quiz_id", "created_at", "updated_at"]
+        expect(res["quiz_id"]).to eq quiz_id
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "with query parameters(array)" do
+      subject { get(api_v1_commentaries_path, params: { quiz_id: [quiz_id, quiz_id2] }) }
+
+      let(:quiz_id) { 1 }
+      let(:quiz_id2) { 2 }
+
+      it "gets list of commentaries which is related to quiz_id & quiz_id2" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res.length).to eq 2
+        expect(res[0].keys).to eq ["id", "text", "quiz_id", "created_at", "updated_at"]
+        expect(res[0]["quiz_id"]).to eq quiz_id
+        expect(res[1]["quiz_id"]).to eq quiz_id2
+        expect(response).to have_http_status(200)
+      end
     end
   end
 
