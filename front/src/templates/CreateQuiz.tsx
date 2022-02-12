@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
 import { SetChoicesArea } from "../components/SetChoicesArea.tsx";
-import Select from "react-select";
+import Select, { MultiValue } from "react-select";
 import { ConfirmCreateDialog } from "../components/ConfirmDialog";
 import { fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
@@ -36,11 +36,18 @@ const CreateQuiz = () => {
     is_right: string;
   };
 
+  type OptionType = {
+    id: number;
+    value: number;
+    label: string;
+  };
+
   const [quiz, setQuiz] = useState(""),
     [choices, setChoices] = useState<Choice[]>([
       { choice: "", is_right: "" },
       { choice: "", is_right: "" },
     ]),
+    [selectedCategories, setSelectedCategories] = useState<MultiValue<OptionType>>([]),
     [commentary, setCommentary] = useState(""),
     [open, setOpen] = useState(false);
 
@@ -50,6 +57,10 @@ const CreateQuiz = () => {
     },
     [setQuiz],
   );
+
+  const inputSelectedCategories = (inputValue: MultiValue<OptionType>) => {
+    setSelectedCategories(inputValue);
+  };
 
   const inputCommentary = useCallback(
     (event) => {
@@ -113,7 +124,13 @@ const CreateQuiz = () => {
         onChange={inputQuiz}
       />
       <Spacer size="sm" />
-      <Select isMulti options={options} placeholder={"カテゴリーを選択してください"} />
+      <Select
+        isMulti
+        options={options}
+        placeholder={"カテゴリーを選択してください"}
+        onChange={(inputValue) => inputSelectedCategories(inputValue)}
+        value={selectedCategories}
+      />
       <Spacer size="sm" />
       <SetChoicesArea choices={choices} setChoices={setChoices} />
       <Spacer size="xs" />
