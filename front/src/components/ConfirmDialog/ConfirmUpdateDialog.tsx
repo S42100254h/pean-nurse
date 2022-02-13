@@ -47,6 +47,7 @@ type Props = {
 
 const ConfirmUpdateDialog = ({ quiz, categories, choices, commentary, open, onClose, id }: Props) => {
   const dispatch = useDispatch();
+  const categoryIds = categories.map((category) => category.id);
 
   return (
     <div>
@@ -75,7 +76,7 @@ const ConfirmUpdateDialog = ({ quiz, categories, choices, commentary, open, onCl
             <PrimaryButton
               label={"クイズを更新する"}
               fullWidth={true}
-              onClick={() => dispatch(editQuiz(quiz, choices, commentary, id))}
+              onClick={() => dispatch(editQuiz(quiz, categoryIds, choices, commentary, id))}
             />
           </Container>
         </DialogContent>
