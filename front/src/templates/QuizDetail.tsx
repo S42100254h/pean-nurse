@@ -148,11 +148,6 @@ const QuizDetail = () => {
     return disabled;
   };
 
-  const menus = [
-    { label: "wrong", value: "false", id: "wrong" },
-    { label: "right", value: "true", id: "right" },
-  ];
-
   const options = categories.map((category) => ({
     id: category.id,
     value: category.id,
