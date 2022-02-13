@@ -47,6 +47,32 @@ RSpec.describe "Api::V1::Categories", type: :request do
     end
   end
 
+  describe "GET /api/v11/categories?quiz_id=number" do
+    subject { get(api_v1_categories_path, params: { quiz_id: quiz_id }) }
+
+    before do
+      create(:quiz, id: 1)
+      create(:quiz, id: 2)
+      create(:category, id: 1)
+      create(:category, id: 2)
+      create(:category, id: 3)
+      create(:category_quiz_relation, quiz_id: 1, category_id: 1)
+      create(:category_quiz_relation, quiz_id: 1, category_id: 2)
+      create(:category_quiz_relation, quiz_id: 2, category_id: 1)
+    end
+
+    let(:quiz_id) { 1 }
+
+    it "gets categories which are related to quiz_id" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.length).to eq 2
+      expect(res[0]["id"]).to eq 1
+      expect(res[1]["id"]).to eq 2
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "GET /api/v1/categories/:id" do
     subject { get(api_v1_category_path(category_id)) }
 
