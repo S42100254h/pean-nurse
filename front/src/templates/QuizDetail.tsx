@@ -1,14 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { ConfirmUpdateDialog } from "../components/ConfirmDialog";
 import { SetChoicesArea } from "../components/SetChoicesArea.tsx";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { deleteQuiz } from "../reducks/quizzes/operations";
+import Select, { MultiValue } from "react-select";
 import { push } from "connected-react-router";
+import { fetchCategories } from "../reducks/categories/operations";
+import { getCategories } from "../reducks/categories/selectors";
+import { RootState } from "../types/entity/rootState";
 import axios from "axios";
 import styled from "styled-components";
+import { Category } from "../types/entity/category";
 
 const Container = styled.div`
   margin: 30px auto;
@@ -37,11 +42,20 @@ type Choice = {
   is_right: string;
 };
 
+type OptionType = {
+  id: number;
+  value: number;
+  label: string;
+};
+
 const QuizDetail = () => {
   const dispatch = useDispatch();
+  const selector = useSelector((state: RootState) => state);
+  const categories = getCategories(selector);
   const match = useRouteMatch<MatchParams>();
 
   const [quiz, setQuiz] = useState(""),
+    [selectedCategories, setSelectedCategories] = useState<MultiValue<OptionType>>([]),
     [choices, setChoices] = useState<Choice[]>([]),
     [commentary, setCommentary] = useState(""),
     [open, setOpen] = useState(false),
@@ -52,7 +66,11 @@ const QuizDetail = () => {
     const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices?quiz_id=" + match.params.id;
     const commentaryApiEndpoint =
       process.env.REACT_APP_API_URL + "commentaries?quiz_id=" + match.params.id;
+    const categoriesApiEndpoint =
+      process.env.REACT_APP_API_URL + "categories?quiz_id=" + match.params.id;
     let isMounted = true;
+
+    dispatch(fetchCategories());
 
     axios.get(quizApiEndpoint).then((resp) => {
       if (isMounted) {
@@ -72,6 +90,17 @@ const QuizDetail = () => {
       }
     });
 
+    axios.get(categoriesApiEndpoint).then((resp) => {
+      if (isMounted) {
+        const newCategories = resp.data.map((res: Category) => ({
+          id: res.id,
+          value: res.id,
+          label: res.name,
+        }));
+        setSelectedCategories(newCategories);
+      }
+    });
+
     return () => {
       isMounted = false;
     };
@@ -83,6 +112,10 @@ const QuizDetail = () => {
     },
     [setQuiz],
   );
+
+  const inputSelectedCategories = (inputValue: MultiValue<OptionType>) => {
+    setSelectedCategories(inputValue);
+  };
 
   const inputCommentary = useCallback(
     (event) => {
@@ -120,6 +153,12 @@ const QuizDetail = () => {
     { label: "right", value: "true", id: "right" },
   ];
 
+  const options = categories.map((category) => ({
+    id: category.id,
+    value: category.id,
+    label: category.name,
+  }));
+
   return (
     <Container>
       <Heading>クイズ詳細</Heading>
@@ -133,6 +172,14 @@ const QuizDetail = () => {
         value={quiz}
         type={"text"}
         onChange={inputQuiz}
+      />
+      <Spacer size="sm" />
+      <Select
+        isMulti
+        options={options}
+        placeholder={"カテゴリーを選択してください"}
+        onChange={(inputValue) => inputSelectedCategories(inputValue)}
+        value={selectedCategories}
       />
       <Spacer size="sm" />
       <SetChoicesArea choices={choices} setChoices={setChoices} />
@@ -163,6 +210,7 @@ const QuizDetail = () => {
       <ConfirmUpdateDialog
         id={match.params.id}
         quiz={quiz}
+        categories={selectedCategories}
         choices={choices}
         commentary={commentary}
         open={open}
