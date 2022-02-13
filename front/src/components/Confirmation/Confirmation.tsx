@@ -47,11 +47,7 @@ const Confirmation = (props: Props) => {
           <Spacer size="xs" />
           <PrimaryButton label={"退会をやめる"} fullWidth={true} onClick={props.onClickStop} />
           <Spacer size="xs" />
-          <SecondaryButton
-            label={"退会手続きを進める"}
-            fullWidth={true}
-            onClick={props.onClickProceed}
-          />
+          <SecondaryButton label={"退会手続きを進める"} fullWidth={true} onClick={props.onClickProceed} />
           <Spacer size="xs" />
         </DialogContent>
       </Dialog>

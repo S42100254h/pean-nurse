@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  PrimaryButton,
-  SecondaryButton,
-  SelectBox,
-  Spacer,
-  TextInput,
-} from "../../components/UIkit";
+import { PrimaryButton, SecondaryButton, SelectBox, Spacer, TextInput } from "../../components/UIkit";
 import { MenuItem } from "@material-ui/core";
 import styled from "styled-components";
 
@@ -16,9 +10,7 @@ type Choice = {
 
 type Choices = {
   choices: Choice[];
-  setChoices: React.Dispatch<
-    React.SetStateAction<{ id?: number; choice: string; is_right: string }[]>
-  >;
+  setChoices: React.Dispatch<React.SetStateAction<{ id?: number; choice: string; is_right: string }[]>>;
 };
 
 const ButtonWrapper = styled.div`
@@ -30,10 +22,7 @@ const ButtonWrapper = styled.div`
 const SetChoicesArea = ({ choices, setChoices }: Choices) => {
   const [index, setIndex] = useState(0);
 
-  const inputChoice = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number,
-  ) => {
+  const inputChoice = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     const newChoices = [...choices];
     newChoices[index] = { ...newChoices[index], choice: event.target.value };
     setChoices(newChoices);

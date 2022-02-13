@@ -45,11 +45,7 @@ const QuizList = () => {
       headerName: "詳細",
       width: 100,
       renderCell: (params: GridCellParams) => (
-        <PrimaryButton
-          label={"詳細"}
-          rowId={params.id}
-          onClick={() => dispatch(push("/quiz/detail/" + params.id))}
-        />
+        <PrimaryButton label={"詳細"} rowId={params.id} onClick={() => dispatch(push("/quiz/detail/" + params.id))} />
       ),
     },
     {
@@ -87,13 +83,7 @@ const QuizList = () => {
     <Container>
       <Heading>クイズ一覧</Heading>
       <div style={{ width: "100%", backgroundColor: "#fff" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          autoHeight
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-        />
+        <DataGrid rows={rows} columns={columns} autoHeight pageSize={10} rowsPerPageOptions={[10]} />
       </div>
       <DeleteDialog
         open={open}

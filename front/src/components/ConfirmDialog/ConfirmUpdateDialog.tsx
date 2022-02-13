@@ -45,15 +45,7 @@ type Props = {
   id: string;
 };
 
-const ConfirmUpdateDialog = ({
-  quiz,
-  categories,
-  choices,
-  commentary,
-  open,
-  onClose,
-  id,
-}: Props) => {
+const ConfirmUpdateDialog = ({ quiz, categories, choices, commentary, open, onClose, id }: Props) => {
   const dispatch = useDispatch();
 
   return (

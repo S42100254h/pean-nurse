@@ -62,12 +62,7 @@ const ConfirmCreateDialog = ({ quiz, categories, choices, commentary, open, onCl
             ))}
             <Spacer size="xs" />
             {choices.map((choice, index) => (
-              <ChoiceCard
-                choice={choice.choice}
-                select={choice.is_right}
-                label={"選択肢" + (index + 1)}
-                key={index}
-              />
+              <ChoiceCard choice={choice.choice} select={choice.is_right} label={"選択肢" + (index + 1)} key={index} />
             ))}
             <Spacer size="xxs" />
             <Commentary commentary={commentary} label={"解説文"} />

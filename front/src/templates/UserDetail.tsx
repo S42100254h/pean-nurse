@@ -113,11 +113,7 @@ const UserDetail = () => {
         onClick={() => dispatch(editUserInfoByAdmin(match.params.id, name, email))}
       />
       <Spacer size="xs" />
-      <SecondaryButton
-        label={"アカウントを削除する"}
-        fullWidth={true}
-        onClick={() => setOpen(true)}
-      />
+      <SecondaryButton label={"アカウントを削除する"} fullWidth={true} onClick={() => setOpen(true)} />
       <DeleteDialog
         open={open}
         onClose={() => setOpen(false)}

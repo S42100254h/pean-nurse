@@ -45,9 +45,7 @@ export const deleteCategory = (id: string | number) => {
         })
         .then(() => {
           const prevCategories: Category[] = getCategories().categories.list;
-          const nextCategories: Category[] = prevCategories.filter(
-            (category) => category.id !== id,
-          );
+          const nextCategories: Category[] = prevCategories.filter((category) => category.id !== id);
           dispatch(deleteCategoryAction(nextCategories));
           dispatch(showLoadingAction("Delete category..."));
 

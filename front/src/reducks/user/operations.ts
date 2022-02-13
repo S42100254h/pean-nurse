@@ -13,12 +13,7 @@ import axios from "axios";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
 
-export const signUp = (
-  name: string,
-  email: string,
-  password: string,
-  password_confirmation: string,
-) => {
+export const signUp = (name: string, email: string, password: string, password_confirmation: string) => {
   return async (dispatch: Dispatch) => {
     if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
@@ -379,11 +374,7 @@ export const deleteImage = () => {
   };
 };
 
-export const editPassword = (
-  current_password: string,
-  password: string,
-  password_confirmation: string,
-) => {
+export const editPassword = (current_password: string, password: string, password_confirmation: string) => {
   return async (dispatch: Dispatch) => {
     if (!isValidRequiredInput(current_password, password, password_confirmation)) {
       alert("未入力の項目があります");
@@ -524,8 +515,7 @@ export const resetPassword = (password: string, password_confirmation: string) =
           dispatch(
             setNotificationAction({
               variant: "error",
-              message:
-                "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。",
+              message: "パスワードの再設定に失敗しました。入力内容を確認するか初めからやり直してください。",
             }),
           );
         }, 400);

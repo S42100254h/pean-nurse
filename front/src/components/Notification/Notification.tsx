@@ -33,11 +33,7 @@ const Notification = () => {
       autoHideDuration={3000}
       onClose={() => dispatch(closeNotificationAction())}
     >
-      <NotificationSnackbar
-        onClose={() => dispatch(closeNotificationAction())}
-        variant={variant}
-        message={message}
-      />
+      <NotificationSnackbar onClose={() => dispatch(closeNotificationAction())} variant={variant} message={message} />
     </StyledSnackbar>
   );
 };
