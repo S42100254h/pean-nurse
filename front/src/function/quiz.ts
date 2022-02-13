@@ -56,7 +56,7 @@ export const createQuiz = (quiz: string, categoryIds: number[], choices: Choice[
   };
 };
 
-export const editQuiz = (quiz: string, choices: Choice[], commentary: string, id: string) => {
+export const editQuiz = (quiz: string, categoryIds: number[], choices: Choice[], commentary: string, id: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -64,7 +64,12 @@ export const editQuiz = (quiz: string, choices: Choice[], commentary: string, id
       const uid = localStorage.getItem("uid") || "";
       const headers = { "access-token": auth_token, client: client, uid: uid };
       const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
-      const body = { quiz: { title: quiz }, choices: choices, commentary: { text: commentary } };
+      const body = {
+        quiz: { title: quiz },
+        category_ids: categoryIds,
+        choices: choices,
+        commentary: { text: commentary },
+      };
 
       axios
         .patch(apiEndpoint, body, { headers: headers })
