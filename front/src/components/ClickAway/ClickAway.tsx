@@ -56,11 +56,7 @@ const ClickAway = (props: Props) => {
           <PopContainer>
             <Label>
               画像をアップロード
-              <StyledInput
-                type="file"
-                accept="image/jpeg, image/png"
-                onChange={(e) => props.onChange(e)}
-              />
+              <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => props.onChange(e)} />
             </Label>
           </PopContainer>
           <PopContainer>

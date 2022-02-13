@@ -51,11 +51,7 @@ const Profile = () => {
   return (
     <GridContainer container spacing={1} direction="row" alignItems="center">
       <Grid item xs={3}>
-        {userImage ? (
-          <StyledAvatar src={userImage.url} />
-        ) : (
-          <StyledAvatar src="/broken-image.jpg" />
-        )}
+        {userImage ? <StyledAvatar src={userImage.url} /> : <StyledAvatar src="/broken-image.jpg" />}
       </Grid>
       <GridCenter item xs={3}>
         <Name>{userName}</Name>

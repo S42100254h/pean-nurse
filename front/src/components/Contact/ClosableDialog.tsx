@@ -109,13 +109,7 @@ const ClosableDialog = (props: Props) => {
     setIsSubmitted(!isSubmitted);
   }, [setIsSubmitted, isSubmitted]);
 
-  const handleSendMail = (
-    email: string,
-    select: string,
-    text: string,
-    image: File | null,
-    name: string,
-  ) => {
+  const handleSendMail = (email: string, select: string, text: string, image: File | null, name: string) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
 
     if (!isValidEmailFormat(email)) {
@@ -190,9 +184,7 @@ const ClosableDialog = (props: Props) => {
             <TextArea>
               <p>PeANをご利用いただきありがとうございます。</p>
               <p>ご不明点やご意見等ございましたら、フォームよりご連絡ください。</p>
-              <p>
-                また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。
-              </p>
+              <p>また、ヘルプページによくある質問を記載しておりますので、合わせてご確認いただけると幸いです。</p>
 
               <p>※ いただきましたご意見は、メールにて順次ご返信させていただきます。</p>
               <img src={cat} alt="ねこ" width="180px" height="180px" />
@@ -209,13 +201,7 @@ const ClosableDialog = (props: Props) => {
                 onChange={inputEmail}
               />
               <Spacer size="xxs" />
-              <SelectBox
-                displayEmpty={true}
-                value={select}
-                variant="outlined"
-                onChange={inputSelect}
-                fullWidth={true}
-              >
+              <SelectBox displayEmpty={true} value={select} variant="outlined" onChange={inputSelect} fullWidth={true}>
                 <MenuItem value="">- 選択してください -</MenuItem>
                 {menus.map((menu) => (
                   <MenuItem value={menu.value} key={menu.id}>
@@ -238,11 +224,7 @@ const ClosableDialog = (props: Props) => {
               <Label>
                 <AttachFile style={{ fontSize: "16px" }} />
                 画像を添付する
-                <StyledInput
-                  type="file"
-                  accept="image/jpeg, image/png"
-                  onChange={(e) => inputImage(e)}
-                />
+                <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
               </Label>
               {image && (
                 <ImageLabel>

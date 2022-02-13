@@ -263,11 +263,7 @@ const Study = () => {
             <div key={i}>
               <QuizContainer>
                 <QuizTitle>問題{i + 1}</QuizTitle>
-                {quiz === undefined ? (
-                  <></>
-                ) : (
-                  <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />
-                )}
+                {quiz === undefined ? <></> : <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />}
               </QuizContainer>
               {quiz === undefined ? <></> : <QuizText>{quiz.title}</QuizText>}
               <Spacer size="xs" />
@@ -297,9 +293,7 @@ const Study = () => {
               {quiz === undefined ? (
                 <></>
               ) : quiz.open ? (
-                <AnswerContainer>
-                  {commentaries[i] === undefined ? <></> : commentaries[i].text}
-                </AnswerContainer>
+                <AnswerContainer>{commentaries[i] === undefined ? <></> : commentaries[i].text}</AnswerContainer>
               ) : (
                 <></>
               )}

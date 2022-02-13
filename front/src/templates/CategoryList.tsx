@@ -72,13 +72,7 @@ const CategoryList = () => {
     <Container>
       <Heading>カテゴリー一覧</Heading>
       <Wrapper>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          autoHeight
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-        />
+        <DataGrid rows={rows} columns={columns} autoHeight pageSize={10} rowsPerPageOptions={[10]} />
       </Wrapper>
       <DeleteDialog
         open={open}

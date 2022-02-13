@@ -1,7 +1,4 @@
-import {
-  closeNotificationAction,
-  setNotificationAction,
-} from "../../../reducks/notification/actions";
+import { closeNotificationAction, setNotificationAction } from "../../../reducks/notification/actions";
 
 describe("actions.tsのテスト", () => {
   it("closeNotificationActionのテスト", () => {

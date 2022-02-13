@@ -138,26 +138,15 @@ const Header = () => {
               <Image src={pean} alt="logo" onClick={() => dispatch(push("/management"))} />
               <Left>
                 <HeaderItem onClick={() => dispatch(push("/management"))}>ホーム</HeaderItem>
-                <HeaderItem onClick={(event) => handleClick(event, userMenu)}>
-                  ユーザー管理
-                </HeaderItem>
-                <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>
-                  クイズ管理
-                </HeaderItem>
-                <HeaderItem onClick={(event) => handleClick(event, categoryMenu)}>
-                  カテゴリー管理
-                </HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, categoryMenu)}>カテゴリー管理</HeaderItem>
               </Left>
               <Right>
                 <HeaderItem onClick={() => dispatch(adminSignOut())}>サインアウト</HeaderItem>
               </Right>
             </StyledToolbar>
-            <DropDown
-              anchorEl={anchorEl}
-              open={dropDownOpen}
-              onClose={() => handleClose()}
-              menus={menus}
-            />
+            <DropDown anchorEl={anchorEl} open={dropDownOpen} onClose={() => handleClose()} menus={menus} />
           </StyledAppBar>
         </Box>
       ) : (
@@ -167,9 +156,7 @@ const Header = () => {
               <StyledToolbar>
                 <Image src={pean} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
                 <Left>
-                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>
-                    ダッシュボード
-                  </HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</HeaderItem>
                   <HeaderItem onClick={() => dispatch(push("/courselist"))}>コース一覧</HeaderItem>
                   <HeaderItem onClick={() => dispatch(push("/help"))}>ヘルプ</HeaderItem>
                 </Left>
@@ -190,16 +177,8 @@ const Header = () => {
             )}
           </StyledAppBar>
           <ClosableDrawer open={open} onClose={handleDrawerToggle} />
-          <SignInDialog
-            open={isSignInOpen}
-            onClose={handleSignInDialogToggle}
-            onClick={handleSignInDialogToggle}
-          />
-          <SignUpDialog
-            open={isSignUpOpen}
-            onClose={handleSignUpDialogToggle}
-            onClick={handleSignUpDialogToggle}
-          />
+          <SignInDialog open={isSignInOpen} onClose={handleSignInDialogToggle} onClick={handleSignInDialogToggle} />
+          <SignUpDialog open={isSignUpOpen} onClose={handleSignUpDialogToggle} onClick={handleSignUpDialogToggle} />
         </Box>
       )}
     </Root>

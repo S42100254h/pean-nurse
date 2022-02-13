@@ -2,14 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Tabs, Tab } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
-import {
-  PasswordInput,
-  PrimaryButton,
-  SecondaryButton,
-  Spacer,
-  TabPanel,
-  TextInput,
-} from "../components/UIkit";
+import { PasswordInput, PrimaryButton, SecondaryButton, Spacer, TabPanel, TextInput } from "../components/UIkit";
 import { useSelector } from "react-redux";
 import { getUserEmail, getUserImage, getUserName } from "../reducks/user/selectors";
 import Avatar from "@material-ui/core/Avatar";
@@ -196,11 +189,7 @@ const Setting = () => {
             <MenuContainer>
               <TabPanel value={value} index={0}>
                 <Image type="button" onClick={(e) => handleModalToggle(e)}>
-                  {userImage ? (
-                    <StyledAvatar src={userImage.url} />
-                  ) : (
-                    <StyledAvatar src="/broken-image.jpg" />
-                  )}
+                  {userImage ? <StyledAvatar src={userImage.url} /> : <StyledAvatar src="/broken-image.jpg" />}
                   <StyledPhotoCameraIcon />
                 </Image>
                 <Spacer size="xs" />

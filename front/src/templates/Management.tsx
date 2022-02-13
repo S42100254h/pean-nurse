@@ -28,32 +28,16 @@ const Management = () => {
       <Container>
         <Heading>クイズ</Heading>
         <Spacer size="xs" />
-        <PrimaryButton
-          id={"quizList"}
-          label={"クイズ一覧"}
-          onClick={() => dispatch(push("/quiz/list"))}
-        />
+        <PrimaryButton id={"quizList"} label={"クイズ一覧"} onClick={() => dispatch(push("/quiz/list"))} />
         <Spacer size="xs" />
-        <PrimaryButton
-          id={"createQuiz"}
-          label={"クイズ作成"}
-          onClick={() => dispatch(push("/quiz/create"))}
-        />
+        <PrimaryButton id={"createQuiz"} label={"クイズ作成"} onClick={() => dispatch(push("/quiz/create"))} />
       </Container>
       <Container>
         <Heading>ユーザー</Heading>
         <Spacer size="xs" />
-        <PrimaryButton
-          id={"userList"}
-          label={"ユーザ一覧"}
-          onClick={() => dispatch(push("/user/list"))}
-        />
+        <PrimaryButton id={"userList"} label={"ユーザ一覧"} onClick={() => dispatch(push("/user/list"))} />
         <Spacer size="xs" />
-        <PrimaryButton
-          id={"createUser"}
-          label={"ユーザー作成"}
-          onClick={() => dispatch(push("/user/create"))}
-        />
+        <PrimaryButton id={"createUser"} label={"ユーザー作成"} onClick={() => dispatch(push("/user/create"))} />
       </Container>
     </Root>
   );

@@ -64,10 +64,8 @@ const QuizDetail = () => {
   useEffect(() => {
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + match.params.id;
     const choiceApiEndpoint = process.env.REACT_APP_API_URL + "choices?quiz_id=" + match.params.id;
-    const commentaryApiEndpoint =
-      process.env.REACT_APP_API_URL + "commentaries?quiz_id=" + match.params.id;
-    const categoriesApiEndpoint =
-      process.env.REACT_APP_API_URL + "categories?quiz_id=" + match.params.id;
+    const commentaryApiEndpoint = process.env.REACT_APP_API_URL + "commentaries?quiz_id=" + match.params.id;
+    const categoriesApiEndpoint = process.env.REACT_APP_API_URL + "categories?quiz_id=" + match.params.id;
     let isMounted = true;
 
     dispatch(fetchCategories());
@@ -197,11 +195,7 @@ const QuizDetail = () => {
         onClick={() => handleDialogOpen()}
       />
       <Spacer size="xs" />
-      <SecondaryButton
-        label={"クイズを削除する"}
-        fullWidth={true}
-        onClick={() => setIsOpen(true)}
-      />
+      <SecondaryButton label={"クイズを削除する"} fullWidth={true} onClick={() => setIsOpen(true)} />
       <ConfirmUpdateDialog
         id={match.params.id}
         quiz={quiz}

@@ -36,12 +36,7 @@ const Contact = () => {
     <>
       {isAdminSignedIn !== true && (
         <>
-          <Root
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            onClick={() => handleDialogToggle()}
-          >
+          <Root display="flex" alignItems="center" justifyContent="center" onClick={() => handleDialogToggle()}>
             <MailOutline fontSize="small" style={{ color: "white" }} />
             <Heading>ご意見箱</Heading>
           </Root>

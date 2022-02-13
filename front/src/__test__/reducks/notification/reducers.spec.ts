@@ -1,9 +1,6 @@
 import initialState from "../../../reducks/store/initialState";
 import { NotificationReducer } from "../../../reducks/notification/reducers";
-import {
-  closeNotificationAction,
-  setNotificationAction,
-} from "../../../reducks/notification/actions";
+import { closeNotificationAction, setNotificationAction } from "../../../reducks/notification/actions";
 
 describe("NotificationReducerのテスト", () => {
   const init = initialState.notification;
