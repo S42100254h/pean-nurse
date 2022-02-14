@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CategoryProfile, type: :model do
   describe "normal scenario" do
