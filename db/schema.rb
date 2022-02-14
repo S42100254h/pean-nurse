@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_211459) do
+ActiveRecord::Schema.define(version: 2022_02_14_215743) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 2022_02_14_211459) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_category_profiles_on_category_id"
+    t.index ["title"], name: "index_category_profiles_on_title", unique: true
+    t.index ["uid"], name: "index_category_profiles_on_uid", unique: true
   end
 
   create_table "category_quiz_relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
