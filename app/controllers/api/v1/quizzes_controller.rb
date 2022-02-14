@@ -49,9 +49,10 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   end
 
   def exam_index
-    from = params[:exam_id].to_i - 1
-    to = params[:exam_id].to_i + 5
-    quizzes = Quiz.all[from..to]
+    from = (params[:exam_id].to_i - 1) * 7
+    to = from + 6
+    category = Category.find_by(name: params[:category_name])
+    quizzes = category.quizzes[from..to]
     render json: quizzes
   end
 

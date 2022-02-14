@@ -180,20 +180,27 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "GET /api/v1/quizzes/exam/:id" do
-    subject { get(api_v1_exam_quizzes_path(exam_id)) }
+  describe "GET /api/v1/quizzes/exam/:category_name/:id" do
+    subject { get(api_v1_exam_quizzes_path(category_name, exam_id)) }
 
     before do
-      create_list(:quiz, 10)
+      create(:category, id: 1, name: "neko")
+      create(:category, id: 2, name: "dummy")
+      create_list(:quiz, 14, category_ids: 1)
+      create_list(:quiz, 14, category_ids: 2)
     end
 
+    let(:category_name) { "neko" }
     let(:exam_id) { 1 }
 
     it "gets seven quizzes" do
       subject
       res = JSON.parse(response.body)
+      quiz_id = res[0]["id"]
+      related_category_id = CategoryQuizRelation.find_by(quiz_id: quiz_id).category_id
       expect(res.length).to eq 7
       expect(res[0].keys).to eq ["id", "title", "created_at", "updated_at"]
+      expect(related_category_id).to eq 1
       expect(response).to have_http_status(200)
     end
   end
