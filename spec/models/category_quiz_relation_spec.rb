@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CategoryQuizRelation, type: :model do
   describe "normal scenario" do
-    context "category_id andquiz_id are valid" do
+    context "category_id and quiz_id are valid" do
       let(:category) { create(:category) }
       let(:quiz) { create(:quiz) }
       let!(:category_quiz_relation) { create(:category_quiz_relation, category: category, quiz: quiz) }
