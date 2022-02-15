@@ -92,7 +92,7 @@ RSpec.describe "Api::V1::Commentaries", type: :request do
     end
   end
 
-  describe "GET api/v1/commentaries/:id" do
+  describe "GET /api/v1/commentaries/:id" do
     subject { get(api_v1_commentary_path(commentary_id)) }
 
     context "specified id exists" do
