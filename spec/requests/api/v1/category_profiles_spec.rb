@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::CategoryProfiles", type: :request do
   describe "POST /api/v1/category_profiles" do
-    subject { post(api_v1_category_profiles_path, params: params, headers: headers)}
+    subject { post(api_v1_category_profiles_path, params: params, headers: headers) }
 
     describe "normal scenario" do
       context "send correct category_profile information" do

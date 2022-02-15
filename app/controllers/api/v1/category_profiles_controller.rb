@@ -30,11 +30,11 @@ class Api::V1::CategoryProfilesController < Api::V1::ApiController
 
   private
 
-  def set_category_profile
-    @category_profile = CategoryProfile.find(params[:id])
-  end
+    def set_category_profile
+      @category_profile = CategoryProfile.find(params[:id])
+    end
 
-  def category_profile_params
-    params.require(:category_profile).permit(:title, :image, :caption, :uid, :category_id)
-  end
+    def category_profile_params
+      params.require(:category_profile).permit(:title, :image, :caption, :uid, :category_id)
+    end
 end
