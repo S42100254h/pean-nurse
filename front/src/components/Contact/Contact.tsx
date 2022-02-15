@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { MailOutline } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { ClosableDialog } from "./index";
-import { getAdminSignedIn } from "../../reducks/admin/selectors";
+import { getSignedIn } from "../../reducks/user/selectors";
 import styled from "styled-components";
 import { RootState } from "../../types/entity/rootState";
 
@@ -30,11 +30,11 @@ const Contact = () => {
   const [open, setOpen] = useState(false);
   const handleDialogToggle = () => setOpen(!open);
 
-  const isAdminSignedIn = getAdminSignedIn(selector);
+  const isSignedIn = getSignedIn(selector);
 
   return (
     <>
-      {isAdminSignedIn !== true && (
+      {isSignedIn === true && (
         <>
           <Root display="flex" alignItems="center" justifyContent="center" onClick={() => handleDialogToggle()}>
             <MailOutline fontSize="small" style={{ color: "white" }} />
