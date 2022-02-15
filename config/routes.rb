@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :index, :update, :destroy]
       resources :quizzes
       resources :categories
+      resources :category_profiles
       resources :choices
       resources :commentaries
       post "inquiries/create"
