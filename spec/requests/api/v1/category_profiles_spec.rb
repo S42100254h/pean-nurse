@@ -48,4 +48,24 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET /api/v1/category_profiles/:id" do
+    subject { get(api_v1_category_profile_path(category_profile_id)) }
+
+    context "specified id exists" do
+      let(:category_profile) { create(:category_profile) }
+      let(:category_profile_id) { category_profile.id }
+
+      it "gets detail of category_profile" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res["id"]).to eq category_profile.id
+        expect(res["title"]).to eq category_profile.title
+        expect(res["image"]).to eq category_profile.image
+        expect(res["caption"]).to eq category_profile.caption
+        expect(res["uid"]).to eq category_profile.uid
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
 end
