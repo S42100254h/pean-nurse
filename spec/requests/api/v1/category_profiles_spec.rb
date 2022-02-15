@@ -68,4 +68,21 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
       end
     end
   end
+
+  describe "PATCH /api/v1/category_profiles/:id" do
+    subject { patch(api_v1_category_profile_path(category_profile_id), params: params, headers: headers) }
+
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:current_admin) { create(:admin) }
+    let(:params) { { category_profile: { title: Faker::Lorem.word, image: Faker::Avatar.image, created_at: Time.current } } }
+    let(:category_profile_id) { category_profile.id }
+    let(:category_profile) { create(:category_profile) }
+
+    it "category_profile is updated" do
+      expect { subject }.to change { category_profile.reload.title }.from(category_profile.title).to(params[:category_profile][:title]) &
+                            change { category_profile.reload.image }.from(category_profile.image).to(params[:category_profile][:image]) &
+                            not_change { category_profile.reload.created_at }
+      expect(response).to have_http_status(200)
+    end
+  end
 end
