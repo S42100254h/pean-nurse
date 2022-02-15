@@ -18,5 +18,18 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
         end
       end
     end
+
+    describe "exception scenario" do
+      context "send category_profile information with noexistent category id" do
+        let(:params) { { category_profile: attributes_for(:category_profile, category_id: category_id) } }
+        let(:current_admin) { create(:admin) }
+        let(:headers) { current_admin.create_new_auth_token }
+        let(:category_id) { 999999 }
+
+        it "CategoryProfile is not created" do
+          expect { subject }.to raise_error ActiveRecord::RecordNotFound
+        end
+      end
+    end
   end
 end
