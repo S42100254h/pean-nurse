@@ -85,4 +85,18 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "DELETE /api/v1/category_profiles/:id" do
+    subject { delete(api_v1_category_profile_path(category_profile_id), headers: headers) }
+
+    let(:headers) { current_admin.create_new_auth_token }
+    let(:current_admin) { create(:admin) }
+    let(:category_profile_id) { category_profile.id }
+    let!(:category_profile) { create(:category_profile) }
+
+    it "category_profile is deleted" do
+      expect { subject }.to change { CategoryProfile.count }.by(-1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end
