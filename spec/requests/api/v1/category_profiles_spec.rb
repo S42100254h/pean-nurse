@@ -32,4 +32,20 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
       end
     end
   end
+
+  describe "GET /api/v1/category_profiles" do
+    subject { get(api_v1_category_profiles_path) }
+
+    before do
+      create_list(:category_profile, 2)
+    end
+
+    it "gets list of category_profiles" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.length).to eq 2
+      expect(res[0].keys).to eq ["id", "title", "image", "caption", "uid", "category_id", "created_at", "updated_at"]
+      expect(response).to have_http_status(200)
+    end
+  end
 end
