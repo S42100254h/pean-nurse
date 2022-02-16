@@ -39,11 +39,16 @@ const StyledClose = styled(Close)`
   cursor: pointer;
 `;
 
-const SetCategoryProfile = () => {
-  const [image, setImage] = useState<File | null>(null),
-    [caption, setCaption] = useState(""),
-    [uid, setUid] = useState("");
+type Props = {
+  image: File | null;
+  caption: string;
+  uid: string;
+  setImage: React.Dispatch<React.SetStateAction<File | null>>;
+  setCaption: React.Dispatch<React.SetStateAction<string>>;
+  setUid: React.Dispatch<React.SetStateAction<string>>;
+};
 
+const SetCategoryProfile = ({ image, caption, uid, setImage, setCaption, setUid }: Props) => {
   const inputImage = useCallback(
     (event) => {
       setImage(event.target.files[0]);

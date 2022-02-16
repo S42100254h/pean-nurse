@@ -63,7 +63,10 @@ const CreateCategory = () => {
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState(""),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [caption, setCaption] = useState(""),
+    [image, setImage] = useState<File | null>(null),
+    [uid, setUid] = useState("");
 
   const inputCategory = useCallback(
     (event) => {
@@ -93,12 +96,21 @@ const CreateCategory = () => {
         {!open ? <StyledAdd /> : <StyledClose />}
         {!open ? "詳細を追加" : "閉じる"}
       </Label>
-      {open && <SetCategoryProfile />}
+      {open && (
+        <SetCategoryProfile
+          image={image}
+          caption={caption}
+          uid={uid}
+          setImage={setImage}
+          setCaption={setCaption}
+          setUid={setUid}
+        />
+      )}
       <Spacer size="xs" />
       <PrimaryButton
         label={"カテゴリーを作成する"}
         fullWidth={true}
-        disabled={!category}
+        disabled={open ? !category || !caption || !image || !uid : !category}
         onClick={() => dispatch(createCategory(category))}
       />
     </Container>
