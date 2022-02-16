@@ -214,7 +214,7 @@ const QuizDetail = () => {
           setIsOpen(false);
           setTimeout(() => {
             dispatch(push("/quiz/list"));
-          }, 100);
+          }, 0);
         }}
       />
     </Container>
