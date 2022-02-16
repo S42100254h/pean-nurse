@@ -6,4 +6,5 @@ class CategoryProfile < ApplicationRecord
   validates :uid, presence: true
   validates :title, uniqueness: true
   validates :uid, uniqueness: true
+  mount_uploader :image, ImageUploader
 end
