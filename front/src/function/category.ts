@@ -15,9 +15,9 @@ export const createCategory = (category: string, caption?: string, image?: File 
       const body =
         caption && image && uid
           ? {
-              category: { name: category },
-              category_profile: { title: category, caption: caption, image: image, uid: uid },
-            }
+            category: { name: category },
+            category_profile: { title: category, caption: caption, image: image, uid: uid },
+          }
           : { category: { name: category } };
 
       axios
