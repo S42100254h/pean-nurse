@@ -1,6 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useRouteMatch } from "react-router";
 import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import axios from "axios";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -20,8 +22,13 @@ const Heading = styled.h2`
   text-align: center;
 `;
 
+type MatchParams = {
+  id: string;
+};
+
 const CategoryDetail = () => {
   const dispatch = useDispatch();
+  const match = useRouteMatch<MatchParams>();
   const [category, setCategory] = useState("");
 
   const inputCategory = useCallback(
@@ -30,6 +37,21 @@ const CategoryDetail = () => {
     },
     [setCategory],
   );
+
+  useEffect(() => {
+    const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories/" + match.params.id;
+    let isMounted = true;
+
+    axios.get(categoryApiEndpoint).then((resp) => {
+      if (isMounted) {
+        setCategory(resp.data.name);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <Container>
