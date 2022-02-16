@@ -37,7 +37,7 @@ const Label = styled.label<LabelProps>`
   background-color: #4dd0e1;
   cursor: pointer;
   font-size: 12px;
-  float: right;
+  float: left;
   margin-bottom: 15px;
   &:hover {
     opacity: 0.7;
@@ -90,7 +90,7 @@ const CreateCategory = () => {
       />
       <Spacer size="xs" />
       <Label onClick={handleOpenToggle} open={open}>
-        <StyledAdd />
+        {!open ? <StyledAdd /> : <StyledClose />}
         {!open ? "詳細を追加" : "閉じる"}
       </Label>
       {open && <SetCategoryProfile />}
