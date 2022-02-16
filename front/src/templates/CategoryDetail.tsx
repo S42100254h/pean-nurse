@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import { CategoryUpdateDialog } from "../components/ConfirmDialog";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -29,7 +30,8 @@ type MatchParams = {
 const CategoryDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(""),
+    [open, setOpen] = useState(false);
 
   const inputCategory = useCallback(
     (event) => {
@@ -37,6 +39,12 @@ const CategoryDetail = () => {
     },
     [setCategory],
   );
+
+  const handleDialogClose = () => setOpen(false);
+  const handleDialogOpen = () => {
+    if (category === "") return;
+    setOpen(true);
+  };
 
   useEffect(() => {
     const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories/" + match.params.id;
@@ -70,8 +78,9 @@ const CategoryDetail = () => {
         label={"カテゴリーを更新する"}
         fullWidth={true}
         disabled={!category}
-        onClick={() => console.log("update!")}
+        onClick={() => handleDialogOpen()}
       />
+      <CategoryUpdateDialog id={match.params.id} category={category} open={open} onClose={handleDialogClose} />
     </Container>
   );
 };
