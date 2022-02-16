@@ -18,6 +18,14 @@ class Api::V1::CategoriesController < Api::V1::ApiController
   end
 
   def create
+  if params[:category_profile]
+    ActiveRecord::Base.transaction do
+      category = Category.create!(category_params)
+      category_profile = category.create_category_profile(params[:category_profile])
+      render json: { category: category, category_profile: category_profile }
+    end
+  else
+    # enable to create Only category without category_profile
     category = Category.create!(category_params)
     render json: category
   end
