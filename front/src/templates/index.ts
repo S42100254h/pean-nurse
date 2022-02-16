@@ -1,4 +1,5 @@
 export { default as AdminSignIn } from "./AdminSignIn";
+export { default as CategoryDetail } from "./CategoryDetail";
 export { default as CategoryList } from "./CategoryList";
 export { default as CourseOverview } from "./CourseOverview";
 export { default as CourseList } from "./CourseList";

@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, fetchCategories } from "../reducks/categories/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
-import { SecondaryButton } from "../components/UIkit";
+import { PrimaryButton, SecondaryButton } from "../components/UIkit";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { RootState } from "../types/entity/rootState";
+import { push } from "connected-react-router";
 import styled from "styled-components";
 
 const Container = styled.div`
   margin: 25px auto;
   width: calc(100% - 20rem);
-  max-width: 600px;
+  max-width: 680px;
 `;
 
 const Heading = styled.h2`
@@ -42,9 +43,21 @@ const CategoryList = () => {
     { field: "id", headerName: "ID", width: 80 },
     { field: "name", headerName: "カテゴリー名", width: 400 },
     {
+      field: "detail",
+      headerName: "詳細",
+      width: 100,
+      renderCell: (params: GridCellParams) => (
+        <PrimaryButton
+          label={"詳細"}
+          rowId={params.id}
+          onClick={() => dispatch(push("/category/detail/" + params.id))}
+        />
+      ),
+    },
+    {
       field: "delete",
       headerName: "削除",
-      width: 120,
+      width: 100,
       renderCell: (params: GridCellParams) => (
         <SecondaryButton
           label={"削除"}

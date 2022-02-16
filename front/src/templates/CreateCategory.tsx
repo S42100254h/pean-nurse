@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { PrimaryButton, TextInput, Spacer } from "../components/UIkit";
+import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
 import { createCategory } from "../function/category";
 import styled from "styled-components";
 
