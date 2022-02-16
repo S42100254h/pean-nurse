@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { CategoryUpdateDialog } from "../components/ConfirmDialog";
+import { DeleteDialog } from "../components/DeleteDialog";
+import { push } from "connected-react-router";
 import axios from "axios";
 import styled from "styled-components";
+import { deleteCategory } from "../reducks/categories/operations";
 
 const Container = styled.div`
   margin: 30px auto;
@@ -31,7 +34,8 @@ const CategoryDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
   const [category, setCategory] = useState(""),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [isOpen, setIsOpen] = useState(false);
 
   const inputCategory = useCallback(
     (event) => {
@@ -80,7 +84,21 @@ const CategoryDetail = () => {
         disabled={!category}
         onClick={() => handleDialogOpen()}
       />
+      <Spacer size="xs" />
+      <SecondaryButton label={"カテゴリーを削除する"} fullWidth={true} onClick={() => setIsOpen(true)} />
       <CategoryUpdateDialog id={match.params.id} category={category} open={open} onClose={handleDialogClose} />
+      <DeleteDialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        onClickStop={() => setIsOpen(false)}
+        onClickProceed={() => {
+          dispatch(deleteCategory(match.params.id));
+          setIsOpen(false);
+          setTimeout(() => {
+            dispatch(push("/category/list"));
+          }, 100);
+        }}
+      />
     </Container>
   );
 };
