@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from "react-router";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import {
   AdminSignIn,
+  CategoryDetail,
   CategoryList,
   CourseOverview,
   CourseList,
@@ -35,6 +36,7 @@ const Router = withRouter(({ location }) => (
     <CSSTransition key={location.key} classNames="item" timeout={1000} exit={false}>
       <Switch>
         <AdminRoute exact path={"/category/create"} component={CreateCategory} />
+        <AdminRoute exact path={"/category/detail/:id"} component={CategoryDetail} />
         <AdminRoute exact path={"/category/list"} component={CategoryList} />
         <AdminRoute exact path={"/management"} component={Management} />
         <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
