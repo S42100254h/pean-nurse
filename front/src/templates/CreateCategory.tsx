@@ -48,7 +48,7 @@ const CreateCategory = () => {
       />
       <Spacer size="xs" />
       <SetCategoryProfile />
-      <Spacer size="sm" />
+      <Spacer size="xs" />
       <PrimaryButton
         label={"カテゴリーを作成する"}
         fullWidth={true}

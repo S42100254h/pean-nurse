@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { AttachFile } from "@material-ui/icons";
+import { AttachFile, Close } from "@material-ui/icons";
 import { Spacer, TextInput } from "../UIkit";
 import styled from "styled-components";
 
@@ -19,6 +19,24 @@ const Label = styled.label`
 
 const StyledInput = styled.input`
   display: none;
+`;
+
+const ImageLabel = styled.label`
+  padding: 5px 8px 5px 5px;
+  margin: 5px 0;
+  font-size: 11px;
+  display: inline-block;
+  background-color: #dcdcdc;
+  border-radius: 3px;
+  justify-content: center;
+`;
+
+const StyledClose = styled(Close)`
+  float: left;
+  margin-right: 3px;
+  color: #f5f5f5;
+  font-size: 14px;
+  cursor: pointer;
 `;
 
 const SetCategoryProfile = () => {
@@ -76,6 +94,12 @@ const SetCategoryProfile = () => {
         画像を添付する
         <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
       </Label>
+      {image && (
+        <ImageLabel>
+          <StyledClose onClick={() => setImage(null)} />
+          {image.name}
+        </ImageLabel>
+      )}
     </div>
   );
 };
