@@ -111,7 +111,7 @@ const CreateCategory = () => {
         label={"カテゴリーを作成する"}
         fullWidth={true}
         disabled={open ? !category || !caption || !image || !uid : !category}
-        onClick={() => dispatch(createCategory(category))}
+        onClick={() => dispatch(createCategory(category, caption, image, uid))}
       />
     </Container>
   );
