@@ -96,7 +96,7 @@ const CategoryDetail = () => {
           setIsOpen(false);
           setTimeout(() => {
             dispatch(push("/category/list"));
-          }, 100);
+          }, 0);
         }}
       />
     </Container>
