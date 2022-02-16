@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import { SetCategoryProfile } from "../components/SetCategoryProfile";
 import { createCategory } from "../function/category";
 import styled from "styled-components";
 
@@ -45,6 +46,8 @@ const CreateCategory = () => {
         value={category}
         onChange={inputCategory}
       />
+      <Spacer size="xs" />
+      <SetCategoryProfile />
       <Spacer size="sm" />
       <PrimaryButton
         label={"カテゴリーを作成する"}
