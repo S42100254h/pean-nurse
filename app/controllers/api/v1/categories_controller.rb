@@ -18,10 +18,10 @@ class Api::V1::CategoriesController < Api::V1::ApiController
   end
 
   def create
-    if params[:category_profile]
+    if params[:title] && params[:caption] && params[:image] && params[:uid]
       ActiveRecord::Base.transaction do
         category = Category.create!(category_params)
-        category_profile = category.create_with_category_profile(params[:category_profile])
+        category_profile = category.create_with_category_profile(params[:title], params[:caption], params[:image], params[:uid])
         render json: { category: category, category_profile: category_profile }
       end
     else
@@ -48,6 +48,6 @@ class Api::V1::CategoriesController < Api::V1::ApiController
     end
 
     def category_params
-      params.require(:category).permit(:name).merge(quiz_ids: params[:quiz_ids])
+      params.permit(:name).merge(quiz_ids: params[:quiz_ids])
     end
 end

@@ -61,7 +61,7 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
         res = JSON.parse(response.body)
         expect(res["id"]).to eq category_profile.id
         expect(res["title"]).to eq category_profile.title
-        expect(res["image"]).to eq category_profile.image
+        expect(res["image"]["url"]).to eq category_profile.image.url
         expect(res["caption"]).to eq category_profile.caption
         expect(res["uid"]).to eq category_profile.uid
         expect(response).to have_http_status(200)
@@ -74,13 +74,12 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
 
     let(:headers) { current_admin.create_new_auth_token }
     let(:current_admin) { create(:admin) }
-    let(:params) { { category_profile: { title: Faker::Lorem.word, image: Faker::Avatar.image, created_at: Time.current } } }
+    let(:params) { { category_profile: { title: Faker::Lorem.word, created_at: Time.current } } }
     let(:category_profile_id) { category_profile.id }
     let(:category_profile) { create(:category_profile) }
 
     it "category_profile is updated" do
       expect { subject }.to change { category_profile.reload.title }.from(category_profile.title).to(params[:category_profile][:title]) &
-                            change { category_profile.reload.image }.from(category_profile.image).to(params[:category_profile][:image]) &
                             not_change { category_profile.reload.created_at }
       expect(response).to have_http_status(200)
     end

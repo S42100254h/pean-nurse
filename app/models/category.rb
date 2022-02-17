@@ -5,8 +5,9 @@ class Category < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
-  def create_with_category_profile(profile)
-    category_profile = self.create_category_profile!(profile.permit!)
+  def create_with_category_profile(title, caption, image, uid)
+    profile_items = { title: title, caption: caption, image: image, uid: uid }
+    category_profile = self.create_category_profile!(profile_items)
     category_profile.save!
   end
 end

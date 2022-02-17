@@ -5,7 +5,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
     subject { post(api_v1_categories_path, params: params, headers: headers) }
 
     context "send correct category information" do
-      let(:params) { { category: attributes_for(:category), quiz_ids: quiz_ids } }
+      let(:params) { attributes_for(:category, quiz_ids: quiz_ids) }
       let(:current_admin) { create(:admin) }
       let(:headers) { current_admin.create_new_auth_token }
       let!(:quiz_ids) { quiz.id }
@@ -19,7 +19,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
     end
 
     context "send correct category information with category_profile" do
-      let(:params) { { category: attributes_for(:category), quiz_ids: quiz_ids, category_profile: attributes_for(:category_profile) } }
+      let(:params) { attributes_for(:category, :with_category_profile, quiz_ids: quiz_ids) }
       let(:current_admin) { create(:admin) }
       let(:headers) { current_admin.create_new_auth_token }
       let!(:quiz_ids) { quiz.id }
@@ -34,7 +34,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
     end
 
     context "send correct category information without quiz_ids" do
-      let(:params) { { category: attributes_for(:category) } }
+      let(:params) { attributes_for(:category) }
       let(:current_admin) { create(:admin) }
       let(:headers) { current_admin.create_new_auth_token }
 
@@ -110,12 +110,12 @@ RSpec.describe "Api::V1::Categories", type: :request do
 
     let(:headers) { current_admin.create_new_auth_token }
     let(:current_admin) { create(:admin) }
-    let(:params) { { category: { name: Faker::Lorem.word, created_at: Time.current } } }
+    let(:params) { { name: Faker::Lorem.word, created_at: Time.current } }
     let(:category_id) { category.id }
     let(:category) { create(:category) }
 
     it "category is updated" do
-      expect { subject }.to change { category.reload.name }.from(category.name).to(params[:category][:name]) &
+      expect { subject }.to change { category.reload.name }.from(category.name).to(params[:name]) &
                             not_change { category.reload.created_at }
       expect(response).to have_http_status(200)
     end
