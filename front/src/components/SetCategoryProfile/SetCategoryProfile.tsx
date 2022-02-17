@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { AttachFile, Close } from "@material-ui/icons";
+import React, { useCallback } from "react";
+import { AttachFile, HighlightOff } from "@material-ui/icons";
 import { Spacer, TextInput } from "../UIkit";
 import styled from "styled-components";
 
@@ -9,9 +9,10 @@ const Label = styled.label`
   width: 130px;
   padding: 8px;
   border-radius: 20px;
-  background-color: #4dd0e1;
+  background-color: ${(props) => props.theme.palette.primary.main};
   cursor: pointer;
   font-size: 12px;
+  color: #fff;
   &:hover {
     opacity: 0.7;
   }
@@ -21,22 +22,29 @@ const StyledInput = styled.input`
   display: none;
 `;
 
-const ImageLabel = styled.label`
-  padding: 5px 8px 5px 5px;
-  margin: 5px 0;
-  font-size: 11px;
-  display: inline-block;
-  background-color: #dcdcdc;
-  border-radius: 3px;
-  justify-content: center;
+const ImageContainer = styled.div`
+  position: relative;
+  width: max-content;
+  height: 100%;
 `;
 
-const StyledClose = styled(Close)`
-  float: left;
-  margin-right: 3px;
-  color: #f5f5f5;
-  font-size: 14px;
+const Image = styled.img`
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 20px;
+`;
+
+const RemoveIcon = styled(HighlightOff)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+  font-size: 20px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 type Props = {
@@ -100,10 +108,10 @@ const SetCategoryProfile = ({ image, caption, uid, setImage, setCaption, setUid 
         <StyledInput type="file" accept="image/jpeg, image/png" onChange={(e) => inputImage(e)} />
       </Label>
       {image && (
-        <ImageLabel>
-          <StyledClose onClick={() => setImage(null)} />
-          {image.name}
-        </ImageLabel>
+        <ImageContainer>
+          <RemoveIcon onClick={() => setImage(null)} />
+          <Image src={URL.createObjectURL(image)} />
+        </ImageContainer>
       )}
     </div>
   );
