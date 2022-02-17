@@ -3,7 +3,11 @@ class Api::V1::CategoryProfilesController < Api::V1::ApiController
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
-    category_profiles = CategoryProfile.all
+    if params[:category_id]
+      category_profiles = CategoryProfile.find_by(category_id: params[:category_id])
+    else
+      category_profiles = CategoryProfile.all
+    end
     render json: category_profiles
   end
 
