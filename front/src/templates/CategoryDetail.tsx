@@ -64,7 +64,6 @@ const CategoryDetail = () => {
     axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
         setCategory(resp.data.name);
-        console.log(resp.data);
       }
     });
 
