@@ -53,8 +53,8 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
     subject { get(api_v1_category_profiles_path, params: { category_id: category_id }) }
 
     before do
-      create(:category, id: 1) 
-      create(:category, id: 2) 
+      create(:category, id: 1)
+      create(:category, id: 2)
       create(:category_profile, category_id: 1)
       create(:category_profile, category_id: 2)
     end
