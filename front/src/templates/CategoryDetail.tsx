@@ -37,6 +37,7 @@ const CategoryDetail = () => {
   const [category, setCategory] = useState(""),
     [caption, setCaption] = useState(""),
     [image, setImage] = useState<File | null>(null),
+    [fileUrl, setFileUrl] = useState<string>(""),
     [uid, setUid] = useState(""),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
@@ -63,6 +64,7 @@ const CategoryDetail = () => {
     axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
         setCategory(resp.data.name);
+        console.log(resp.data);
       }
     });
 
@@ -70,6 +72,7 @@ const CategoryDetail = () => {
       if (isMounted) {
         setCaption(resp.data.caption);
         setImage(resp.data.image);
+        setFileUrl(resp.data.image.url);
         setUid(resp.data.uid);
       }
     });
@@ -94,9 +97,11 @@ const CategoryDetail = () => {
       <Spacer size="xs" />
       <SetCategoryProfile
         image={image}
+        fileUrl={fileUrl}
         caption={caption}
         uid={uid}
         setImage={setImage}
+        setFileUrl={setFileUrl}
         setCaption={setCaption}
         setUid={setUid}
       />

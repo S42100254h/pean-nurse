@@ -49,17 +49,21 @@ const RemoveIcon = styled(HighlightOff)`
 
 type Props = {
   image: File | null;
+  fileUrl: string;
   caption: string;
   uid: string;
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
+  setFileUrl: React.Dispatch<React.SetStateAction<string>>;
   setCaption: React.Dispatch<React.SetStateAction<string>>;
   setUid: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SetCategoryProfile = ({ image, caption, uid, setImage, setCaption, setUid }: Props) => {
+const SetCategoryProfile = ({ image, fileUrl, caption, uid, setImage, setFileUrl, setCaption, setUid }: Props) => {
   const inputImage = useCallback(
     (event) => {
       setImage(event.target.files[0]);
+      const imageUrl = URL.createObjectURL(event.target.files[0]);
+      setFileUrl(imageUrl);
       // enable to attach same file
       event.target.value = "";
     },
@@ -109,8 +113,13 @@ const SetCategoryProfile = ({ image, caption, uid, setImage, setCaption, setUid 
       </Label>
       {image && (
         <ImageContainer>
-          <RemoveIcon onClick={() => setImage(null)} />
-          <Image src={URL.createObjectURL(image)} />
+          <RemoveIcon
+            onClick={() => {
+              setImage(null);
+              setFileUrl("");
+            }}
+          />
+          <Image src={fileUrl} />
         </ImageContainer>
       )}
     </div>
