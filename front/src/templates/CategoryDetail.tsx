@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
 import { CategoryUpdateDialog } from "../components/ConfirmDialog";
+import { SetCategoryProfile } from "../components/SetCategoryProfile";
 import { DeleteDialog } from "../components/DeleteDialog";
 import { push } from "connected-react-router";
 import axios from "axios";
@@ -34,6 +35,10 @@ const CategoryDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
   const [category, setCategory] = useState(""),
+    [caption, setCaption] = useState(""),
+    [image, setImage] = useState<File | null>(null),
+    [fileUrl, setFileUrl] = useState<string>(""),
+    [uid, setUid] = useState(""),
     [open, setOpen] = useState(false),
     [isOpen, setIsOpen] = useState(false);
 
@@ -52,11 +57,22 @@ const CategoryDetail = () => {
 
   useEffect(() => {
     const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories/" + match.params.id;
+    const categoryProfileApiEndpoint =
+      process.env.REACT_APP_API_URL + "category_profiles?category_id=" + match.params.id;
     let isMounted = true;
 
     axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
         setCategory(resp.data.name);
+      }
+    });
+
+    axios.get(categoryProfileApiEndpoint).then((resp) => {
+      if (isMounted) {
+        setCaption(resp.data.caption);
+        setImage(resp.data.image);
+        setFileUrl(resp.data.image.url);
+        setUid(resp.data.uid);
       }
     });
 
@@ -76,6 +92,17 @@ const CategoryDetail = () => {
         rows={1}
         value={category}
         onChange={inputCategory}
+      />
+      <Spacer size="xs" />
+      <SetCategoryProfile
+        image={image}
+        fileUrl={fileUrl}
+        caption={caption}
+        uid={uid}
+        setImage={setImage}
+        setFileUrl={setFileUrl}
+        setCaption={setCaption}
+        setUid={setUid}
       />
       <Spacer size="sm" />
       <PrimaryButton

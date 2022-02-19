@@ -66,6 +66,7 @@ const CreateCategory = () => {
     [open, setOpen] = useState(false),
     [caption, setCaption] = useState(""),
     [image, setImage] = useState<File | null>(null),
+    [fileUrl, setFileUrl] = useState<string>(""),
     [uid, setUid] = useState("");
 
   const inputCategory = useCallback(
@@ -99,9 +100,11 @@ const CreateCategory = () => {
       {open && (
         <SetCategoryProfile
           image={image}
+          fileUrl={fileUrl}
           caption={caption}
           uid={uid}
           setImage={setImage}
+          setFileUrl={setFileUrl}
           setCaption={setCaption}
           setUid={setUid}
         />

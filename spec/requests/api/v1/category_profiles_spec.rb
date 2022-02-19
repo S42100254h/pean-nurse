@@ -49,6 +49,27 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
     end
   end
 
+  describe "GET /api/v1/category_profiles?category_id=number" do
+    subject { get(api_v1_category_profiles_path, params: { category_id: category_id }) }
+
+    before do
+      create(:category, id: 1)
+      create(:category, id: 2)
+      create(:category_profile, category_id: 1)
+      create(:category_profile, category_id: 2)
+    end
+
+    let(:category_id) { 1 }
+
+    it "gets category_profile which is related to category_id" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.keys).to eq ["id", "title", "image", "caption", "uid", "category_id", "created_at", "updated_at"]
+      expect(res["category_id"]).to eq category_id
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "GET /api/v1/category_profiles/:id" do
     subject { get(api_v1_category_profile_path(category_profile_id)) }
 

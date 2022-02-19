@@ -18,7 +18,7 @@ class Api::V1::CategoriesController < Api::V1::ApiController
   end
 
   def create
-    if params[:title] && params[:caption] && params[:image] && params[:uid]
+    if !!(params[:title] && params[:caption] && params[:image] && params[:uid]) == true
       ActiveRecord::Base.transaction do
         category = Category.create!(category_params)
         category_profile = category.create_with_category_profile(params[:title], params[:caption], params[:image], params[:uid])
