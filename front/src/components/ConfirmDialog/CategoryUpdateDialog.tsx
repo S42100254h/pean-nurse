@@ -18,11 +18,6 @@ const Headline = styled.div`
   text-align: center;
 `;
 
-const Caption = styled.p`
-  font-weight: bold;
-  margin-left: 10px;
-`;
-
 type Props = {
   category: string;
   open: boolean;
