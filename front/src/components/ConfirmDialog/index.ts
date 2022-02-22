@@ -1,4 +1,4 @@
-export { default as Category } from "./Category";
+export { default as Card } from "./Card";
 export { default as CategoryCard } from "./CategoryCard";
 export { default as CategoryUpdateDialog } from "./CategoryUpdateDialog";
 export { default as ChoiceCard } from "./ChoiceCard";
