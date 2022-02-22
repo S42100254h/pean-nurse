@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { PrimaryButton, Spacer } from "../UIkit";
-import { Category } from "./index";
+import { Card } from "./index";
 import { editCategory } from "../../function/category";
 import styled from "styled-components";
 
@@ -18,14 +18,31 @@ const Headline = styled.div`
   text-align: center;
 `;
 
+const ImageContainer = styled.div`
+  position: relative;
+  width: max-content;
+  height: 100%;
+`;
+
+const Image = styled.img`
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 20px;
+`;
+
 type Props = {
-  category: string;
+  id: string;
   open: boolean;
   onClose: () => void;
-  id: string;
+  category: string;
+  caption?: string;
+  image?: File | null;
+  fileUrl?: string;
+  uid?: string;
 };
 
-const CategoryUpdateDialog = ({ category, open, onClose, id }: Props) => {
+const CategoryUpdateDialog = ({ id, open, onClose, category, caption, image, fileUrl, uid }: Props) => {
   const dispatch = useDispatch();
   return (
     <div>
@@ -34,7 +51,14 @@ const CategoryUpdateDialog = ({ category, open, onClose, id }: Props) => {
           <Container>
             <Headline>以下の内容でカテゴリーを更新してもよろしいですか？</Headline>
             <Spacer size="xs" />
-            <Category category={category} label={"カテゴリー"} />
+            <Card text={category} label={"カテゴリー"} />
+            {caption && <Card text={caption} label={"見出し"} />}
+            {uid && <Card text={uid} label={"ID"} />}
+            {image && (
+              <ImageContainer>
+                <Image src={fileUrl} />
+              </ImageContainer>
+            )}
             <Spacer size="xxs" />
             <PrimaryButton
               label={"クイズを更新する"}
