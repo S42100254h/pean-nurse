@@ -63,7 +63,7 @@ const CategoryUpdateDialog = ({ id, open, onClose, category, caption, image, fil
             <PrimaryButton
               label={"クイズを更新する"}
               fullWidth={true}
-              onClick={() => dispatch(editCategory(category, id))}
+              onClick={() => dispatch(editCategory(id, category, caption, image, uid))}
             />
           </Container>
         </DialogContent>
