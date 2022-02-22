@@ -163,7 +163,16 @@ const CategoryDetail = () => {
       />
       <Spacer size="xs" />
       <SecondaryButton label={"カテゴリーを削除する"} fullWidth={true} onClick={() => setIsOpen(true)} />
-      <CategoryUpdateDialog id={match.params.id} category={category} open={dialogOpen} onClose={handleDialogClose} />
+      <CategoryUpdateDialog
+        id={match.params.id}
+        category={category}
+        caption={caption}
+        image={image}
+        fileUrl={fileUrl}
+        uid={uid}
+        open={dialogOpen}
+        onClose={handleDialogClose}
+      />
       <DeleteDialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
