@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
+import { Add, Close } from "@material-ui/icons";
 import { CategoryUpdateDialog } from "../components/ConfirmDialog";
 import { SetCategoryProfile } from "../components/SetCategoryProfile";
 import { DeleteDialog } from "../components/DeleteDialog";
@@ -27,6 +28,42 @@ const Heading = styled.h2`
   text-align: center;
 `;
 
+const Label = styled.label<LabelProps>`
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: #4dd0e1;
+  cursor: pointer;
+  font-size: 12px;
+  float: left;
+  margin-bottom: 15px;
+  &:hover {
+    opacity: 0.7;
+  }
+  background-color: ${(props) => (props.open ? props.theme.palette.secondary.main : props.theme.palette.primary.main)};
+`;
+
+const StyledAdd = styled(Add)`
+  float: right;
+  color: #f5f5f5;
+  font-size: 14px;
+  margin-right: 3px;
+`;
+
+const StyledClose = styled(Close)`
+  float: right;
+  color: #f5f5f5;
+  font-size: 14px;
+  margin-right: 3px;
+`;
+
+type LabelProps = {
+  open: boolean;
+};
+
 type MatchParams = {
   id: string;
 };
@@ -39,8 +76,9 @@ const CategoryDetail = () => {
     [image, setImage] = useState<File | null>(null),
     [fileUrl, setFileUrl] = useState<string>(""),
     [uid, setUid] = useState(""),
-    [open, setOpen] = useState(false),
-    [isOpen, setIsOpen] = useState(false);
+    [dialogOpen, setDialogOpen] = useState(false),
+    [isOpen, setIsOpen] = useState(false),
+    [open, setOpen] = useState(false);
 
   const inputCategory = useCallback(
     (event) => {
@@ -49,10 +87,15 @@ const CategoryDetail = () => {
     [setCategory],
   );
 
-  const handleDialogClose = () => setOpen(false);
+  const handleDialogClose = () => setDialogOpen(false);
+
   const handleDialogOpen = () => {
     if (category === "") return;
-    setOpen(true);
+    setDialogOpen(true);
+  };
+
+  const handleOpenToggle = () => {
+    setOpen(!open);
   };
 
   useEffect(() => {
@@ -73,6 +116,7 @@ const CategoryDetail = () => {
         setImage(resp.data.image);
         setFileUrl(resp.data.image.url);
         setUid(resp.data.uid);
+        setOpen(true);
       }
     });
 
@@ -94,26 +138,41 @@ const CategoryDetail = () => {
         onChange={inputCategory}
       />
       <Spacer size="xs" />
-      <SetCategoryProfile
-        image={image}
-        fileUrl={fileUrl}
-        caption={caption}
-        uid={uid}
-        setImage={setImage}
-        setFileUrl={setFileUrl}
-        setCaption={setCaption}
-        setUid={setUid}
-      />
+      <Label onClick={handleOpenToggle} open={open}>
+        {!open ? <StyledAdd /> : <StyledClose />}
+        {!open ? "詳細を追加" : "閉じる"}
+      </Label>
+      {open && (
+        <SetCategoryProfile
+          image={image}
+          fileUrl={fileUrl}
+          caption={caption}
+          uid={uid}
+          setImage={setImage}
+          setFileUrl={setFileUrl}
+          setCaption={setCaption}
+          setUid={setUid}
+        />
+      )}
       <Spacer size="sm" />
       <PrimaryButton
         label={"カテゴリーを更新する"}
         fullWidth={true}
-        disabled={!category}
+        disabled={open ? !category || !caption || !image || !uid : !category}
         onClick={() => handleDialogOpen()}
       />
       <Spacer size="xs" />
       <SecondaryButton label={"カテゴリーを削除する"} fullWidth={true} onClick={() => setIsOpen(true)} />
-      <CategoryUpdateDialog id={match.params.id} category={category} open={open} onClose={handleDialogClose} />
+      <CategoryUpdateDialog
+        id={match.params.id}
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        category={category}
+        caption={caption}
+        image={image}
+        fileUrl={fileUrl}
+        uid={uid}
+      />
       <DeleteDialog
         open={isOpen}
         onClose={() => setIsOpen(false)}

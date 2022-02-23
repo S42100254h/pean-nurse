@@ -14,7 +14,7 @@ const Caption = styled.p`
 `;
 
 type Props = {
-  category: string;
+  text: string;
   label: string;
 };
 
@@ -23,7 +23,7 @@ const Category = (props: Props) => {
     <>
       <Container>
         <Caption>{props.label}</Caption>
-        <div>{props.category}</div>
+        <div>{props.text}</div>
       </Container>
     </>
   );
