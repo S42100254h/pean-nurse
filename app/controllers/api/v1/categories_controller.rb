@@ -36,13 +36,13 @@ class Api::V1::CategoriesController < Api::V1::ApiController
       ActiveRecord::Base.transaction do
         @category.update!(category_params)
 
-        if @category.category_profile == nil
+        if @category.category_profile.nil?
           category_profile = @category.create_with_category_profile(params[:title], params[:caption], params[:image], params[:uid])
         else
           category_profile = @category.category_profile
           profile_items = { title: params[:title], caption: params[:caption], uid: params[:uid] }
           # update image only when image is changed
-          profile_items[:image] = params[:image] if params[:image].class == ActionDispatch::Http::UploadedFile
+          profile_items[:image] = params[:image] if params[:image].instance_of?(ActionDispatch::Http::UploadedFile)
           category_profile.update!(profile_items)
         end
         render json: { category: @category, category_profile: category_profile }
