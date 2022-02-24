@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Course from "../components/Course/Course";
 import { Grid } from "@material-ui/core";
 import { push } from "connected-react-router";
 import cat from "../assets/img/cat.png";
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   max-width: 1080px;
@@ -64,6 +65,16 @@ const courses = [
 
 const CourseList = () => {
   const dispatch = useDispatch();
+
+  const [categoryProfiles, setCategoryProfiles] = useState([]);
+
+  useEffect(() => {
+    const apiEndpoint = process.env.REACT_APP_API_URL + "category_profiles";
+
+    axios.get(apiEndpoint).then((resp) => {
+      setCategoryProfiles(resp.data);
+    });
+  }, []);
 
   return (
     <Container>
