@@ -63,16 +63,29 @@ const courses = [
   },
 ];
 
+type Image = {
+  url: string;
+};
+
+type CategoryProfile = {
+  id: string;
+  title: string;
+  image: Image;
+  caption: string;
+  uid: string;
+};
+
 const CourseList = () => {
   const dispatch = useDispatch();
 
-  const [categoryProfiles, setCategoryProfiles] = useState([]);
+  const [categoryProfiles, setCategoryProfiles] = useState<CategoryProfile[]>([]);
 
   useEffect(() => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "category_profiles";
 
     axios.get(apiEndpoint).then((resp) => {
       setCategoryProfiles(resp.data);
+      console.log(resp.data);
     });
   }, []);
 
@@ -80,17 +93,18 @@ const CourseList = () => {
     <Container>
       <Heading>コース一覧</Heading>
       <Grid container spacing={2} alignItems="center" direction="row">
-        {courses.map((course) => (
-          <Grid item xs={12} sm={4} md={3} key={course.id}>
-            <Course
-              title={course.title}
-              image={course.image}
-              caption={course.caption}
-              number={course.number}
-              onClick={() => dispatch(push("/courselist/" + course.id))}
-            />
-          </Grid>
-        ))}
+        {categoryProfiles !== [] &&
+          categoryProfiles.map((categoryProfile) => (
+            <Grid item xs={12} sm={4} md={3} key={categoryProfile.id}>
+              <Course
+                title={categoryProfile.title}
+                image={categoryProfile.image.url}
+                caption={categoryProfile.caption}
+                number={1}
+                onClick={() => dispatch(push("/courselist/" + categoryProfile.id))}
+              />
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );

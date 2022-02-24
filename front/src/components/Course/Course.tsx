@@ -58,7 +58,7 @@ const Caption = styled.p`
 
 type Props = {
   title: string;
-  image: any;
+  image: string;
   caption: string;
   number: number;
   onClick: MouseEventHandler;
