@@ -57,16 +57,23 @@ const CourseOverview = () => {
 
   useEffect(() => {
     const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "category_profiles/" + match.params.id;
+    let isMounted = true;
 
     axios.get(categoryProfileApiEndpoint).then((resp) => {
-      setCategoryProfile(resp.data);
-      const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
+      if (isMounted) {
+        setCategoryProfile(resp.data);
+        const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
 
-      axios.get(quizApiEndpoint).then((r) => {
-        const courseNumber = Math.floor(r.data.length / 7);
-        setQuizzesLength(courseNumber);
-      });
+        axios.get(quizApiEndpoint).then((r) => {
+          const courseNumber = Math.floor(r.data.length / 7);
+          setQuizzesLength(courseNumber);
+        });
+      }
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
