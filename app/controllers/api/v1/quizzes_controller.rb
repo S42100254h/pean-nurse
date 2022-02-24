@@ -3,7 +3,12 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
-    quizzes = Quiz.all
+    if params[:category_id]
+      category = Category.find(params[:category_id])
+      quizzes = category.quizzes
+    else
+      quizzes = Quiz.all
+    end
     render json: quizzes
   end
 
