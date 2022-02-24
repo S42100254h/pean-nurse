@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import { CourseCard } from "../components/CourseCard";
 import styled from "styled-components";
 import { Spacer } from "../components/UIkit";
+import axios from "axios";
 
 const Container = styled.div`
   margin: 30px auto;
@@ -25,22 +27,54 @@ const SubHeading = styled.h3`
   text-align: center;
 `;
 
-const courseCards = [
-  { id: 1, label: "神経内科Ⅰ" },
-  { id: 2, label: "神経内科Ⅱ" },
-  { id: 3, label: "神経内科Ⅲ" },
-  { id: 4, label: "神経内科Ⅳ" },
-];
+type Image = {
+  url: string;
+};
+
+type CategoryProfile = {
+  id: string;
+  title: string;
+  image: Image;
+  caption: string;
+  uid: string;
+};
+
+type MatchParams = {
+  id: string;
+};
 
 const CourseOverview = () => {
+  const match = useRouteMatch<MatchParams>();
+  const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
+    [quizzesLength, setQuizzesLength] = useState(0);
+
+  const courseCards = [];
+  if (categoryProfile !== undefined) {
+    for (let i = 1; i <= quizzesLength; i++) {
+      courseCards.push(<CourseCard key={i} label={categoryProfile?.title + i} />);
+    }
+  }
+
+  useEffect(() => {
+    const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "category_profiles/" + match.params.id;
+
+    axios.get(categoryProfileApiEndpoint).then((resp) => {
+      setCategoryProfile(resp.data);
+      const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
+
+      axios.get(quizApiEndpoint).then((r) => {
+        const courseNumber = Math.floor(r.data.length / 7);
+        setQuizzesLength(courseNumber);
+      });
+    });
+  }, []);
+
   return (
     <Container>
-      <Heading>神経内科</Heading>
-      <SubHeading>ALS, パーキンソン病 ...</SubHeading>
+      <Heading>{categoryProfile?.title}</Heading>
+      <SubHeading>{categoryProfile?.caption}</SubHeading>
       <Spacer size="sm" />
-      {courseCards.map((card) => (
-        <CourseCard key={card.id} label={card.label} />
-      ))}
+      <div>{courseCards}</div>
     </Container>
   );
 };
