@@ -231,7 +231,6 @@ const Study = () => {
   };
 
   useEffect(() => {
-    // [Need modify!!]: enable dynamic parameter below to be gotten when selecting course
     const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/コロナ対策室/1";
     let isMounted = true;
 
@@ -277,44 +276,32 @@ const Study = () => {
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Swiper>
-          {quizzes.map((quiz, i) => (
+          {quizzes?.map((quiz, i) => (
             <div key={i}>
               <QuizContainer>
                 <QuizTitle>問題{i + 1}</QuizTitle>
-                {quiz === undefined ? <></> : <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />}
+                <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />
               </QuizContainer>
-              {quiz === undefined ? <></> : <QuizText>{quiz.title}</QuizText>}
+              <QuizText>{quiz.title}</QuizText>
               <Spacer size="xs" />
               <ChoicesContainer>
-                {choices[i] === undefined ? (
-                  <></>
-                ) : (
-                  choices[i].map((choice, index) => (
-                    <ChoiceContainer key={choice.id} onClick={() => checkAnswers(i, index)}>
-                      {choices[i] === [] ? (
-                        <></>
-                      ) : choice.clicked === "right" ? (
-                        <StyledCheckCircle />
-                      ) : choice.clicked === "wrong" ? (
-                        <StyledCancel />
-                      ) : choice.clicked === "clicked" ? (
-                        <Icon src={darkIcons[index]} />
-                      ) : (
-                        <Icon src={lightIcons[index]} />
-                      )}
-                      <p>{choice.choice}</p>
-                    </ChoiceContainer>
-                  ))
-                )}
+                {choices[i]?.map((choice, index) => (
+                  <ChoiceContainer key={choice.id} onClick={() => checkAnswers(i, index)}>
+                    {choice.clicked === "right" ? (
+                      <StyledCheckCircle />
+                    ) : choice.clicked === "wrong" ? (
+                      <StyledCancel />
+                    ) : choice.clicked === "clicked" ? (
+                      <Icon src={darkIcons[index]} />
+                    ) : (
+                      <Icon src={lightIcons[index]} />
+                    )}
+                    <p>{choice.choice}</p>
+                  </ChoiceContainer>
+                ))}
                 <Spacer size="xs" />
               </ChoicesContainer>
-              {quiz === undefined ? (
-                <></>
-              ) : quiz.open ? (
-                <AnswerContainer>{commentaries[i] === undefined ? <></> : commentaries[i].text}</AnswerContainer>
-              ) : (
-                <></>
-              )}
+              {quiz.open ? <AnswerContainer>{commentaries[i]?.text}</AnswerContainer> : <></>}
             </div>
           ))}
           <div>
