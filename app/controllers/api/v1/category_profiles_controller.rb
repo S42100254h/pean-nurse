@@ -12,7 +12,7 @@ class Api::V1::CategoryProfilesController < Api::V1::ApiController
   end
 
   def show
-    category_profile = CategoryProfile.find(params[:id])
+    category_profile = CategoryProfile.find_by(uid: params[:id])
     render json: category_profile
   end
 
