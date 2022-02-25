@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
@@ -155,7 +156,12 @@ type Commentary = {
   text: string;
 };
 
+type MatchParams = {
+  id: string;
+};
+
 const Study = () => {
+  const match = useRouteMatch<MatchParams>();
   const [choices, setChoices] = useState<Choice[][]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [commentaries, setCommentaries] = useState<Commentary[]>([]),
@@ -226,32 +232,44 @@ const Study = () => {
 
   useEffect(() => {
     // [Need modify!!]: enable dynamic parameter below to be gotten when selecting course
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/1";
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/コロナ対策室/1";
+    let isMounted = true;
+
     axios.get(quizApiEndpoint).then((resp) => {
-      const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
-        id: newQuiz.id,
-        title: newQuiz.title,
-        checked: false,
-        count: 1,
-        isCorrect: undefined,
-        open: false,
-      }));
-      setQuizzes(newQuizzes);
+      if (isMounted) {
+        const newQuizzes = resp.data.map((newQuiz: Quiz) => ({
+          id: newQuiz.id,
+          title: newQuiz.title,
+          checked: false,
+          count: 1,
+          isCorrect: undefined,
+          open: false,
+        }));
+        setQuizzes(newQuizzes);
+      }
     });
 
     const choicesApiEndpoint =
       process.env.REACT_APP_API_URL +
       "choices?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
     axios.get(choicesApiEndpoint).then((resp) => {
-      setChoices(resp.data);
+      if (isMounted) {
+        setChoices(resp.data);
+      }
     });
 
     const commentariesApiEndpoint =
       process.env.REACT_APP_API_URL +
       "commentaries?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
     axios.get(commentariesApiEndpoint).then((resp) => {
-      setCommentaries(resp.data);
+      if (isMounted) {
+        setCommentaries(resp.data);
+      }
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
