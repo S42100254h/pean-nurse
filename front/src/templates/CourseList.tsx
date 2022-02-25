@@ -60,7 +60,7 @@ const CourseList = () => {
               image={categoryProfile.image.url}
               caption={categoryProfile.caption}
               number={1}
-              onClick={() => dispatch(push("/courselist/" + categoryProfile.id))}
+              onClick={() => dispatch(push("/courselist/" + categoryProfile.uid))}
             />
           </Grid>
         ))}
