@@ -23,11 +23,12 @@ const Label = styled.div`
 type Props = {
   key: number;
   label: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const CourseCard = (props: Props) => {
   return (
-    <Container>
+    <Container onClick={props.onClick}>
       <Label>{props.label}</Label>
     </Container>
   );

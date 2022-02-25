@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { CourseCard } from "../components/CourseCard";
 import styled from "styled-components";
 import { Spacer } from "../components/UIkit";
+import { push } from "connected-react-router";
 import axios from "axios";
 
 const Container = styled.div`
@@ -44,6 +46,7 @@ type MatchParams = {
 };
 
 const CourseOverview = () => {
+  const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
   const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
     [quizzesLength, setQuizzesLength] = useState(0);
@@ -51,7 +54,13 @@ const CourseOverview = () => {
   const courseCards = [];
   if (categoryProfile !== undefined) {
     for (let i = 1; i <= quizzesLength; i++) {
-      courseCards.push(<CourseCard key={i} label={categoryProfile?.title + i} />);
+      courseCards.push(
+        <CourseCard
+          key={i}
+          label={categoryProfile?.title + i}
+          onClick={() => dispatch(push("/courselist/" + match.params.id + "/study/" + i))}
+        />,
+      );
     }
   }
 
