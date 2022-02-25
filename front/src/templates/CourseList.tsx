@@ -36,28 +36,34 @@ const CourseList = () => {
 
   useEffect(() => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "category_profiles";
+    let isMounted = true;
 
     axios.get(apiEndpoint).then((resp) => {
-      setCategoryProfiles(resp.data);
+      if (isMounted) {
+        setCategoryProfiles(resp.data);
+      }
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
     <Container>
       <Heading>コース一覧</Heading>
       <Grid container spacing={2} alignItems="center" direction="row">
-        {categoryProfiles !== [] &&
-          categoryProfiles.map((categoryProfile) => (
-            <Grid item xs={12} sm={4} md={3} key={categoryProfile.id}>
-              <Course
-                title={categoryProfile.title}
-                image={categoryProfile.image.url}
-                caption={categoryProfile.caption}
-                number={1}
-                onClick={() => dispatch(push("/courselist/" + categoryProfile.id))}
-              />
-            </Grid>
-          ))}
+        {categoryProfiles.map((categoryProfile) => (
+          <Grid item xs={12} sm={4} md={3} key={categoryProfile.id}>
+            <Course
+              title={categoryProfile.title}
+              image={categoryProfile.image.url}
+              caption={categoryProfile.caption}
+              number={1}
+              onClick={() => dispatch(push("/courselist/" + categoryProfile.uid))}
+            />
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );

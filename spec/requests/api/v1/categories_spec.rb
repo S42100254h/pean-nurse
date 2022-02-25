@@ -62,7 +62,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
     end
   end
 
-  describe "GET /api/v11/categories?quiz_id=number" do
+  describe "GET /api/v1/categories?quiz_id=number" do
     subject { get(api_v1_categories_path, params: { quiz_id: quiz_id }) }
 
     before do

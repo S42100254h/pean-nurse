@@ -75,7 +75,7 @@ RSpec.describe "Api::V1::CategoryProfiles", type: :request do
 
     context "specified id exists" do
       let(:category_profile) { create(:category_profile) }
-      let(:category_profile_id) { category_profile.id }
+      let(:category_profile_id) { category_profile.uid }
 
       it "gets detail of category_profile" do
         subject
