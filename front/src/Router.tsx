@@ -55,7 +55,7 @@ const Router = withRouter(({ location }) => (
         <PrivateRoute exact path={"/courselist/:id"} component={CourseOverview} />
         <PrivateRoute exact path={"/dashboard"} component={DashBoard} />
         <PrivateRoute exact path={"/setting"} component={Setting} />
-        <PrivateRoute exact path={"/study"} component={Study} />
+        <PrivateRoute exact path={"/courselist/:id/study/:id"} component={Study} />
         <PrivateRoute exact path={"/deactivate"} component={Deactivate} />
         <Route component={PageNotFound} />
       </Switch>
