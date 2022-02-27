@@ -246,10 +246,6 @@ export const editUserInfo = (name: string, email: string) => {
           },
         })
         .then((resp) => {
-          localStorage.setItem("access-token", resp.headers["access-token"]);
-          localStorage.setItem("client", resp.headers["client"]);
-          localStorage.setItem("uid", resp.headers["uid"]);
-
           dispatch(editUserInfoAction(resp.data.data));
           dispatch(showLoadingAction("Update ..."));
           dispatch(push("/dashboard"));
