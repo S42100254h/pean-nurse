@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
@@ -22,6 +23,7 @@ import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
 import { PassFail } from "../components/PassFail";
 import styled from "styled-components";
+import { push } from "connected-react-router";
 import axios from "axios";
 
 const Container = styled.div`
@@ -188,6 +190,7 @@ type MatchParams = {
 };
 
 const Study = () => {
+  const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
   const [choices, setChoices] = useState<Choice[][]>([]),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
@@ -256,6 +259,9 @@ const Study = () => {
   const calcCorrectAnswerRate = () => {
     return Math.round((correctQuiz / answeredQuiz) * 100);
   };
+
+  const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
+  const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
 
   useEffect(() => {
     const category_profile_uid = match.url.split("/")[2];
@@ -358,8 +364,8 @@ const Study = () => {
         </CorrectAnswerRate>
       </SelectArea>
       <LabelContainer>
-        <Label>前のクイズへ</Label>
-        <Label>次のクイズへ</Label>
+        <Label onClick={() => dispatch(push(previousQuizUrl))}>前のクイズへ</Label>
+        <Label onClick={() => dispatch(push(nextQuizUrl))}>次のクイズへ</Label>
       </LabelContainer>
     </Container>
   );
