@@ -7,7 +7,9 @@ import styled from "styled-components";
 
 const Root = styled.section`
   align-items: center;
-  background: #fff;
+  background: ${(props) => props.theme.palette.basic.dark};
+  opacity: 0.9;
+  color: #fff;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -16,7 +18,7 @@ const Root = styled.section`
   left: 0;
   height: 100vh;
   width: 100%;
-  z-index: 10;
+  z-index: 10000;
 `;
 
 type Props = {

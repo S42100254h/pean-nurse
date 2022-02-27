@@ -5,6 +5,7 @@ import { CourseCard } from "../components/CourseCard";
 import styled from "styled-components";
 import { Spacer } from "../components/UIkit";
 import { push } from "connected-react-router";
+import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import axios from "axios";
 
 const Container = styled.div`
@@ -58,7 +59,14 @@ const CourseOverview = () => {
         <CourseCard
           key={i}
           label={categoryProfile?.title + i}
-          onClick={() => dispatch(push("/courselist/" + match.params.id + "/study/" + i))}
+          onClick={() => {
+            dispatch(showLoadingAction("Loading..."));
+            dispatch(push("/courselist/" + match.params.id + "/study/" + i));
+
+            setTimeout(() => {
+              dispatch(hideLoadingAction());
+            }, 1300);
+          }}
         />,
       );
     }

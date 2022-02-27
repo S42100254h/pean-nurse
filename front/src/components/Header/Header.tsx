@@ -16,7 +16,7 @@ import styled from "styled-components";
 
 const Root = styled(Box)`
   flex-grow: 1;
-  z-index: 9999;
+  z-index: 9;
 `;
 
 const Left = styled.div`
