@@ -37,6 +37,31 @@ const Heading = styled.h2`
   text-align: center;
 `;
 
+const Label = styled.label<LabelProps>`
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: ${(props) => props.theme.palette.primary.main};
+  cursor: pointer;
+  font-size: 12px;
+  float: left;
+  margin-bottom: 15px;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+  padding: 20px 150px;
+`;
+
 const SelectArea = styled.div`
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -135,6 +160,8 @@ const Image = styled.img`
 
 const lightIcons = [A_light, B_light, C_light, D_light, E_light, F_light, G_light, H_light];
 const darkIcons = [A_dark, B_dark, C_dark, D_dark, E_dark, F_dark, G_dark, H_dark];
+
+type LabelProps = {};
 
 type Choice = {
   id: number;
@@ -330,6 +357,10 @@ const Study = () => {
           )}
         </CorrectAnswerRate>
       </SelectArea>
+      <LabelContainer>
+        <Label>前のクイズへ</Label>
+        <Label>次のクイズへ</Label>
+      </LabelContainer>
     </Container>
   );
 };
