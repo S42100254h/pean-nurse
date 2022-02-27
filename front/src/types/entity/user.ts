@@ -7,4 +7,5 @@ export type User = {
   name: string;
   email: string;
   image: Image | null;
+  experiencePoint: number;
 };
