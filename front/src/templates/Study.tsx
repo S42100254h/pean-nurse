@@ -191,14 +191,14 @@ type Commentary = {
   text: string;
 };
 
-type Image = {
+type ImageProp = {
   url: string;
 };
 
 type CategoryProfile = {
   id: string;
   title: string;
-  image: Image;
+  image: ImageProp;
   caption: string;
   uid: string;
 };
