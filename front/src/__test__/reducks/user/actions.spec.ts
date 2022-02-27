@@ -2,6 +2,7 @@ import {
   signUpAction,
   signInAction,
   signOutAction,
+  editExperiencePointAction,
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
@@ -50,6 +51,24 @@ describe("actions.tsのテスト", () => {
     expect(action).toStrictEqual({
       type: "SIGN_OUT",
       payload: undefined,
+    });
+  });
+
+  it("editExperiencePointActionのテスト", () => {
+    const dummy = {
+      id: 1,
+      isSignedIn: true,
+      uid: "dummy@gmail.com",
+      name: "dummy-admin",
+      email: "dummy@gmail.com",
+      image: null,
+      experiencePoint: 100,
+    };
+    const action = editExperiencePointAction(dummy);
+
+    expect(action).toStrictEqual({
+      type: "EDIT_EXPERIENCE_POINT",
+      payload: dummy,
     });
   });
 
