@@ -285,6 +285,11 @@ const Study = () => {
   const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
 
   useEffect(() => {
+    dispatch(showLoadingAction("Loading..."));
+
+    setTimeout(() => {
+      dispatch(hideLoadingAction());
+    }, 1300);
     const category_profile_uid = match.url.split("/")[2];
     const quizApiEndpoint =
       process.env.REACT_APP_API_URL + "quizzes/exam/" + category_profile_uid + "/" + match.params.id;
@@ -398,30 +403,10 @@ const Study = () => {
         </CorrectAnswerRate>
       </SelectArea>
       <LabelContainer>
-        <Label
-          disabled={match.params.id === "1"}
-          onClick={() => {
-            dispatch(showLoadingAction("Loading..."));
-            dispatch(push(previousQuizUrl));
-
-            setTimeout(() => {
-              dispatch(hideLoadingAction());
-            }, 1300);
-          }}
-        >
+        <Label disabled={match.params.id === "1"} onClick={() => dispatch(push(previousQuizUrl))}>
           前のクイズへ
         </Label>
-        <Label
-          disabled={Number(match.params.id) === quizzesLength}
-          onClick={() => {
-            dispatch(showLoadingAction("Loading..."));
-            dispatch(push(nextQuizUrl));
-
-            setTimeout(() => {
-              dispatch(hideLoadingAction());
-            }, 1300);
-          }}
-        >
+        <Label disabled={Number(match.params.id) === quizzesLength} onClick={() => dispatch(push(nextQuizUrl))}>
           次のクイズへ
         </Label>
       </LabelContainer>
