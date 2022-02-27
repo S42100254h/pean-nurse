@@ -231,8 +231,9 @@ const Study = () => {
   };
 
   useEffect(() => {
-    // [Need modify!!]: enable dynamic parameter below to be gotten when selecting course
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/コロナ対策室/1";
+    const category_profile_uid = match.url.split("/")[2];
+    const quizApiEndpoint =
+      process.env.REACT_APP_API_URL + "quizzes/exam/" + category_profile_uid + "/" + match.params.id;
     let isMounted = true;
 
     axios.get(quizApiEndpoint).then((resp) => {
@@ -246,24 +247,18 @@ const Study = () => {
           open: false,
         }));
         setQuizzes(newQuizzes);
-      }
-    });
 
-    const choicesApiEndpoint =
-      process.env.REACT_APP_API_URL +
-      "choices?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
-    axios.get(choicesApiEndpoint).then((resp) => {
-      if (isMounted) {
-        setChoices(resp.data);
-      }
-    });
+        const quiz_ids = resp.data.map((newQuiz: Quiz) => newQuiz.id);
 
-    const commentariesApiEndpoint =
-      process.env.REACT_APP_API_URL +
-      "commentaries?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
-    axios.get(commentariesApiEndpoint).then((resp) => {
-      if (isMounted) {
-        setCommentaries(resp.data);
+        const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices";
+        axios.get(choicesApiEndpoint, { params: { quiz_id: quiz_ids } }).then((resp) => {
+          setChoices(resp.data);
+        });
+
+        const commentariesApiEndpoint = process.env.REACT_APP_API_URL + "commentaries";
+        axios.get(commentariesApiEndpoint, { params: { quiz_id: quiz_ids } }).then((resp) => {
+          setCommentaries(resp.data);
+        });
       }
     });
 
@@ -277,44 +272,32 @@ const Study = () => {
       <Heading>神経内科Ⅰ</Heading>
       <SelectArea>
         <Swiper>
-          {quizzes.map((quiz, i) => (
+          {quizzes?.map((quiz, i) => (
             <div key={i}>
               <QuizContainer>
                 <QuizTitle>問題{i + 1}</QuizTitle>
-                {quiz === undefined ? <></> : <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />}
+                <PassFail checked={quiz.checked} isCorrect={quiz.isCorrect} />
               </QuizContainer>
-              {quiz === undefined ? <></> : <QuizText>{quiz.title}</QuizText>}
+              <QuizText>{quiz.title}</QuizText>
               <Spacer size="xs" />
               <ChoicesContainer>
-                {choices[i] === undefined ? (
-                  <></>
-                ) : (
-                  choices[i].map((choice, index) => (
-                    <ChoiceContainer key={choice.id} onClick={() => checkAnswers(i, index)}>
-                      {choices[i] === [] ? (
-                        <></>
-                      ) : choice.clicked === "right" ? (
-                        <StyledCheckCircle />
-                      ) : choice.clicked === "wrong" ? (
-                        <StyledCancel />
-                      ) : choice.clicked === "clicked" ? (
-                        <Icon src={darkIcons[index]} />
-                      ) : (
-                        <Icon src={lightIcons[index]} />
-                      )}
-                      <p>{choice.choice}</p>
-                    </ChoiceContainer>
-                  ))
-                )}
+                {choices[i]?.map((choice, index) => (
+                  <ChoiceContainer key={choice.id} onClick={() => checkAnswers(i, index)}>
+                    {choice.clicked === "right" ? (
+                      <StyledCheckCircle />
+                    ) : choice.clicked === "wrong" ? (
+                      <StyledCancel />
+                    ) : choice.clicked === "clicked" ? (
+                      <Icon src={darkIcons[index]} />
+                    ) : (
+                      <Icon src={lightIcons[index]} />
+                    )}
+                    <p>{choice.choice}</p>
+                  </ChoiceContainer>
+                ))}
                 <Spacer size="xs" />
               </ChoicesContainer>
-              {quiz === undefined ? (
-                <></>
-              ) : quiz.open ? (
-                <AnswerContainer>{commentaries[i] === undefined ? <></> : commentaries[i].text}</AnswerContainer>
-              ) : (
-                <></>
-              )}
+              {quiz.open ? <AnswerContainer>{commentaries[i]?.text}</AnswerContainer> : <></>}
             </div>
           ))}
           <div>

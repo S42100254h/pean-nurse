@@ -206,17 +206,18 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "GET /api/v1/quizzes/exam/:category_name/:id" do
-    subject { get(api_v1_exam_quizzes_path(category_name, exam_id)) }
+  describe "GET /api/v1/quizzes/exam/:category_profile_uid/:id" do
+    subject { get(api_v1_exam_quizzes_path(category_profile_uid, exam_id)) }
 
     before do
       create(:category, id: 1, name: "neko")
       create(:category, id: 2, name: "dummy")
+      create(:category_profile, uid: "cat", category_id: 1)
       create_list(:quiz, 14, category_ids: 1)
       create_list(:quiz, 14, category_ids: 2)
     end
 
-    let(:category_name) { "neko" }
+    let(:category_profile_uid) { "cat" }
     let(:exam_id) { 1 }
 
     it "gets seven quizzes" do
