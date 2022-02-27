@@ -3,9 +3,11 @@ import { RootState } from "../../types/entity/rootState";
 
 const usersSelector = (state: RootState) => state.user;
 
-export const getUserId = createSelector([usersSelector], (state) => state.uid);
+export const getExperiencePoint = createSelector([usersSelector], (state) => state.experiencePoint);
 
 export const getSignedIn = createSelector([usersSelector], (state) => state.isSignedIn);
+
+export const getUserId = createSelector([usersSelector], (state) => state.uid);
 
 export const getUserImage = createSelector([usersSelector], (state) => state.image);
 
