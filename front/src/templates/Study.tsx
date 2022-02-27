@@ -341,7 +341,7 @@ const Study = () => {
 
   return (
     <Container>
-      <Heading>神経内科Ⅰ</Heading>
+      <Heading>{categoryProfile?.title + match.params.id}</Heading>
       <SelectArea>
         <Swiper>
           {quizzes?.map((quiz, i) => (
