@@ -19,6 +19,7 @@ import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
 import cat from "../assets/img/cat.png";
+import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
 import { PassFail } from "../components/PassFail";
@@ -397,10 +398,30 @@ const Study = () => {
         </CorrectAnswerRate>
       </SelectArea>
       <LabelContainer>
-        <Label onClick={() => dispatch(push(previousQuizUrl))} disabled={match.params.id === "1"}>
+        <Label
+          disabled={match.params.id === "1"}
+          onClick={() => {
+            dispatch(showLoadingAction("Loading..."));
+            dispatch(push(previousQuizUrl));
+
+            setTimeout(() => {
+              dispatch(hideLoadingAction());
+            }, 1300);
+          }}
+        >
           前のクイズへ
         </Label>
-        <Label onClick={() => dispatch(push(nextQuizUrl))} disabled={Number(match.params.id) === quizzesLength}>
+        <Label
+          disabled={Number(match.params.id) === quizzesLength}
+          onClick={() => {
+            dispatch(showLoadingAction("Loading..."));
+            dispatch(push(nextQuizUrl));
+
+            setTimeout(() => {
+              dispatch(hideLoadingAction());
+            }, 1300);
+          }}
+        >
           次のクイズへ
         </Label>
       </LabelContainer>
