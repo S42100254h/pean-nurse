@@ -247,24 +247,18 @@ const Study = () => {
           open: false,
         }));
         setQuizzes(newQuizzes);
-      }
-    });
 
-    const choicesApiEndpoint =
-      process.env.REACT_APP_API_URL +
-      "choices?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
-    axios.get(choicesApiEndpoint).then((resp) => {
-      if (isMounted) {
-        setChoices(resp.data);
-      }
-    });
+        const quiz_ids = resp.data.map((newQuiz: Quiz) => newQuiz.id);
 
-    const commentariesApiEndpoint =
-      process.env.REACT_APP_API_URL +
-      "commentaries?quiz_id[]=20&quiz_id[]=21&quiz_id[]=22&quiz_id[]=23&quiz_id[]=24&quiz_id[]=25&quiz_id[]=26";
-    axios.get(commentariesApiEndpoint).then((resp) => {
-      if (isMounted) {
-        setCommentaries(resp.data);
+        const choicesApiEndpoint = process.env.REACT_APP_API_URL + "choices";
+        axios.get(choicesApiEndpoint, { params: { quiz_id: quiz_ids } }).then((resp) => {
+          setChoices(resp.data);
+        });
+
+        const commentariesApiEndpoint = process.env.REACT_APP_API_URL + "commentaries";
+        axios.get(commentariesApiEndpoint, { params: { quiz_id: quiz_ids } }).then((resp) => {
+          setCommentaries(resp.data);
+        });
       }
     });
 
