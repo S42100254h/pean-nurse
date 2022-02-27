@@ -1,4 +1,6 @@
-class Api::V1::InquiriesController < ApplicationController
+class Api::V1::InquiriesController < Api::V1::ApiController
+  before_action :authenticate_user!
+
   def create
     @inquiry = Inquiry.new(inquiry_params)
 
