@@ -1,5 +1,6 @@
 import {
   deleteUserImageAction,
+  editExperiencePointAction,
   editUserInfoAction,
   editUserImageAction,
   signUpAction,
@@ -223,6 +224,31 @@ export const deleteUser = () => {
         });
     } else {
       dispatch(push("/signin"));
+    }
+  };
+};
+
+export const editExperiencePoint = (experiencePoint: number) => {
+  return async (dispatch: Dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/levelup";
+
+      const body = { experience_point: experiencePoint };
+
+      axios
+        .patch(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(editExperiencePointAction(resp.data.experience_point));
+        });
     }
   };
 };
