@@ -231,7 +231,9 @@ const Study = () => {
   };
 
   useEffect(() => {
-    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/コロナ対策室/1";
+    const category_profile_uid = match.url.split("/")[2];
+    const quizApiEndpoint =
+      process.env.REACT_APP_API_URL + "quizzes/exam/" + category_profile_uid + "/" + match.params.id;
     let isMounted = true;
 
     axios.get(quizApiEndpoint).then((resp) => {
