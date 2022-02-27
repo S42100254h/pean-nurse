@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
 import A_light from "../assets/img/A_light.png";
@@ -21,7 +22,8 @@ import cat from "../assets/img/cat.png";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
 import { PassFail } from "../components/PassFail";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { push } from "connected-react-router";
 import axios from "axios";
 
 const Container = styled.div`
@@ -35,6 +37,39 @@ const Heading = styled.h2`
   font-size: 1.563rem;
   margin: 0 auto 1rem auto;
   text-align: center;
+`;
+
+const Label = styled.button`
+  font-size: 12px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 8px;
+  float: left;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: ${(props) => props.theme.palette.primary.main};
+  ${(props) =>
+    props.disabled
+      ? css`
+          background-color: ${(props) => props.theme.palette.basic.main};
+        `
+      : css`
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+        `}
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+  padding: 20px 150px;
 `;
 
 const SelectArea = styled.div`
@@ -156,14 +191,29 @@ type Commentary = {
   text: string;
 };
 
+type ImageProp = {
+  url: string;
+};
+
+type CategoryProfile = {
+  id: string;
+  title: string;
+  image: ImageProp;
+  caption: string;
+  uid: string;
+};
+
 type MatchParams = {
   id: string;
 };
 
 const Study = () => {
+  const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
-  const [choices, setChoices] = useState<Choice[][]>([]),
+  const [choices, setChoices] = useState<Choice[][]>([]);
+  const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
+    [quizzesLength, setQuizzesLength] = useState(0),
     [commentaries, setCommentaries] = useState<Commentary[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0);
@@ -230,6 +280,9 @@ const Study = () => {
     return Math.round((correctQuiz / answeredQuiz) * 100);
   };
 
+  const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
+  const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
+
   useEffect(() => {
     const category_profile_uid = match.url.split("/")[2];
     const quizApiEndpoint =
@@ -258,6 +311,19 @@ const Study = () => {
         const commentariesApiEndpoint = process.env.REACT_APP_API_URL + "commentaries";
         axios.get(commentariesApiEndpoint, { params: { quiz_id: quiz_ids } }).then((resp) => {
           setCommentaries(resp.data);
+        });
+      }
+    });
+
+    const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "category_profiles/" + category_profile_uid;
+    axios.get(categoryProfileApiEndpoint).then((resp) => {
+      if (isMounted) {
+        setCategoryProfile(resp.data);
+        const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
+
+        axios.get(quizApiEndpoint).then((r) => {
+          const courseNumber = Math.floor(r.data.length / 7);
+          setQuizzesLength(courseNumber);
         });
       }
     });
@@ -330,6 +396,14 @@ const Study = () => {
           )}
         </CorrectAnswerRate>
       </SelectArea>
+      <LabelContainer>
+        <Label onClick={() => dispatch(push(previousQuizUrl))} disabled={match.params.id === "1"}>
+          前のクイズへ
+        </Label>
+        <Label onClick={() => dispatch(push(nextQuizUrl))} disabled={Number(match.params.id) === quizzesLength}>
+          次のクイズへ
+        </Label>
+      </LabelContainer>
     </Container>
   );
 };
