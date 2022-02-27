@@ -18,6 +18,7 @@ const Root = styled.section`
   left: 0;
   height: 100vh;
   width: 100%;
+  z-index: 10000;
 `;
 
 type Props = {
