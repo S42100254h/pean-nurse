@@ -3,6 +3,7 @@ import {
   signInAction,
   signUpAction,
   signOutAction,
+  editExperiencePointAction,
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
@@ -73,6 +74,22 @@ describe("UsersReducerのテスト", () => {
 
     expect(newState.name).toStrictEqual(dummy.name);
     expect(newState.email).toStrictEqual(dummy.email);
+  });
+
+  it("action.type === EDIT_EXPERIENCE_POINTのときのテスト", () => {
+    const dummy = {
+      id: 1,
+      isSignedIn: true,
+      uid: "dummy@gmail.com",
+      name: "dummy-admin",
+      email: "dummy@gmail.com",
+      image: null,
+      experiencePoint: 100,
+    };
+    const action = editExperiencePointAction(dummy);
+    const newState = UserReducer(init, action);
+
+    expect(newState.experiencePoint).toStrictEqual(dummy.experiencePoint);
   });
 
   it("action.type === EDIT_USER_IMAGEのときのテスト", () => {
