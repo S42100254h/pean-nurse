@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
@@ -284,8 +284,11 @@ const Study = () => {
   const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
   const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
 
+  const isFirstRender = useRef(false);
+
   useEffect(() => {
     dispatch(showLoadingAction("Loading..."));
+    isFirstRender.current = true;
 
     setTimeout(() => {
       dispatch(hideLoadingAction());
@@ -337,6 +340,16 @@ const Study = () => {
     return () => {
       isMounted = false;
     };
+  }, []);
+
+  // 第二引数にレベルアップアニメーションを実行するためのトリガーとなるlocal stateを入れる。
+  useEffect(() => {
+    // check wether first render or not
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      // ここにlevel upアニメーションを実行する関数を記述する。
+    }
   }, []);
 
   return (
