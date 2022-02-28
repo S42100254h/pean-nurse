@@ -2,6 +2,7 @@ import {
   signUpAction,
   signInAction,
   signOutAction,
+  editExperiencePointAction,
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
@@ -16,6 +17,7 @@ describe("actions.tsのテスト", () => {
       name: "dummy-user",
       email: "dummy@gmail.com",
       image: null,
+      experiencePoint: 0,
     };
     const action = signUpAction(dummy);
 
@@ -33,6 +35,7 @@ describe("actions.tsのテスト", () => {
       name: "dummy-user",
       email: "dummy@gmail.com",
       image: null,
+      experiencePoint: 0,
     };
     const action = signInAction(dummy);
 
@@ -51,6 +54,24 @@ describe("actions.tsのテスト", () => {
     });
   });
 
+  it("editExperiencePointActionのテスト", () => {
+    const dummy = {
+      id: 1,
+      isSignedIn: true,
+      uid: "dummy@gmail.com",
+      name: "dummy-admin",
+      email: "dummy@gmail.com",
+      image: null,
+      experiencePoint: 100,
+    };
+    const action = editExperiencePointAction(dummy);
+
+    expect(action).toStrictEqual({
+      type: "EDIT_EXPERIENCE_POINT",
+      payload: dummy,
+    });
+  });
+
   it("editUserInfoActionのテスト", () => {
     const dummy = {
       id: 1,
@@ -59,6 +80,7 @@ describe("actions.tsのテスト", () => {
       name: "dummy-admin",
       email: "dummy@gmail.com",
       image: null,
+      experiencePoint: 0,
     };
     const action = editUserInfoAction(dummy);
 
@@ -76,6 +98,7 @@ describe("actions.tsのテスト", () => {
       name: "dummy-admin",
       email: "dummy@gmail.com",
       image: { url: "cat.png" },
+      experiencePoint: 0,
     };
     const action = editUserImageAction(dummy);
 

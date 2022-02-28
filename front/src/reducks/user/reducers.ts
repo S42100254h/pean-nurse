@@ -24,6 +24,10 @@ export const UserReducer = reducerWithInitialState(initialState.user)
   .case(Actions.signOutAction, () => ({
     ...initialState.user,
   }))
+  .case(Actions.editExperiencePointAction, (state, payload) => ({
+    ...state,
+    experiencePoint: payload.experiencePoint,
+  }))
   .case(Actions.editUserInfoAction, (state, payload) => ({
     ...state,
     name: payload.name,

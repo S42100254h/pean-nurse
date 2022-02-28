@@ -1,5 +1,6 @@
 import {
   deleteUserImageAction,
+  editExperiencePointAction,
   editUserInfoAction,
   editUserImageAction,
   signUpAction,
@@ -223,6 +224,41 @@ export const deleteUser = () => {
         });
     } else {
       dispatch(push("/signin"));
+    }
+  };
+};
+
+export const editExperiencePoint = (experiencePoint: number) => {
+  return async (dispatch: Dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/levelup";
+
+      const body = { experience_point: experiencePoint };
+
+      axios
+        .patch(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(editExperiencePointAction(resp.data));
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "経験値アップに失敗しました。",
+              }),
+            );
+          }, 400);
+        });
     }
   };
 };
@@ -546,6 +582,7 @@ export const listenAuthState = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
+              experiencePoint: userData.experiencePoint,
             }),
           );
         })
@@ -585,6 +622,7 @@ export const redirectToDashboard = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
+              experiencePoint: userData.experiencePoint,
             }),
           );
 

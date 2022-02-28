@@ -14,6 +14,7 @@ describe("UsersReducerのテスト", () => {
         name: "cat",
         email: "cat@gmail.com",
         image: null,
+        experiencePoint: 0,
       },
       {
         id: 2,
@@ -22,6 +23,7 @@ describe("UsersReducerのテスト", () => {
         name: "dog",
         email: "dog@gmail.com",
         image: null,
+        experiencePoint: 0,
       },
     ];
     const action = fetchUsersAction(dummy);
@@ -35,6 +37,7 @@ describe("UsersReducerのテスト", () => {
         name: "cat",
         email: "cat@gmail.com",
         image: null,
+        experiencePoint: 0,
       },
       {
         id: 2,
@@ -43,6 +46,7 @@ describe("UsersReducerのテスト", () => {
         name: "dog",
         email: "dog@gmail.com",
         image: null,
+        experiencePoint: 0,
       },
     ]);
   });
@@ -56,6 +60,7 @@ describe("UsersReducerのテスト", () => {
         name: "cat",
         email: "cat@gmail.com",
         image: null,
+        experiencePoint: 0,
       },
     ];
     const action = deleteUserAction(dummy);
@@ -69,6 +74,7 @@ describe("UsersReducerのテスト", () => {
         name: "cat",
         email: "cat@gmail.com",
         image: null,
+        experiencePoint: 0,
       },
     ]);
   });
