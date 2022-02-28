@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 type Props = {
   children: React.ReactNode;
+  onClick: (e: number) => void;
 };
 
 type ArrowProps = {
@@ -72,6 +73,7 @@ export const Swiper = (props: Props) => {
     draggable: true,
     nextArrow: <NextArrow onClick={() => gotoNext()} />,
     prevArrow: <PrevArrow onClick={() => gotoPrev()} />,
+    beforeChange: (current: number, next: number) => props.onClick(next),
   };
 
   return <Slider {...settings}>{props.children}</Slider>;

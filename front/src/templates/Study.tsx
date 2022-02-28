@@ -217,7 +217,8 @@ const Study = () => {
     [quizzesLength, setQuizzesLength] = useState(0),
     [commentaries, setCommentaries] = useState<Commentary[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
-    [answeredQuiz, setAnsweredQuiz] = useState(0);
+    [answeredQuiz, setAnsweredQuiz] = useState(0),
+    [fire, setFire] = useState(false);
 
   const checkAnswers = (i: number, index: number) => {
     if (quizzes[i].checked === true) return;
@@ -279,6 +280,13 @@ const Study = () => {
 
   const calcCorrectAnswerRate = () => {
     return Math.round((correctQuiz / answeredQuiz) * 100);
+  };
+
+  const handleFire = (e: number) => {
+    if (quizzes.length === answeredQuiz && quizzes.length === e) {
+      setFire(true);
+    }
+    return;
   };
 
   const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
@@ -349,14 +357,15 @@ const Study = () => {
       isFirstRender.current = false;
     } else {
       // ここにlevel upアニメーションを実行する関数を記述する。
+      console.log("fire!");
     }
-  }, []);
+  }, [fire]);
 
   return (
     <Container>
       <Heading>{categoryProfile?.title + match.params.id}</Heading>
       <SelectArea>
-        <Swiper>
+        <Swiper onClick={(e) => handleFire(e)}>
           {quizzes?.map((quiz, i) => (
             <div key={i}>
               <QuizContainer>
