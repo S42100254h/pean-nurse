@@ -247,7 +247,17 @@ export const editExperiencePoint = (experiencePoint: number) => {
           },
         })
         .then((resp) => {
-          dispatch(editExperiencePointAction(resp.data.experience_point));
+          dispatch(editExperiencePointAction(resp.data));
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "経験値アップに失敗しました。",
+              }),
+            );
+          }, 400);
         });
     }
   };
