@@ -74,7 +74,7 @@ RSpec.describe "Api::V1::Users", type: :request do
     let(:params) { { user: { experience_point: 100 } } }
 
     it "experience_point of user is updated" do
-      expect { subject }.to change { current_user.reload.experience_point }.from(current_user.experience_point).to(params[:user][:experience_point]) 
+      expect { subject }.to change { current_user.reload.experience_point }.from(current_user.experience_point).to(params[:user][:experience_point])
       expect(response).to have_http_status(200)
     end
   end
