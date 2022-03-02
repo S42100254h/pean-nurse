@@ -228,7 +228,7 @@ export const deleteUser = () => {
   };
 };
 
-export const editExperiencePoint = (experiencePoint: number) => {
+export const editExperiencePoint = (exp: number) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -236,7 +236,7 @@ export const editExperiencePoint = (experiencePoint: number) => {
       const uid = localStorage.getItem("uid") || "";
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/levelup";
 
-      const body = { experience_point: experiencePoint };
+      const body = { exp: exp };
 
       axios
         .patch(apiEndpoint, body, {
@@ -582,7 +582,7 @@ export const listenAuthState = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
-              experiencePoint: userData.experiencePoint,
+              exp: userData.exp,
             }),
           );
         })
@@ -622,7 +622,7 @@ export const redirectToDashboard = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
-              experiencePoint: userData.experiencePoint,
+              exp: userData.exp,
             }),
           );
 

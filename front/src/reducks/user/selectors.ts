@@ -3,7 +3,7 @@ import { RootState } from "../../types/entity/rootState";
 
 const usersSelector = (state: RootState) => state.user;
 
-export const getExperiencePoint = createSelector([usersSelector], (state) => state.experiencePoint);
+export const getExperiencePoint = createSelector([usersSelector], (state) => state.exp);
 
 export const getSignedIn = createSelector([usersSelector], (state) => state.isSignedIn);
 

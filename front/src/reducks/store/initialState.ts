@@ -29,7 +29,7 @@ const initialState: RootState = {
     name: "",
     email: "",
     image: null,
-    experiencePoint: 0,
+    exp: 0,
   },
   users: {
     list: [],
