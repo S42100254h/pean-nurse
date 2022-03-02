@@ -362,7 +362,6 @@ const Study = () => {
       setTimeout(() => {
         setOpen(true);
       }, 300);
-      console.log("fire!");
     }
   }, [fire]);
 
@@ -439,7 +438,7 @@ const Study = () => {
           次のクイズへ
         </Label>
       </LabelContainer>
-      <LevelUpDialog open={open} />
+      <LevelUpDialog open={open} onClose={() => setOpen(false)} />
     </Container>
   );
 };
