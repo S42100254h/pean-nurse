@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
+import { editExperiencePoint } from "../../reducks/user/operations";
+import { RootState } from "../../types/entity/rootState";
+import { getExperiencePoint } from "../../reducks/user/selectors";
 import cat from "../../assets/img/cat.png";
 import styled from "styled-components";
 
@@ -29,6 +33,19 @@ type Props = {
 };
 
 const LevelUpDialog = (props: Props) => {
+  const dispatch = useDispatch();
+  const selector = useSelector((state: RootState) => state);
+
+  const exp = getExperiencePoint(selector);
+
+  useEffect(() => {
+    if (props.open === false) return;
+
+    setTimeout(() => {
+      dispatch(editExperiencePoint(100));
+    }, 200);
+  }, [props.open]);
+
   return (
     <div>
       <Dialog open={props.open} fullWidth={true} maxWidth={"sm"} onClose={props.onClose}>
