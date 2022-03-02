@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
+import { LevelUpDialog } from "../components/LevelUpDialog";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
 import C_light from "../assets/img/C_light.png";
@@ -218,7 +219,8 @@ const Study = () => {
     [commentaries, setCommentaries] = useState<Commentary[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0),
-    [fire, setFire] = useState(false);
+    [fire, setFire] = useState(false),
+    [open, setOpen] = useState(false);
 
   const checkAnswers = (i: number, index: number) => {
     if (quizzes[i].checked === true) return;
@@ -357,6 +359,9 @@ const Study = () => {
       isFirstRender.current = false;
     } else {
       // ここにlevel upアニメーションを実行する関数を記述する。
+      setTimeout(() => {
+        setOpen(true);
+      }, 300);
       console.log("fire!");
     }
   }, [fire]);
@@ -434,6 +439,7 @@ const Study = () => {
           次のクイズへ
         </Label>
       </LabelContainer>
+      <LevelUpDialog open={open} />
     </Container>
   );
 };
