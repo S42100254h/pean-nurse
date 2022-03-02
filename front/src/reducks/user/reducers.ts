@@ -20,6 +20,7 @@ export const UserReducer = reducerWithInitialState(initialState.user)
     name: payload.name,
     email: payload.email,
     image: payload.image,
+    exp: payload.exp,
   }))
   .case(Actions.signOutAction, () => ({
     ...initialState.user,
