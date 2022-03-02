@@ -30,7 +30,7 @@ RSpec.describe "Api::V1::Users", type: :request do
       subject
       res = JSON.parse(response.body)
       expect(res.length).to eq 8
-      expect(res[0].keys).to eq ["id", "provider", "uid", "allow_password_change", "name", "nickname", "image", "email", "created_at", "updated_at", "level", "experience_point"]
+      expect(res[0].keys).to eq ["id", "provider", "uid", "allow_password_change", "name", "nickname", "image", "email", "created_at", "updated_at", "level", "exp"]
       expect(response).to have_http_status(200)
     end
   end
@@ -46,7 +46,7 @@ RSpec.describe "Api::V1::Users", type: :request do
     it "get detail of user" do
       subject
       res = JSON.parse(response.body)
-      expect(res.keys).to eq ["id", "provider", "uid", "allow_password_change", "name", "nickname", "image", "email", "created_at", "updated_at", "level", "experience_point"]
+      expect(res.keys).to eq ["id", "provider", "uid", "allow_password_change", "name", "nickname", "image", "email", "created_at", "updated_at", "level", "exp"]
       expect(response).to have_http_status(200)
     end
   end
@@ -71,10 +71,10 @@ RSpec.describe "Api::V1::Users", type: :request do
 
     let(:current_user) { create(:user) }
     let(:headers) { current_user.create_new_auth_token }
-    let(:params) { { user: { experience_point: 100 } } }
+    let(:params) { { user: { exp: 100 } } }
 
-    it "experience_point of user is updated" do
-      expect { subject }.to change { current_user.reload.experience_point }.from(current_user.experience_point).to(params[:user][:experience_point])
+    it "exp of user is updated" do
+      expect { subject }.to change { current_user.reload.exp }.from(current_user.exp).to(params[:user][:exp])
       expect(response).to have_http_status(200)
     end
   end
