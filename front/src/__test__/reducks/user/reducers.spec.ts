@@ -20,7 +20,7 @@ describe("UsersReducerのテスト", () => {
       name: "dummy-user",
       email: "dummy@gmail.com",
       image: null,
-      experiencePoint: 0,
+      exp: 0,
     };
     const action = signInAction(dummy);
     const newState = UserReducer(init, action);
@@ -37,7 +37,7 @@ describe("UsersReducerのテスト", () => {
       name: "dummy-user",
       email: "dummy@gmail.com",
       image: null,
-      experiencePoint: 0,
+      exp: 0,
     };
     const action = signUpAction(dummy);
     const newState = UserReducer(init, action);
@@ -67,7 +67,7 @@ describe("UsersReducerのテスト", () => {
       name: "dummy-admin",
       email: "dummy@gmail.com",
       image: null,
-      experiencePoint: 0,
+      exp: 0,
     };
     const action = editUserInfoAction(dummy);
     const newState = UserReducer(init, action);
@@ -84,12 +84,12 @@ describe("UsersReducerのテスト", () => {
       name: "dummy-admin",
       email: "dummy@gmail.com",
       image: null,
-      experiencePoint: 100,
+      exp: 100,
     };
     const action = editExperiencePointAction(dummy);
     const newState = UserReducer(init, action);
 
-    expect(newState.experiencePoint).toStrictEqual(dummy.experiencePoint);
+    expect(newState.exp).toStrictEqual(dummy.exp);
   });
 
   it("action.type === EDIT_USER_IMAGEのときのテスト", () => {
@@ -100,7 +100,7 @@ describe("UsersReducerのテスト", () => {
       name: "dummy-admin",
       email: "dummy@gmail.com",
       image: { url: "cat.png" },
-      experiencePoint: 0,
+      exp: 0,
     };
     const action = editUserImageAction(dummy);
     const newState = UserReducer(init, action);
