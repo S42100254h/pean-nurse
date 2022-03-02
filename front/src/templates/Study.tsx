@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
+import { LevelUpDialog } from "../components/LevelUpDialog";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
 import C_light from "../assets/img/C_light.png";
@@ -217,7 +218,9 @@ const Study = () => {
     [quizzesLength, setQuizzesLength] = useState(0),
     [commentaries, setCommentaries] = useState<Commentary[]>([]),
     [correctQuiz, setCorrectQuiz] = useState(0),
-    [answeredQuiz, setAnsweredQuiz] = useState(0);
+    [answeredQuiz, setAnsweredQuiz] = useState(0),
+    [fire, setFire] = useState(false),
+    [open, setOpen] = useState(false);
 
   const checkAnswers = (i: number, index: number) => {
     if (quizzes[i].checked === true) return;
@@ -281,11 +284,21 @@ const Study = () => {
     return Math.round((correctQuiz / answeredQuiz) * 100);
   };
 
+  const handleFire = (e: number) => {
+    if (quizzes.length === answeredQuiz && quizzes.length === e) {
+      setFire(true);
+    }
+    return;
+  };
+
   const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
   const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
 
+  const isFirstRender = useRef(false);
+
   useEffect(() => {
     dispatch(showLoadingAction("Loading..."));
+    isFirstRender.current = true;
 
     setTimeout(() => {
       dispatch(hideLoadingAction());
@@ -339,11 +352,24 @@ const Study = () => {
     };
   }, []);
 
+  // 第二引数にレベルアップアニメーションを実行するためのトリガーとなるlocal stateを入れる。
+  useEffect(() => {
+    // check wether first render or not
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      // ここにlevel upアニメーションを実行する関数を記述する。
+      setTimeout(() => {
+        setOpen(true);
+      }, 300);
+    }
+  }, [fire]);
+
   return (
     <Container>
       <Heading>{categoryProfile?.title + match.params.id}</Heading>
       <SelectArea>
-        <Swiper>
+        <Swiper onClick={(e) => handleFire(e)}>
           {quizzes?.map((quiz, i) => (
             <div key={i}>
               <QuizContainer>
@@ -372,19 +398,21 @@ const Study = () => {
               {quiz.open ? <AnswerContainer>{commentaries[i]?.text}</AnswerContainer> : <></>}
             </div>
           ))}
-          <div>
-            <Image src={cat} />
-            <ResultTextArea>
-              <p>お疲れ様でした！！</p>
-              {calcCorrectAnswerRate() === 100 ? (
-                <p>完璧です！！この調子で学習を進めましょう！！</p>
-              ) : calcCorrectAnswerRate() > 80 ? (
-                <p>おしい！！この調子で学習を進めましょう！！</p>
-              ) : (
-                <p>分からないところは復習しながら学習を進めましょう！！</p>
-              )}
-            </ResultTextArea>
-          </div>
+          {quizzes.length === answeredQuiz && (
+            <div>
+              <Image src={cat} />
+              <ResultTextArea>
+                <p>お疲れ様でした！！</p>
+                {calcCorrectAnswerRate() === 100 ? (
+                  <p>完璧です！！この調子で学習を進めましょう！！</p>
+                ) : calcCorrectAnswerRate() > 80 ? (
+                  <p>おしい！！この調子で学習を進めましょう！！</p>
+                ) : (
+                  <p>分からないところは復習しながら学習を進めましょう！！</p>
+                )}
+              </ResultTextArea>
+            </div>
+          )}
         </Swiper>
         <Spacer size="sm" />
         <CorrectAnswerRate>
@@ -410,6 +438,7 @@ const Study = () => {
           次のクイズへ
         </Label>
       </LabelContainer>
+      <LevelUpDialog open={open} onClose={() => setOpen(false)} />
     </Container>
   );
 };
