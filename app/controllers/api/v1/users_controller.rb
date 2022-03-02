@@ -20,9 +20,9 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def levelup
     @user = current_user
-    total_exp = @user.experience_point
-    total_exp += params[:user][:experience_point].to_i
-    @user.update!(experience_point: total_exp)
+    total_exp = @user.exp
+    total_exp += params[:user][:exp].to_i
+    @user.update!(exp: total_exp)
     render json: @user
   end
 
