@@ -582,7 +582,7 @@ export const listenAuthState = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
-              experiencePoint: userData.experiencePoint,
+              exp: userData.exp,
             }),
           );
         })
@@ -622,7 +622,7 @@ export const redirectToDashboard = () => {
               name: userData.name,
               image: userData.image,
               email: userData.email,
-              experiencePoint: userData.experiencePoint,
+              exp: userData.exp,
             }),
           );
 
