@@ -4,6 +4,7 @@ export { default as CategoryList } from "./CategoryList";
 export { default as CourseOverview } from "./CourseOverview";
 export { default as CourseList } from "./CourseList";
 export { default as CreateCategory } from "./CreateCategory";
+export { default as CreateExperience } from "./CreateExperience";
 export { default as CreateQuiz } from "./CreateQuiz";
 export { default as Deactivate } from "./Deactivate";
 export { default as DashBoard } from "./DashBoard";
