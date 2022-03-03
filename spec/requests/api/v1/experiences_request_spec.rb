@@ -35,7 +35,7 @@ RSpec.describe "Api::V1::Experiences", type: :request do
 
   describe "GET /api/v1/experiences/:id" do
     subject { get(api_v1_experience_path(experience_id)) }
-  
+
     context "specified id exists" do
       let(:experience) { create(:experience) }
       let(:experience_id) { experience.id }
@@ -67,8 +67,8 @@ RSpec.describe "Api::V1::Experiences", type: :request do
   end
 
   describe "DELETE /api/v1/experience/:id" do
-    subject { delete(api_v1_experience_path(experience_id), headers: current_admin.create_new_auth_token) }    
-  
+    subject { delete(api_v1_experience_path(experience_id), headers: current_admin.create_new_auth_token) }
+
     let(:current_admin) { create(:admin) }
     let(:experience_id) { experience.id }
     let!(:experience) { create(:experience) }
