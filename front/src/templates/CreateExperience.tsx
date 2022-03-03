@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { PrimaryButton, Spacer, TextInput } from "../components/UIkit";
+import { createExperience } from "../function/experience";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -59,7 +60,7 @@ const CreateExperience = () => {
         label={"経験値表を作成する"}
         fullWidth={true}
         disabled={!level || !experience}
-        onClick={() => console.log("create experience")}
+        onClick={() => dispatch(createExperience(level, experience))}
       />
     </Container>
   );
