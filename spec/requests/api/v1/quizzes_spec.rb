@@ -4,7 +4,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
   describe "POST /api/v1/quizzes" do
     subject { post(api_v1_quizzes_path, params: params, headers: current_admin.create_new_auth_token) }
 
-    describe "normal senario" do
+    describe "normal scenario" do
       context "send correct quiz information" do
         let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids } }
         let(:current_admin) { create(:admin) }
