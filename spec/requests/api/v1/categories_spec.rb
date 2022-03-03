@@ -95,7 +95,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
       let(:category) { create(:category) }
       let(:category_id) { category.id }
 
-      it "get detail of category" do
+      it "gets detail of category" do
         subject
         res = JSON.parse(response.body)
         expect(res["id"]).to eq category.id
