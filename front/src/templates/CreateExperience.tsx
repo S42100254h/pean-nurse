@@ -45,7 +45,15 @@ const CreateExperience = () => {
     <Container>
       <Heading>経験値表作成</Heading>
       <Spacer size="sm" />
-      <TextInput fullWidth={true} label={"レベル"} required={true} rows={1} value={level} onChange={inputLevel} />
+      <TextInput
+        fullWidth={true}
+        label={"レベル"}
+        required={true}
+        rows={1}
+        value={level}
+        type={"number"}
+        onChange={inputLevel}
+      />
       <Spacer size="xs" />
       <TextInput
         fullWidth={true}
@@ -53,6 +61,7 @@ const CreateExperience = () => {
         required={true}
         rows={1}
         value={experience}
+        type={"number"}
         onChange={inputExperience}
       />
       <Spacer size="xs" />
