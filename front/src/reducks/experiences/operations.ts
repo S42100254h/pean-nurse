@@ -19,7 +19,7 @@ export const fetchExperiences = () => {
           dispatch(
             setNotificationAction({
               variant: "error",
-              message: "カテゴリー一覧の取得に失敗しました。",
+              message: "経験値一覧の取得に失敗しました。",
             }),
           );
         }, 400);
@@ -54,7 +54,7 @@ export const deleteExperience = (id: string | number) => {
             dispatch(
               setNotificationAction({
                 variant: "success",
-                message: "経験値表を修正しました。",
+                message: "経験値を削除しました。",
               }),
             );
           }, 1000);
@@ -64,7 +64,7 @@ export const deleteExperience = (id: string | number) => {
             dispatch(
               setNotificationAction({
                 variant: "error",
-                message: "経験値表の修正に失敗しました。",
+                message: "経験値の削除に失敗しました。",
               }),
             );
           }, 400);
