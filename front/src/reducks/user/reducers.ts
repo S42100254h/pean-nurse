@@ -21,13 +21,18 @@ export const UserReducer = reducerWithInitialState(initialState.user)
     email: payload.email,
     image: payload.image,
     exp: payload.exp,
+    level: payload.level,
   }))
   .case(Actions.signOutAction, () => ({
     ...initialState.user,
   }))
-  .case(Actions.editExperiencePointAction, (state, payload) => ({
+  .case(Actions.editUserExpAction, (state, payload) => ({
     ...state,
     exp: payload.exp,
+  }))
+  .case(Actions.editUserLevelAction, (state, payload) => ({
+    ...state,
+    level: payload.level,
   }))
   .case(Actions.editUserInfoAction, (state, payload) => ({
     ...state,

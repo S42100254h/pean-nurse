@@ -3,7 +3,7 @@ import {
   signInAction,
   signUpAction,
   signOutAction,
-  editExperiencePointAction,
+  editUserExpAction,
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
@@ -21,6 +21,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = signInAction(dummy);
     const newState = UserReducer(init, action);
@@ -38,6 +39,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = signUpAction(dummy);
     const newState = UserReducer(init, action);
@@ -68,6 +70,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = editUserInfoAction(dummy);
     const newState = UserReducer(init, action);
@@ -76,7 +79,7 @@ describe("UsersReducerのテスト", () => {
     expect(newState.email).toStrictEqual(dummy.email);
   });
 
-  it("action.type === EDIT_EXPERIENCE_POINTのときのテスト", () => {
+  it("action.type === EDIT_USER_EXPのときのテスト", () => {
     const dummy = {
       id: 1,
       isSignedIn: true,
@@ -85,8 +88,9 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 100,
+      level: 1,
     };
-    const action = editExperiencePointAction(dummy);
+    const action = editUserExpAction(dummy);
     const newState = UserReducer(init, action);
 
     expect(newState.exp).toStrictEqual(dummy.exp);
@@ -101,6 +105,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: { url: "cat.png" },
       exp: 0,
+      level: 1,
     };
     const action = editUserImageAction(dummy);
     const newState = UserReducer(init, action);
