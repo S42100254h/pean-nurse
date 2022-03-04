@@ -30,6 +30,10 @@ export const UserReducer = reducerWithInitialState(initialState.user)
     ...state,
     exp: payload.exp,
   }))
+  .case(Actions.editUserLevelAction, (state, payload) => ({
+    ...state,
+    level: payload.level,
+  }))
   .case(Actions.editUserInfoAction, (state, payload) => ({
     ...state,
     name: payload.name,
