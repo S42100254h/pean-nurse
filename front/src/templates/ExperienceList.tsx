@@ -72,7 +72,7 @@ const ExperienceList = () => {
 
   return (
     <Container>
-      <Heading>経験値表</Heading>
+      <Heading>経験値一覧</Heading>
       <Wrapper>
         <DataGrid rows={rows} columns={columns} autoHeight pageSize={10} rowsPerPageOptions={[10]} />
       </Wrapper>
