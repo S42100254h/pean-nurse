@@ -10,6 +10,9 @@ const initialState: RootState = {
   categories: {
     list: [],
   },
+  experiences: {
+    list: [],
+  },
   loading: {
     state: false,
     text: "",
