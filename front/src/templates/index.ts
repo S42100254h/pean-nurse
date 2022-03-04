@@ -8,6 +8,7 @@ export { default as CreateExperience } from "./CreateExperience";
 export { default as CreateQuiz } from "./CreateQuiz";
 export { default as Deactivate } from "./Deactivate";
 export { default as DashBoard } from "./DashBoard";
+export { default as ExperienceList } from "./ExperienceList";
 export { default as ForgetPassword } from "./ForgetPassword";
 export { default as ForgetPasswordSent } from "./ForgetPasswordSent";
 export { default as Home } from "./Home";
