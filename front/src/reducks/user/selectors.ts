@@ -5,7 +5,7 @@ const usersSelector = (state: RootState) => state.user;
 
 export const getExperiencePoint = createSelector([usersSelector], (state) => state.exp);
 
-export const getLevel = createSelector([usersSelector], (state) => state.level);
+export const getUserLevel = createSelector([usersSelector], (state) => state.level);
 
 export const getSignedIn = createSelector([usersSelector], (state) => state.isSignedIn);
 

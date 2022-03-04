@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import { getUserName, getUserImage } from "../../reducks/user/selectors";
+import { getUserLevel, getUserName, getUserImage } from "../../reducks/user/selectors";
 import { RootState } from "../../types/entity/rootState";
 import styled from "styled-components";
 
@@ -47,6 +47,7 @@ const Profile = () => {
   const selector = useSelector((state: RootState) => state);
   const userName = getUserName(selector);
   const userImage = getUserImage(selector);
+  const userLevel = getUserLevel(selector);
 
   return (
     <GridContainer container spacing={1} direction="row" alignItems="center">
