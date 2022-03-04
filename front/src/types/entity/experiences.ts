@@ -1,5 +1,5 @@
-export type Experience = {
-  id: number;
-  level: number;
-  experience: number;
+import { Experience } from "./experience";
+
+export type Experiences = {
+  list: Experience[];
 };
