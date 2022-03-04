@@ -56,7 +56,7 @@ const Profile = () => {
       </Grid>
       <GridCenter item xs={3}>
         <Name>{userName}</Name>
-        <Level>Lv. 1</Level>
+        <Level>Lv. {userLevel}</Level>
       </GridCenter>
       <GridCenter item xs={3}>
         <Cleard>1</Cleard>
