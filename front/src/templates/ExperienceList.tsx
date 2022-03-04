@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
-import { PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { SecondaryButton } from "../components/UIkit";
+import { fetchExperiences, deleteExperience } from "../reducks/experiences/operations";
+import { getExperiences } from "../reducks/experiences/selectors";
 import { DeleteDialog } from "../components/DeleteDialog";
-import { push } from "connected-react-router";
 import styled from "styled-components";
+import { RootState } from "../types/entity/rootState";
 
 const Container = styled.div`
   margin: 25px auto;
@@ -26,27 +28,16 @@ const Wrapper = styled.div`
 
 const ExperienceList = () => {
   const dispatch = useDispatch();
+  const selector = useSelector((state: RootState) => state);
+  const experiences = getExperiences(selector);
 
   const [open, setOpen] = useState(false),
-    [selectedId, setSelectedId] = useState<string | number>(""),
-    [experiences, setExperiences] = useState<any>();
+    [selectedId, setSelectedId] = useState<string | number>("");
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
-    { field: "level", headerName: "レベル", width: 180 },
-    { field: "experience", headerName: "経験値", width: 220 },
-    {
-      field: "detail",
-      headerName: "詳細",
-      width: 100,
-      renderCell: (params: GridCellParams) => (
-        <PrimaryButton
-          label={"詳細"}
-          rowId={params.id}
-          onClick={() => dispatch(push("/category/detail/" + params.id))}
-        />
-      ),
-    },
+    { field: "level", headerName: "レベル", width: 230 },
+    { field: "experience", headerName: "経験値", width: 270 },
     {
       field: "delete",
       headerName: "削除",
@@ -64,10 +55,19 @@ const ExperienceList = () => {
     },
   ];
 
-  const rows = experiences;
+  const sortedExperiences = experiences.sort((a, b) => {
+    // descending order by level
+    return a.level < b.level ? -1 : 1;
+  });
+
+  const rows = sortedExperiences.map((experience) => ({
+    id: experience.id,
+    level: experience.level,
+    experience: experience.experience,
+  }));
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(fetchExperiences());
   }, []);
 
   return (

@@ -32,10 +32,6 @@ const CategoryList = () => {
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, []);
-
   const [open, setOpen] = useState(false),
     [selectedId, setSelectedId] = useState<string | number>("");
 
@@ -80,6 +76,10 @@ const CategoryList = () => {
     id: category.id,
     name: category.name,
   }));
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   return (
     <Container>
