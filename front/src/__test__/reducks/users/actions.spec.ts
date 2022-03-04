@@ -11,6 +11,7 @@ describe("actions.tsのテスト", () => {
         email: "cat@gmail.com",
         image: null,
         exp: 0,
+        level: 1,
       },
       {
         id: 2,
@@ -20,6 +21,7 @@ describe("actions.tsのテスト", () => {
         email: "dog@gmail.com",
         image: null,
         exp: 0,
+        level: 1,
       },
     ];
     const action = fetchUsersAction(dummy);
@@ -40,6 +42,7 @@ describe("actions.tsのテスト", () => {
         email: "cat@gmail.com",
         image: null,
         exp: 0,
+        level: 1,
       },
       {
         id: 2,
@@ -49,6 +52,7 @@ describe("actions.tsのテスト", () => {
         email: "dog@gmail.com",
         image: null,
         exp: 0,
+        level: 1,
       },
     ];
 

@@ -18,6 +18,7 @@ describe("actions.tsのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = signUpAction(dummy);
 
@@ -36,6 +37,7 @@ describe("actions.tsのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = signInAction(dummy);
 
@@ -63,6 +65,7 @@ describe("actions.tsのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 100,
+      level: 1,
     };
     const action = editExperiencePointAction(dummy);
 
@@ -81,6 +84,7 @@ describe("actions.tsのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = editUserInfoAction(dummy);
 
@@ -99,6 +103,7 @@ describe("actions.tsのテスト", () => {
       email: "dummy@gmail.com",
       image: { url: "cat.png" },
       exp: 0,
+      level: 1,
     };
     const action = editUserImageAction(dummy);
 

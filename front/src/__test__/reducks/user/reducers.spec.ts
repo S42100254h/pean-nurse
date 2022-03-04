@@ -21,6 +21,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = signInAction(dummy);
     const newState = UserReducer(init, action);
@@ -38,6 +39,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = signUpAction(dummy);
     const newState = UserReducer(init, action);
@@ -68,6 +70,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 0,
+      level: 1,
     };
     const action = editUserInfoAction(dummy);
     const newState = UserReducer(init, action);
@@ -85,6 +88,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: null,
       exp: 100,
+      level: 1,
     };
     const action = editExperiencePointAction(dummy);
     const newState = UserReducer(init, action);
@@ -101,6 +105,7 @@ describe("UsersReducerのテスト", () => {
       email: "dummy@gmail.com",
       image: { url: "cat.png" },
       exp: 0,
+      level: 1,
     };
     const action = editUserImageAction(dummy);
     const newState = UserReducer(init, action);
