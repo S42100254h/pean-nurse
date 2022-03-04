@@ -8,4 +8,5 @@ export type User = {
   email: string;
   image: Image | null;
   exp: number;
+  level: number;
 };

@@ -33,6 +33,7 @@ const initialState: RootState = {
     email: "",
     image: null,
     exp: 0,
+    level: 1,
   },
   users: {
     list: [],
