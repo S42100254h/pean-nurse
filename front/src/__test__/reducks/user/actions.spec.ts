@@ -2,7 +2,7 @@ import {
   signUpAction,
   signInAction,
   signOutAction,
-  editExperiencePointAction,
+  editUserExpAction,
   editUserInfoAction,
   editUserImageAction,
   deleteUserImageAction,
@@ -56,7 +56,7 @@ describe("actions.tsのテスト", () => {
     });
   });
 
-  it("editExperiencePointActionのテスト", () => {
+  it("editUserExpActionのテスト", () => {
     const dummy = {
       id: 1,
       isSignedIn: true,
@@ -67,10 +67,10 @@ describe("actions.tsのテスト", () => {
       exp: 100,
       level: 1,
     };
-    const action = editExperiencePointAction(dummy);
+    const action = editUserExpAction(dummy);
 
     expect(action).toStrictEqual({
-      type: "EDIT_EXPERIENCE_POINT",
+      type: "EDIT_USER_EXP",
       payload: dummy,
     });
   });

@@ -1,6 +1,6 @@
 import {
   deleteUserImageAction,
-  editExperiencePointAction,
+  editUserExpAction,
   editUserInfoAction,
   editUserImageAction,
   signUpAction,
@@ -247,7 +247,7 @@ export const editExperiencePoint = (exp: number) => {
           },
         })
         .then((resp) => {
-          dispatch(editExperiencePointAction(resp.data));
+          dispatch(editUserExpAction(resp.data));
         })
         .catch(() => {
           setTimeout(() => {

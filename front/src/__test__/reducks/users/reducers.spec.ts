@@ -40,6 +40,7 @@ describe("UsersReducerのテスト", () => {
         email: "cat@gmail.com",
         image: null,
         exp: 0,
+        level: 1,
       },
       {
         id: 2,
@@ -49,6 +50,7 @@ describe("UsersReducerのテスト", () => {
         email: "dog@gmail.com",
         image: null,
         exp: 0,
+        level: 1,
       },
     ]);
   });
