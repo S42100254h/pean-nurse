@@ -12,6 +12,7 @@ import {
   CreateQuiz,
   Deactivate,
   DashBoard,
+  ExperienceList,
   ForgetPassword,
   ForgetPasswordSent,
   Home,
@@ -39,6 +40,7 @@ const Router = withRouter(({ location }) => (
         <AdminRoute exact path={"/category/create"} component={CreateCategory} />
         <AdminRoute exact path={"/category/detail/:id"} component={CategoryDetail} />
         <AdminRoute exact path={"/category/list"} component={CategoryList} />
+        <AdminRoute exact path={"/experience/list"} component={ExperienceList} />
         <AdminRoute exact path={"/management"} component={Management} />
         <AdminRoute exact path={"/experience/create"} component={CreateExperience} />
         <AdminRoute exact path={"/quiz/create"} component={CreateQuiz} />
