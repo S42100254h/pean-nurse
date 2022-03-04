@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, fetchCategories } from "../reducks/categories/operations";
-import { getCategories } from "../reducks/categories/selectors";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
-import { PrimaryButton, SecondaryButton } from "../components/UIkit";
+import { SecondaryButton } from "../components/UIkit";
+import { fetchExperiences, deleteExperience } from "../reducks/experiences/operations";
+import { getExperiences } from "../reducks/experiences/selectors";
 import { DeleteDialog } from "../components/DeleteDialog";
-import { RootState } from "../types/entity/rootState";
-import { push } from "connected-react-router";
 import styled from "styled-components";
+import { RootState } from "../types/entity/rootState";
 
 const Container = styled.div`
   margin: 25px auto;
@@ -27,29 +26,18 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
-const CategoryList = () => {
+const ExperienceList = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
-  const categories = getCategories(selector);
+  const experiences = getExperiences(selector);
 
   const [open, setOpen] = useState(false),
     [selectedId, setSelectedId] = useState<string | number>("");
 
   const columns = [
     { field: "id", headerName: "ID", width: 80 },
-    { field: "name", headerName: "カテゴリー名", width: 400 },
-    {
-      field: "detail",
-      headerName: "詳細",
-      width: 100,
-      renderCell: (params: GridCellParams) => (
-        <PrimaryButton
-          label={"詳細"}
-          rowId={params.id}
-          onClick={() => dispatch(push("/category/detail/" + params.id))}
-        />
-      ),
-    },
+    { field: "level", headerName: "レベル", width: 230 },
+    { field: "experience", headerName: "経験値", width: 270 },
     {
       field: "delete",
       headerName: "削除",
@@ -67,23 +55,24 @@ const CategoryList = () => {
     },
   ];
 
-  const sortedCategories = categories.sort((a, b) => {
-    // ascending order by updated_at
-    return a.created_at > b.created_at ? -1 : 1;
+  const sortedExperiences = experiences.sort((a, b) => {
+    // descending order by level
+    return a.level < b.level ? -1 : 1;
   });
 
-  const rows = sortedCategories.map((category) => ({
-    id: category.id,
-    name: category.name,
+  const rows = sortedExperiences.map((experience) => ({
+    id: experience.id,
+    level: experience.level,
+    experience: experience.experience,
   }));
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(fetchExperiences());
   }, []);
 
   return (
     <Container>
-      <Heading>カテゴリー一覧</Heading>
+      <Heading>経験値表</Heading>
       <Wrapper>
         <DataGrid rows={rows} columns={columns} autoHeight pageSize={10} rowsPerPageOptions={[10]} />
       </Wrapper>
@@ -95,7 +84,7 @@ const CategoryList = () => {
         }}
         onClickStop={() => setOpen(false)}
         onClickProceed={() => {
-          dispatch(deleteCategory(selectedId));
+          dispatch(deleteExperience(selectedId));
           setOpen(false);
         }}
       />
@@ -103,4 +92,4 @@ const CategoryList = () => {
   );
 };
 
-export default CategoryList;
+export default ExperienceList;
