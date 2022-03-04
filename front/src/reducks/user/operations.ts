@@ -583,6 +583,7 @@ export const listenAuthState = () => {
               image: userData.image,
               email: userData.email,
               exp: userData.exp,
+              level: userData.level,
             }),
           );
         })
@@ -623,6 +624,7 @@ export const redirectToDashboard = () => {
               image: userData.image,
               email: userData.email,
               exp: userData.exp,
+              level: userData.level,
             }),
           );
 
