@@ -118,6 +118,19 @@ const Header = () => {
     },
   ];
 
+  const experienceMenu: Menu[] = [
+    {
+      label: "経験値一覧",
+      id: "experiencelist",
+      value: "/experience/list",
+    },
+    {
+      label: "経験値作成",
+      id: "createexperience",
+      value: "/experience/create",
+    },
+  ];
+
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, menus: Menu[]) => {
     setAnchorEl(event.currentTarget);
     setMenus(menus);
@@ -141,6 +154,7 @@ const Header = () => {
                 <HeaderItem onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</HeaderItem>
                 <HeaderItem onClick={(event) => handleClick(event, quizMenu)}>クイズ管理</HeaderItem>
                 <HeaderItem onClick={(event) => handleClick(event, categoryMenu)}>カテゴリー管理</HeaderItem>
+                <HeaderItem onClick={(event) => handleClick(event, experienceMenu)}>経験値管理</HeaderItem>
               </Left>
               <Right>
                 <HeaderItem onClick={() => dispatch(adminSignOut())}>サインアウト</HeaderItem>
