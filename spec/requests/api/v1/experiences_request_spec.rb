@@ -34,17 +34,17 @@ RSpec.describe "Api::V1::Experiences", type: :request do
   end
 
   describe "GET /api/v1/experiences/:id" do
-    subject { get(api_v1_experience_path(experience_id)) }
+    subject { get(api_v1_experience_path(experience_level)) }
 
     context "specified id exists" do
-      let(:experience) { create(:experience) }
-      let(:experience_id) { experience.id }
+      let(:experience) { create(:experience, level: 2) }
+      let(:experience_level) { experience.level }
 
       it "gets detail of experience" do
         subject
         res = JSON.parse(response.body)
-        expect(res["id"]).to eq experience_id
-        expect(res["level"]).to eq experience.level
+        expect(res["id"]).to eq experience.id
+        expect(res["level"]).to eq experience_level
         expect(res["experience"]).to eq experience.experience
         expect(response).to have_http_status(200)
       end
