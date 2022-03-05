@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { editExperiencePoint } from "../../reducks/user/operations";
+import { editExperiencePoint, editUserLevel } from "../../reducks/user/operations";
 import { RootState } from "../../types/entity/rootState";
 import { getExperiencePoint, getUserLevel } from "../../reducks/user/selectors";
 import { ProgressBar } from "../UIkit";
@@ -71,8 +71,15 @@ const LevelUpDialog = (props: Props) => {
 
   useEffect(() => {
     if (props.open === false) return;
+
     setTimeout(() => {
       dispatch(editExperiencePoint(props.addedExp));
+
+      if (exp + props.addedExp >= endExp) {
+        setTimeout(() => {
+          dispatch(editUserLevel(level + 1));
+        }, 1000);
+      }
     }, 200);
   }, [props.open]);
 
