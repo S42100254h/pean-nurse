@@ -85,7 +85,7 @@ RSpec.describe "Api::V1::Users", type: :request do
     let(:current_user) { create(:user) }
     let(:headers) { current_user.create_new_auth_token }
     let(:params) { { user: { level: 2 } } }
-    
+
     it "level of user is updated" do
       expect { subject }.to change { current_user.reload.level }.from(current_user.level).to(params[:user][:level])
       expect(response).to have_http_status(200)
