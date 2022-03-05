@@ -46,6 +46,7 @@ const LevelUpDialog = (props: Props) => {
 
   // add "| 0" to prevent from returning infinity (0 / number => inifinity)
   const percent = (((exp - startExp) / (endExp - startExp)) * 100) | 0;
+  const roundPercent = percent >= 100 ? 100 : percent;
 
   useEffect(() => {
     const startApiEndpoint = process.env.REACT_APP_API_URL + "experiences/" + level;
@@ -90,7 +91,7 @@ const LevelUpDialog = (props: Props) => {
           <Container>
             <Heading>経験値アップ！！</Heading>
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
-            <ProgressBar percent={percent} />
+            <ProgressBar percent={roundPercent} />
           </Container>
         </DialogContent>
       </Dialog>
