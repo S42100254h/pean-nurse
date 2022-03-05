@@ -6,6 +6,7 @@ import {
   signUpAction,
   signInAction,
   signOutAction,
+  editUserLevelAction,
 } from "./actions";
 import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
@@ -234,7 +235,7 @@ export const editExperiencePoint = (exp: number) => {
       const auth_token = localStorage.getItem("access-token") || "";
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
-      const apiEndpoint = process.env.REACT_APP_API_URL + "users/levelup";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/add_exp";
 
       const body = { exp: exp };
 
@@ -255,6 +256,41 @@ export const editExperiencePoint = (exp: number) => {
               setNotificationAction({
                 variant: "error",
                 message: "経験値アップに失敗しました。",
+              }),
+            );
+          }, 400);
+        });
+    }
+  };
+};
+
+export const editUserLevel = (level: number) => {
+  return async (dispatch: Dispatch) => {
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/level_up";
+
+      const body = { level: level };
+
+      axios
+        .patch(apiEndpoint, body, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(editUserLevelAction(resp.data));
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "レベルアップに失敗しました。",
               }),
             );
           }, 400);

@@ -66,8 +66,8 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
-  describe "PATCH /api/v1/users/levelup" do
-    subject { patch(api_v1_users_levelup_path, headers: headers, params: params) }
+  describe "PATCH /api/v1/users/add_exp" do
+    subject { patch(api_v1_users_add_exp_path, headers: headers, params: params) }
 
     let(:current_user) { create(:user) }
     let(:headers) { current_user.create_new_auth_token }
@@ -75,6 +75,19 @@ RSpec.describe "Api::V1::Users", type: :request do
 
     it "exp of user is updated" do
       expect { subject }.to change { current_user.reload.exp }.from(current_user.exp).to(params[:user][:exp])
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe "PATCH /api/v1/users/level_up" do
+    subject { patch(api_v1_users_level_up_path, params: params, headers: headers) }
+
+    let(:current_user) { create(:user) }
+    let(:headers) { current_user.create_new_auth_token }
+    let(:params) { { user: { level: 2 } } }
+
+    it "level of user is updated" do
+      expect { subject }.to change { current_user.reload.level }.from(current_user.level).to(params[:user][:level])
       expect(response).to have_http_status(200)
     end
   end
