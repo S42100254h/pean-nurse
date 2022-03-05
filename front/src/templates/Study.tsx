@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
-import { LevelUpDialog } from "../components/LevelUpDialog";
+import { GetExperienceDialog } from "../components/GetExperienceDialog";
 import A_light from "../assets/img/A_light.png";
 import B_light from "../assets/img/B_light.png";
 import C_light from "../assets/img/C_light.png";
@@ -446,7 +446,7 @@ const Study = () => {
           次のクイズへ
         </Label>
       </LabelContainer>
-      <LevelUpDialog
+      <GetExperienceDialog
         open={open}
         addedExp={carculateExp()}
         onClose={() => setOpen(false)}
