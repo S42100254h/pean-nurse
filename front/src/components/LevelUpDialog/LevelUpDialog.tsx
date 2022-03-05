@@ -29,6 +29,25 @@ const Image = styled.img`
   margin: auto;
 `;
 
+const TextContainer = styled.div`
+  text-align: center;
+`;
+
+const Text = styled.p`
+  color: ${(props) => props.theme.palette.secondary.light};
+  text-align: center;
+  font-size: 24px;
+  display: inline-block;
+`;
+
+const SubText = styled.p`
+  font-size: 14px;
+  opacity: 0.7;
+  letter-spacing: -0.5px;
+  margin-left: 5px;
+  display: inline-block;
+`;
+
 type Props = {
   open: boolean;
   addedExp: number;
@@ -91,6 +110,10 @@ const LevelUpDialog = (props: Props) => {
           <Container>
             <Heading>経験値アップ！！</Heading>
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
+            <TextContainer>
+              <Text>Congratulations!!</Text>
+              <SubText>(+ {props.addedExp} EXP)</SubText>
+            </TextContainer>
             <ProgressBar percent={roundPercent} />
           </Container>
         </DialogContent>
