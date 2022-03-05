@@ -79,6 +79,19 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
+  describe "PATCH /api/v1/users/level_up" do
+    subject { patch(api_v1_users_level_up_path, params: params, headers: headers) }
+
+    let(:current_user) { create(:user) }
+    let(:headers) { current_user.create_new_auth_token }
+    let(:params) { { user: { level: 2 } } }
+    
+    it "level of user is updated" do
+      expect { subject }.to change { current_user.reload.level }.from(current_user.level).to(params[:user][:level])
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "DELETE /api/v1/users/:id" do
     subject { delete(api_v1_user_path(user_id), headers: headers) }
 

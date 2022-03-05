@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get "users/currentuser"
       get "admins/currentadmin"
       patch "users/add_exp"
+      patch "users/level_up"
       resources :users, only: [:show, :index, :update, :destroy]
       resources :quizzes
       resources :categories
