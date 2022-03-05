@@ -48,6 +48,7 @@ const Image = styled.img`
 type Props = {
   open: boolean;
   onClose: () => void;
+  level: number;
 };
 
 const LevelUpDialog = (props: Props) => {
@@ -61,7 +62,7 @@ const LevelUpDialog = (props: Props) => {
             <Wrraper>
               <Image src={cat} width="200px" height="200px" />
               <TextWrraper>
-                <Level>Lv. 32</Level>
+                <Level>Lv. {props.level}</Level>
                 <Comment>この調子でがんばろう！！</Comment>
               </TextWrraper>
             </Wrraper>
