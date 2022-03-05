@@ -93,7 +93,7 @@ type Props = {
   disabled: boolean;
 };
 
-const LevelUpDialog = (props: Props) => {
+const GetExperienceDialog = (props: Props) => {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const exp = getExperiencePoint(selector);
@@ -167,4 +167,4 @@ const LevelUpDialog = (props: Props) => {
   );
 };
 
-export default LevelUpDialog;
+export default GetExperienceDialog;
