@@ -291,6 +291,14 @@ const Study = () => {
     return;
   };
 
+  const carculateExp = () => {
+    if (correctQuiz === answeredQuiz) {
+      return 100;
+    } else {
+      return correctQuiz * 10;
+    }
+  };
+
   const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
   const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
 
@@ -438,7 +446,7 @@ const Study = () => {
           次のクイズへ
         </Label>
       </LabelContainer>
-      <LevelUpDialog open={open} onClose={() => setOpen(false)} />
+      <LevelUpDialog open={open} addedExp={carculateExp()} onClose={() => setOpen(false)} />
     </Container>
   );
 };

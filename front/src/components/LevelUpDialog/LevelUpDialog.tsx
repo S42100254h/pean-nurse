@@ -31,6 +31,7 @@ const Image = styled.img`
 
 type Props = {
   open: boolean;
+  addedExp: number;
   onClose: () => void;
 };
 
@@ -71,7 +72,7 @@ const LevelUpDialog = (props: Props) => {
   useEffect(() => {
     if (props.open === false) return;
     setTimeout(() => {
-      dispatch(editExperiencePoint(30));
+      dispatch(editExperiencePoint(props.addedExp));
     }, 200);
   }, [props.open]);
 
