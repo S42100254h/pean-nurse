@@ -90,6 +90,7 @@ type Props = {
   addedExp: number;
   onClose: () => void;
   path: string;
+  disabled: boolean;
 };
 
 const LevelUpDialog = (props: Props) => {
@@ -155,7 +156,7 @@ const LevelUpDialog = (props: Props) => {
             <ProgressBar percent={roundPercent} />
             <LabelContainer>
               <Comment>次の問題もがんばろう！！</Comment>
-              <Label disabled={false} onClick={() => dispatch(push(props.path))}>
+              <Label disabled={props.disabled} onClick={() => dispatch(push(props.path))}>
                 次のクイズへ
               </Label>
             </LabelContainer>
