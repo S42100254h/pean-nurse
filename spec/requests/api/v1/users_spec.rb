@@ -66,8 +66,8 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
-  describe "PATCH /api/v1/users/levelup" do
-    subject { patch(api_v1_users_levelup_path, headers: headers, params: params) }
+  describe "PATCH /api/v1/users/add_exp" do
+    subject { patch(api_v1_users_add_exp_path, headers: headers, params: params) }
 
     let(:current_user) { create(:user) }
     let(:headers) { current_user.create_new_auth_token }

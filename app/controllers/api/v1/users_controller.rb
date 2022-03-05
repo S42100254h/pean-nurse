@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_user, only: [:update, :destroy]
-  before_action :authenticate_user!, only: [:currentuser, :levelup]
+  before_action :authenticate_user!, only: [:currentuser, :add_exp]
   before_action :authenticate_admin!, only: [:index, :show, :update, :destroy]
 
   def index
@@ -18,7 +18,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     render json: @user
   end
 
-  def levelup
+  def add_exp
     @user = current_user
     total_exp = @user.exp
     total_exp += params[:user][:exp].to_i

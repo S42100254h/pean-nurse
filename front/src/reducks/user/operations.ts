@@ -234,7 +234,7 @@ export const editExperiencePoint = (exp: number) => {
       const auth_token = localStorage.getItem("access-token") || "";
       const client = localStorage.getItem("client") || "";
       const uid = localStorage.getItem("uid") || "";
-      const apiEndpoint = process.env.REACT_APP_API_URL + "users/levelup";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "users/add_exp";
 
       const body = { exp: exp };
 
