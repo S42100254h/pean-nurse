@@ -8,7 +8,7 @@ class Api::V1::ExperiencesController < Api::V1::ApiController
   end
 
   def show
-    experience = Experience.find(params[:id])
+    experience = Experience.find_by(level: params[:id])
     render json: experience
   end
 
