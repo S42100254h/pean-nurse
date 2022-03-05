@@ -446,7 +446,13 @@ const Study = () => {
           次のクイズへ
         </Label>
       </LabelContainer>
-      <LevelUpDialog open={open} addedExp={carculateExp()} onClose={() => setOpen(false)} />
+      <LevelUpDialog
+        open={open}
+        addedExp={carculateExp()}
+        onClose={() => setOpen(false)}
+        path={nextQuizUrl}
+        disabled={Number(match.params.id) === quizzesLength}
+      />
     </Container>
   );
 };

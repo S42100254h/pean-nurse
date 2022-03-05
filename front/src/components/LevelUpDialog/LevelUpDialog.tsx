@@ -6,7 +6,8 @@ import { RootState } from "../../types/entity/rootState";
 import { getExperiencePoint, getUserLevel } from "../../reducks/user/selectors";
 import { ProgressBar } from "../UIkit";
 import cat from "../../assets/img/cat.png";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { push } from "connected-react-router";
 import axios from "axios";
 
 const Container = styled.div`
@@ -29,10 +30,67 @@ const Image = styled.img`
   margin: auto;
 `;
 
+const TextContainer = styled.div`
+  text-align: center;
+`;
+
+const Text = styled.div`
+  color: ${(props) => props.theme.palette.secondary.light};
+  text-align: center;
+  font-size: 24px;
+  display: inline-block;
+`;
+
+const SubText = styled.div`
+  font-size: 14px;
+  opacity: 0.7;
+  letter-spacing: -0.5px;
+  margin-left: 5px;
+  display: inline-block;
+`;
+
+const Comment = styled.div`
+  font-size: 16px;
+  opacity: 0.7;
+  padding: 8px 0px;
+  display: inline-block;
+`;
+
+const Label = styled.button`
+  font-size: 12px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 8px;
+  float: right;
+  border-radius: 20px;
+  border: none;
+  background-color: ${(props) => props.theme.palette.primary.main};
+  ${(props) =>
+    props.disabled
+      ? css`
+          background-color: ${(props) => props.theme.palette.basic.main};
+        `
+      : css`
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+        `}
+`;
+
+const LabelContainer = styled.div`
+  padding-top: 5px;
+  justify-content: space-between;
+`;
+
 type Props = {
   open: boolean;
   addedExp: number;
   onClose: () => void;
+  path: string;
+  disabled: boolean;
 };
 
 const LevelUpDialog = (props: Props) => {
@@ -91,7 +149,17 @@ const LevelUpDialog = (props: Props) => {
           <Container>
             <Heading>経験値アップ！！</Heading>
             <Image src={cat} alt="ねこ" width="180px" height="180px" />
+            <TextContainer>
+              <Text>Congratulations!!</Text>
+              <SubText>(+ {props.addedExp} EXP)</SubText>
+            </TextContainer>
             <ProgressBar percent={roundPercent} />
+            <LabelContainer>
+              <Comment>次の問題もがんばろう！！</Comment>
+              <Label disabled={props.disabled} onClick={() => dispatch(push(props.path))}>
+                次のクイズへ
+              </Label>
+            </LabelContainer>
           </Container>
         </DialogContent>
       </Dialog>
