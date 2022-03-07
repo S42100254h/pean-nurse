@@ -16,4 +16,20 @@ RSpec.describe "Api::V1::Badges", type: :request do
       end
     end
   end
+
+  describe "GET /api/v1/badges" do
+    subject { get(api_v1_badges_path) }
+
+    before do
+      create_list(:badge, 8)
+    end
+
+    it "gets list of badges" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res.length).to eq 8
+      expect(res[0].keys).to eq ["id", "index", "color","user_id", "category_id", "created_at", "updated_at"]
+      expect(response).to have_http_status(200)
+    end
+  end
 end
