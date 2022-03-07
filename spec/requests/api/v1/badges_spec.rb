@@ -32,4 +32,22 @@ RSpec.describe "Api::V1::Badges", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET /api/v1/badges/:id" do
+    subject { get(api_v1_badge_path(badge_id)) }
+
+    context "specified id exists" do
+      let(:badge) { create(:badge) }
+      let(:badge_id) { badge.id }
+
+      it "gets detail of badge" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res["id"]).to eq badge.id
+        expect(res["index"]).to eq badge.index
+        expect(res["color"]).to eq badge.color
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
 end
