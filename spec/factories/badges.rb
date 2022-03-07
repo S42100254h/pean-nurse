@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :badge do
-    index { 1 }
-    color { "MyString" }
-    user { nil }
-    category { nil }
+    index { Faker::Number.within(range: 1..10) }
+    color { ["gold", "silver", "bronze"].sample }
+    user
+    category
   end
 end
