@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Dialog, DialogContent } from "@material-ui/core";
-import { Spacer } from "../UIkit";
+import { Reward, Spacer } from "../UIkit";
 import cat from "../../assets/img/cat.png";
 import styled from "styled-components";
 
@@ -55,19 +55,21 @@ const LevelUpDialog = (props: Props) => {
   return (
     <div>
       <Dialog open={props.open} maxWidth={"md"} onClose={props.onClose}>
-        <DialogContent>
-          <Container>
-            <Text>Level Up!!</Text>
-            <Spacer size={"xs"} />
-            <Wrraper>
-              <Image src={cat} width="200px" height="200px" />
-              <TextWrraper>
-                <Level>Lv. {props.level}</Level>
-                <Comment>この調子でがんばろう！！</Comment>
-              </TextWrraper>
-            </Wrraper>
-          </Container>
-        </DialogContent>
+        <Reward width={550} height={450}>
+          <DialogContent>
+            <Container>
+              <Text>Level Up!!</Text>
+              <Spacer size={"xs"} />
+              <Wrraper>
+                <Image src={cat} width="200px" height="200px" />
+                <TextWrraper>
+                  <Level>Lv. {props.level}</Level>
+                  <Comment>この調子でがんばろう！！</Comment>
+                </TextWrraper>
+              </Wrraper>
+            </Container>
+          </DialogContent>
+        </Reward>
       </Dialog>
     </div>
   );
