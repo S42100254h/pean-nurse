@@ -5,6 +5,7 @@ import { editExperiencePoint, editUserLevel } from "../../reducks/user/operation
 import { RootState } from "../../types/entity/rootState";
 import { getExperiencePoint, getUserLevel } from "../../reducks/user/selectors";
 import { ProgressBar } from "../UIkit";
+import { LevelUpDialog } from "../LevelUpDialog";
 import cat from "../../assets/img/cat.png";
 import styled, { css } from "styled-components";
 import { push } from "connected-react-router";
@@ -100,7 +101,8 @@ const GetExperienceDialog = (props: Props) => {
   const level = getUserLevel(selector);
 
   const [endExp, setEndExp] = useState(0),
-    [startExp, setStartExp] = useState(0);
+    [startExp, setStartExp] = useState(0),
+    [isOpen, setIsOpen] = useState(false);
 
   // add "| 0" to prevent from returning infinity (0 / number => inifinity)
   const percent = (((exp - startExp) / (endExp - startExp)) * 100) | 0;
@@ -135,9 +137,11 @@ const GetExperienceDialog = (props: Props) => {
       dispatch(editExperiencePoint(props.addedExp));
 
       if (exp + props.addedExp >= endExp) {
+        dispatch(editUserLevel(level + 1));
+
         setTimeout(() => {
-          dispatch(editUserLevel(level + 1));
-        }, 1000);
+          setIsOpen(true);
+        }, 2000);
       }
     }, 200);
   }, [props.open]);
@@ -163,6 +167,7 @@ const GetExperienceDialog = (props: Props) => {
           </Container>
         </DialogContent>
       </Dialog>
+      <LevelUpDialog open={isOpen} onClose={() => setIsOpen(false)} level={level} />
     </div>
   );
 };
