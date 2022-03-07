@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_113846) do
+ActiveRecord::Schema.define(version: 2022_03_07_084001) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 2022_03_03_113846) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_admins_on_uid_and_provider", unique: true
+  end
+
+  create_table "badges", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "index"
+    t.string "color"
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_badges_on_category_id"
+    t.index ["user_id"], name: "index_badges_on_user_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -136,6 +147,8 @@ ActiveRecord::Schema.define(version: 2022_03_03_113846) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "badges", "categories"
+  add_foreign_key "badges", "users"
   add_foreign_key "category_profiles", "categories"
   add_foreign_key "category_quiz_relations", "categories"
   add_foreign_key "category_quiz_relations", "quizzes"
