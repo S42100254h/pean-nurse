@@ -13,7 +13,12 @@ class Api::V1::BadgesController < Api::V1::ApiController
   end
 
   def create
-    badge = Badge.create!(badge_params)
+    if Badge.find_by(index: badge_params[:index], category_id: params[:category_id])
+      badge = Badge.find_by(index: badge_params[:index], category_id: params[:category_id])
+      current_user.update_badge_color(badge)
+    else
+      badge = current_user.badges.create!(badge_params)
+    end
     render json: badge
   end
 
@@ -34,6 +39,6 @@ class Api::V1::BadgesController < Api::V1::ApiController
     end
 
     def badge_params
-      params.require(:badge).permit(:index, :color).merge(user_id: params[:user_id], category_id: params[:category_id])
+      params.require(:badge).permit(:index, :color).merge(category_id: params[:category_id])
     end
 end
