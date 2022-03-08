@@ -65,4 +65,17 @@ RSpec.describe "Api::V1::Badges", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "DELETE /api/v1/badges/:id" do
+    subject { delete(api_v1_badge_path(badge.id), headers: headers) }
+
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
+    let!(:badge) { create(:badge, id: 1) }
+
+    it "badge is deleted" do
+      expect { subject }.to change { Badge.count }.by(-1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end
