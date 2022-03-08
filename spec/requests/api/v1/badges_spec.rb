@@ -50,4 +50,19 @@ RSpec.describe "Api::V1::Badges", type: :request do
       end
     end
   end
+
+  describe "PATCH /api/v1/badges/:id" do
+    subject { patch(api_v1_badge_path(badge.id), params: params, headers: headers)}
+
+    let(:params) { { badge: attributes_for(:badge), index: 1, color: "gold", user_id: current_user.id, category_id: category.id } }
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
+    let(:badge) { create(:badge, index: 1, color: "silver", user_id: current_user.id, category_id: category.id) }
+    let(:category) { create(:category) }
+  
+    it "badge is updated" do
+      expect { subject }.to change { badge.reload.color }.from(badge.color).to(params[:badge][:color])
+      expect(response).to have_http_status(200)
+    end
+  end
 end
