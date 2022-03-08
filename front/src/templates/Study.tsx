@@ -360,13 +360,11 @@ const Study = () => {
     };
   }, []);
 
-  // 第二引数にレベルアップアニメーションを実行するためのトリガーとなるlocal stateを入れる。
   useEffect(() => {
     // check wether first render or not
     if (isFirstRender.current) {
       isFirstRender.current = false;
     } else {
-      // ここにlevel upアニメーションを実行する関数を記述する。
       setTimeout(() => {
         setOpen(true);
       }, 300);
