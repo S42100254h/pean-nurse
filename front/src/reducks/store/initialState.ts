@@ -7,6 +7,9 @@ const initialState: RootState = {
     name: "",
     email: "",
   },
+  badges: {
+    list: [],
+  },
   categories: {
     list: [],
   },
