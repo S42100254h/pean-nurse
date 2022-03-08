@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :choices
       resources :commentaries
       resources :experiences
+      resources :badges
       post "inquiries/create"
       get "quizzes/exam/:category_profile_uid/:exam_id", to: "quizzes#exam_index", as: "exam_quizzes"
     end
