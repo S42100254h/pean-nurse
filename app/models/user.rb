@@ -17,10 +17,11 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   def update_badge_color(badge)
-    if badge[:color] == "silver"
-      badge.update!({ color: "gold"})
-    elsif badge[:color] == "bronze"
-      badge.update!({ color: "silver"})
+    case badge[:color]
+    when "silver"
+      badge.update!({ color: "gold" })
+    when "bronze"
+      badge.update!({ color: "silver" })
     end
   end
 end
