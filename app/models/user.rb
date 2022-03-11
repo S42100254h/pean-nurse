@@ -15,4 +15,13 @@ class User < ApplicationRecord
   # email_regexp = /\A[^@\s]+@[^@\s]+\z/
   # password_length = 6..128
   include DeviseTokenAuth::Concerns::User
+
+  def update_badge_color(badge)
+    case badge[:color]
+    when "silver"
+      badge.update!({ color: "gold" })
+    when "bronze"
+      badge.update!({ color: "silver" })
+    end
+  end
 end
