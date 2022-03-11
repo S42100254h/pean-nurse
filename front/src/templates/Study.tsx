@@ -20,6 +20,7 @@ import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
 import cat from "../assets/img/cat.png";
+import { createBadge } from "../function/badge";
 import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
@@ -214,6 +215,7 @@ const Study = () => {
   const match = useRouteMatch<MatchParams>();
   const [choices, setChoices] = useState<Choice[][]>([]);
   const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
+    [categoryId, setCategoryId] = useState(""),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [quizzesLength, setQuizzesLength] = useState(0),
     [commentaries, setCommentaries] = useState<Commentary[]>([]),
@@ -346,6 +348,7 @@ const Study = () => {
     axios.get(categoryProfileApiEndpoint).then((resp) => {
       if (isMounted) {
         setCategoryProfile(resp.data);
+        setCategoryId(resp.data.category_id);
         const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
 
         axios.get(quizApiEndpoint).then((r) => {
@@ -365,6 +368,10 @@ const Study = () => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
     } else {
+      if (correctQuiz / answeredQuiz === 1) {
+        dispatch(createBadge(match.params.id, categoryId));
+      }
+
       setTimeout(() => {
         setOpen(true);
       }, 300);
