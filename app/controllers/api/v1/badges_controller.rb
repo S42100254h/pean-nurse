@@ -17,7 +17,7 @@ class Api::V1::BadgesController < Api::V1::ApiController
       badge = Badge.find_by(index: badge_params[:index], category_id: params[:category_id])
       current_user.update_badge_color(badge)
     else
-      badge = current_user.badges.create!(badge_params)
+      badge = current_user.badges.create!(badge_params.merge(color: "bronze"))
     end
     render json: badge
   end
