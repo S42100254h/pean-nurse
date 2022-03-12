@@ -222,7 +222,8 @@ const Study = () => {
     [correctQuiz, setCorrectQuiz] = useState(0),
     [answeredQuiz, setAnsweredQuiz] = useState(0),
     [fire, setFire] = useState(false),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [show, setShow] = useState(false);
 
   const checkAnswers = (i: number, index: number) => {
     if (quizzes[i].checked === true) return;
@@ -370,6 +371,7 @@ const Study = () => {
     } else {
       if (correctQuiz / answeredQuiz === 1) {
         dispatch(createBadge(match.params.id, categoryId));
+        setShow(true);
       }
 
       setTimeout(() => {
@@ -453,6 +455,7 @@ const Study = () => {
       </LabelContainer>
       <GetExperienceDialog
         open={open}
+        show={show}
         addedExp={carculateExp()}
         onClose={() => setOpen(false)}
         path={nextQuizUrl}
