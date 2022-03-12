@@ -7,6 +7,9 @@ import { getExperiencePoint, getUserLevel } from "../../reducks/user/selectors";
 import { ProgressBar } from "../UIkit";
 import { LevelUpDialog } from "../LevelUpDialog";
 import cat from "../../assets/img/cat.png";
+import bronze from "../../assets/img/bronze.png";
+import silver from "../../assets/img/silver.png";
+import gold from "../../assets/img/gold.png";
 import styled, { css } from "styled-components";
 import { push } from "connected-react-router";
 import axios from "axios";
@@ -40,14 +43,20 @@ const Text = styled.div`
   text-align: center;
   font-size: 24px;
   display: inline-block;
+  vertical-align: middle;
 `;
 
 const SubText = styled.div`
   font-size: 14px;
   opacity: 0.7;
   letter-spacing: -0.5px;
-  margin-left: 5px;
+  margin: 0 10px 0 5px;
   display: inline-block;
+  vertical-align: middle;
+`;
+
+const Badge = styled.img`
+  vertical-align: middle;
 `;
 
 const Comment = styled.div`
@@ -156,6 +165,7 @@ const GetExperienceDialog = (props: Props) => {
             <TextContainer>
               <Text>Congratulations!!</Text>
               <SubText>(+ {props.addedExp} EXP)</SubText>
+              <Badge src={bronze} width="34px" height="30px" />
             </TextContainer>
             <ProgressBar percent={roundPercent} />
             <LabelContainer>
