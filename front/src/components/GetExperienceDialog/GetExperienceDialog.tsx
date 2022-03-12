@@ -97,6 +97,7 @@ const LabelContainer = styled.div`
 
 type Props = {
   open: boolean;
+  show: boolean;
   addedExp: number;
   onClose: () => void;
   path: string;
@@ -165,7 +166,7 @@ const GetExperienceDialog = (props: Props) => {
             <TextContainer>
               <Text>Congratulations!!</Text>
               <SubText>(+ {props.addedExp} EXP)</SubText>
-              <Badge src={bronze} width="34px" height="30px" />
+              {props.show && <Badge src={bronze} width="34px" height="30px" />}
             </TextContainer>
             <ProgressBar percent={roundPercent} />
             <LabelContainer>
