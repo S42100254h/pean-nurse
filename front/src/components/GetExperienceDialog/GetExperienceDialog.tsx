@@ -4,12 +4,9 @@ import { Dialog, DialogContent } from "@material-ui/core";
 import { editExperiencePoint, editUserLevel } from "../../reducks/user/operations";
 import { RootState } from "../../types/entity/rootState";
 import { getExperiencePoint, getUserLevel } from "../../reducks/user/selectors";
-import { ProgressBar } from "../UIkit";
+import { Badge, ProgressBar } from "../UIkit";
 import { LevelUpDialog } from "../LevelUpDialog";
 import cat from "../../assets/img/cat.png";
-import bronze from "../../assets/img/bronze.png";
-import silver from "../../assets/img/silver.png";
-import gold from "../../assets/img/gold.png";
 import styled, { css } from "styled-components";
 import { push } from "connected-react-router";
 import axios from "axios";
@@ -55,7 +52,7 @@ const SubText = styled.div`
   vertical-align: middle;
 `;
 
-const Badge = styled.img`
+const StyledBadge = styled(Badge)`
   vertical-align: middle;
 `;
 
@@ -98,6 +95,7 @@ const LabelContainer = styled.div`
 type Props = {
   open: boolean;
   show: boolean;
+  color: "bronze" | "silver" | "gold";
   addedExp: number;
   onClose: () => void;
   path: string;
@@ -166,7 +164,7 @@ const GetExperienceDialog = (props: Props) => {
             <TextContainer>
               <Text>Congratulations!!</Text>
               <SubText>(+ {props.addedExp} EXP)</SubText>
-              {props.show && <Badge src={bronze} width="34px" height="30px" />}
+              {props.show && <StyledBadge color={props.color} />}
             </TextContainer>
             <ProgressBar percent={roundPercent} />
             <LabelContainer>
