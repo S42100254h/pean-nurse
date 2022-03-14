@@ -13,8 +13,8 @@ class Api::V1::BadgesController < Api::V1::ApiController
   end
 
   def create
-    if Badge.find_by(index: badge_params[:index], category_id: params[:category_id])
-      badge = Badge.find_by(index: badge_params[:index], category_id: params[:category_id])
+    if current_user.badges.find_by(index: badge_params[:index], category_id: params[:category_id])
+      badge = current_user.badges.find_by(index: badge_params[:index], category_id: params[:category_id])
       current_user.update_badge_color(badge)
     else
       badge = current_user.badges.create!(badge_params.merge(color: "bronze"))
