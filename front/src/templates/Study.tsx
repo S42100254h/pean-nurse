@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
 import { GetExperienceDialog } from "../components/GetExperienceDialog";
@@ -20,7 +20,9 @@ import F_dark from "../assets/img/F_dark.png";
 import G_dark from "../assets/img/G_dark.png";
 import H_dark from "../assets/img/H_dark.png";
 import cat from "../assets/img/cat.png";
-import { createBadge } from "../function/badge";
+import { createBadge } from "../reducks/badge/operations";
+import { getBadgeColor } from "../reducks/badge/selectors";
+import { RootState } from "../types/entity/rootState";
 import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import { Quiz } from "../types/entity/quiz";
@@ -212,6 +214,8 @@ type MatchParams = {
 
 const Study = () => {
   const dispatch = useDispatch();
+  const selector = useSelector((state: RootState) => state);
+  const color = getBadgeColor(selector);
   const match = useRouteMatch<MatchParams>();
   const [choices, setChoices] = useState<Choice[][]>([]);
   const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
@@ -456,6 +460,7 @@ const Study = () => {
       <GetExperienceDialog
         open={open}
         show={show}
+        color={color}
         addedExp={carculateExp()}
         onClose={() => setOpen(false)}
         path={nextQuizUrl}
