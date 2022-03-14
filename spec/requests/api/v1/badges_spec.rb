@@ -19,7 +19,7 @@ RSpec.describe "Api::V1::Badges", type: :request do
     context "badge has already existed" do
       let(:params) { { badge: attributes_for(:badge, index: 1), category_id: category.id } }
       let(:headers) { current_user.create_new_auth_token }
-      let!(:badge) { create(:badge, index: 1, color: "bronze", category_id: category.id) }
+      let!(:badge) { create(:badge, index: 1, color: "bronze", category_id: category.id, user_id: current_user.id) }
       let!(:category) { create(:category) }
       let!(:current_user) { create(:user) }
 
