@@ -9,5 +9,8 @@ export const BadgeReducer = reducerWithInitialState(initialState.badge).case(
     id: payload.id,
     index: payload.index,
     color: payload.color,
+    category_id: payload.category_id,
+    created_at: payload.created_at,
+    updated_at: payload.updated_at,
   }),
 );

@@ -13,6 +13,9 @@ describe("BadgesReducerのテスト", () => {
           id: 1,
           index: 1,
           color: "bronze",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
       silver: [
@@ -20,6 +23,9 @@ describe("BadgesReducerのテスト", () => {
           id: 2,
           index: 2,
           color: "silver",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
       gold: [
@@ -27,11 +33,17 @@ describe("BadgesReducerのテスト", () => {
           id: 3,
           index: 2,
           color: "gold",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
         {
           id: 4,
           index: 2,
           color: "gold",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
     };
@@ -43,6 +55,9 @@ describe("BadgesReducerのテスト", () => {
         id: 1,
         index: 1,
         color: "bronze",
+        category_id: 1,
+        created_at: "2021-01-01",
+        updated_at: "2021-02-01",
       },
     ]);
     expect(newState.silver).toStrictEqual([
@@ -50,6 +65,9 @@ describe("BadgesReducerのテスト", () => {
         id: 2,
         index: 2,
         color: "silver",
+        category_id: 1,
+        created_at: "2021-01-01",
+        updated_at: "2021-02-01",
       },
     ]);
     expect(newState.gold).toStrictEqual([
@@ -57,11 +75,17 @@ describe("BadgesReducerのテスト", () => {
         id: 3,
         index: 2,
         color: "gold",
+        category_id: 1,
+        created_at: "2021-01-01",
+        updated_at: "2021-02-01",
       },
       {
         id: 4,
         index: 2,
         color: "gold",
+        category_id: 1,
+        created_at: "2021-01-01",
+        updated_at: "2021-02-01",
       },
     ]);
   });
@@ -73,6 +97,9 @@ describe("BadgesReducerのテスト", () => {
           id: 1,
           index: 1,
           color: "bronze",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
       silver: [
@@ -80,6 +107,9 @@ describe("BadgesReducerのテスト", () => {
           id: 2,
           index: 2,
           color: "silver",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
       gold: [
@@ -87,11 +117,17 @@ describe("BadgesReducerのテスト", () => {
           id: 3,
           index: 2,
           color: "gold",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
         {
           id: 4,
           index: 2,
           color: "gold",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
     };
@@ -103,11 +139,17 @@ describe("BadgesReducerのテスト", () => {
           id: 3,
           index: 2,
           color: "gold",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
         {
           id: 4,
           index: 2,
           color: "gold",
+          category_id: 1,
+          created_at: "2021-01-01",
+          updated_at: "2021-02-01",
         },
       ],
     };
@@ -121,11 +163,17 @@ describe("BadgesReducerのテスト", () => {
         id: 3,
         index: 2,
         color: "gold",
+        category_id: 1,
+        created_at: "2021-01-01",
+        updated_at: "2021-02-01",
       },
       {
         id: 4,
         index: 2,
         color: "gold",
+        category_id: 1,
+        created_at: "2021-01-01",
+        updated_at: "2021-02-01",
       },
     ]);
   });
