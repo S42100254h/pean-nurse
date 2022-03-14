@@ -11,6 +11,9 @@ const initialState: RootState = {
     id: 0,
     index: 0,
     color: "bronze",
+    category_id: 0,
+    created_at: "",
+    updated_at: "",
   },
   badges: {
     bronze: [],
