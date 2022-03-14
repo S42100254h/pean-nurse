@@ -2,22 +2,21 @@ import React from "react";
 import { Profile } from "../components/Profile";
 import styled from "styled-components";
 import { Spacer } from "../components/UIkit";
+import bronze from "../assets/img/bronze.png";
+import silver from "../assets/img/silver.png";
+import gold from "../assets/img/gold.png";
 
 const Container = styled.div`
   width: calc(100% - 5rem);
   max-width: 1080px;
   height: auto;
-  min-height: 250px;
+  min-height: 180px;
   margin: 0 auto;
-`;
-
-const Heading = styled.h2`
-  font-size: 18px;
 `;
 
 const Text = styled.p`
   font-size: 14px;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 
 const DashBoard = () => {
@@ -26,12 +25,16 @@ const DashBoard = () => {
       <Profile />
       <Spacer size="sm" />
       <Container>
-        <Heading>学習中のコース</Heading>
-        <Text>学習中のコースはありません。</Text>
+        <img src={bronze} />
+        <Text>学習中の問題はありません。</Text>
       </Container>
       <Container>
-        <Heading>修了コース</Heading>
-        <Text>修了したコースはありません。</Text>
+        <img src={silver} />
+        <Text>学習中の問題はありません。</Text>
+      </Container>
+      <Container>
+        <img src={gold} />
+        <Text>学習中の問題はありません。</Text>
       </Container>
     </div>
   );
