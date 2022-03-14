@@ -1,20 +1,36 @@
 import { fetchBadgesAction, deleteBadgeAction } from "../../../reducks/badges/actions";
-import { Badge } from "../../../types/entity/badge";
+import { Badges } from "../../../types/entity/badges";
 
 describe("actions.tsのテスト", () => {
   it("fetchBadgesActionのテスト", () => {
-    const dummy: Badge[] = [
-      {
-        id: 1,
-        index: 1,
-        color: "bronze",
-      },
-      {
-        id: 2,
-        index: 2,
-        color: "silver",
-      },
-    ];
+    const dummy: Badges = {
+      bronze: [
+        {
+          id: 1,
+          index: 1,
+          color: "bronze",
+        },
+      ],
+      silver: [
+        {
+          id: 2,
+          index: 2,
+          color: "silver",
+        },
+      ],
+      gold: [
+        {
+          id: 3,
+          index: 2,
+          color: "gold",
+        },
+        {
+          id: 4,
+          index: 2,
+          color: "gold",
+        },
+      ],
+    };
     const action = fetchBadgesAction(dummy);
 
     expect(action).toStrictEqual({
@@ -24,18 +40,34 @@ describe("actions.tsのテスト", () => {
   });
 
   it("deleteBadgeActionのテスト", () => {
-    const dummy: Badge[] = [
-      {
-        id: 1,
-        index: 1,
-        color: "bronze",
-      },
-      {
-        id: 2,
-        index: 2,
-        color: "silver",
-      },
-    ];
+    const dummy: Badges = {
+      bronze: [
+        {
+          id: 1,
+          index: 1,
+          color: "bronze",
+        },
+      ],
+      silver: [
+        {
+          id: 2,
+          index: 2,
+          color: "silver",
+        },
+      ],
+      gold: [
+        {
+          id: 3,
+          index: 2,
+          color: "gold",
+        },
+        {
+          id: 4,
+          index: 2,
+          color: "gold",
+        },
+      ],
+    };
     const action = deleteBadgeAction(dummy);
 
     expect(action).toStrictEqual({

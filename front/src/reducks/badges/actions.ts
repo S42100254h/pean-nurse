@@ -1,7 +1,7 @@
 import actionCreatorFactory from "typescript-fsa";
-import { Badge } from "../../types/entity/badge";
+import { Badges } from "../../types/entity/badges";
 
 const actionCreator = actionCreatorFactory();
 
-export const fetchBadgesAction = actionCreator<Badge[]>("FETCH_BADGES");
-export const deleteBadgeAction = actionCreator<Badge[]>("DELETE_BADGE");
+export const fetchBadgesAction = actionCreator<Badges>("FETCH_BADGES");
+export const deleteBadgeAction = actionCreator<Badges>("DELETE_BADGE");
