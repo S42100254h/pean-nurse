@@ -32,17 +32,27 @@ RSpec.describe "Api::V1::Badges", type: :request do
   end
 
   describe "GET /api/v1/badges" do
-    subject { get(api_v1_badges_path) }
+    subject { get(api_v1_badges_path, headers: headers) }
 
     before do
-      create_list(:badge, 8)
+      create(:user, id: 1)
+      create(:user, id: 2)
+      create_list(:badge, 2, user_id: 1, color: "bronze")
+      create_list(:badge, 4, user_id: 1, color: "silver")
+      create_list(:badge, 8, user_id: 1, color: "gold")
+      create_list(:badge, 2, user_id: 2, color: "bronze")
     end
+
+    let(:current_user) { User.find(1) }
+    let(:headers) { current_user.create_new_auth_token }
 
     it "gets list of badges" do
       subject
       res = JSON.parse(response.body)
-      expect(res.length).to eq 8
-      expect(res[0].keys).to eq ["id", "index", "color", "user_id", "category_id", "created_at", "updated_at"]
+      expect(res["bronze"].length).to eq 2
+      expect(res["silver"].length).to eq 4
+      expect(res["gold"].length).to eq 8
+      expect(res["bronze"][0].keys).to eq ["id", "index", "color", "user_id", "category_id", "created_at", "updated_at"]
       expect(response).to have_http_status(200)
     end
   end
