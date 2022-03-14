@@ -9,7 +9,7 @@ import styled from "styled-components";
 const GridContainer = styled(Grid)`
   margin: 30px auto;
   max-width: 600px;
-  padding: 20px 50px;
+  padding: 20px 40px;
   height: auto;
   width: calc(100% - 2rem);
   background-color: #fff;
@@ -24,15 +24,15 @@ const GridCenter = styled(Grid)`
 const StyledAvatar = styled(Avatar)`
   width: 100px;
   height: 100px;
-  margin: 0 20px;
+  margin: 0 auto;
 `;
 
 const Name = styled.p`
-  font-size: 18px;
+  font-size: 22px;
 `;
 
 const Level = styled.p`
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 const Caption = styled.p`
@@ -51,20 +51,16 @@ const Profile = () => {
 
   return (
     <GridContainer container spacing={1} direction="row" alignItems="center">
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         {userImage ? <StyledAvatar src={userImage.url} /> : <StyledAvatar src="/broken-image.jpg" />}
       </Grid>
-      <GridCenter item xs={3}>
+      <GridCenter item xs={4}>
         <Name>{userName}</Name>
         <Level>Lv. {userLevel}</Level>
       </GridCenter>
-      <GridCenter item xs={3}>
+      <GridCenter item xs={4}>
         <Cleard>1</Cleard>
-        <Caption>総演習クリア数</Caption>
-      </GridCenter>
-      <GridCenter item xs={3}>
-        <Cleard>1</Cleard>
-        <Caption>修了コース数</Caption>
+        <Caption>総問題クリア数</Caption>
       </GridCenter>
     </GridContainer>
   );
