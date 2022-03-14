@@ -13,7 +13,9 @@ const initialState: RootState = {
     color: "bronze",
   },
   badges: {
-    list: [],
+    bronze: [],
+    silver: [],
+    gold: [],
   },
   categories: {
     list: [],

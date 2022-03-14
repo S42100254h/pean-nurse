@@ -1,5 +1,7 @@
 import { Badge } from "./badge";
 
 export type Badges = {
-  list: Badge[];
+  bronze: Badge[];
+  silver: Badge[];
+  gold: Badge[];
 };
