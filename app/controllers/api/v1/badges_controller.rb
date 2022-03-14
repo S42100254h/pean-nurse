@@ -1,10 +1,13 @@
 class Api::V1::BadgesController < Api::V1::ApiController
   before_action :set_badge, only: [:update, :destroy]
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :create, :update, :destroy]
 
   def index
-    badges = Badge.all
-    render json: badges
+    badges = current_user.badges
+    bronze = badges.where(color: "bronze")
+    silver = badges.where(color: "silver")
+    gold = badges.where(color: "gold")
+    render json: { bronze: bronze, silver: silver, gold: gold }
   end
 
   def show
