@@ -7,23 +7,34 @@ import { Badge } from "../../types/entity/badge";
 
 export const fetchBadges = () => {
   return async (dispatch: Dispatch) => {
-    const apiEndpoint = process.env.REACT_APP_API_URL + "badges";
+    if (localStorage.getItem("access-token")) {
+      const auth_token = localStorage.getItem("access-token") || "";
+      const client = localStorage.getItem("client") || "";
+      const uid = localStorage.getItem("uid") || "";
+      const apiEndpoint = process.env.REACT_APP_API_URL + "badges";
 
-    axios
-      .get(apiEndpoint)
-      .then((resp) => {
-        dispatch(fetchBadgesAction(resp.data));
-      })
-      .catch(() => {
-        setTimeout(() => {
-          dispatch(
-            setNotificationAction({
-              variant: "error",
-              message: "バッジ一覧の取得に失敗しました。",
-            }),
-          );
-        }, 400);
-      });
+      axios
+        .get(apiEndpoint, {
+          headers: {
+            "access-token": auth_token,
+            client: client,
+            uid: uid,
+          },
+        })
+        .then((resp) => {
+          dispatch(fetchBadgesAction(resp.data));
+        })
+        .catch(() => {
+          setTimeout(() => {
+            dispatch(
+              setNotificationAction({
+                variant: "error",
+                message: "バッジ一覧の取得に失敗しました。",
+              }),
+            );
+          }, 400);
+        });
+    }
   };
 };
 
