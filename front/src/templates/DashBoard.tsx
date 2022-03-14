@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Profile } from "../components/Profile";
 import styled from "styled-components";
 import { Spacer } from "../components/UIkit";
 import bronze from "../assets/img/bronze.png";
 import silver from "../assets/img/silver.png";
 import gold from "../assets/img/gold.png";
+import { RootState } from "../types/entity/rootState";
+import { fetchBadges } from "../reducks/badges/operations";
+import { getBronzeBadges, getSilverBadges, getGoldBadges } from "../reducks/badges/selectors";
 
 const Container = styled.div`
   width: calc(100% - 5rem);
@@ -16,25 +20,63 @@ const Container = styled.div`
 
 const Text = styled.p`
   font-size: 14px;
-  margin-top: 10px;
+`;
+
+const Image = styled.img`
+  margin: 5px 0 10px 0;
+`;
+
+const BadgeContainer = styled.div`
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: #fff;
+  display: inline-block;
+  margin: 5px;
 `;
 
 const DashBoard = () => {
+  const dispatch = useDispatch();
+  const selector = useSelector((state: RootState) => state);
+  const bronzeBadges = getBronzeBadges(selector);
+  const silverBadges = getSilverBadges(selector);
+  const goldBadges = getGoldBadges(selector);
+
+  useEffect(() => {
+    dispatch(fetchBadges());
+  }, []);
+
   return (
     <div>
       <Profile />
       <Spacer size="sm" />
       <Container>
-        <img src={bronze} />
-        <Text>学習中の問題はありません。</Text>
+        <Image src={bronze} />
+        <div>
+          {bronzeBadges.length === 0 && <Text>学習中の問題はありません。</Text>}
+          {bronzeBadges.map((bronzeBadge) => (
+            <BadgeContainer key={bronzeBadge.id}>{bronzeBadge.id}</BadgeContainer>
+          ))}
+        </div>
       </Container>
       <Container>
-        <img src={silver} />
-        <Text>学習中の問題はありません。</Text>
+        <Image src={silver} />
+        <div>
+          {silverBadges.length === 0 && <Text>学習中の問題はありません。</Text>}
+          {silverBadges.map((silverBadge) => (
+            <BadgeContainer key={silverBadge.id}>{silverBadge.id}</BadgeContainer>
+          ))}
+        </div>
       </Container>
       <Container>
-        <img src={gold} />
-        <Text>学習中の問題はありません。</Text>
+        <Image src={gold} />
+        <div>
+          {goldBadges.length === 0 && <Text>学習中の問題はありません。</Text>}
+          {goldBadges.map((goldBadge) => (
+            <BadgeContainer key={goldBadge.id}>{goldBadge.id}</BadgeContainer>
+          ))}
+        </div>
       </Container>
     </div>
   );
