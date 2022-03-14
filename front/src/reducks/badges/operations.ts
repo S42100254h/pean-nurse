@@ -28,7 +28,7 @@ export const fetchBadges = () => {
 };
 
 export const deleteBadge = (id: string | number) => {
-  return async (dispatch: Dispatch, getBadges: Function) => {
+  return async (dispatch: Dispatch, getBronzeBadges: Function, getSilverBadges: Function, getGoldBadges: Function) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
       const client = localStorage.getItem("client") || "";
@@ -44,9 +44,13 @@ export const deleteBadge = (id: string | number) => {
           },
         })
         .then(() => {
-          const prevBadges: Badge[] = getBadges().categories.list;
-          const nextBadges: Badge[] = prevBadges.filter((badge) => badge.id !== id);
-          dispatch(deleteBadgeAction(nextBadges));
+          const prevBronzeBadges: Badge[] = getBronzeBadges().categories.bronze;
+          const prevSilverBadges: Badge[] = getSilverBadges().categories.silver;
+          const prevGoldBadges: Badge[] = getGoldBadges().categories.gold;
+          const nextBronzeBadges: Badge[] = prevBronzeBadges.filter((bronzeBadge) => bronzeBadge.id !== id);
+          const nextSilverBadges: Badge[] = prevSilverBadges.filter((silverBadge) => silverBadge.id !== id);
+          const nextGoldBadges: Badge[] = prevGoldBadges.filter((goldBadge) => goldBadge.id !== id);
+          dispatch(deleteBadgeAction({ bronze: nextBronzeBadges, silver: nextSilverBadges, gold: nextGoldBadges }));
           dispatch(showLoadingAction("Delete badge..."));
 
           setTimeout(() => {
