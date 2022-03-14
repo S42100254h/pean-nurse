@@ -1,3 +1,4 @@
+export { default as Badge } from "./Badge";
 export { default as DropDown } from "./DropDown";
 export { default as Loading } from "./Loading";
 export { default as PasswordInput } from "./PasswordInput";

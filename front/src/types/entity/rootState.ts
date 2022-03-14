@@ -1,4 +1,5 @@
 import { Admin } from "./admin";
+import { Badge } from "./badge";
 import { Badges } from "./badges";
 import { Categories } from "./categories";
 import { Experiences } from "./experiences";
@@ -10,6 +11,7 @@ import { Users } from "./users";
 
 export type RootState = {
   admin: Admin;
+  badge: Badge;
   badges: Badges;
   categories: Categories;
   experiences: Experiences;

@@ -4,6 +4,8 @@ import thunk from "redux-thunk";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import { AdminsReducer } from "../admin/reducers";
+import { BadgeReducer } from "../badge/reducers";
+import { BadgesReducer } from "../badges/reducers";
 import { CategoriesReducer } from "../categories/reducers";
 import { ExperiencesReducer } from "../experiences/reducers";
 import { LoadingReducer } from "../loading/reducers";
@@ -18,6 +20,8 @@ export const createStore = (history: History) => {
     combineReducers({
       router: connectRouter(history),
       admin: AdminsReducer,
+      badge: BadgeReducer,
+      badges: BadgesReducer,
       categories: CategoriesReducer,
       experiences: ExperiencesReducer,
       loading: LoadingReducer,

@@ -13,15 +13,11 @@ describe("BadgesReducerのテスト", () => {
         id: 1,
         index: 1,
         color: "bronze",
-        created_at: "2021-01-01",
-        updated_at: "2021-02-01",
       },
       {
         id: 2,
         index: 2,
         color: "silver",
-        created_at: "2021-01-01",
-        updated_at: "2021-02-01",
       },
     ];
     const action = fetchBadgesAction(dummy);
@@ -32,15 +28,11 @@ describe("BadgesReducerのテスト", () => {
         id: 1,
         index: 1,
         color: "bronze",
-        created_at: "2021-01-01",
-        updated_at: "2021-02-01",
       },
       {
         id: 2,
         index: 2,
         color: "silver",
-        created_at: "2021-01-01",
-        updated_at: "2021-02-01",
       },
     ]);
   });
@@ -52,15 +44,11 @@ describe("BadgesReducerのテスト", () => {
           id: 1,
           index: 1,
           color: "bronze",
-          created_at: "2021-01-01",
-          updated_at: "2021-02-01",
         },
         {
           id: 2,
           index: 2,
           color: "silver",
-          created_at: "2021-01-01",
-          updated_at: "2021-02-01",
         },
       ],
     };
@@ -69,8 +57,6 @@ describe("BadgesReducerのテスト", () => {
         id: 1,
         index: 1,
         color: "bronze",
-        created_at: "2021-01-01",
-        updated_at: "2021-02-01",
       },
     ];
     const action = deleteBadgeAction(dummy);
@@ -81,8 +67,6 @@ describe("BadgesReducerのテスト", () => {
         id: 1,
         index: 1,
         color: "bronze",
-        created_at: "2021-01-01",
-        updated_at: "2021-02-01",
       },
     ]);
   });
