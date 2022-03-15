@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_084001) do
+ActiveRecord::Schema.define(version: 2022_03_15_131407) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(version: 2022_03_07_084001) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
 
   create_table "quizzes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -154,4 +156,5 @@ ActiveRecord::Schema.define(version: 2022_03_07_084001) do
   add_foreign_key "category_quiz_relations", "quizzes"
   add_foreign_key "choices", "quizzes"
   add_foreign_key "commentaries", "quizzes"
+  add_foreign_key "inquiries", "users"
 end
