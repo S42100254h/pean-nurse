@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../reducks/categories/selectors";
+import { fetchCategories } from "../../reducks/categories/operations";
 import { RootState } from "../../types/entity/rootState";
 import { Badge } from "../../types/entity/badge";
 import styled from "styled-components";
@@ -46,6 +48,7 @@ type Props = {
 };
 
 const ListArea = (props: Props) => {
+  const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state);
   const categories = getCategories(selector);
 
@@ -53,6 +56,10 @@ const ListArea = (props: Props) => {
     const selectedCategory = categories.filter((category) => category.id === category_id);
     return selectedCategory[0].name;
   };
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   return (
     <div>
