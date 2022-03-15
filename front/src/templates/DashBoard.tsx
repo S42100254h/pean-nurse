@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Profile } from "../components/Profile";
 import { ListArea } from "../components/ListArea";
 import styled from "styled-components";
-import { Spacer } from "../components/UIkit";
+import { Spacer, Tooltip } from "../components/UIkit";
 import bronze from "../assets/img/bronze.png";
 import silver from "../assets/img/silver.png";
 import gold from "../assets/img/gold.png";
@@ -39,15 +39,21 @@ const DashBoard = () => {
       <Profile />
       <Spacer size="sm" />
       <Container>
-        <Image src={bronze} />
+        <Tooltip content={"１回 全問正解した問題が表示されます。"}>
+          <Image src={bronze} />
+        </Tooltip>
         <ListArea badges={bronzeBadges} />
       </Container>
       <Container>
-        <Image src={silver} />
+        <Tooltip content={"２回 全問正解した問題が表示されます。"}>
+          <Image src={silver} />
+        </Tooltip>
         <ListArea badges={silverBadges} />
       </Container>
       <Container>
-        <Image src={gold} />
+        <Tooltip content={"３回 全問正解した問題が表示されます。"}>
+          <Image src={gold} />
+        </Tooltip>
         <ListArea badges={goldBadges} />
       </Container>
     </div>
