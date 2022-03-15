@@ -20,3 +20,11 @@ export const isValidPassword = (password: string, confirmPassword: string) => {
   }
   return validator;
 };
+
+export const getAuthentication = () => {
+  const auth_token = localStorage.getItem("access-token") || "";
+  const client = localStorage.getItem("client") || "";
+  const uid = localStorage.getItem("uid") || "";
+  const headers = { "access-token": auth_token, client: client, uid: uid };
+  return headers;
+};

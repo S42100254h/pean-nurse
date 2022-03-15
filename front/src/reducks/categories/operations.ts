@@ -2,6 +2,7 @@ import axios from "axios";
 import { fetchCategoriesAction, deleteCategoryAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { getAuthentication } from "../../function/common";
 import { Dispatch } from "redux";
 import { Category } from "../../types/entity/category";
 
@@ -16,12 +17,7 @@ export const fetchCategories = () => {
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(
-            setNotificationAction({
-              variant: "error",
-              message: "カテゴリー一覧の取得に失敗しました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "error", message: "カテゴリー一覧の取得に失敗しました。" }));
         }, 400);
       });
   };
@@ -30,19 +26,11 @@ export const fetchCategories = () => {
 export const deleteCategory = (id: string | number) => {
   return async (dispatch: Dispatch, getCategories: Function) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "categories/" + id;
 
       axios
-        .delete(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .delete(apiEndpoint, { headers: headers })
         .then(() => {
           const prevCategories: Category[] = getCategories().categories.list;
           const nextCategories: Category[] = prevCategories.filter((category) => category.id !== id);
@@ -51,22 +39,12 @@ export const deleteCategory = (id: string | number) => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "カテゴリーを削除しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "カテゴリーを削除しました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "カテゴリーの削除に失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "カテゴリーの削除に失敗しました。" }));
           }, 400);
         });
     }

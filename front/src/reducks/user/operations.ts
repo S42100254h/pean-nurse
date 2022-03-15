@@ -11,6 +11,7 @@ import {
 import { isValidEmailFormat, isValidRequiredInput, isValidPassword } from "../../function/common";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
+import { getAuthentication } from "../../function/common";
 import axios from "axios";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
@@ -58,22 +59,12 @@ export const signUp = (name: string, email: string, password: string, password_c
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(
-            setNotificationAction({
-              variant: "success",
-              message: "ユーザー登録に成功しました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "success", message: "ユーザー登録に成功しました。" }));
         }, 1000);
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(
-            setNotificationAction({
-              variant: "error",
-              message: "ユーザー登録に失敗しました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "error", message: "ユーザー登録に失敗しました。" }));
         }, 400);
       });
   };
@@ -112,12 +103,7 @@ export const signIn = (email: string, password: string) => {
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(
-            setNotificationAction({
-              variant: "success",
-              message: "サインインしました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "success", message: "サインインしました。" }));
         }, 1000);
       })
       .catch(() => {
@@ -136,19 +122,11 @@ export const signIn = (email: string, password: string) => {
 export const signOut = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth/sign_out";
 
       axios
-        .delete(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .delete(apiEndpoint, { headers: headers })
         .then(() => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Sign out..."));
@@ -157,22 +135,12 @@ export const signOut = () => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "サインアウトしました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "サインアウトに失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
           }, 400);
         });
     } else {
@@ -184,19 +152,11 @@ export const signOut = () => {
 export const deleteUser = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       axios
-        .delete(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .delete(apiEndpoint, { headers: headers })
         .then(() => {
           dispatch(signOutAction());
           dispatch(showLoadingAction("Delete user..."));
@@ -205,22 +165,12 @@ export const deleteUser = () => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "ユーザー情報を削除しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を削除しました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "ユーザー情報の削除に失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の削除に失敗しました。" }));
           }, 400);
         });
     } else {
@@ -232,32 +182,19 @@ export const deleteUser = () => {
 export const editExperiencePoint = (exp: number) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/add_exp";
 
       const body = { exp: exp };
 
       axios
-        .patch(apiEndpoint, body, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .patch(apiEndpoint, body, { headers: headers })
         .then((resp) => {
           dispatch(editUserExpAction(resp.data));
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "経験値アップに失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "経験値アップに失敗しました。" }));
           }, 400);
         });
     }
@@ -267,32 +204,19 @@ export const editExperiencePoint = (exp: number) => {
 export const editUserLevel = (level: number) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/level_up";
 
       const body = { level: level };
 
       axios
-        .patch(apiEndpoint, body, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .patch(apiEndpoint, body, { headers: headers })
         .then((resp) => {
           dispatch(editUserLevelAction(resp.data));
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "レベルアップに失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "レベルアップに失敗しました。" }));
           }, 400);
         });
     }
@@ -302,21 +226,13 @@ export const editUserLevel = (level: number) => {
 export const editUserInfo = (name: string, email: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { name: name, email: email };
 
       axios
-        .patch(apiEndpoint, body, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .patch(apiEndpoint, body, { headers: headers })
         .then((resp) => {
           dispatch(editUserInfoAction(resp.data.data));
           dispatch(showLoadingAction("Update ..."));
@@ -324,22 +240,12 @@ export const editUserInfo = (name: string, email: string) => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "ユーザー情報を更新しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "ユーザー情報を更新しました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "ユーザー情報の更新に失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "ユーザー情報の更新に失敗しました。" }));
           }, 400);
         });
     } else {
@@ -399,41 +305,23 @@ export const editImage = (image: File) => {
 export const deleteImage = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth";
 
       const body = { image: "" };
 
       axios
-        .patch(apiEndpoint, body, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .patch(apiEndpoint, body, { headers: headers })
         .then(() => {
           dispatch(deleteUserImageAction());
 
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "画像をデフォルトに変更しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "画像をデフォルトに変更しました。" }));
           }, 0);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "画像の更新に失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "画像の更新に失敗しました。" }));
           }, 400);
         });
     } else {
@@ -460,9 +348,7 @@ export const editPassword = (current_password: string, password: string, passwor
     }
 
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "auth/password";
 
       const body = {
@@ -472,25 +358,14 @@ export const editPassword = (current_password: string, password: string, passwor
       };
 
       axios
-        .put(apiEndpoint, body, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .put(apiEndpoint, body, { headers: headers })
         .then(() => {
           dispatch(showLoadingAction("Update Password ..."));
           dispatch(push("/dashboard"));
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "パスワードを更新しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "パスワードを更新しました。" }));
           }, 1000);
         })
         .catch(() => {
@@ -522,12 +397,7 @@ export const forgetPassword = (email: string) => {
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(
-            setNotificationAction({
-              variant: "success",
-              message: "メールを送信しました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "success", message: "メールを送信しました。" }));
         }, 1000);
       })
       .catch(() => {
@@ -570,12 +440,7 @@ export const resetPassword = (password: string, password_confirmation: string) =
 
         setTimeout(() => {
           dispatch(hideLoadingAction());
-          dispatch(
-            setNotificationAction({
-              variant: "success",
-              message: "パスワードを再設定しました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "success", message: "パスワードを再設定しました。" }));
         }, 1000);
       })
       .catch(() => {
@@ -594,19 +459,11 @@ export const resetPassword = (password: string, password_confirmation: string) =
 export const listenAuthState = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/currentuser";
 
       axios
-        .get(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .get(apiEndpoint, { headers: headers })
         .then((response) => {
           const userData = response.data;
 
@@ -635,37 +492,27 @@ export const listenAuthState = () => {
 export const redirectToDashboard = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "users/currentuser";
 
-      axios
-        .get(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
-        .then((response) => {
-          const userData = response.data;
+      axios.get(apiEndpoint, { headers: headers }).then((response) => {
+        const userData = response.data;
 
-          dispatch(
-            signInAction({
-              id: userData.id,
-              isSignedIn: true,
-              uid: userData.uid,
-              name: userData.name,
-              image: userData.image,
-              email: userData.email,
-              exp: userData.exp,
-              level: userData.level,
-            }),
-          );
+        dispatch(
+          signInAction({
+            id: userData.id,
+            isSignedIn: true,
+            uid: userData.uid,
+            name: userData.name,
+            image: userData.image,
+            email: userData.email,
+            exp: userData.exp,
+            level: userData.level,
+          }),
+        );
 
-          dispatch(push("/dashboard"));
-        });
+        dispatch(push("/dashboard"));
+      });
     }
   };
 };

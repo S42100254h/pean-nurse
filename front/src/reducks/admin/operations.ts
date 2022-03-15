@@ -4,6 +4,7 @@ import { hideLoadingAction, showLoadingAction } from "../loading/actions";
 import { setNotificationAction } from "../notification/actions";
 import axios from "axios";
 import { push } from "connected-react-router";
+import { getAuthentication } from "../../function/common";
 import { Dispatch } from "redux";
 
 export const adminSignIn = (email: string, password: string) => {
@@ -63,19 +64,11 @@ export const adminSignIn = (email: string, password: string) => {
 export const adminSignOut = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "admin/sign_out";
 
       axios
-        .delete(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .delete(apiEndpoint, { headers: headers })
         .then(() => {
           dispatch(adminSignOutAction());
           dispatch(showLoadingAction("Sign out..."));
@@ -84,22 +77,12 @@ export const adminSignOut = () => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "サインアウトしました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "サインアウトしました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "サインアウトに失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "サインアウトに失敗しました。" }));
           }, 400);
         });
     } else {
@@ -111,19 +94,11 @@ export const adminSignOut = () => {
 export const listenAdminState = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "admins/currentadmin";
 
       axios
-        .get(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .get(apiEndpoint, { headers: headers })
         .then((response) => {
           const adminData = response.data;
 
@@ -148,33 +123,23 @@ export const listenAdminState = () => {
 export const redirectToManagement = () => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "admins/currentadmin";
 
-      axios
-        .get(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
-        .then((response) => {
-          const adminData = response.data;
+      axios.get(apiEndpoint, { headers: headers }).then((response) => {
+        const adminData = response.data;
 
-          dispatch(
-            adminSignInAction({
-              isAdminSignedIn: true,
-              uid: adminData.uid,
-              name: adminData.name,
-              email: adminData.email,
-            }),
-          );
+        dispatch(
+          adminSignInAction({
+            isAdminSignedIn: true,
+            uid: adminData.uid,
+            name: adminData.name,
+            email: adminData.email,
+          }),
+        );
 
-          dispatch(push("/management"));
-        });
+        dispatch(push("/management"));
+      });
     }
   };
 };

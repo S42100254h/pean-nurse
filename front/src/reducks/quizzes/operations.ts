@@ -2,6 +2,7 @@ import axios from "axios";
 import { fetchQuizzesAction, deleteQuizAction } from "./actions";
 import { setNotificationAction } from "../notification/actions";
 import { hideLoadingAction, showLoadingAction } from "../loading/actions";
+import { getAuthentication } from "../../function/common";
 import { Dispatch } from "redux";
 import { Quiz } from "../../types/entity/quiz";
 
@@ -16,12 +17,7 @@ export const fetchQuizzes = () => {
       })
       .catch(() => {
         setTimeout(() => {
-          dispatch(
-            setNotificationAction({
-              variant: "error",
-              message: "クイズ一覧の取得に失敗しました。",
-            }),
-          );
+          dispatch(setNotificationAction({ variant: "error", message: "クイズ一覧の取得に失敗しました。" }));
         }, 400);
       });
   };
@@ -30,19 +26,11 @@ export const fetchQuizzes = () => {
 export const deleteQuiz = (id: string | number) => {
   return async (dispatch: Dispatch, getQuizzes: Function) => {
     if (localStorage.getItem("access-token")) {
-      const auth_token = localStorage.getItem("access-token") || "";
-      const client = localStorage.getItem("client") || "";
-      const uid = localStorage.getItem("uid") || "";
+      const headers = getAuthentication();
       const apiEndpoint = process.env.REACT_APP_API_URL + "quizzes/" + id;
 
       axios
-        .delete(apiEndpoint, {
-          headers: {
-            "access-token": auth_token,
-            client: client,
-            uid: uid,
-          },
-        })
+        .delete(apiEndpoint, { headers: headers })
         .then(() => {
           const prevQuizzes = getQuizzes().quizzes.list;
           const nextQuizzes = prevQuizzes.filter((quiz: Quiz) => quiz.id !== Number(id));
@@ -51,22 +39,12 @@ export const deleteQuiz = (id: string | number) => {
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "クイズを削除しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "クイズを削除しました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "クイズの削除に失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "クイズの削除に失敗しました。" }));
           }, 400);
         });
     }
