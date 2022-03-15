@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Spacer, Swiper } from "../components/UIkit";
@@ -309,11 +309,8 @@ const Study = () => {
   const previousQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) - 1);
   const nextQuizUrl = match.url.slice(0, -1) + (Number(match.params.id) + 1);
 
-  const isFirstRender = useRef(false);
-
   useEffect(() => {
     dispatch(showLoadingAction("Loading..."));
-    isFirstRender.current = true;
 
     setTimeout(() => {
       dispatch(hideLoadingAction());
@@ -369,19 +366,15 @@ const Study = () => {
   }, []);
 
   useEffect(() => {
-    // check wether first render or not
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-    } else {
-      if (correctQuiz / answeredQuiz === 1) {
-        dispatch(createBadge(match.params.id, categoryId));
-        setShow(true);
-      }
-
-      setTimeout(() => {
-        setOpen(true);
-      }, 300);
+    if (fire === false) return;
+    if (correctQuiz / answeredQuiz === 1) {
+      dispatch(createBadge(match.params.id, categoryId));
+      setShow(true);
     }
+
+    setTimeout(() => {
+      setOpen(true);
+    }, 300);
   }, [fire]);
 
   return (
