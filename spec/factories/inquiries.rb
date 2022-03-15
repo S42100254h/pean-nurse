@@ -4,5 +4,6 @@ FactoryBot.define do
     select { ["コース内容について", "お支払いについて", "エラー、トラブルについて", "その他"].sample }
     text { Faker::Lorem.question }
     image { Rack::Test::UploadedFile.new Rails.root.join "front/src/assets/img/cat.png" }
+    user
   end
 end
