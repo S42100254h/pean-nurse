@@ -9,7 +9,6 @@ import silver from "../assets/img/silver.png";
 import gold from "../assets/img/gold.png";
 import { RootState } from "../types/entity/rootState";
 import { fetchBadges } from "../reducks/badges/operations";
-import { fetchCategories } from "../reducks/categories/operations";
 import { getBronzeBadges, getSilverBadges, getGoldBadges } from "../reducks/badges/selectors";
 
 const Container = styled.div`
@@ -33,7 +32,6 @@ const DashBoard = () => {
 
   useEffect(() => {
     dispatch(fetchBadges());
-    dispatch(fetchCategories());
   }, []);
 
   return (
