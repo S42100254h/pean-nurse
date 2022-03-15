@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :stack do
-    user { nil }
+    user
   end
 end
