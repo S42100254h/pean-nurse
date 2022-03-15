@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :badges, dependent: :destroy
+  has_many :inquiries, dependent: :destroy
   extend Devise::Models
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
