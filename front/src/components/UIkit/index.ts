@@ -11,3 +11,4 @@ export { default as Swiper } from "./Swiper";
 export { default as Spacer } from "./Spacer";
 export { default as TextInput } from "./TextInput";
 export { default as TabPanel } from "./TabPanel";
+export { default as Tooltip } from "./Tooltip";
