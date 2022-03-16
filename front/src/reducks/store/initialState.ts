@@ -38,6 +38,9 @@ const initialState: RootState = {
   quizzes: {
     list: [],
   },
+  stacks: {
+    list: [],
+  },
   user: {
     id: "",
     isSignedIn: false,

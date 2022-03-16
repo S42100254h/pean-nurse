@@ -6,6 +6,7 @@ import { Experiences } from "./experiences";
 import { Loading } from "./loading";
 import { Notification } from "./notification";
 import { Quizzes } from "./quizzes";
+import { Stacks } from "./stacks";
 import { User } from "./user";
 import { Users } from "./users";
 
@@ -18,6 +19,7 @@ export type RootState = {
   loading: Loading;
   notification: Notification;
   quizzes: Quizzes;
+  stacks: Stacks;
   user: User;
   users: Users;
 };
