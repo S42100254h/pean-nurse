@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Stacks", type: :request do
   describe "POST /api/v1/stacks" do
