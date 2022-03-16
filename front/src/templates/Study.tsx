@@ -22,6 +22,7 @@ import H_dark from "../assets/img/H_dark.png";
 import cat from "../assets/img/cat.png";
 import { createBadge } from "../reducks/badge/operations";
 import { getBadgeColor } from "../reducks/badge/selectors";
+import { createStack } from "../function/stack";
 import { RootState } from "../types/entity/rootState";
 import { hideLoadingAction, showLoadingAction } from "../reducks/loading/actions";
 import { Cancel, CheckCircle } from "@material-ui/icons";
@@ -371,6 +372,8 @@ const Study = () => {
       dispatch(createBadge(match.params.id, categoryId));
       setShow(true);
     }
+
+    dispatch(createStack());
 
     setTimeout(() => {
       setOpen(true);
