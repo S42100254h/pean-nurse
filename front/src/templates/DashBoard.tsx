@@ -21,6 +21,19 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
+const CalendarContainer = styled.div`
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: -400px;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  margin: 0 auto;
+  max-width: 600px;
+`;
+
 const Image = styled.img`
   margin: 5px 0 10px 0;
 `;
@@ -39,8 +52,12 @@ const DashBoard = () => {
 
   return (
     <div>
-      <Profile />
-      <Calendar />
+      <Wrapper>
+        <Profile />
+        <CalendarContainer>
+          <Calendar />
+        </CalendarContainer>
+      </Wrapper>
       <Spacer size="sm" />
       <Container>
         <Tooltip content={"１回 全問正解した問題が表示されます。"}>
