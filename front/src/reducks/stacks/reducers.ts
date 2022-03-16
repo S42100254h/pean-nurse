@@ -6,6 +6,6 @@ export const StacksReducer = reducerWithInitialState(initialState.stacks).case(
   Actions.fetchStacksAction,
   (state, payload) => ({
     ...state,
-    list: [...payload.list],
+    list: [...payload],
   }),
 );
