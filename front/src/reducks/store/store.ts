@@ -11,6 +11,7 @@ import { ExperiencesReducer } from "../experiences/reducers";
 import { LoadingReducer } from "../loading/reducers";
 import { NotificationReducer } from "../notification/reducers";
 import { QuizzesReducer } from "../quizzes/reducers";
+import { StacksReducer } from "../stacks/reducers";
 import { UserReducer } from "../user/reducers";
 import { UsersReducer } from "../users/reducers";
 import { History } from "history";
@@ -27,6 +28,7 @@ export const createStore = (history: History) => {
       loading: LoadingReducer,
       notification: NotificationReducer,
       quizzes: QuizzesReducer,
+      stacks: StacksReducer,
       user: UserReducer,
       users: UsersReducer,
     }),
