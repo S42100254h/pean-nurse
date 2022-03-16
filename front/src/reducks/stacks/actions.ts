@@ -1,6 +1,6 @@
 import actionCreatorFactory from "typescript-fsa";
-import { Stacks } from "../../types/entity/stacks";
+import { Stack } from "../../types/entity/stack";
 
 const actionCreator = actionCreatorFactory();
 
-export const fetchStacksAction = actionCreator<Stacks>("FETCH_STACKS");
+export const fetchStacksAction = actionCreator<Stack[]>("FETCH_STACKS");
