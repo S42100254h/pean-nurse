@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { getUserLevel, getUserName, getUserImage } from "../../reducks/user/selectors";
+import { getStacks } from "../../reducks/stacks/selectors";
 import { RootState } from "../../types/entity/rootState";
 import styled from "styled-components";
 
@@ -48,6 +49,7 @@ const Profile = () => {
   const userName = getUserName(selector);
   const userImage = getUserImage(selector);
   const userLevel = getUserLevel(selector);
+  const stacks = getStacks(selector);
 
   return (
     <GridContainer container spacing={1} direction="row" alignItems="center">
@@ -59,7 +61,7 @@ const Profile = () => {
         <Level>Lv. {userLevel}</Level>
       </GridCenter>
       <GridCenter item xs={4}>
-        <Cleard>1</Cleard>
+        <Cleard>{stacks.length}</Cleard>
         <Caption>総問題クリア数</Caption>
       </GridCenter>
     </GridContainer>
