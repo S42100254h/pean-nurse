@@ -18,9 +18,9 @@ const Item = styled.div`
   width: 30px;
   height: 30px;
   margin: 0 2px;
-  background-color: #fff;
   border-radius: 6px;
   display: inline-block;
+  ${(props) => getColor(props)}
 `;
 
 const Day = styled.div`
@@ -31,6 +31,30 @@ const Day = styled.div`
   color: ${(props) => props.theme.palette.basic.dark};
   display: inline-block;
 `;
+
+const getColor = (props: any) => {
+  if (props.color === "dark") {
+    return `
+      background-color: #2B7584;
+    `;
+  } else if (props.color === "little dark") {
+    return `
+      background-color: #45BEB5";
+    `;
+  } else if (props.color === "little light") {
+    return `
+      background-color: #57F3C6;
+    `;
+  } else if (props.color === "light") {
+    return `
+      background-color: #B0F5E5;
+    `;
+  } else {
+    return `
+      background-color: #fff;
+    `;
+  }
+};
 
 const getMonth = (year: number, month: number) => {
   return dayjs(`${year}-${month}`);
@@ -88,9 +112,7 @@ const Calendar = () => {
         <Day key={day.toString()}>{day}</Day>
       ))}
       {schedules.map((schedule, i) => (
-        <Item key={schedule.toString()} color={colors[i]}>
-          {schedule.date()}
-        </Item>
+        <Item key={schedule.toString()} color={colors[i]} />
       ))}
     </Container>
   );

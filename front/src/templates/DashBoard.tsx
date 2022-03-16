@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Profile } from "../components/Profile";
+import { Calendar } from "../components/Calendar";
 import { ListArea } from "../components/ListArea";
 import styled from "styled-components";
 import { Spacer, Tooltip } from "../components/UIkit";
@@ -39,6 +40,7 @@ const DashBoard = () => {
   return (
     <div>
       <Profile />
+      <Calendar />
       <Spacer size="sm" />
       <Container>
         <Tooltip content={"１回 全問正解した問題が表示されます。"}>
