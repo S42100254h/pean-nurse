@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_15_131407) do
+ActiveRecord::Schema.define(version: 2022_03_15_235406) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -122,6 +122,13 @@ ActiveRecord::Schema.define(version: 2022_03_15_131407) do
     t.index ["title"], name: "index_quizzes_on_title", unique: true
   end
 
+  create_table "stacks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_stacks_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -157,4 +164,5 @@ ActiveRecord::Schema.define(version: 2022_03_15_131407) do
   add_foreign_key "choices", "quizzes"
   add_foreign_key "commentaries", "quizzes"
   add_foreign_key "inquiries", "users"
+  add_foreign_key "stacks", "users"
 end
