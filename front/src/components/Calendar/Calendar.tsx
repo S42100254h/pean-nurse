@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getStacks } from "../../reducks/stacks/selectors";
 import { RootState } from "../../types/entity/rootState";
-import { Spacer } from "../UIkit";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
