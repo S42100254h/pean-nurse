@@ -12,6 +12,7 @@ services:
       - mysql-datavolume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Tokyo
 
 volumes:
   mysql-datavolume:
