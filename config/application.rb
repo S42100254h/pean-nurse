@@ -63,5 +63,7 @@ module NurseStep
 
     config.middleware.use ActionDispatch::Flash
     config.api_only = true
+    config.time_zone = "Tokyo"
+    config.active_record.default_timezone = :local
   end
 end
