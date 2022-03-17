@@ -14,24 +14,20 @@ import { fetchStacks } from "../reducks/stacks/operations";
 import { getBronzeBadges, getSilverBadges, getGoldBadges } from "../reducks/badges/selectors";
 
 const Container = styled.div`
-  width: calc(100% - 5rem);
+  width: calc(100% - 2rem);
   max-width: 1080px;
   height: auto;
-  min-height: 180px;
   margin: 0 auto;
+`;
+
+const CourseContainer = styled.div`
+  height: auto;
+  min-height: 180px;
+  width: 80%;
 `;
 
 const CalendarContainer = styled.div`
-  position: absolute;
-  display: inline-block;
-  top: 0;
-  right: -400px;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  margin: 0 auto;
-  max-width: 600px;
+  float: right;
 `;
 
 const Image = styled.img`
@@ -51,33 +47,31 @@ const DashBoard = () => {
   }, []);
 
   return (
-    <div>
-      <Wrapper>
-        <Profile />
-        <CalendarContainer>
-          <Calendar />
-        </CalendarContainer>
-      </Wrapper>
-      <Spacer size="sm" />
-      <Container>
+    <Container>
+      <Profile />
+      <Spacer size="xs" />
+      <CalendarContainer>
+        <Calendar />
+      </CalendarContainer>
+      <CourseContainer>
         <Tooltip content={"１回 全問正解した問題が表示されます。"}>
           <Image src={bronze} />
         </Tooltip>
         <ListArea badges={bronzeBadges} />
-      </Container>
-      <Container>
+      </CourseContainer>
+      <CourseContainer>
         <Tooltip content={"２回 全問正解した問題が表示されます。"}>
           <Image src={silver} />
         </Tooltip>
         <ListArea badges={silverBadges} />
-      </Container>
-      <Container>
+      </CourseContainer>
+      <CourseContainer>
         <Tooltip content={"３回 全問正解した問題が表示されます。"}>
           <Image src={gold} />
         </Tooltip>
         <ListArea badges={goldBadges} />
-      </Container>
-    </div>
+      </CourseContainer>
+    </Container>
   );
 };
 

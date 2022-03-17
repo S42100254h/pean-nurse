@@ -7,7 +7,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 
 const Container = styled.div`
-  width: 250px;
+  width: 215px;
   height: auto;
   display: inline-block;
   text-align: center;
@@ -24,10 +24,8 @@ type Props = {
 };
 
 const Item = styled.div<Props>`
-  /* width: 30px; */
-  width: ${(props) => (props.width ? props.width : 30)}px;
-  height: ${(props) => (props.width ? props.width : 30)}px;
-  /* height: 30px; */
+  width: ${(props) => (props.width ? props.width : 25)}px;
+  height: ${(props) => (props.width ? props.width : 25)}px;
   margin: 2px;
   border-radius: 6px;
   border: 0.01px solid rgba(0, 0, 0, 0.02);
@@ -37,17 +35,16 @@ const Item = styled.div<Props>`
 `;
 
 const Day = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin: 0 2px;
-  line-height: 40px;
   color: ${(props) => props.theme.palette.basic.dark};
   display: inline-block;
 `;
 
 const Wrapper = styled.div`
   float: right;
-  padding-right: 10px;
+  padding: 10px 5px 0 0;
 `;
 
 const Text = styled.div`
@@ -138,14 +135,13 @@ const Calendar = () => {
       {schedules.map((schedule, i) => (
         <Item key={schedule.toString()} color={colors[i]} />
       ))}
-      <Spacer size="xxs" />
       <Wrapper>
         <Text>少ない</Text>
-        <Item width={20} height={20} />
-        <Item color="light" width={20} height={20} />
-        <Item color="little light" width={20} height={20} />
-        <Item color="little dark" width={20} height={20} />
-        <Item color="dark" width={20} height={20} />
+        <Item width={18} height={18} />
+        <Item color="light" width={18} height={18} />
+        <Item color="little light" width={18} height={18} />
+        <Item color="little dark" width={18} height={18} />
+        <Item color="dark" width={18} height={18} />
         <Text>多い</Text>
       </Wrapper>
     </Container>
