@@ -2,24 +2,37 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getStacks } from "../../reducks/stacks/selectors";
 import { RootState } from "../../types/entity/rootState";
+import { Spacer } from "../UIkit";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
 const Container = styled.div`
   width: 250px;
-  height: 220px;
+  height: auto;
   display: inline-block;
-  border: 1px solid #000;
   text-align: center;
   padding: 2px;
 `;
 
-const Item = styled.div`
-  width: 30px;
-  height: 30px;
-  margin: 0 2px;
+const Heading = styled.p`
+  font-size: 16px;
+`;
+
+type Props = {
+  width?: number;
+  height?: number;
+};
+
+const Item = styled.div<Props>`
+  /* width: 30px; */
+  width: ${(props) => (props.width ? props.width : 30)}px;
+  height: ${(props) => (props.width ? props.width : 30)}px;
+  /* height: 30px; */
+  margin: 2px;
   border-radius: 6px;
+  border: 0.01px solid rgba(0, 0, 0, 0.02);
   display: inline-block;
+  vertical-align: middle;
   ${(props) => getColor(props)}
 `;
 
@@ -32,6 +45,16 @@ const Day = styled.div`
   display: inline-block;
 `;
 
+const Wrapper = styled.div`
+  float: right;
+  padding-right: 10px;
+`;
+
+const Text = styled.div`
+  font-size: 12px;
+  display: inline-block;
+`;
+
 const getColor = (props: any) => {
   if (props.color === "dark") {
     return `
@@ -39,7 +62,7 @@ const getColor = (props: any) => {
     `;
   } else if (props.color === "little dark") {
     return `
-      background-color: #45BEB5";
+      background-color: #45BEB5;
     `;
   } else if (props.color === "little light") {
     return `
@@ -51,7 +74,7 @@ const getColor = (props: any) => {
     `;
   } else {
     return `
-      background-color: #fff;
+      background-color: #ECF3FA;
     `;
   }
 };
@@ -108,12 +131,23 @@ const Calendar = () => {
 
   return (
     <Container>
+      <Heading>{month}月 学習ログ</Heading>
       {days.map((day) => (
         <Day key={day.toString()}>{day}</Day>
       ))}
       {schedules.map((schedule, i) => (
         <Item key={schedule.toString()} color={colors[i]} />
       ))}
+      <Spacer size="xxs" />
+      <Wrapper>
+        <Text>少ない</Text>
+        <Item width={20} height={20} />
+        <Item color="light" width={20} height={20} />
+        <Item color="little light" width={20} height={20} />
+        <Item color="little dark" width={20} height={20} />
+        <Item color="dark" width={20} height={20} />
+        <Text>多い</Text>
+      </Wrapper>
     </Container>
   );
 };
