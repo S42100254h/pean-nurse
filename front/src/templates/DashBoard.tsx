@@ -54,19 +54,19 @@ const DashBoard = () => {
         <Calendar />
       </CalendarContainer>
       <CourseContainer>
-        <Tooltip content={"１回 全問正解した問題が表示されます。"}>
+        <Tooltip content={"１回 全問正解した問題が表示されます。"} location="top">
           <Image src={bronze} />
         </Tooltip>
         <ListArea badges={bronzeBadges} />
       </CourseContainer>
       <CourseContainer>
-        <Tooltip content={"２回 全問正解した問題が表示されます。"}>
+        <Tooltip content={"２回 全問正解した問題が表示されます。"} location="top">
           <Image src={silver} />
         </Tooltip>
         <ListArea badges={silverBadges} />
       </CourseContainer>
       <CourseContainer>
-        <Tooltip content={"３回 全問正解した問題が表示されます。"}>
+        <Tooltip content={"３回 全問正解した問題が表示されます。"} location="top">
           <Image src={gold} />
         </Tooltip>
         <ListArea badges={goldBadges} />
