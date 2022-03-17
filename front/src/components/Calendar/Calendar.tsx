@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getStacks } from "../../reducks/stacks/selectors";
 import { RootState } from "../../types/entity/rootState";
-import { Spacer } from "../UIkit";
+import { Tooltip } from "../UIkit";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
@@ -24,8 +24,8 @@ type Props = {
 };
 
 const Item = styled.div<Props>`
-  width: ${(props) => (props.width ? props.width : 25)}px;
-  height: ${(props) => (props.width ? props.width : 25)}px;
+  width: ${(props) => (props.width ? props.width : 18)}px;
+  height: ${(props) => (props.width ? props.width : 18)}px;
   margin: 2px;
   border-radius: 6px;
   border: 0.01px solid rgba(0, 0, 0, 0.02);
@@ -103,28 +103,30 @@ const Calendar = () => {
   const selector = useSelector((state: RootState) => state);
   const stacks = getStacks(selector);
 
-  const setColor = () => {
-    let color = [];
+  const setStacks = () => {
+    let counts = [];
+    let colors = [];
     // take only created_at out from stacks
     const stacksDays = stacks.map((stack) => dayjs(stack["created_at"]).format("YYYYMMDD"));
     for (let i = 0; i < schedules.length; i++) {
-      const count = stacksDays.filter((stacksDay) => stacksDay === schedules[i].format("YYYYMMDD")).length;
-      if (count >= 15) {
-        color[i] = "dark";
-      } else if (count >= 10) {
-        color[i] = "little dark";
-      } else if (count >= 5) {
-        color[i] = "little light";
-      } else if (count >= 1) {
-        color[i] = "light";
+      counts[i] = stacksDays.filter((stacksDay) => stacksDay === schedules[i].format("YYYYMMDD")).length;
+      if (counts[i] >= 15) {
+        colors[i] = "dark";
+      } else if (counts[i] >= 10) {
+        colors[i] = "little dark";
+      } else if (counts[i] >= 5) {
+        colors[i] = "little light";
+      } else if (counts[i] >= 1) {
+        colors[i] = "light";
       } else {
-        color[i] = "white";
+        colors[i] = "white";
       }
     }
-    return color;
+    return { colors: colors, counts: counts };
   };
 
-  const colors = setColor();
+  const colors = setStacks().colors;
+  const counts = setStacks().counts;
 
   return (
     <Container>
@@ -133,15 +135,26 @@ const Calendar = () => {
         <Day key={day.toString()}>{day}</Day>
       ))}
       {schedules.map((schedule, i) => (
-        <Item key={schedule.toString()} color={colors[i]} />
+        <Tooltip
+          key={schedule.toString()}
+          content={
+            counts[i] !== 0
+              ? `${counts[i]}問クリア - ${schedule.format("YYYY/MM/DD")}`
+              : `${schedule.format("YYYY/MM/DD")}`
+          }
+          location="bottom"
+          width={200}
+        >
+          <Item color={colors[i]} width={25} height={25} />
+        </Tooltip>
       ))}
       <Wrapper>
         <Text>少ない</Text>
-        <Item width={18} height={18} />
-        <Item color="light" width={18} height={18} />
-        <Item color="little light" width={18} height={18} />
-        <Item color="little dark" width={18} height={18} />
-        <Item color="dark" width={18} height={18} />
+        <Item />
+        <Item color="light" />
+        <Item color="little light" />
+        <Item color="little dark" />
+        <Item color="dark" />
         <Text>多い</Text>
       </Wrapper>
     </Container>
