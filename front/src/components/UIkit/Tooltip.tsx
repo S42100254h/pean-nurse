@@ -6,11 +6,15 @@ const Container = styled.div`
   display: inline-block;
 `;
 
-const Content = styled.div`
+type CustomProps = {
+  width?: number;
+};
+
+const Content = styled.div<CustomProps>`
   position: absolute;
   bottom: calc(100% + 5px);
   left: -10px;
-  width: 300px;
+  width: ${(props) => (props.width ? props.width : 300)}px;
   border-radius: 4px;
   color: #fff;
   padding: 5px 10px;
@@ -29,6 +33,7 @@ const Content = styled.div`
 type Props = {
   content: string;
   children: ReactNode;
+  width?: number;
 };
 
 const Tooltip = (props: Props) => {
@@ -39,7 +44,7 @@ const Tooltip = (props: Props) => {
       <div onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
         {props.children}
       </div>
-      {show && <Content>{props.content}</Content>}
+      {show && <Content width={props.width}>{props.content}</Content>}
     </Container>
   );
 };
