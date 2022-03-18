@@ -23,7 +23,9 @@ class Api::V1::CategoriesController < Api::V1::ApiController
   end
 
   def update
-    @category.update!(category_params)
+    category_items = category_params
+    category_items.delete(:image) if !uploaded_file?
+    @category.update!(category_items)
     render json: @category
   end
 
@@ -42,7 +44,6 @@ class Api::V1::CategoriesController < Api::V1::ApiController
       params.permit(:name, :image, :caption, :uid).merge(quiz_ids: params[:quiz_ids])
     end
 
-    # ↓↓pending
     def uploaded_file?
       params[:image].instance_of?(ActionDispatch::Http::UploadedFile)
     end
