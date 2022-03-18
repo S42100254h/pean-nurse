@@ -45,7 +45,7 @@ export const createCategory = (name: string, caption: string, image: File | null
   };
 };
 
-export const editCategory = (id: string, category: string, caption?: string, image?: File | null, uid?: string) => {
+export const editCategory = (id: string, name: string, caption: string, image: File | null, uid: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -54,8 +54,7 @@ export const editCategory = (id: string, category: string, caption?: string, ima
       const apiEndpoint = process.env.REACT_APP_API_URL + "categories/" + id;
 
       let form: any = new FormData();
-      form.append("name", category);
-      form.append("title", category);
+      form.append("name", name);
       form.append("caption", caption);
       form.append("image", image);
       form.append("uid", uid);

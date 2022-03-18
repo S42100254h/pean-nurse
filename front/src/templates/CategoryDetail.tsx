@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { PrimaryButton, SecondaryButton, Spacer, TextInput } from "../components/UIkit";
-import { Add, Close } from "@material-ui/icons";
 import { CategoryUpdateDialog } from "../components/ConfirmDialog";
 import { SetCategoryProfile } from "../components/SetCategoryProfile";
 import { DeleteDialog } from "../components/DeleteDialog";
@@ -28,42 +27,6 @@ const Heading = styled.h2`
   text-align: center;
 `;
 
-const Label = styled.label<LabelProps>`
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  width: 100px;
-  padding: 8px;
-  border-radius: 20px;
-  background-color: #4dd0e1;
-  cursor: pointer;
-  font-size: 12px;
-  float: left;
-  margin-bottom: 15px;
-  &:hover {
-    opacity: 0.7;
-  }
-  background-color: ${(props) => (props.open ? props.theme.palette.secondary.main : props.theme.palette.primary.main)};
-`;
-
-const StyledAdd = styled(Add)`
-  float: right;
-  color: #f5f5f5;
-  font-size: 14px;
-  margin-right: 3px;
-`;
-
-const StyledClose = styled(Close)`
-  float: right;
-  color: #f5f5f5;
-  font-size: 14px;
-  margin-right: 3px;
-`;
-
-type LabelProps = {
-  open: boolean;
-};
-
 type MatchParams = {
   id: string;
 };
@@ -71,52 +34,39 @@ type MatchParams = {
 const CategoryDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
-  const [category, setCategory] = useState(""),
+  const [name, setName] = useState(""),
     [caption, setCaption] = useState(""),
     [image, setImage] = useState<File | null>(null),
     [fileUrl, setFileUrl] = useState<string>(""),
     [uid, setUid] = useState(""),
     [dialogOpen, setDialogOpen] = useState(false),
-    [isOpen, setIsOpen] = useState(false),
-    [open, setOpen] = useState(false);
+    [isOpen, setIsOpen] = useState(false);
 
   const inputCategory = useCallback(
     (event) => {
-      setCategory(event.target.value);
+      setName(event.target.value);
     },
-    [setCategory],
+    [setName],
   );
 
   const handleDialogClose = () => setDialogOpen(false);
 
   const handleDialogOpen = () => {
-    if (category === "") return;
+    if (name === "") return;
     setDialogOpen(true);
-  };
-
-  const handleOpenToggle = () => {
-    setOpen(!open);
   };
 
   useEffect(() => {
     const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories/" + match.params.id;
-    const categoryProfileApiEndpoint =
-      process.env.REACT_APP_API_URL + "category_profiles?category_id=" + match.params.id;
     let isMounted = true;
 
     axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
-        setCategory(resp.data.name);
-      }
-    });
-
-    axios.get(categoryProfileApiEndpoint).then((resp) => {
-      if (isMounted) {
+        setName(resp.data.name);
         setCaption(resp.data.caption);
         setImage(resp.data.image);
         setFileUrl(resp.data.image.url);
         setUid(resp.data.uid);
-        setOpen(true);
       }
     });
 
@@ -134,31 +84,25 @@ const CategoryDetail = () => {
         label={"カテゴリー名"}
         required={true}
         rows={1}
-        value={category}
+        value={name}
         onChange={inputCategory}
       />
       <Spacer size="xs" />
-      <Label onClick={handleOpenToggle} open={open}>
-        {!open ? <StyledAdd /> : <StyledClose />}
-        {!open ? "詳細を追加" : "閉じる"}
-      </Label>
-      {open && (
-        <SetCategoryProfile
-          image={image}
-          fileUrl={fileUrl}
-          caption={caption}
-          uid={uid}
-          setImage={setImage}
-          setFileUrl={setFileUrl}
-          setCaption={setCaption}
-          setUid={setUid}
-        />
-      )}
+      <SetCategoryProfile
+        image={image}
+        fileUrl={fileUrl}
+        caption={caption}
+        uid={uid}
+        setImage={setImage}
+        setFileUrl={setFileUrl}
+        setCaption={setCaption}
+        setUid={setUid}
+      />
       <Spacer size="sm" />
       <PrimaryButton
         label={"カテゴリーを更新する"}
         fullWidth={true}
-        disabled={open ? !category || !caption || !image || !uid : !category}
+        disabled={!name || !caption || !image || !uid}
         onClick={() => handleDialogOpen()}
       />
       <Spacer size="xs" />
@@ -167,7 +111,7 @@ const CategoryDetail = () => {
         id={match.params.id}
         open={dialogOpen}
         onClose={handleDialogClose}
-        category={category}
+        name={name}
         caption={caption}
         image={image}
         fileUrl={fileUrl}
