@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       get "quizzes/exam/:category_uid/:exam_id", to: "quizzes#exam_index", as: "exam_quizzes"
       resources :badges
       resources :categories
-      resources :category_profiles
       resources :choices
       resources :commentaries
       resources :experiences
