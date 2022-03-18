@@ -7,6 +7,7 @@ import { RootState } from "../../types/entity/rootState";
 import { Badge } from "../../types/entity/badge";
 import styled from "styled-components";
 import cat from "../../assets/img/cat.png";
+import { push } from "connected-react-router";
 
 const Text = styled.p`
   font-size: 14px;
@@ -57,6 +58,11 @@ const ListArea = (props: Props) => {
     return selectedCategory[0].name;
   };
 
+  const findCategoryUid = (category_id: number) => {
+    const selectedCategory = categories.filter((category) => category.id === category_id);
+    return selectedCategory[0].uid;
+  };
+
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
@@ -65,7 +71,10 @@ const ListArea = (props: Props) => {
     <div>
       {props.badges.length === 0 && <Text>学習中の問題はありません。</Text>}
       {props.badges.map((badge) => (
-        <BadgeContainer key={badge.id}>
+        <BadgeContainer
+          key={badge.id}
+          onClick={() => dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))}
+        >
           <Icon src={cat} />
           <Caption>
             {findCategoryName(badge.category_id)}
