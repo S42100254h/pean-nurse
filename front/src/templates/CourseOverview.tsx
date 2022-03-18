@@ -33,9 +33,9 @@ type Image = {
   url: string;
 };
 
-type CategoryProfile = {
+type Category = {
   id: string;
-  title: string;
+  name: string;
   image: Image;
   caption: string;
   uid: string;
@@ -48,16 +48,16 @@ type MatchParams = {
 const CourseOverview = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
-  const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
+  const [category, setCategory] = useState<Category>(),
     [quizzesLength, setQuizzesLength] = useState(0);
 
   const courseCards = [];
-  if (categoryProfile !== undefined) {
+  if (category !== undefined) {
     for (let i = 1; i <= quizzesLength; i++) {
       courseCards.push(
         <CourseCard
           key={i}
-          label={categoryProfile?.title + i}
+          label={category?.name + i}
           onClick={() => dispatch(push("/courselist/" + match.params.id + "/study/" + i))}
         />,
       );
@@ -65,18 +65,20 @@ const CourseOverview = () => {
   }
 
   useEffect(() => {
-    const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "category_profiles/" + match.params.id;
     let isMounted = true;
 
+    const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "categories?category_uid=" + match.params.id;
     axios.get(categoryProfileApiEndpoint).then((resp) => {
       if (isMounted) {
-        setCategoryProfile(resp.data);
-        const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
+        setCategory(resp.data);
+      }
+    });
 
-        axios.get(quizApiEndpoint).then((r) => {
-          const courseNumber = Math.floor(r.data.length / 7);
-          setQuizzesLength(courseNumber);
-        });
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_uid=" + match.params.id;
+    axios.get(quizApiEndpoint).then((r) => {
+      if (isMounted) {
+        const courseNumber = Math.floor(r.data.length / 7);
+        setQuizzesLength(courseNumber);
       }
     });
 
@@ -87,8 +89,8 @@ const CourseOverview = () => {
 
   return (
     <Container>
-      <Heading>{categoryProfile?.title}</Heading>
-      <SubHeading>{categoryProfile?.caption}</SubHeading>
+      <Heading>{category?.name}</Heading>
+      <SubHeading>{category?.caption}</SubHeading>
       <Spacer size="sm" />
       <div>{courseCards}</div>
     </Container>
