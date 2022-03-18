@@ -24,7 +24,7 @@ class Api::V1::CategoriesController < Api::V1::ApiController
 
   def update
     category_items = category_params
-    category_items.delete(:image) if !uploaded_file?
+    category_items.delete(:image) unless uploaded_file?
     @category.update!(category_items)
     render json: @category
   end
