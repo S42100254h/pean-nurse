@@ -75,7 +75,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
 
   describe "GET /api/v1/categories?category_uid=string" do
     subject { get(api_v1_categories_path, params: { category_uid: category_uid }) }
-    
+
     let(:category) { create(:category) }
     let(:category_uid) { category.uid }
 
