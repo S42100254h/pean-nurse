@@ -18,21 +18,6 @@ RSpec.describe "Api::V1::Categories", type: :request do
       end
     end
 
-    context "send correct category information with category_profile" do
-      let(:params) { attributes_for(:category, :with_category_profile, quiz_ids: quiz_ids) }
-      let(:current_admin) { create(:admin) }
-      let(:headers) { current_admin.create_new_auth_token }
-      let!(:quiz_ids) { quiz.id }
-      let!(:quiz) { create(:quiz) }
-
-      it "Category, CategoryQuizRelation and CategoryProfile are created" do
-        expect { subject }.to change { Category.count }.by(1) &
-                              change { CategoryQuizRelation.count }.by(1) &
-                              change { CategoryProfile.count }.by(1)
-        expect(response).to have_http_status(200)
-      end
-    end
-
     context "send correct category information without quiz_ids" do
       let(:params) { attributes_for(:category) }
       let(:current_admin) { create(:admin) }
@@ -108,46 +93,15 @@ RSpec.describe "Api::V1::Categories", type: :request do
   describe "PATCH /api/v1/categories/:id" do
     subject { patch(api_v1_category_path(category_id), params: params, headers: current_admin.create_new_auth_token) }
 
-    context "send category without category_profile" do
-      let(:current_admin) { create(:admin) }
-      let(:params) { { name: Faker::Lorem.word, created_at: Time.current } }
-      let(:category_id) { category.id }
-      let(:category) { create(:category) }
+    let(:current_admin) { create(:admin) }
+    let(:params) { { name: Faker::Lorem.word, created_at: Time.current } }
+    let(:category_id) { category.id }
+    let(:category) { create(:category) }
 
-      it "category is updated" do
-        expect { subject }.to change { category.reload.name }.from(category.name).to(params[:name]) &
-                              not_change { category.reload.created_at }
-        expect(response).to have_http_status(200)
-      end
-    end
-
-    context "send category with category_profile" do
-      let(:current_admin) { create(:admin) }
-      let(:params) { attributes_for(:category, :with_category_profile) }
-      let(:category_id) { category.id }
-      let(:category) { create(:category) }
-      let(:category_profile) { create(:category_profile, category_id: category_id) }
-
-      it "category and category_profile are updated" do
-        expect { subject }.to change { category.reload.name }.from(category.name).to(params[:name]) &
-                              change { category_profile.reload.title }.from(category_profile.title).to(params[:title]) &
-                              change { category_profile.reload.caption }.from(category_profile.caption).to(params[:caption]) &
-                              change { category_profile.reload.uid }.from(category_profile.uid).to(params[:uid])
-        expect(response).to have_http_status(200)
-      end
-    end
-
-    context "send category, which does not have category_profile, with category_profile" do
-      let(:current_admin) { create(:admin) }
-      let(:params) { attributes_for(:category, :with_category_profile) }
-      let(:category_id) { category.id }
-      let(:category) { create(:category) }
-
-      it "category is updated and category_profile is created" do
-        expect { subject }.to change { category.reload.name }.from(category.name).to(params[:name]) &
-                              change { CategoryProfile.count }.by(1)
-        expect(response).to have_http_status(200)
-      end
+    it "category is updated" do
+      expect { subject }.to change { category.reload.name }.from(category.name).to(params[:name]) &
+                            not_change { category.reload.created_at }
+      expect(response).to have_http_status(200)
     end
   end
 
