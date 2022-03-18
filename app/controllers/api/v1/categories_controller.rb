@@ -6,6 +6,8 @@ class Api::V1::CategoriesController < Api::V1::ApiController
     if params[:quiz_id]
       quiz = Quiz.find(params[:quiz_id])
       categories = quiz.categories
+    elsif params[:category_uid]
+      categories = Category.find_by(uid: params[:category_uid])
     else
       categories = Category.all
     end
