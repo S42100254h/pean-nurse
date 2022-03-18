@@ -351,12 +351,14 @@ const Study = () => {
       if (isMounted) {
         setCategory(resp.data);
         setCategoryId(resp.data.id);
-        const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.id;
+      }
+    });
 
-        axios.get(quizApiEndpoint).then((r) => {
-          const courseNumber = Math.floor(r.data.length / 7);
-          setQuizzesLength(courseNumber);
-        });
+    const quizzesApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_uid=" + category_uid;
+    axios.get(quizzesApiEndpoint).then((r) => {
+      if (isMounted) {
+        const courseNumber = Math.floor(r.data.length / 7);
+        setQuizzesLength(courseNumber);
       }
     });
 
