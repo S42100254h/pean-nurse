@@ -4,7 +4,7 @@ import { setNotificationAction } from "../reducks/notification/actions";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
 
-export const createCategory = (category: string, caption?: string, image?: File | null, uid?: string) => {
+export const createCategory = (name: string, caption: string, image: File | null, uid: string) => {
   return async (dispatch: Dispatch) => {
     if (localStorage.getItem("access-token")) {
       const auth_token = localStorage.getItem("access-token") || "";
@@ -13,8 +13,7 @@ export const createCategory = (category: string, caption?: string, image?: File 
       const apiEndpoint = process.env.REACT_APP_API_URL + "categories";
 
       let form: any = new FormData();
-      form.append("name", category);
-      form.append("title", category);
+      form.append("name", name);
       form.append("caption", caption);
       form.append("image", image);
       form.append("uid", uid);
@@ -34,22 +33,12 @@ export const createCategory = (category: string, caption?: string, image?: File 
 
           setTimeout(() => {
             dispatch(hideLoadingAction());
-            dispatch(
-              setNotificationAction({
-                variant: "success",
-                message: "カテゴリーの作成に成功しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "success", message: "カテゴリーの作成に成功しました。" }));
           }, 1000);
         })
         .catch(() => {
           setTimeout(() => {
-            dispatch(
-              setNotificationAction({
-                variant: "error",
-                message: "カテゴリーの作成に失敗しました。",
-              }),
-            );
+            dispatch(setNotificationAction({ variant: "error", message: "カテゴリーの作成に失敗しました。" }));
           }, 400);
         });
     }
