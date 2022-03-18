@@ -3,8 +3,8 @@ class Api::V1::QuizzesController < Api::V1::ApiController
   before_action :authenticate_admin!, only: [:create, :update, :destroy]
 
   def index
-    if params[:category_id]
-      category = Category.find(params[:category_id])
+    if params[:category_uid]
+      category = Category.find_by(uid: params[:category_uid])
       quizzes = category.quizzes
     else
       quizzes = Quiz.all
