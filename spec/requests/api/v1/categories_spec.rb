@@ -57,7 +57,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
       subject
       res = JSON.parse(response.body)
       expect(res.length).to eq 8
-      expect(res[0].keys).to eq ["id", "name", "created_at", "updated_at"]
+      expect(res[0].keys).to eq ["id", "name", "created_at", "updated_at", "image", "caption", "uid"]
       expect(response).to have_http_status(200)
     end
   end
