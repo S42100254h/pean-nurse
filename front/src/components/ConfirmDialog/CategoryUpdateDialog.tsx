@@ -36,10 +36,10 @@ type Props = {
   open: boolean;
   onClose: () => void;
   name: string;
-  caption?: string;
-  image?: File | null;
-  fileUrl?: string;
-  uid?: string;
+  caption: string;
+  image: File | null;
+  fileUrl: string;
+  uid: string;
 };
 
 const CategoryUpdateDialog = ({ id, open, onClose, name, caption, image, fileUrl, uid }: Props) => {
@@ -52,13 +52,11 @@ const CategoryUpdateDialog = ({ id, open, onClose, name, caption, image, fileUrl
             <Headline>以下の内容でカテゴリーを更新してもよろしいですか？</Headline>
             <Spacer size="xs" />
             <Card text={name} label={"カテゴリー"} />
-            {caption && <Card text={caption} label={"見出し"} />}
-            {uid && <Card text={uid} label={"ID"} />}
-            {image && (
-              <ImageContainer>
-                <Image src={fileUrl} />
-              </ImageContainer>
-            )}
+            <Card text={caption} label={"見出し"} />
+            <Card text={uid} label={"ID"} />
+            <ImageContainer>
+              <Image src={fileUrl} />
+            </ImageContainer>
             <Spacer size="xxs" />
             <PrimaryButton
               label={"クイズを更新する"}
