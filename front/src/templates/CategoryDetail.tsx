@@ -58,18 +58,11 @@ const CategoryDetail = () => {
 
   useEffect(() => {
     const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories/" + match.params.id;
-    const categoryProfileApiEndpoint =
-      process.env.REACT_APP_API_URL + "category_profiles?category_id=" + match.params.id;
     let isMounted = true;
 
     axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
         setName(resp.data.name);
-      }
-    });
-
-    axios.get(categoryProfileApiEndpoint).then((resp) => {
-      if (isMounted) {
         setCaption(resp.data.caption);
         setImage(resp.data.image);
         setFileUrl(resp.data.image.url);
@@ -118,7 +111,7 @@ const CategoryDetail = () => {
         id={match.params.id}
         open={dialogOpen}
         onClose={handleDialogClose}
-        category={name}
+        name={name}
         caption={caption}
         image={image}
         fileUrl={fileUrl}
