@@ -18,21 +18,6 @@ RSpec.describe "Api::V1::Categories", type: :request do
       end
     end
 
-    context "send correct category information with category_profile" do
-      let(:params) { attributes_for(:category, :with_category_profile, quiz_ids: quiz_ids) }
-      let(:current_admin) { create(:admin) }
-      let(:headers) { current_admin.create_new_auth_token }
-      let!(:quiz_ids) { quiz.id }
-      let!(:quiz) { create(:quiz) }
-
-      it "Category, CategoryQuizRelation and CategoryProfile are created" do
-        expect { subject }.to change { Category.count }.by(1) &
-                              change { CategoryQuizRelation.count }.by(1) &
-                              change { CategoryProfile.count }.by(1)
-        expect(response).to have_http_status(200)
-      end
-    end
-
     context "send correct category information without quiz_ids" do
       let(:params) { attributes_for(:category) }
       let(:current_admin) { create(:admin) }
