@@ -201,9 +201,9 @@ type ImageProp = {
   url: string;
 };
 
-type CategoryProfile = {
+type Category = {
   id: string;
-  title: string;
+  name: string;
   image: ImageProp;
   caption: string;
   uid: string;
@@ -219,7 +219,7 @@ const Study = () => {
   const color = getBadgeColor(selector);
   const match = useRouteMatch<MatchParams>();
   const [choices, setChoices] = useState<Choice[][]>([]);
-  const [categoryProfile, setCategoryProfile] = useState<CategoryProfile>(),
+  const [category, setCategory] = useState<Category>(),
     [categoryId, setCategoryId] = useState(""),
     [quizzes, setQuizzes] = useState<QuizType[]>([]),
     [quizzesLength, setQuizzesLength] = useState(0),
@@ -316,9 +316,8 @@ const Study = () => {
     setTimeout(() => {
       dispatch(hideLoadingAction());
     }, 1300);
-    const category_profile_uid = match.url.split("/")[2];
-    const quizApiEndpoint =
-      process.env.REACT_APP_API_URL + "quizzes/exam/" + category_profile_uid + "/" + match.params.id;
+    const category_uid = match.url.split("/")[2];
+    const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes/exam/" + category_uid + "/" + match.params.id;
     let isMounted = true;
 
     axios.get(quizApiEndpoint).then((resp) => {
@@ -347,12 +346,12 @@ const Study = () => {
       }
     });
 
-    const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "category_profiles/" + category_profile_uid;
-    axios.get(categoryProfileApiEndpoint).then((resp) => {
+    const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories?category_uid=" + category_uid;
+    axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
-        setCategoryProfile(resp.data);
-        setCategoryId(resp.data.category_id);
-        const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.category_id;
+        setCategory(resp.data);
+        setCategoryId(resp.data.id);
+        const quizApiEndpoint = process.env.REACT_APP_API_URL + "quizzes?category_id=" + resp.data.id;
 
         axios.get(quizApiEndpoint).then((r) => {
           const courseNumber = Math.floor(r.data.length / 7);
@@ -382,7 +381,7 @@ const Study = () => {
 
   return (
     <Container>
-      <Heading>{categoryProfile?.title + match.params.id}</Heading>
+      <Heading>{category?.name + match.params.id}</Heading>
       <SelectArea>
         <Swiper onClick={(e) => handleFire(e)}>
           {quizzes?.map((quiz, i) => (
