@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get "users/currentuser"
       patch "users/add_exp"
       patch "users/level_up"
-      get "quizzes/exam/:category_profile_uid/:exam_id", to: "quizzes#exam_index", as: "exam_quizzes"
+      get "quizzes/exam/:category_uid/:exam_id", to: "quizzes#exam_index", as: "exam_quizzes"
       resources :badges
       resources :categories
       resources :category_profiles
