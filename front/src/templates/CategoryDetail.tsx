@@ -34,7 +34,7 @@ type MatchParams = {
 const CategoryDetail = () => {
   const dispatch = useDispatch();
   const match = useRouteMatch<MatchParams>();
-  const [category, setCategory] = useState(""),
+  const [name, setName] = useState(""),
     [caption, setCaption] = useState(""),
     [image, setImage] = useState<File | null>(null),
     [fileUrl, setFileUrl] = useState<string>(""),
@@ -44,15 +44,15 @@ const CategoryDetail = () => {
 
   const inputCategory = useCallback(
     (event) => {
-      setCategory(event.target.value);
+      setName(event.target.value);
     },
-    [setCategory],
+    [setName],
   );
 
   const handleDialogClose = () => setDialogOpen(false);
 
   const handleDialogOpen = () => {
-    if (category === "") return;
+    if (name === "") return;
     setDialogOpen(true);
   };
 
@@ -64,7 +64,7 @@ const CategoryDetail = () => {
 
     axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
-        setCategory(resp.data.name);
+        setName(resp.data.name);
       }
     });
 
@@ -91,7 +91,7 @@ const CategoryDetail = () => {
         label={"カテゴリー名"}
         required={true}
         rows={1}
-        value={category}
+        value={name}
         onChange={inputCategory}
       />
       <Spacer size="xs" />
@@ -109,7 +109,7 @@ const CategoryDetail = () => {
       <PrimaryButton
         label={"カテゴリーを更新する"}
         fullWidth={true}
-        disabled={!category || !caption || !image || !uid}
+        disabled={!name || !caption || !image || !uid}
         onClick={() => handleDialogOpen()}
       />
       <Spacer size="xs" />
@@ -118,7 +118,7 @@ const CategoryDetail = () => {
         id={match.params.id}
         open={dialogOpen}
         onClose={handleDialogClose}
-        category={category}
+        category={name}
         caption={caption}
         image={image}
         fileUrl={fileUrl}
