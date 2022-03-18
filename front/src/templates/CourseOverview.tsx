@@ -67,8 +67,8 @@ const CourseOverview = () => {
   useEffect(() => {
     let isMounted = true;
 
-    const categoryProfileApiEndpoint = process.env.REACT_APP_API_URL + "categories?category_uid=" + match.params.id;
-    axios.get(categoryProfileApiEndpoint).then((resp) => {
+    const categoryApiEndpoint = process.env.REACT_APP_API_URL + "categories?category_uid=" + match.params.id;
+    axios.get(categoryApiEndpoint).then((resp) => {
       if (isMounted) {
         setCategory(resp.data);
       }
