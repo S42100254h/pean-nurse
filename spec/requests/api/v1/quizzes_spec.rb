@@ -81,21 +81,21 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
     end
   end
 
-  describe "GET /api/v1/quizzes?category_id=number" do
-    subject { get(api_v1_quizzes_path, params: { category_id: category_id }) }
+  describe "GET /api/v1/quizzes?category_uid=string" do
+    subject { get(api_v1_quizzes_path, params: { category_uid: category_uid }) }
 
     before do
       create(:quiz, id: 1)
       create(:quiz, id: 2)
       create(:quiz, id: 3)
-      create(:category, id: 1)
-      create(:category, id: 2)
+      create(:category, id: 1, uid: "neko")
+      create(:category, id: 2, uid: "cat")
       create(:category_quiz_relation, quiz_id: 1, category_id: 1)
       create(:category_quiz_relation, quiz_id: 2, category_id: 1)
       create(:category_quiz_relation, quiz_id: 3, category_id: 2)
     end
 
-    let(:category_id) { 1 }
+    let(:category_uid) { "neko" }
 
     it "gets quizzes which are related to category_id" do
       subject

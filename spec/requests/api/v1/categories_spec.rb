@@ -73,6 +73,23 @@ RSpec.describe "Api::V1::Categories", type: :request do
     end
   end
 
+  describe "GET /api/v1/categories?category_uid=string" do
+    subject { get(api_v1_categories_path, params: { category_uid: category_uid }) }
+
+    let(:category) { create(:category) }
+    let(:category_uid) { category.uid }
+
+    it "gets category which is related to category_uid" do
+      subject
+      res = JSON.parse(response.body)
+      expect(res["id"]).to eq category.id
+      expect(res["name"]).to eq category.name
+      expect(res["caption"]).to eq category.caption
+      expect(res["uid"]).to eq category.uid
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "GET /api/v1/categories/:id" do
     subject { get(api_v1_category_path(category_id)) }
 
@@ -85,6 +102,8 @@ RSpec.describe "Api::V1::Categories", type: :request do
         res = JSON.parse(response.body)
         expect(res["id"]).to eq category.id
         expect(res["name"]).to eq category.name
+        expect(res["caption"]).to eq category.caption
+        expect(res["uid"]).to eq category.uid
         expect(response).to have_http_status(200)
       end
     end
