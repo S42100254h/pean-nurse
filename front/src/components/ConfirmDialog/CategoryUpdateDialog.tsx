@@ -35,14 +35,14 @@ type Props = {
   id: string;
   open: boolean;
   onClose: () => void;
-  category: string;
+  name: string;
   caption?: string;
   image?: File | null;
   fileUrl?: string;
   uid?: string;
 };
 
-const CategoryUpdateDialog = ({ id, open, onClose, category, caption, image, fileUrl, uid }: Props) => {
+const CategoryUpdateDialog = ({ id, open, onClose, name, caption, image, fileUrl, uid }: Props) => {
   const dispatch = useDispatch();
   return (
     <div>
@@ -51,7 +51,7 @@ const CategoryUpdateDialog = ({ id, open, onClose, category, caption, image, fil
           <Container>
             <Headline>以下の内容でカテゴリーを更新してもよろしいですか？</Headline>
             <Spacer size="xs" />
-            <Card text={category} label={"カテゴリー"} />
+            <Card text={name} label={"カテゴリー"} />
             {caption && <Card text={caption} label={"見出し"} />}
             {uid && <Card text={uid} label={"ID"} />}
             {image && (
@@ -63,7 +63,7 @@ const CategoryUpdateDialog = ({ id, open, onClose, category, caption, image, fil
             <PrimaryButton
               label={"クイズを更新する"}
               fullWidth={true}
-              onClick={() => dispatch(editCategory(id, category, caption, image, uid))}
+              onClick={() => dispatch(editCategory(id, name, caption, image, uid))}
             />
           </Container>
         </DialogContent>
