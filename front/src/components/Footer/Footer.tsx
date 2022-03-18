@@ -1,5 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Grid } from "@material-ui/core";
+import { push } from "connected-react-router";
+import logo_dark from "../../assets/img/logo_dark.png";
 import styled from "styled-components";
 
 const Root = styled.div`
@@ -28,10 +31,26 @@ const Text = styled.div`
     color: ${(props) => props.theme.palette.primary.main};
   }
 `;
+
+const Image = styled.img`
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
 const Footer = () => {
+  const dispatch = useDispatch();
+
   return (
     <Root>
       <Grid container spacing={2} direction="row" justifyContent="flex-end">
+        <Grid item sm={7}>
+          <Image src={logo_dark} onClick={() => dispatch(push("/dashboard"))} />
+        </Grid>
         <Grid item sm={2}>
           <Heading>PeAN</Heading>
           <Text>About</Text>
