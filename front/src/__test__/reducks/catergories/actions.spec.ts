@@ -6,12 +6,18 @@ describe("atcions.tsのテスト", () => {
       {
         id: 1,
         name: "neko",
+        image: null,
+        caption: "animal",
+        uid: "cat",
         created_at: "2021-01-01",
         updated_at: "2021-02-01",
       },
       {
         id: 2,
         name: "cat",
+        image: null,
+        caption: "animal",
+        uid: "cat",
         created_at: "2021-01-01",
         updated_at: "2021-02-01",
       },
@@ -29,6 +35,9 @@ describe("atcions.tsのテスト", () => {
       {
         id: 1,
         name: "neko",
+        image: null,
+        caption: "animal",
+        uid: "cat",
         created_at: "2021-01-01",
         updated_at: "2021-02-01",
       },
