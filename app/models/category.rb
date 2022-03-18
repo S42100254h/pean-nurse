@@ -5,6 +5,9 @@ class Category < ApplicationRecord
   has_one :category_profile, dependent: :destroy
   validates :name, presence: true
   validates :name, uniqueness: true
+  validates :image, presence: true
+  validates :caption, presence: true
+  validates :uid, presence: true
 
   def create_with_category_profile(title, caption, image, uid)
     profile_items = { title: title, caption: caption, image: image, uid: uid }
