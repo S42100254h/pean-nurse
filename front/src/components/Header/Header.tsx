@@ -4,6 +4,7 @@ import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
 import pean from "../../assets/img/pean.png";
+import logo from "../../assets/img/logo.png";
 import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
 import { SignUpDialog } from "../SignUpDialog";
@@ -168,7 +169,7 @@ const Header = () => {
           <StyledAppBar position="fixed">
             {isSignedIn ? (
               <StyledToolbar>
-                <Image src={pean} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
+                <Image src={logo} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
                 <Left>
                   <HeaderItem onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</HeaderItem>
                   <HeaderItem onClick={() => dispatch(push("/courselist"))}>コース一覧</HeaderItem>
