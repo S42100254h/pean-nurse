@@ -8,6 +8,7 @@ class Category < ApplicationRecord
   validates :image, presence: true
   validates :caption, presence: true
   validates :uid, presence: true
+  mount_uploader :image, ImageUploader
 
   def create_with_category_profile(title, caption, image, uid)
     profile_items = { title: title, caption: caption, image: image, uid: uid }
