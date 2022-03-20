@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
-import pean from "../../assets/img/pean.png";
 import logo from "../../assets/img/logo.png";
 import { ClosableDrawer } from "./index";
 import { SignInDialog } from "../SignInDialog";
@@ -149,7 +148,7 @@ const Header = () => {
         <Box>
           <StyledAppBar position="fixed">
             <StyledToolbar>
-              <Image src={pean} alt="logo" onClick={() => dispatch(push("/management"))} />
+              <Image src={logo} alt="logo" onClick={() => dispatch(push("/management"))} />
               <Left>
                 <HeaderItem onClick={() => dispatch(push("/management"))}>ホーム</HeaderItem>
                 <HeaderItem onClick={(event) => handleClick(event, userMenu)}>ユーザー管理</HeaderItem>
@@ -183,7 +182,7 @@ const Header = () => {
               </StyledToolbar>
             ) : (
               <StyledToolbar>
-                <Image src={pean} alt="logo" onClick={() => dispatch(push("/"))} />
+                <Image src={logo} alt="logo" onClick={() => dispatch(push("/"))} />
                 <Right>
                   <HeaderItem onClick={handleSignInDialogToggle}>サインイン</HeaderItem>
                   <HeaderItem onClick={handleSignUpDialogToggle}>無料会員登録</HeaderItem>
