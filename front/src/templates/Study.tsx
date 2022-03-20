@@ -96,6 +96,7 @@ const QuizTitle = styled.p`
 const QuizText = styled.div`
   padding-top: 10px;
   clear: both;
+  white-space: pre-wrap;
 `;
 
 const QuizContainer = styled.div`
@@ -153,6 +154,7 @@ const AnswerContainer = styled.div`
   padding: 20px 30px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
 `;
 
 const CorrectAnswerRate = styled.div`
