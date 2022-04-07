@@ -34,6 +34,7 @@ gem "devise_token_auth"
 gem "dotenv-rails", require: "dotenv/rails-now"
 gem "fog-aws"
 gem "rack-cors"
+gem "unicorn"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

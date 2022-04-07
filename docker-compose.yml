@@ -12,6 +12,7 @@ services:
       TZ: Asia/Tokyo
     ports:
       - 4000:3000
+    command: dockerize -wait tcp://database:3306 -timeout 20s unicorn -c config/unicorn.rb
     tty: true
     stdin_open: true
     depends_on:
