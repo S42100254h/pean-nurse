@@ -425,3 +425,6 @@ Rails/ReversibleMigration:
 
 Style/ConditionalAssignment:
   Enabled: false
+
+Lint/SuppressedException:
+  Enabled: false
