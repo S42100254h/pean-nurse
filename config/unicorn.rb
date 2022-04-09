@@ -6,8 +6,8 @@ rails_root = File.expand_path("..", __dir__)
 
 working_directory rails_root
 
-# listen "#{rails_root}/tmp/unicorn.sock"
-listen 4000
+listen "#{rails_root}/tmp/unicorn.sock"
+# listen 4000
 pid File.expand_path("../tmp/unicorn.pid", __dir__)
 
 old_pid = "#{rails_root}/tmp/unicorn.pid"
