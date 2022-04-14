@@ -1,6 +1,13 @@
-worker_processes 3
-timeout 15
-preload_app true
+rails_env = ENV["RAILS_ENV"] || "development"
+
+if rails_env == "development"
+  worker_processes 1
+  timeout 10000
+else
+  worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
+  timeout 15
+  preload_app true
+end
 
 rails_root = File.expand_path("..", __dir__)
 
