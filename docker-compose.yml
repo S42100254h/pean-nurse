@@ -8,10 +8,9 @@ services:
     volumes:
       - .:/myapp
       - bundle:/usr/local/bundle
+      - tmp-data:/myapp/tmp
     environment:
       TZ: Asia/Tokyo
-    ports:
-      - 4000:3000
     command: dockerize -wait tcp://database:3306 -timeout 20s unicorn -c config/unicorn.rb
     tty: true
     stdin_open: true
@@ -22,12 +21,27 @@ services:
     build:
       context: ./front/
       dockerfile: Dockerfile
+    command: npm start
     ports:
-      - 3000:80
-    volumes_from:
-      - api
+      - 3001:3000
+    volumes:
+      - ./front/:/home/node/app
+    tty: true
+    stdin_open: true
     depends_on:
       - api
+
+  nginx:
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:80
+    volumes:
+      - tmp-data:/myapp/tmp
+      - ./front/:/var/www
+    depends_on:
+      - front
 
   database:
     restart: always
@@ -44,5 +58,6 @@ services:
 
 volumes:
   bundle:
+  tmp-data:
   mysql-datavolume:
     driver: local
