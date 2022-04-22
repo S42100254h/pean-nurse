@@ -41,7 +41,8 @@
   },
   "scripts": {
     "start": "webpack serve --mode=development",
-    "build": "webpack --mode=development",
+    "build": "webpack --mode=production",
+    "build:div": "webpack --mode=development",
     "test": "jest",
     "lint": "eslint --ext .ts,.js,.tsx .",
     "fix": "eslint --ext .ts,.js,.tsx . --fix",
