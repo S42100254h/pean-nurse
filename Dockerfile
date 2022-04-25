@@ -1,9 +1,9 @@
 FROM ruby:3.0.0
 
+ENV TZ Asia/Tokyo
 ENV DOCKERIZE_VERSION v0.6.1
 
 RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y postgresql-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs wget
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
