@@ -67,6 +67,6 @@ class Api::V1::QuizzesController < Api::V1::ApiController
     end
 
     def quiz_params
-      params.require(:quiz).permit(:title).merge(category_ids: params[:category_ids])
+      params.require(:quiz).permit(:title, { category_ids: [] })
     end
 end

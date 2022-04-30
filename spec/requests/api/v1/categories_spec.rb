@@ -5,7 +5,7 @@ RSpec.describe "Api::V1::Categories", type: :request do
     subject { post(api_v1_categories_path, params: params, headers: headers) }
 
     context "send correct category information" do
-      let(:params) { attributes_for(:category, quiz_ids: quiz_ids) }
+      let(:params) { attributes_for(:category, { quiz_ids: [quiz_ids] }) }
       let(:current_admin) { create(:admin) }
       let(:headers) { current_admin.create_new_auth_token }
       let!(:quiz_ids) { quiz.id }
