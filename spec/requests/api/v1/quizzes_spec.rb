@@ -6,7 +6,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
 
     describe "normal scenario" do
       context "send correct quiz information" do
-        let(:params) { { quiz: attributes_for(:quiz, { category_ids: [category_ids] }) } }
+        let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids } }
         let(:current_admin) { create(:admin) }
         let!(:category_ids) { category.id }
         let!(:category) { create(:category) }
@@ -19,7 +19,7 @@ RSpec.describe "Api::V1::Quizzes", type: :request do
       end
 
       context "send correct quiz information with choices and commentary" do
-        let(:params) { { quiz: attributes_for(:quiz, { category_ids: [category_ids] }), choices: attributes_for_list(:choice, 4), commentary: attributes_for(:commentary) } }
+        let(:params) { { quiz: attributes_for(:quiz), category_ids: category_ids, choices: attributes_for_list(:choice, 4), commentary: attributes_for(:commentary) } }
         let(:current_admin) { create(:admin) }
         let!(:category_ids) { category.id }
         let!(:category) { create(:category) }
