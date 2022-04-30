@@ -43,7 +43,7 @@ class Api::V1::CategoriesController < Api::V1::ApiController
     end
 
     def category_params
-      params.permit(:name, :image, :caption, :uid).merge(quiz_ids: params[:quiz_ids])
+      params.permit(:name, :image, :caption, :uid)
     end
 
     def uploaded_file?
