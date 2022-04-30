@@ -2,9 +2,9 @@ class Api::V1::InquiriesController < Api::V1::ApiController
   before_action :authenticate_user!
 
   def create
-    @inquiry = Inquiry.new(inquiry_params)
+    @inquiry = current_user.inquiries.new(inquiry_params)
 
-    if params[:image] != ""
+    if params[:image] != nil
       @file = params[:image].tempfile
       @filename = params[:image].original_filename
     end
