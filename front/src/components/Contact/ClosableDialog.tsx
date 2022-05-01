@@ -4,6 +4,7 @@ import { Dialog, DialogContent, TextField, MenuItem } from "@material-ui/core";
 import { AttachFile, Close } from "@material-ui/icons";
 import { PrimaryButton, SelectBox, Spacer, TextInput } from "../UIkit";
 import { getUserEmail, getUserName } from "../../reducks/user/selectors";
+import { getAuthentication } from "../../function/common";
 import { useSelector } from "react-redux";
 import cat from "../../assets/img/cat.png";
 import axios from "axios";
@@ -111,6 +112,7 @@ const ClosableDialog = (props: Props) => {
 
   const handleSendMail = (email: string, select: string, text: string, image: File | null, name: string) => {
     const apiEndpoint = process.env.REACT_APP_API_URL + "inquiries/create";
+    const headers = getAuthentication();
 
     if (!isValidEmailFormat(email)) {
       alert("メールアドレスの形式が不正です");
@@ -130,11 +132,11 @@ const ClosableDialog = (props: Props) => {
     form.append("email", email);
     form.append("select", select);
     form.append("text", text);
-    form.append("image", image);
     form.append("name", name);
+    if (image != null) form.append("image", image);
 
     axios
-      .post(apiEndpoint, form)
+      .post(apiEndpoint, form, { headers: headers })
       .then(() => {
         handleIsSubmittedToggle();
       })
