@@ -4,7 +4,7 @@ class Api::V1::InquiriesController < Api::V1::ApiController
   def create
     @inquiry = current_user.inquiries.new(inquiry_params)
 
-    if params[:image] != nil
+    unless params[:image].nil?
       @file = params[:image].tempfile
       @filename = params[:image].original_filename
     end
