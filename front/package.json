@@ -40,9 +40,8 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "webpack serve --mode=development",
-    "build": "webpack --mode=production",
-    "build:div": "webpack --mode=development",
+    "start": "webpack-cli serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "jest",
     "lint": "eslint --ext .ts,.js,.tsx .",
     "fix": "eslint --ext .ts,.js,.tsx . --fix",
