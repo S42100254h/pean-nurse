@@ -16,7 +16,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new Dotenv({
-      path: "./.env.development",
+      path: "./.env.development.local",
     }),
   ],
 });
