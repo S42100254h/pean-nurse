@@ -28,7 +28,7 @@ module NurseStep
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "localhost:3001"
+        origins ENV["API_DOMAIN"] || ""
 
         resource "*",
                  headers: :any,
