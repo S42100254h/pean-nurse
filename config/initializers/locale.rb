@@ -1,1 +1,1 @@
-Faker::Config.locale = :ja
+# Faker::Config.locale = :ja
