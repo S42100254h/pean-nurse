@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: setup Ruby
         uses: ruby/setup-ruby@v1
@@ -24,22 +24,6 @@ jobs:
           ruby-version: "3.0.0"
           bundler-cache: true
 
-<<<<<<< HEAD
-=======
-      - name: Bundler install
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-
-      - name: Bundler and gem install
-        run: |
-          gem install bundler -v 2.2.3
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
-
->>>>>>> b11be0f (bundle lock --add-platform x86_64-linux)
       - name: Database create and migrate
         run: |
           cp config/database.yml.ci config/database.yml
