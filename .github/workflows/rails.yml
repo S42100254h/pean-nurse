@@ -1,0 +1,58 @@
+name: "Run rspec, rubocop"
+on: [push]
+env:
+  RAILS_ENV: test
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - "3306:3306"
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0.0"
+          bundler-cache: true
+
+      - name: Database create and migrate
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run rspec
+        env:
+          AWS_S3_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+          AWS_S3_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          MAILER_PASS: ${{ secrets.MAILER_PASS }}
+          FROM_MAIL_ADDRESS: ${{ secrets.FROM_MAIL_ADDRESS }}
+          TO_MAIL_ADDRESS: ${{ secrets.TO_MAIL_ADDRESS }}
+          RESET_PASSWORD_URL: ${{ secrets.RESET_PASSWORD_URL }}
+        run: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0.0"
+          bundler-cache: true
+
+      - name: Run rubocop
+        run: bundle exec rubocop
