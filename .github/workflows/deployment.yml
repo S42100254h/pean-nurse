@@ -1,0 +1,132 @@
+name: Deploy to Amazon ECS
+on: [push]
+
+env:
+  AWS_DEFAULT_REGION: ap-northeast-1
+  AWS_ECR_REPO_RAILS: pean-rails
+  AWS_ECR_REPO_NGINX: pean-nginx
+  ECS_TASK_DEFINITION: PeAN-task
+  CONTAINER_NAME_RAILS: rails
+  CONTAINER_NAME_NGINX: nginx
+  SERVICE_NAME: PeAN-service
+  CLUSTER_NAME: PeANCluster
+
+jobs:
+  build_rails:
+    runs-on: [self-hosted, macos]
+    outputs:
+      image: ${{ steps.rails-image.outputs.image }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: rails-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.AWS_ECR_REPO_RAILS }}
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REPOSITORY:$IMAGE_TAG"
+
+  build_nginx:
+    runs-on: [self-hosted, macos]
+    defaults:
+      run:
+        working-directory: ./front
+    outputs:
+      image: ${{ steps.nginx-image.outputs.image }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} >> .env
+          echo REACT_APP_PUBLIC_URL=${{ secrets.REACT_APP_PUBLIC_URL }} >> .env
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: nginx-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.AWS_ECR_REPO_NGINX }}
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REPOSITORY:$IMAGE_TAG"
+
+  deploy:
+    runs-on: [self-hosted, macos]
+    needs: [build_rails, build_nginx]
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} --query taskDefinition > task-definition.json
+
+      - name: Render Amazon ECS task definition for first container
+        id: render-container-rails
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ env.CONTAINER_NAME_RAILS }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ needs.build_rails.outputs.image }}
+
+      - name: Modify Amazon ECS task definition with second container
+        id: render-container-nginx
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-container-rails.outputs.task-definition }}
+          container-name: ${{ env.CONTAINER_NAME_NGINX }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ needs.build_nginx.outputs.image }}
+
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-container-nginx.outputs.task-definition }}
+          service: ${{ env.SERVICE_NAME }}
+          cluster: ${{ env.CLUSTER_NAME }}
+          wait-for-service-stability: true
