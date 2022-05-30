@@ -30,10 +30,10 @@ jobs:
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          path: /tmp/.buildx-cache-rails
+          key: ${{ runner.os }}-buildx-rails-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx-rails-
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -55,6 +55,13 @@ jobs:
           push: true
           file: ./Dockerfile
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.AWS_ECR_REPO_RAILS }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache-rails
+          cache-to: type=local,dest=/tmp/.buildx-cache-rails-new,mode=max
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache-rails
+          mv /tmp/.buildx-cache-rails-new /tmp/.buildx-cache-rails
 
   build_nginx:
     runs-on: ubuntu-latest
@@ -83,10 +90,10 @@ jobs:
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          path: /tmp/.buildx-cache-nginx
+          key: ${{ runner.os }}-buildx-nginx-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx-nginx-
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -108,6 +115,13 @@ jobs:
           push: true
           file: ./front/Dockerfile
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.AWS_ECR_REPO_NGINX }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache-nginx
+          cache-to: type=local,dest=/tmp/.buildx-cache-nginx-new,mode=max
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache-nginx
+          mv /tmp/.buildx-cache-nginx-new /tmp/.buildx-cache-nginx
 
   deploy:
     runs-on: ubuntu-latest
