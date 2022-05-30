@@ -1,5 +1,9 @@
 name: Deploy to Amazon ECS
-on: [push]
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
 
 env:
   AWS_DEFAULT_REGION: ap-northeast-1
@@ -14,6 +18,7 @@ env:
 jobs:
   build_rails:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     outputs:
       image: ${{ steps.rails-image.outputs.image }}
 
@@ -65,6 +70,7 @@ jobs:
 
   build_nginx:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     defaults:
       run:
         working-directory: ./front
@@ -125,6 +131,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     needs: [build_rails, build_nginx]
     environment: production
 
