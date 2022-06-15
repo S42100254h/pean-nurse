@@ -22,7 +22,7 @@ class InquiryMailer < ApplicationMailer
     @filename = filename
     mail(
       to: @inquiry.email,
-      subject: "【nurse-step】お問い合わせいただきありがとうございます",
+      subject: "【PeAN】お問い合わせいただきありがとうございます",
     )
   end
 end
