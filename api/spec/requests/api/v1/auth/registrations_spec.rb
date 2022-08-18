@@ -65,7 +65,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         let(:headers) { user.create_new_auth_token }
         let(:params) {
           { name: "dummy", email: "dummy@example.com",
-            image: Rack::Test::UploadedFile.new(File.join(Rails.root, "front/src/assets/img/cat.png")) }
+            image: Rack::Test::UploadedFile.new(File.join(Rails.root, "app/assets/images/pig.png")) }
         }
         let!(:user) { create(:user) }
 
