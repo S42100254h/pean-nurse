@@ -6,6 +6,9 @@ env:
 jobs:
   rspec:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
     services:
       mysql:
         image: mysql:8.0
@@ -44,6 +47,9 @@ jobs:
 
   rubocop:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
