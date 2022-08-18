@@ -26,6 +26,7 @@ jobs:
         with:
           ruby-version: "3.0.0"
           bundler-cache: true
+          working-directory: ./api
 
       - name: Database create and migrate
         run: |
@@ -59,6 +60,7 @@ jobs:
         with:
           ruby-version: "3.0.0"
           bundler-cache: true
+          working-directory: ./api
 
       - name: Run rubocop
         run: bundle exec rubocop
