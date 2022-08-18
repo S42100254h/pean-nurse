@@ -3,10 +3,10 @@ version: "3.2"
 services:
   api:
     build:
-      context: .
+      context: ./api/
       dockerfile: Dockerfile
     volumes:
-      - .:/myapp
+      - ./api/:/myapp
       - bundle:/usr/local/bundle
     environment:
       TZ: Asia/Tokyo
