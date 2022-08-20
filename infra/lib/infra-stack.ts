@@ -39,7 +39,7 @@ export class InfraStack extends cdk.Stack {
       OSecretKey.MasterUserPassword,
     );
 
-    const rds = new Rds(subnet.private1a, subnet.private1c, securityGroup.rds, secretsManager.rdsCluster);
+    const rds = new Rds(subnet.private1a, subnet.private1c, securityGroup.rds, masterUsername, masterUserPassword);
     rds.createResources(this);
   }
 }

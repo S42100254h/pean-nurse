@@ -1,9 +1,7 @@
 import * as cdk from "@aws-cdk/core";
 import { CfnDBSubnetGroup, CfnDBParameterGroup, CfnDBInstance } from "@aws-cdk/aws-rds";
 import { CfnSubnet, CfnSecurityGroup } from "@aws-cdk/aws-ec2";
-import { CfnSecret } from "@aws-cdk/aws-secretsmanager";
 import { Resource } from "./abstract/resource";
-import { SecretsManager, OSecretKey } from "./secretsManager";
 
 interface InstanceInfo {
   readonly id: string;
@@ -23,7 +21,8 @@ export class Rds extends Resource {
   private readonly subnetDb1a: CfnSubnet;
   private readonly subnetDb1c: CfnSubnet;
   private readonly securityGroupRds: CfnSecurityGroup;
-  private readonly secretRdsCluster: CfnSecret;
+  private readonly masterUsername: string;
+  private readonly masterUserPassword: string;
   private readonly instances: InstanceInfo[] = [
     {
       id: "RdsDbInstance1a",
@@ -45,13 +44,15 @@ export class Rds extends Resource {
     subnetDb1a: CfnSubnet,
     subnetDb1c: CfnSubnet,
     securityGroupRds: CfnSecurityGroup,
-    secretRdsCluster: CfnSecret,
+    masterUsername: string,
+    masterUserPassword: string,
   ) {
     super();
     this.subnetDb1a = subnetDb1a;
     this.subnetDb1c = subnetDb1c;
     this.securityGroupRds = securityGroupRds;
-    this.secretRdsCluster = secretRdsCluster;
+    this.masterUsername = masterUsername;
+    this.masterUserPassword = masterUserPassword;
   }
 
   createResources(scope: cdk.Construct) {
@@ -101,8 +102,8 @@ export class Rds extends Resource {
       dbInstanceIdentifier: this.createResourceName(scope, instanceInfo.resourceName),
       dbParameterGroupName: parameterGroup.ref,
       dbSubnetGroupName: subnetGroup.ref,
-      masterUserPassword: SecretsManager.getDynamicReference(this.secretRdsCluster, OSecretKey.MasterUserPassword),
-      masterUsername: SecretsManager.getDynamicReference(this.secretRdsCluster, OSecretKey.MasterUsername),
+      masterUserPassword: this.masterUserPassword,
+      masterUsername: this.masterUsername,
       preferredMaintenanceWindow: instanceInfo.preferredMaintenanceWindow,
     });
 
