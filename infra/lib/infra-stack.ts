@@ -6,6 +6,7 @@ import { RouteTable } from "./resource/routeTable";
 import { NetworkAcl } from "./resource/networkAcl";
 import { SecurityGroup } from "./resource/securityGroup";
 import { SecretsManager, OSecretKey } from "./resource/secretsManager";
+import { Rds } from "./resource/rds";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -37,5 +38,8 @@ export class InfraStack extends cdk.Stack {
       secretsManager.rdsCluster,
       OSecretKey.MasterUserPassword,
     );
+
+    const rds = new Rds(subnet.private1a, subnet.private1c, securityGroup.rds, masterUsername, masterUserPassword);
+    rds.createResources(this);
   }
 }
