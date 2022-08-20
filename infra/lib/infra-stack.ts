@@ -5,6 +5,7 @@ import { InternetGateway } from "./resource/internetGateway";
 import { RouteTable } from "./resource/routeTable";
 import { NetworkAcl } from "./resource/networkAcl";
 import { SecurityGroup } from "./resource/securityGroup";
+import { SecretsManager, OSecretKey } from "./resource/secretsManager";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -27,5 +28,14 @@ export class InfraStack extends cdk.Stack {
 
     const securityGroup = new SecurityGroup(vpc.vpc);
     securityGroup.createResources(this);
+
+    const secretsManager = new SecretsManager();
+    secretsManager.createResources(this);
+
+    const masterUsername = SecretsManager.getDynamicReference(secretsManager.rdsCluster, OSecretKey.MasterUsername);
+    const masterUserPassword = SecretsManager.getDynamicReference(
+      secretsManager.rdsCluster,
+      OSecretKey.MasterUserPassword,
+    );
   }
 }
