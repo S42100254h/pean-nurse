@@ -8,6 +8,7 @@ import { SecurityGroup } from "./resource/securityGroup";
 import { SecretsManager, OSecretKey } from "./resource/secretsManager";
 import { Rds } from "./resource/rds";
 import { Ecr } from "./resource/ecr";
+import { Alb } from "./resource/alb";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -45,5 +46,8 @@ export class InfraStack extends cdk.Stack {
 
     const ecr = new Ecr();
     ecr.createResources(this);
+
+    const alb = new Alb(vpc.vpc, subnet.public1a, subnet.public1c, securityGroup.alb);
+    alb.createResources(this);
   }
 }
