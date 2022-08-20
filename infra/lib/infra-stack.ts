@@ -4,6 +4,7 @@ import { Subnet } from "./resource/subnet";
 import { InternetGateway } from "./resource/internetGateway";
 import { RouteTable } from "./resource/routeTable";
 import { NetworkAcl } from "./resource/networkAcl";
+import { SecurityGroup } from "./resource/securityGroup";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -23,5 +24,8 @@ export class InfraStack extends cdk.Stack {
 
     const networkAcl = new NetworkAcl(vpc.vpc, subnet.public1a, subnet.public1c, subnet.private1a, subnet.private1c);
     networkAcl.createResources(this);
+
+    const securityGroup = new SecurityGroup(vpc.vpc);
+    securityGroup.createResources(this);
   }
 }
