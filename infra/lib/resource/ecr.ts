@@ -4,17 +4,21 @@ import { Resource } from "./abstract/resource";
 
 interface ResourceInfo {
   readonly id: string;
+  readonly assign: (repo: CfnRepository) => void;
 }
 
 export class Ecr extends Resource {
-  public repository: CfnRepository;
+  public repositoryNginx: CfnRepository;
+  public repositoryRails: CfnRepository;
 
   private readonly resourceInfo: ResourceInfo[] = [
     {
       id: "pean-nginx",
+      assign: (repo) => (this.repositoryNginx = repo),
     },
     {
       id: "pean-rails",
+      assign: (repo) => (this.repositoryRails = repo),
     },
   ];
 
@@ -25,6 +29,7 @@ export class Ecr extends Resource {
   createResources(scope: cdk.Construct) {
     for (const resourceInfo of this.resourceInfo) {
       const repo = this.createRepository(scope, resourceInfo);
+      resourceInfo.assign(repo);
     }
   }
 
