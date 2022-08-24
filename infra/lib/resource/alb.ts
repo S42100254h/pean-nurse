@@ -1,6 +1,7 @@
 import * as cdk from "@aws-cdk/core";
 import { CfnLoadBalancer, CfnTargetGroup, CfnListener } from "@aws-cdk/aws-elasticloadbalancingv2";
 import { CfnVPC, CfnSubnet, CfnSecurityGroup } from "@aws-cdk/aws-ec2";
+import { CfnCertificate } from "@aws-cdk/aws-certificatemanager";
 import { Resource } from "./abstract/resource";
 
 export class Alb extends Resource {
@@ -11,13 +12,21 @@ export class Alb extends Resource {
   private readonly subnetPublic1a: CfnSubnet;
   private readonly subnetPublic1c: CfnSubnet;
   private readonly securityGroupAlb: CfnSecurityGroup;
+  private readonly certificate: CfnCertificate;
 
-  constructor(vpc: CfnVPC, subnetPublic1a: CfnSubnet, subnetPublic1c: CfnSubnet, securityGroupAlb: CfnSecurityGroup) {
+  constructor(
+    vpc: CfnVPC,
+    subnetPublic1a: CfnSubnet,
+    subnetPublic1c: CfnSubnet,
+    securityGroupAlb: CfnSecurityGroup,
+    certificate: CfnCertificate,
+  ) {
     super();
     this.vpc = vpc;
     this.subnetPublic1a = subnetPublic1a;
     this.subnetPublic1c = subnetPublic1c;
     this.securityGroupAlb = securityGroupAlb;
+    this.certificate = certificate;
   }
 
   createResources(scope: cdk.Construct) {
@@ -69,7 +78,7 @@ export class Alb extends Resource {
       loadBalancerArn: loadBalancer.ref,
       certificates: [
         {
-          certificateArn: process.env.CERTIFICATE_ARN,
+          certificateArn: this.certificate.ref,
         },
       ],
       port: 443,

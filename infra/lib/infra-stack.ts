@@ -48,9 +48,10 @@ export class InfraStack extends cdk.Stack {
     const ecr = new Ecr();
     ecr.createResources(this);
 
-    const alb = new Alb(vpc.vpc, subnet.public1a, subnet.public1c, securityGroup.alb);
-    alb.createResources(this);
     const certificateManager = new CertificateManager();
     certificateManager.createResources(this);
+
+    const alb = new Alb(vpc.vpc, subnet.public1a, subnet.public1c, securityGroup.alb, certificateManager.certificate);
+    alb.createResources(this);
   }
 }
