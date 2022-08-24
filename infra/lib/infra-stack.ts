@@ -8,8 +8,8 @@ import { SecurityGroup } from "./resource/securityGroup";
 import { SecretsManager, OSecretKey } from "./resource/secretsManager";
 import { Rds } from "./resource/rds";
 import { Ecr } from "./resource/ecr";
-import { Alb } from "./resource/alb";
 import { CertificateManager } from "./resource/certificateManager";
+import { Alb } from "./resource/alb";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
