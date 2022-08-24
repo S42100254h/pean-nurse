@@ -8,6 +8,7 @@ import { SecurityGroup } from "./resource/securityGroup";
 import { SecretsManager, OSecretKey } from "./resource/secretsManager";
 import { Rds } from "./resource/rds";
 import { Ecr } from "./resource/ecr";
+import { CertificateManager } from "./resource/certificateManager";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -45,5 +46,8 @@ export class InfraStack extends cdk.Stack {
 
     const ecr = new Ecr();
     ecr.createResources(this);
+
+    const certificateManager = new CertificateManager();
+    certificateManager.createResources(this);
   }
 }
