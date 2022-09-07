@@ -10,6 +10,8 @@ import { Rds } from "./resource/rds";
 import { Ecr } from "./resource/ecr";
 import { CertificateManager } from "./resource/certificateManager";
 import { Alb } from "./resource/alb";
+import { Ecs } from "./resource/ecs";
+require("dotenv").config();
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -53,5 +55,19 @@ export class InfraStack extends cdk.Stack {
 
     const alb = new Alb(vpc.vpc, subnet.public1a, subnet.public1c, securityGroup.alb, certificateManager.certificate);
     alb.createResources(this);
+
+    const ecs = new Ecs(
+      vpc.vpc,
+      subnet.public1a,
+      subnet.public1c,
+      securityGroup.ecs,
+      alb.loadBalancer,
+      ecr.repositoryNginx,
+      ecr.repositoryRails,
+      masterUserPassword,
+      alb.targetGroup,
+      rds.dbInstance1a,
+    );
+    ecs.createResources(this);
   }
 }
