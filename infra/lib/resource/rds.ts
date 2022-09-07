@@ -61,6 +61,7 @@ export class Rds extends Resource {
 
     for (const instanceInfo of this.instances) {
       const instance = this.createInstance(scope, instanceInfo, subnetGroup, parameterGroup);
+      instanceInfo.assign(instance);
     }
   }
 
