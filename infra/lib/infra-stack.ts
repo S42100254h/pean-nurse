@@ -11,6 +11,7 @@ import { Ecr } from "./resource/ecr";
 import { CertificateManager } from "./resource/certificateManager";
 import { Alb } from "./resource/alb";
 import { Ecs } from "./resource/ecs";
+import { Route53 } from "./resource/route53";
 require("dotenv").config();
 
 export class InfraStack extends cdk.Stack {
@@ -69,5 +70,8 @@ export class InfraStack extends cdk.Stack {
       rds.dbInstance1a,
     );
     ecs.createResources(this);
+
+    const route53 = new Route53(alb.loadBalancer);
+    route53.createResources(this);
   }
 }
