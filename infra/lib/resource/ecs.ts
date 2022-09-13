@@ -1,7 +1,7 @@
 import * as cdk from "@aws-cdk/core";
-import { CfnSubnet, CfnSecurityGroup, CfnVPC } from "@aws-cdk/aws-ec2";
+import { CfnSubnet, CfnSecurityGroup } from "@aws-cdk/aws-ec2";
 import { CfnTaskDefinition, CfnService, CfnCluster } from "@aws-cdk/aws-ecs";
-import { CfnLoadBalancer, CfnTargetGroup } from "@aws-cdk/aws-elasticloadbalancingv2";
+import { CfnTargetGroup } from "@aws-cdk/aws-elasticloadbalancingv2";
 import { CfnRepository } from "@aws-cdk/aws-ecr";
 import { CfnDBInstance } from "@aws-cdk/aws-rds";
 import { Resource } from "./abstract/resource";
@@ -22,11 +22,9 @@ interface ResourceInfo {
 export class Ecs extends Resource {
   public service: CfnService;
 
-  private readonly vpc: CfnVPC;
   private readonly subnetEcs1a: CfnSubnet;
   private readonly subnetEcs1c: CfnSubnet;
   private readonly securityGroupEcs: CfnSecurityGroup;
-  private readonly alb: CfnLoadBalancer;
   private readonly repositoryNginx: CfnRepository;
   private readonly repositoryRails: CfnRepository;
   private readonly password: string;
@@ -48,11 +46,9 @@ export class Ecs extends Resource {
   ];
 
   constructor(
-    vpc: CfnVPC,
     subnetEcs1a: CfnSubnet,
     subnetEcs1c: CfnSubnet,
     securityGroupEcs: CfnSecurityGroup,
-    alb: CfnLoadBalancer,
     repositoryNginx: CfnRepository,
     repositoryRails: CfnRepository,
     password: string,
@@ -60,11 +56,9 @@ export class Ecs extends Resource {
     dbInstance: CfnDBInstance,
   ) {
     super();
-    this.vpc = vpc;
     this.subnetEcs1a = subnetEcs1a;
     this.subnetEcs1c = subnetEcs1c;
     this.securityGroupEcs = securityGroupEcs;
-    this.alb = alb;
     this.repositoryNginx = repositoryNginx;
     this.repositoryRails = repositoryRails;
     this.password = password;
@@ -286,7 +280,6 @@ export class Ecs extends Resource {
         {
           containerPort: 80,
           containerName: resourceInfo.containerName,
-          // loadBalancerName: this.alb.name,
           targetGroupArn: this.targetGroup.ref,
         },
       ],
