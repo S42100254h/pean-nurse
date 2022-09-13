@@ -98,7 +98,7 @@ export class RouteTable extends Resource {
   }
 
   private createRoute(scope: cdk.Construct, routeInfo: RouteInfo, routeTable: CfnRouteTable) {
-    const route = new CfnRoute(scope, routeInfo.id, {
+    new CfnRoute(scope, routeInfo.id, {
       routeTableId: routeTable.ref,
       destinationCidrBlock: routeInfo.destinationCidrBlock,
       gatewayId: routeInfo.gatewayId(),
