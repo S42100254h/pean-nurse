@@ -12,6 +12,7 @@ import { CertificateManager } from "./resource/certificateManager";
 import { Alb } from "./resource/alb";
 import { Ecs } from "./resource/ecs";
 import { Route53 } from "./resource/route53";
+import { S3 } from "./resource/s3";
 require("dotenv").config();
 
 export class InfraStack extends cdk.Stack {
@@ -71,5 +72,8 @@ export class InfraStack extends cdk.Stack {
 
     const route53 = new Route53(alb.loadBalancer);
     route53.createResources(this);
+
+    const s3 = new S3();
+    s3.createResources(this);
   }
 }
