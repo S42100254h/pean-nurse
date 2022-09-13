@@ -58,11 +58,9 @@ export class InfraStack extends cdk.Stack {
     alb.createResources(this);
 
     const ecs = new Ecs(
-      vpc.vpc,
       subnet.public1a,
       subnet.public1c,
       securityGroup.ecs,
-      alb.loadBalancer,
       ecr.repositoryNginx,
       ecr.repositoryRails,
       masterUserPassword,
