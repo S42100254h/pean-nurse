@@ -47,7 +47,7 @@ const ReviewHeading = styled.h2`
 `;
 
 const BottomContainer = styled.div`
-  height: 430px;
+  height: 100%;
   text-align: center;
   background-color: #2b546a;
   color: #fff;
@@ -119,6 +119,7 @@ const Home = () => {
         <Message>国家試験の合否によっては、今後の１年が決まります。</Message>
         <Spacer size="sm" />
         <Message>私たちと一緒に医療の世界へ飛び込みましょう！</Message>
+        <Spacer size="sm" />
       </BottomContainer>
       <RegisterContainer>
         <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
