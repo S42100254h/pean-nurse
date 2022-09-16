@@ -47,7 +47,7 @@ const ReviewHeading = styled.h2`
 `;
 
 const BottomContainer = styled.div`
-  height: 430px;
+  height: 100%;
   text-align: center;
   background-color: #2b546a;
   color: #fff;
@@ -62,7 +62,7 @@ const BottomHeading = styled.h2`
 const Voice = styled.p`
   font-size: 20px;
   font-weight: bold;
-  color: #000;
+  font-style: italic;
   padding-bottom: 10px;
   line-height: 20px;
 `;
@@ -111,7 +111,7 @@ const Home = () => {
         <BottomHeading>看護学生から、看護師になろう</BottomHeading>
         <Voice>「国家試験に合格できるか心配...」</Voice>
         <Voice>「参考書を読むと眠くなって、勉強が進まない...」</Voice>
-        <Spacer size="xxs" />
+        <Spacer size="xs" />
         <Message>そんなあなたが医療の世界に飛び込むお手伝いをしたい！</Message>
         <Message>私たちはこんな思いで、PeANを運営しています。</Message>
         <Spacer size="sm" />
@@ -119,6 +119,7 @@ const Home = () => {
         <Message>国家試験の合否によっては、今後の１年が決まります。</Message>
         <Spacer size="sm" />
         <Message>私たちと一緒に医療の世界へ飛び込みましょう！</Message>
+        <Spacer size="sm" />
       </BottomContainer>
       <RegisterContainer>
         <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
