@@ -10,8 +10,8 @@ env:
   AWS_ECR_REPO_RAILS: pean-rails
   AWS_ECR_REPO_NGINX: pean-nginx
   ECS_TASK_DEFINITION: peanTask
-  CONTAINER_NAME_RAILS: rails
-  CONTAINER_NAME_NGINX: nginx
+  CONTAINER_NAME_RAILS: pean-rails
+  CONTAINER_NAME_NGINX: pean-nginx
   SERVICE_NAME: FargateService
   CLUSTER_NAME: PeanCluster
 
