@@ -61,7 +61,7 @@ jobs:
           context: ./api
           platforms: linux/arm64
           push: true
-          file: ./Dockerfile
+          file: ./api/Dockerfile
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.AWS_ECR_REPO_RAILS }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache-rails
           cache-to: type=local,dest=/tmp/.buildx-cache-rails-new,mode=max
