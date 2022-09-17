@@ -18,6 +18,9 @@ env:
 jobs:
   build_rails:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
     if: github.event.pull_request.merged == true
     outputs:
       image: ${{ steps.rails-image.outputs.image }}
