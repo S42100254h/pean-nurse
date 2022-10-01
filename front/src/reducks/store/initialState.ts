@@ -12,6 +12,7 @@ const initialState: RootState = {
     index: 0,
     color: "bronze",
     category_id: 0,
+    image: null,
     created_at: "",
     updated_at: "",
   },

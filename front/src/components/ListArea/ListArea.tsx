@@ -63,6 +63,11 @@ const ListArea = (props: Props) => {
     return selectedCategory[0].uid;
   };
 
+  const findCategoryImage = (category_id: number) => {
+    const selectedCategory = categories.filter((category) => category.id === category_id);
+    return selectedCategory[0].image;
+  };
+
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
@@ -75,7 +80,7 @@ const ListArea = (props: Props) => {
           key={badge.id}
           onClick={() => dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))}
         >
-          <Icon src={cat} />
+          <Icon src={findCategoryImage(badge.category_id)?.url} />
           <Caption>
             {findCategoryName(badge.category_id)}
             {badge.index}
