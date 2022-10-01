@@ -6,7 +6,6 @@ import { fetchCategories } from "../../reducks/categories/operations";
 import { RootState } from "../../types/entity/rootState";
 import { Badge } from "../../types/entity/badge";
 import styled from "styled-components";
-import cat from "../../assets/img/cat.png";
 import { push } from "connected-react-router";
 
 const Text = styled.p`
@@ -80,7 +79,7 @@ const ListArea = (props: Props) => {
           key={badge.id}
           onClick={() => dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))}
         >
-          <Icon src={findCategoryImage(badge.category_id)?.url} />
+          {findCategoryImage(badge.category_id) && <Icon src={findCategoryImage(badge.category_id)?.url} />}
           <Caption>
             {findCategoryName(badge.category_id)}
             {badge.index}
