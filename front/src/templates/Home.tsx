@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PrimaryButton, Spacer } from "../components/UIkit";
 import { SignUpDialog } from "../components/SignUpDialog";
 import styled from "styled-components";
+import course_image from "../assets/img/course_image.png";
 
 const TopContainer = styled.div`
   height: 320px;
@@ -20,7 +21,7 @@ const TopSubHeading = styled.h3`
 `;
 
 const MiddleContainer = styled.div`
-  height: 400px;
+  height: 100%;
   text-align: center;
   background-color: ${(props) => props.theme.palette.primary.light};
 `;
@@ -86,6 +87,12 @@ const RegisterHeading = styled.h2`
   padding: 0 0 30px 0;
 `;
 
+const Image = styled.img`
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 50px;
+`;
+
 const Home = () => {
   const [open, setOpen] = useState(false);
 
@@ -100,7 +107,7 @@ const Home = () => {
       </TopContainer>
       <MiddleContainer>
         <MiddleHeading>看護学生から、看護師へ</MiddleHeading>
-        <div>※ここに問題の画面を入れ込む※</div>
+        <Image src={course_image} />
       </MiddleContainer>
       <ReviewContainer>
         <ReviewSubHeading>看護師 国家試験WEB問題集の</ReviewSubHeading>
