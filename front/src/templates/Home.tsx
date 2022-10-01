@@ -3,6 +3,7 @@ import { PrimaryButton, Spacer } from "../components/UIkit";
 import { SignUpDialog } from "../components/SignUpDialog";
 import styled from "styled-components";
 import course_image from "../assets/img/course_image.png";
+import quiz_image from "../assets/img/quiz_image.png";
 
 const TopContainer = styled.div`
   height: 320px;
@@ -28,23 +29,18 @@ const MiddleContainer = styled.div`
 
 const MiddleHeading = styled.h2`
   font-size: 40px;
-  padding: 40px 0 30px 0;
+  padding: 40px 0;
 `;
 
-const ReviewContainer = styled.div`
+const ExplanationContainer = styled.div`
   background-color: #fff;
-  height: 600px;
+  height: 100%;
   text-align: center;
 `;
 
-const ReviewSubHeading = styled.h3`
-  font-size: 20px;
-  padding: 40px 0 10px 0;
-`;
-
-const ReviewHeading = styled.h2`
+const ExplanationHeading = styled.h2`
   font-size: 36px;
-  padding: 0 0 30px 0;
+  padding: 30px 0;
 `;
 
 const BottomContainer = styled.div`
@@ -109,11 +105,10 @@ const Home = () => {
         <MiddleHeading>看護学生から、看護師へ</MiddleHeading>
         <Image src={course_image} />
       </MiddleContainer>
-      <ReviewContainer>
-        <ReviewSubHeading>看護師 国家試験WEB問題集の</ReviewSubHeading>
-        <ReviewHeading>利用者レビュー</ReviewHeading>
-        <div>※ここにレビューを２件埋め込む※</div>
-      </ReviewContainer>
+      <ExplanationContainer>
+        <ExplanationHeading>クイズを解きながら学べる</ExplanationHeading>
+        <Image src={quiz_image} />
+      </ExplanationContainer>
       <BottomContainer>
         <BottomHeading>看護学生から、看護師になろう</BottomHeading>
         <Voice>「国家試験に合格できるか心配...」</Voice>
