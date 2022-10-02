@@ -149,7 +149,7 @@ const ChoicesContainer = styled.div``;
 
 const AnswerContainer = styled.div`
   background-color: ${(props) => props.theme.palette.primary.light};
-  min-height: 200px;
+  min-height: 120px;
   height: 100%;
   padding: 20px 30px;
   border-radius: 4px;
