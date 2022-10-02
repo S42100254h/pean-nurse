@@ -24,6 +24,7 @@ const CourseContainer = styled.div`
   height: auto;
   min-height: 180px;
   width: 80%;
+  margin-bottom: 15px;
 `;
 
 const CalendarContainer = styled.div`
