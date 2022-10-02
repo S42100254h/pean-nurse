@@ -26,13 +26,14 @@ const Caption = styled.p`
 `;
 
 const BadgeContainer = styled.div`
-  width: 180px;
+  width: fit-content;
   height: 60px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   background-color: #fff;
   display: inline-block;
   margin: 5px;
+  padding: 0 10px;
   text-align: center;
   transition-duration: 0.3s;
   &:hover {
