@@ -11,6 +11,7 @@ export { default as DashBoard } from "./DashBoard";
 export { default as ExperienceList } from "./ExperienceList";
 export { default as ForgetPassword } from "./ForgetPassword";
 export { default as ForgetPasswordSent } from "./ForgetPasswordSent";
+export { default as Help } from "./Help";
 export { default as Home } from "./Home";
 export { default as Management } from "./Management";
 export { default as PageNotFound } from "./PageNotFound";
