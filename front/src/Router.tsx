@@ -15,6 +15,7 @@ import {
   ExperienceList,
   ForgetPassword,
   ForgetPasswordSent,
+  Help,
   Home,
   Management,
   PageNotFound,
@@ -61,6 +62,7 @@ const Router = withRouter(({ location }) => (
         <PrivateRoute exact path={"/setting"} component={Setting} />
         <PrivateRoute exact path={"/courselist/:id/study/:id"} component={Study} />
         <PrivateRoute exact path={"/deactivate"} component={Deactivate} />
+        <PrivateRoute exact path={"/help"} component={Help} />
         <Route component={PageNotFound} />
       </Switch>
     </CSSTransition>
