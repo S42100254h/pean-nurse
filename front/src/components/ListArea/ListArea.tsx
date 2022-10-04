@@ -49,19 +49,9 @@ type Props = {
 const ListArea = (props: Props) => {
   const dispatch = useDispatch();
 
-  const findCategoryName = (category_id: number) => {
+  const findCategory = (category_id: number) => {
     const selectedCategory = props.categories.filter((category) => category.id === category_id);
-    return selectedCategory[0].name;
-  };
-
-  const findCategoryUid = (category_id: number) => {
-    const selectedCategory = props.categories.filter((category) => category.id === category_id);
-    return selectedCategory[0].uid;
-  };
-
-  const findCategoryImage = (category_id: number) => {
-    const selectedCategory = props.categories.filter((category) => category.id === category_id);
-    return selectedCategory[0].image;
+    return selectedCategory[0];
   };
 
   return (
@@ -70,11 +60,11 @@ const ListArea = (props: Props) => {
       {props.badges.map((badge) => (
         <BadgeContainer
           key={badge.id}
-          onClick={() => dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))}
+          onClick={() => dispatch(push("/courselist/" + findCategory(badge.category_id).uid + "/study/" + badge.index))}
         >
-          <Icon src={findCategoryImage(badge.category_id)?.url} />
+          <Icon src={findCategory(badge.category_id).image?.url} />
           <Caption>
-            {findCategoryName(badge.category_id)}
+            {findCategory(badge.category_id).name}
             {badge.index}
           </Caption>
         </BadgeContainer>
