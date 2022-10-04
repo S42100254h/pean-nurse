@@ -74,19 +74,25 @@ const ListArea = (props: Props) => {
 
   return (
     <div>
-      {props.badges.length === 0 && <Text>学習中の問題はありません。</Text>}
-      {props.badges.map((badge) => (
-        <BadgeContainer
-          key={badge.id}
-          onClick={() => dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))}
-        >
-          <Icon src={findCategoryImage(badge.category_id) ? findCategoryImage(badge.category_id)?.url : ""} />
-          <Caption>
-            {findCategoryName(badge.category_id)}
-            {badge.index}
-          </Caption>
-        </BadgeContainer>
-      ))}
+      {categories && (
+        <>
+          {props.badges.length === 0 && <Text>学習中の問題はありません。</Text>}
+          {props.badges.map((badge) => (
+            <BadgeContainer
+              key={badge.id}
+              onClick={() =>
+                dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))
+              }
+            >
+              <Icon src={findCategoryImage(badge.category_id) ? findCategoryImage(badge.category_id)?.url : ""} />
+              <Caption>
+                {findCategoryName(badge.category_id)}
+                {badge.index}
+              </Caption>
+            </BadgeContainer>
+          ))}
+        </>
+      )}
     </div>
   );
 };
