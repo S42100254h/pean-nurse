@@ -3,10 +3,10 @@ import { PrimaryButton, Spacer } from "../components/UIkit";
 import { SignUpDialog } from "../components/SignUpDialog";
 import styled from "styled-components";
 import course_image from "../assets/img/course_image.png";
-import quiz_image from "../assets/img/quiz_image.png";
+import quiz from "../assets/img/quiz.gif";
 
 const TopContainer = styled.div`
-  height: 320px;
+  height: 340px;
   text-align: center;
 `;
 
@@ -40,7 +40,7 @@ const ExplanationContainer = styled.div`
 
 const ExplanationHeading = styled.h2`
   font-size: 36px;
-  padding: 30px 0;
+  padding: 40px 0 30px 0;
 `;
 
 const BottomContainer = styled.div`
@@ -71,22 +71,28 @@ const Message = styled.p`
 const RegisterContainer = styled.div`
   height: 280px;
   text-align: center;
+  padding-top: 30px;
 `;
 
 const RegisterSubHeading = styled.h3`
-  font-size: 20px;
+  font-size: 28px;
   padding: 40px 0 10px 0;
 `;
 
 const RegisterHeading = styled.h2`
-  font-size: 30px;
+  font-size: 40px;
   padding: 0 0 30px 0;
 `;
 
 const Image = styled.img`
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin-bottom: 50px;
+`;
+
+const ButtonContainer = styled.div`
+  width: 300px;
+  margin: 0 auto;
 `;
 
 const Home = () => {
@@ -99,15 +105,18 @@ const Home = () => {
       <TopContainer>
         <TopHeading>看護師 国家試験</TopHeading>
         <TopSubHeading>WEB問題集で学習しよう</TopSubHeading>
-        <PrimaryButton id={"button"} label={"今すぐ始める"} onClick={handleDialogToggle} />
+        <Spacer size="xxs" />
+        <ButtonContainer>
+          <PrimaryButton id={"button"} label={"今すぐ始める"} fullWidth={true} onClick={handleDialogToggle} />
+        </ButtonContainer>
       </TopContainer>
       <MiddleContainer>
-        <MiddleHeading>看護学生から、看護師へ</MiddleHeading>
+        <MiddleHeading>専門科目別に学習できる</MiddleHeading>
         <Image src={course_image} />
       </MiddleContainer>
       <ExplanationContainer>
-        <ExplanationHeading>クイズを解きながら学べる</ExplanationHeading>
-        <Image src={quiz_image} />
+        <ExplanationHeading>クイズを解きながらゲーム感覚で学ぶ</ExplanationHeading>
+        <Image src={quiz} />
       </ExplanationContainer>
       <BottomContainer>
         <BottomHeading>看護学生から、看護師になろう</BottomHeading>
@@ -126,7 +135,9 @@ const Home = () => {
       <RegisterContainer>
         <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
         <RegisterHeading>さっそく始めよう！</RegisterHeading>
-        <PrimaryButton id={"button"} label={"無料会員登録"} onClick={handleDialogToggle} />
+        <ButtonContainer>
+          <PrimaryButton id={"button"} label={"無料会員登録"} fullWidth={true} onClick={handleDialogToggle} />
+        </ButtonContainer>
       </RegisterContainer>
       <SignUpDialog open={open} onClose={handleDialogToggle} onClick={handleDialogToggle} />
     </div>
