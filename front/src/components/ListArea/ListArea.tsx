@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getCategories } from "../../reducks/categories/selectors";
+import { fetchCategories } from "../../reducks/categories/operations";
+import { RootState } from "../../types/entity/rootState";
 import { Badge } from "../../types/entity/badge";
-import { Category } from "../../types/entity/category";
 import styled from "styled-components";
 import { push } from "connected-react-router";
 
@@ -43,16 +46,31 @@ const BadgeContainer = styled.div`
 
 type Props = {
   badges: Badge[];
-  categories: Category[];
 };
 
 const ListArea = (props: Props) => {
   const dispatch = useDispatch();
+  const selector = useSelector((state: RootState) => state);
+  const categories = getCategories(selector);
 
-  const findCategory = (category_id: number) => {
-    const selectedCategory = props.categories.filter((category) => category.id === category_id);
-    return selectedCategory[0];
+  const findCategoryName = (category_id: number) => {
+    const selectedCategory = categories.filter((category) => category.id === category_id);
+    return selectedCategory[0].name;
   };
+
+  const findCategoryUid = (category_id: number) => {
+    const selectedCategory = categories.filter((category) => category.id === category_id);
+    return selectedCategory[0].uid;
+  };
+
+  const findCategoryImage = (category_id: number) => {
+    const selectedCategory = categories.filter((category) => category.id === category_id);
+    return selectedCategory[0].image;
+  };
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   return (
     <div>
@@ -60,11 +78,11 @@ const ListArea = (props: Props) => {
       {props.badges.map((badge) => (
         <BadgeContainer
           key={badge.id}
-          onClick={() => dispatch(push("/courselist/" + findCategory(badge.category_id).uid + "/study/" + badge.index))}
+          onClick={() => dispatch(push("/courselist/" + findCategoryUid(badge.category_id) + "/study/" + badge.index))}
         >
-          <Icon src={findCategory(badge.category_id).image?.url} />
+          <Icon src={findCategoryImage(badge.category_id) ? findCategoryImage(badge.category_id)?.url : ""} />
           <Caption>
-            {findCategory(badge.category_id).name}
+            {findCategoryName(badge.category_id)}
             {badge.index}
           </Caption>
         </BadgeContainer>
