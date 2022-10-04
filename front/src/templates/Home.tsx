@@ -71,15 +71,16 @@ const Message = styled.p`
 const RegisterContainer = styled.div`
   height: 280px;
   text-align: center;
+  padding-top: 30px;
 `;
 
 const RegisterSubHeading = styled.h3`
-  font-size: 20px;
+  font-size: 28px;
   padding: 40px 0 10px 0;
 `;
 
 const RegisterHeading = styled.h2`
-  font-size: 30px;
+  font-size: 40px;
   padding: 0 0 30px 0;
 `;
 
@@ -87,6 +88,11 @@ const Image = styled.img`
   width: 100%;
   max-width: 800px;
   margin-bottom: 50px;
+`;
+
+const ButtonContainer = styled.div`
+  width: 300px;
+  margin: 0 auto;
 `;
 
 const Home = () => {
@@ -100,7 +106,9 @@ const Home = () => {
         <TopHeading>看護師 国家試験</TopHeading>
         <TopSubHeading>WEB問題集で学習しよう</TopSubHeading>
         <Spacer size="xxs" />
-        <PrimaryButton id={"button"} label={"今すぐ始める"} onClick={handleDialogToggle} />
+        <ButtonContainer>
+          <PrimaryButton id={"button"} label={"今すぐ始める"} fullWidth={true} onClick={handleDialogToggle} />
+        </ButtonContainer>
       </TopContainer>
       <MiddleContainer>
         <MiddleHeading>専門科目別に学習できる</MiddleHeading>
@@ -127,7 +135,9 @@ const Home = () => {
       <RegisterContainer>
         <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
         <RegisterHeading>さっそく始めよう！</RegisterHeading>
-        <PrimaryButton id={"button"} label={"無料会員登録"} onClick={handleDialogToggle} />
+        <ButtonContainer>
+          <PrimaryButton id={"button"} label={"無料会員登録"} fullWidth={true} onClick={handleDialogToggle} />
+        </ButtonContainer>
       </RegisterContainer>
       <SignUpDialog open={open} onClose={handleDialogToggle} onClick={handleDialogToggle} />
     </div>
