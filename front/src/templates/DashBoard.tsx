@@ -11,6 +11,8 @@ import gold from "../assets/img/gold.png";
 import { RootState } from "../types/entity/rootState";
 import { fetchBadges } from "../reducks/badges/operations";
 import { fetchStacks } from "../reducks/stacks/operations";
+import { getCategories } from "../reducks/categories/selectors";
+import { fetchCategories } from "../reducks/categories/operations";
 import { getBronzeBadges, getSilverBadges, getGoldBadges } from "../reducks/badges/selectors";
 
 const Container = styled.div`
@@ -41,10 +43,12 @@ const DashBoard = () => {
   const bronzeBadges = getBronzeBadges(selector);
   const silverBadges = getSilverBadges(selector);
   const goldBadges = getGoldBadges(selector);
+  const categories = getCategories(selector);
 
   useEffect(() => {
     dispatch(fetchBadges());
     dispatch(fetchStacks());
+    dispatch(fetchCategories());
   }, []);
 
   return (
@@ -58,19 +62,19 @@ const DashBoard = () => {
         <Tooltip content={"１回 全問正解した問題が表示されます。"} location="top">
           <Image src={bronze} />
         </Tooltip>
-        <ListArea badges={bronzeBadges} />
+        <ListArea badges={bronzeBadges} categories={categories} />
       </CourseContainer>
       <CourseContainer>
         <Tooltip content={"２回 全問正解した問題が表示されます。"} location="top">
           <Image src={silver} />
         </Tooltip>
-        <ListArea badges={silverBadges} />
+        <ListArea badges={silverBadges} categories={categories} />
       </CourseContainer>
       <CourseContainer>
         <Tooltip content={"３回 全問正解した問題が表示されます。"} location="top">
           <Image src={gold} />
         </Tooltip>
-        <ListArea badges={goldBadges} />
+        <ListArea badges={goldBadges} categories={categories} />
       </CourseContainer>
     </Container>
   );
