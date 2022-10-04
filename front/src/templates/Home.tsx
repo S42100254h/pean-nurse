@@ -3,10 +3,10 @@ import { PrimaryButton, Spacer } from "../components/UIkit";
 import { SignUpDialog } from "../components/SignUpDialog";
 import styled from "styled-components";
 import course_image from "../assets/img/course_image.png";
-import quiz_image from "../assets/img/quiz_image.png";
+import quiz from "../assets/img/quiz.gif";
 
 const TopContainer = styled.div`
-  height: 320px;
+  height: 340px;
   text-align: center;
 `;
 
@@ -40,7 +40,7 @@ const ExplanationContainer = styled.div`
 
 const ExplanationHeading = styled.h2`
   font-size: 36px;
-  padding: 30px 0;
+  padding: 40px 0 30px 0;
 `;
 
 const BottomContainer = styled.div`
@@ -85,7 +85,7 @@ const RegisterHeading = styled.h2`
 
 const Image = styled.img`
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin-bottom: 50px;
 `;
 
@@ -99,15 +99,16 @@ const Home = () => {
       <TopContainer>
         <TopHeading>看護師 国家試験</TopHeading>
         <TopSubHeading>WEB問題集で学習しよう</TopSubHeading>
+        <Spacer size="xxs" />
         <PrimaryButton id={"button"} label={"今すぐ始める"} onClick={handleDialogToggle} />
       </TopContainer>
       <MiddleContainer>
-        <MiddleHeading>看護学生から、看護師へ</MiddleHeading>
+        <MiddleHeading>専門科目別に学習できる</MiddleHeading>
         <Image src={course_image} />
       </MiddleContainer>
       <ExplanationContainer>
-        <ExplanationHeading>クイズを解きながら学べる</ExplanationHeading>
-        <Image src={quiz_image} />
+        <ExplanationHeading>クイズを解きながらゲーム感覚で学ぶ</ExplanationHeading>
+        <Image src={quiz} />
       </ExplanationContainer>
       <BottomContainer>
         <BottomHeading>看護学生から、看護師になろう</BottomHeading>
