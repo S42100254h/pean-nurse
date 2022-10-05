@@ -13,6 +13,7 @@ import "./assets/style.css";
 const Main = styled.main`
   padding: 70px 0 60px 0;
   min-height: calc(100vh - 292px);
+  width: calc(100vw - 15px);
 `;
 
 const App = () => {
