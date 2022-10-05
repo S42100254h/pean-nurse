@@ -62,7 +62,7 @@ const ListArea = (props: Props) => {
           key={badge.id}
           onClick={() => dispatch(push("/courselist/" + findCategory(badge.category_id).uid + "/study/" + badge.index))}
         >
-          <Icon src={findCategory(badge.category_id).image?.url} />
+          <Icon src={findCategory(badge.category_id)?.image?.url} />
           <Caption>
             {findCategory(badge.category_id).name}
             {badge.index}
