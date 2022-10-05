@@ -28,3 +28,5 @@ export const getAuthentication = () => {
   const headers = { "access-token": auth_token, client: client, uid: uid };
   return headers;
 };
+
+export const _sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
