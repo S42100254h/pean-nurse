@@ -11,6 +11,7 @@ const Root = styled.div`
   background-color: ${(props) => props.theme.palette.basic.dark};
   box-shadow: 0 0 1px grey;
   position: relative;
+  width: calc(100vw - 15px);
 `;
 
 const Heading = styled.h2`
