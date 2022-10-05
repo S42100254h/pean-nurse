@@ -35,7 +35,7 @@ const StyledAppBar = styled(AppBar)`
 `;
 
 const StyledToolbar = styled(Toolbar)`
-  width: 100%;
+  width: calc(100vw - 15px);
 `;
 
 const Image = styled.img`
