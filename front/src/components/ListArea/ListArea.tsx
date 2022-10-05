@@ -4,6 +4,7 @@ import { Badge } from "../../types/entity/badge";
 import { Category } from "../../types/entity/category";
 import styled from "styled-components";
 import { push } from "connected-react-router";
+import { _sleep } from "../../function/common";
 
 const Text = styled.p`
   font-size: 14px;
@@ -54,6 +55,12 @@ const ListArea = (props: Props) => {
     return selectedCategory[0];
   };
 
+  const findCategoryImage = (category_id: number) => {
+    _sleep(300);
+    const selectedCategory = props.categories.filter((category) => category.id === category_id);
+    return selectedCategory[0].image;
+  };
+
   return (
     <div>
       {props.badges.length === 0 && <Text>学習中の問題はありません。</Text>}
@@ -62,7 +69,7 @@ const ListArea = (props: Props) => {
           key={badge.id}
           onClick={() => dispatch(push("/courselist/" + findCategory(badge.category_id).uid + "/study/" + badge.index))}
         >
-          <Icon src={findCategory(badge.category_id).image?.url} />
+          <Icon src={findCategoryImage(badge.category_id)?.url} />
           <Caption>
             {findCategory(badge.category_id).name}
             {badge.index}
