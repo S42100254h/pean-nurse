@@ -34,6 +34,9 @@ const Image = styled.img`
   height: 40px;
   width: 80px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.75;
+  }
 `;
 
 const NextArrow = (props: ArrowProps) => {
