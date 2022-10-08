@@ -12,8 +12,8 @@ import { RootState } from "../../types/entity/rootState";
 import styled from "styled-components";
 
 const StyledSnackbar = styled(Snackbar)`
-  height: 80px;
-  padding-top: 70px;
+  height: 60px;
+  margin-top: 50px;
 `;
 
 const Notification = () => {
