@@ -19,7 +19,7 @@ default: &default
 
 development:
   <<: *default
-  database: nurse_step_development
+  database: pean_nurse_development
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
@@ -27,7 +27,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: nurse_step_test
+  database: pean_nurse_test
   host: 127.0.0.1
 
 # As with config/credentials.yml, you never want to store sensitive information,

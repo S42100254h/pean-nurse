@@ -6,4 +6,4 @@ test:
    password:
    host: <%= ENV.fetch("MYSQL_HOST", "127.0.0.1") %>
    port: <%= ENV.fetch("MYSQL_PORT", "3306") %>
-   database: <%= ENV.fetch("MYSQL_DATABASE", "nurse_step_test") %>
+   database: <%= ENV.fetch("MYSQL_DATABASE", "pean_nurse_test") %>
