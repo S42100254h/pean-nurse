@@ -104,7 +104,7 @@ const Home = () => {
     <div>
       <TopContainer>
         <TopHeading>看護師 国家試験</TopHeading>
-        <TopSubHeading>WEB問題集で学習しよう</TopSubHeading>
+        <TopSubHeading>Web問題集「PeAN」で学習しよう</TopSubHeading>
         <Spacer size="xxs" />
         <ButtonContainer>
           <PrimaryButton id={"button"} label={"今すぐ始める"} fullWidth={true} onClick={handleDialogToggle} />
