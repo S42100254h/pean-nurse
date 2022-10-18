@@ -170,7 +170,7 @@ const Header = () => {
               <StyledToolbar>
                 <Image src={logo} alt="logo" onClick={() => dispatch(push("/dashboard"))} />
                 <Left>
-                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>ダッシュボード</HeaderItem>
+                  <HeaderItem onClick={() => dispatch(push("/dashboard"))}>マイページ</HeaderItem>
                   <HeaderItem onClick={() => dispatch(push("/courselist"))}>コース一覧</HeaderItem>
                   <HeaderItem onClick={() => dispatch(push("/help"))}>ヘルプ</HeaderItem>
                 </Left>
