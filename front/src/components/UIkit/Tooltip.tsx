@@ -32,8 +32,8 @@ const Content = styled.div<CustomProps>`
 const getLocation = (props: any) => {
   if (props.location === "top") {
     return `
-      bottom: calc(100% + 5px);
-      left: -20%;
+      bottom: calc(100% + 8px);
+      left: -25px;
     `;
   } else if (props.location === "bottom") {
     return `
