@@ -14,6 +14,7 @@ import { fetchStacks } from "../reducks/stacks/operations";
 import { getCategories } from "../reducks/categories/selectors";
 import { fetchCategories } from "../reducks/categories/operations";
 import { getBronzeBadges, getSilverBadges, getGoldBadges } from "../reducks/badges/selectors";
+import { Help } from "@material-ui/icons";
 
 const Container = styled.div`
   width: calc(100% - 2rem);
@@ -33,7 +34,16 @@ const CalendarContainer = styled.div`
   float: right;
 `;
 
-const Image = styled.img`
+const Image = styled.img``;
+
+const HelpIcon = styled(Help)`
+  position: absolute;
+  width: 20px;
+  padding-bottom: 3px;
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
   margin: 5px 0 10px 0;
 `;
 
@@ -59,21 +69,30 @@ const DashBoard = () => {
         <Calendar />
       </CalendarContainer>
       <CourseContainer>
-        <Tooltip content={"１回 全問正解した問題が表示されます。"} location="top">
-          <Image src={bronze} />
-        </Tooltip>
+        <ImageContainer>
+          <img src={bronze} />
+          <Tooltip content={"１回 全問正解した問題が表示されます。"} location="top">
+            <HelpIcon />
+          </Tooltip>
+        </ImageContainer>
         <ListArea badges={bronzeBadges} categories={categories} />
       </CourseContainer>
       <CourseContainer>
-        <Tooltip content={"２回 全問正解した問題が表示されます。"} location="top">
-          <Image src={silver} />
-        </Tooltip>
+        <ImageContainer>
+          <img src={silver} />
+          <Tooltip content={"２回 全問正解した問題が表示されます。"} location="top">
+            <HelpIcon />
+          </Tooltip>
+        </ImageContainer>
         <ListArea badges={silverBadges} categories={categories} />
       </CourseContainer>
       <CourseContainer>
-        <Tooltip content={"３回 全問正解した問題が表示されます。"} location="top">
-          <Image src={gold} />
-        </Tooltip>
+        <ImageContainer>
+          <img src={gold} />
+          <Tooltip content={"３回 全問正解した問題が表示されます。"} location="top">
+            <HelpIcon />
+          </Tooltip>
+        </ImageContainer>
         <ListArea badges={goldBadges} categories={categories} />
       </CourseContainer>
     </Container>
