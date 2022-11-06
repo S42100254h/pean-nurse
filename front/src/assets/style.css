@@ -8,7 +8,20 @@
   transition: opacity 330ms ease-in;
 }
 
+/************** intersection-observer *****************/
+
+.target {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.5s, transform 1s;
+}
+.target.active {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
 /************** react-slick *****************/
+
 .slick-list {
   transition: height 250ms linear;
 }
