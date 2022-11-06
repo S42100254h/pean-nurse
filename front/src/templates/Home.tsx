@@ -100,9 +100,31 @@ const Home = () => {
 
   const handleDialogToggle = () => setOpen(!open);
 
+  const targets = document.querySelectorAll(".target");
+
+  const options = {
+    root: null,
+    rootMargin: "-30% 0px",
+    threshold: 0,
+  };
+
+  const doWhenIntersect = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(doWhenIntersect, options);
+
+  targets.forEach((target) => {
+    observer.observe(target);
+  });
+
   return (
     <div>
-      <TopContainer>
+      <TopContainer className="target">
         <TopHeading>看護師 国家試験</TopHeading>
         <TopSubHeading>Web問題集「PeAN」で学習しよう</TopSubHeading>
         <Spacer size="xxs" />
@@ -110,15 +132,15 @@ const Home = () => {
           <PrimaryButton id={"button"} label={"今すぐ始める"} fullWidth={true} onClick={handleDialogToggle} />
         </ButtonContainer>
       </TopContainer>
-      <MiddleContainer>
+      <MiddleContainer className="target">
         <MiddleHeading>専門科目別に学習できる</MiddleHeading>
         <Image src={course_image} />
       </MiddleContainer>
-      <ExplanationContainer>
+      <ExplanationContainer className="target">
         <ExplanationHeading>クイズを解きながらゲーム感覚で学ぶ</ExplanationHeading>
         <Image src={quiz} />
       </ExplanationContainer>
-      <BottomContainer>
+      <BottomContainer className="target">
         <BottomHeading>看護学生から、看護師になろう</BottomHeading>
         <Voice>「国家試験に合格できるか心配...」</Voice>
         <Voice>「参考書を読むと眠くなって、勉強が進まない...」</Voice>
@@ -132,7 +154,7 @@ const Home = () => {
         <Message>私たちと一緒に医療の世界へ飛び込みましょう！</Message>
         <Spacer size="sm" />
       </BottomContainer>
-      <RegisterContainer>
+      <RegisterContainer className="target">
         <RegisterSubHeading>無料会員登録をして、</RegisterSubHeading>
         <RegisterHeading>さっそく始めよう！</RegisterHeading>
         <ButtonContainer>
