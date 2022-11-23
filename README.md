@@ -59,6 +59,8 @@ PeAN の由来は、看護師１年目のみんなが買う必須アイテム「
 - Docker
 - GitHub Actions(CI/CD)
 
+## ネットワーク図
+
 ![ネットワーク図](./infra/network-diagram.png)
 
 ## 機能一覧
