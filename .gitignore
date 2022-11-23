@@ -77,3 +77,4 @@ yarn-debug.log*
 .yarn-integrity
 
 erd.pdf
+.DS_store
