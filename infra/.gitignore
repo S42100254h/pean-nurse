@@ -10,3 +10,5 @@ cdk.out
 /dist
 
 .env
+
+network-diagram.png
