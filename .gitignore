@@ -78,3 +78,5 @@ yarn-debug.log*
 
 erd.pdf
 .DS_store
+
+dump.sql
